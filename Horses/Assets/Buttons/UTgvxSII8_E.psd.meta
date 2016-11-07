@@ -1,0 +1,163 @@
+fileFormatVersion: 2
+guid: ada7c85000889384485d5b4cafdc5820
+timeCreated: 1478035369
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: UTgvxSII8_E_0
+    21300002: UTgvxSII8_E_1
+    21300004: UTgvxSII8_E_2
+    21300006: UTgvxSII8_E_3
+    21300008: UTgvxSII8_E_4
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: UTgvxSII8_E_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 323
+        width: 305
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 152.5, y: 28.5}
+        - {x: 146.5, y: 38.5}
+        - {x: 115.5, y: 38.5}
+        - {x: 78.5, y: 30.5}
+        - {x: 3.5, y: 38.5}
+        - {x: -152.5, y: 38.5}
+        - {x: -152.5, y: 0.5}
+        - {x: -128.5, y: -38.5}
+        - {x: -68.5, y: -38.5}
+        - {x: -68.5, y: -37.5}
+        - {x: -69.5, y: -6.5}
+        - {x: -21.5, y: -38.5}
+        - {x: 152.5, y: -38.5}
+    - name: UTgvxSII8_E_1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 257
+        width: 228
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -105, y: 29.5}
+        - {x: -114, y: 21.5}
+        - {x: -114, y: -22.5}
+        - {x: -101, y: -29.5}
+        - {x: 98, y: -29.5}
+        - {x: 114, y: -23.5}
+        - {x: 114, y: 21.5}
+        - {x: 96, y: 29.5}
+    - name: UTgvxSII8_E_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 186
+        width: 238
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 119, y: 21}
+        - {x: 94, y: 30}
+        - {x: -94, y: 30}
+        - {x: -118, y: 26}
+        - {x: -119, y: 22}
+        - {x: -119, y: -25}
+        - {x: -90, y: -30}
+        - {x: 103, y: -30}
+        - {x: 111, y: -29}
+        - {x: 119, y: -21}
+    - name: UTgvxSII8_E_3
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 109
+        width: 228
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 114, y: 19}
+        - {x: 100, y: 30}
+        - {x: 91, y: 32}
+        - {x: -96, y: 32}
+        - {x: -114, y: 26}
+        - {x: -114, y: -28}
+        - {x: -100, y: -32}
+        - {x: 94, y: -32}
+        - {x: 108, y: -27}
+        - {x: 114, y: -22}
+    - name: UTgvxSII8_E_4
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 38
+        width: 229
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -114.5, y: 30}
+        - {x: -114.5, y: -30}
+        - {x: 114.5, y: -30}
+        - {x: 114.5, y: 22}
+        - {x: 113.5, y: 30}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
