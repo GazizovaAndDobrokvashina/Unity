@@ -28,3 +28,8 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Houdini/Temp/__Backupscenes/0.backup
+*.meta
+Houdini/
+Temp
+metadata
