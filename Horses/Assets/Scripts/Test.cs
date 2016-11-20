@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HorseMoving : MonoBehaviour {
+public class Test : MonoBehaviour {
 
 	float userSpeed = 10f;
 	float speed = 10f;
@@ -43,7 +43,7 @@ public class HorseMoving : MonoBehaviour {
 
 		if (Input.GetAxisRaw ("Vertical") != 0 ) {
 			if (valueMove > 0) {
-
+				
 				if (isAxisInUse == false) {
 					if (count == 0 || count == 1) {
 						count++;
@@ -73,7 +73,7 @@ public class HorseMoving : MonoBehaviour {
 			isAxisInUse = false;
 			tr.Translate (-Vector3.zero);
 		}
-
+			
 
 		if(valueTurn > 0) {
 			transform.Rotate(Vector3.up, turnSpeed * Time.deltaTime);

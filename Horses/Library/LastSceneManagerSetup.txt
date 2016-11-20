@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Menu1.unity
+- path: Assets/Competition.unity
   isLoaded: 1
   isActive: 1
