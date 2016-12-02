@@ -4,4 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Menu1 (2).unity
+  - enabled: 1
+    path: Assets/RoundMenu.unity
+  - enabled: 1
+    path: Assets/GoForWalk.unity
+  - enabled: 1
+    path: Assets/Competition.unity

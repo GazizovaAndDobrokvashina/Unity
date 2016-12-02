@@ -87,8 +87,10 @@ public class HorseMoving : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision coll) {
-		isFlying = false;
-		anim.SetBool ("Jump",false);
+		if (coll.gameObject.tag == "Zemlya") { 
+			isFlying = false;
+			anim.SetBool ("Jump", false);
+		}
 	}
 
 	void ControlSpeed() {

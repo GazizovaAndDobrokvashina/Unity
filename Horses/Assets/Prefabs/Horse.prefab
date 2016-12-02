@@ -692,6 +692,7 @@ GameObject:
   - 54: {fileID: 5499794}
   - 65: {fileID: 6551818}
   - 114: {fileID: 11450628}
+  - 114: {fileID: 11471308}
   m_Layer: 0
   m_Name: Horse
   m_TagString: Untagged
@@ -721,7 +722,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100744}
   m_LocalRotation: {x: 0.1644337, y: 0, z: 0, w: 0.9863882}
-  m_LocalPosition: {x: 0.59000015, y: 2.91, z: -4.6}
+  m_LocalPosition: {x: 0.11, y: 2.91, z: 0.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 18.9287, y: 0, z: 0}
   m_Children: []
@@ -1187,10 +1188,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198620}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42.197, y: 0.075, z: 3.25}
+  m_LocalRotation: {x: 0, y: -0.21667282, z: 0, w: 0.9762443}
+  m_LocalPosition: {x: 112.6, y: 0.07500005, z: 84.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -25.0274, z: 0}
   m_Children:
   - {fileID: 423982}
   - {fileID: 421592}
@@ -1476,6 +1477,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tr: {fileID: 464814}
   rig: {fileID: 5499794}
+--- !u!114 &11471308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a17fcc7e193624a80fc9c3f6b64870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allowable_mistakes: 0
+  total_barriers: 0
+  reverse: 0
+  counterMode: 0
+  textOutput: {fileID: 0}
+  startAwake: 0
 --- !u!124 &12444852
 Behaviour:
   m_ObjectHideFlags: 1
