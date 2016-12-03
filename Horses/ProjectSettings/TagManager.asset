@@ -9,6 +9,8 @@ TagManager:
   - Start
   - FinishOfComp
   - Zemlya
+  - Barrier
+  - Jerd
   layers:
   - Default
   - TransparentFX

@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!48 &4800000
+Shader:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Hidden_Nature_Tree Soft Occlusion Bark Rendertex
+  m_Script: "Shader \"Hidden/Nature/Tree Soft Occlusion Bark Rendertex\" {\nProperties
+    {\n _Color (\"Main Color\", Color) = (1,1,1,0)\n _MainTex (\"Main Texture\", 2D)
+    = \"white\" {}\n _BaseLight (\"Base Light\", Range(0,1)) = 0.35\n _AO (\"Amb.
+    Occlusion\", Range(0,10)) = 2.4\n _Scale (\"Scale\", Vector) = (1,1,1,1)\n _SquashAmount
+    (\"Squash\", Float) = 1\n}\nSubShader { \n Pass {\n  Lighting On\n  Fog { Mode
+    Off }\nProgram \"vp\" {\nSubProgram \"opengl \" {\nBind \"vertex\" Vertex\nBind
+    \"color\" Color\nBind \"normal\" Normal\nBind \"texcoord\" TexCoord0\nBind \"tangent\"
+    ATTR14\nMatrix 9 [_TerrainEngineBendTree]\nVector 6 [_Scale]\nVector 7 [_SquashPlaneNormal]\nFloat
+    8 [_SquashAmount]\nFloat 13 [_AO]\nFloat 14 [_BaseLight]\nVector 15 [_Color]\nVector
+    16 [_TerrainTreeLightDirections0]\nVector 17 [_TerrainTreeLightDirections1]\nVector
+    18 [_TerrainTreeLightDirections2]\nVector 19 [_TerrainTreeLightDirections3]\nVector
+    20 [_TerrainTreeLightColors0]\nVector 21 [_TerrainTreeLightColors1]\nVector 22
+    [_TerrainTreeLightColors2]\nVector 23 [_TerrainTreeLightColors3]\n\"!!ARBvp1.0\n#
+    39 ALU\nPARAM c[24] = { { 0, 1 },\n\t\tstate.lightmodel.ambient,\n\t\tstate.matrix.mvp,\n\t\tprogram.local[6..23]
+    };\nTEMP R0;\nTEMP R1;\nTEMP R2;\nDP3 R2.x, vertex.normal, c[17];\nMUL R0.xyz,
+    vertex.position, c[6];\nMOV R0.w, c[0].x;\nDP4 R1.z, R0, c[11];\nDP4 R1.x, R0,
+    c[9];\nDP4 R1.y, R0, c[10];\nADD R1.xyz, R1, -R0;\nMAD R1.xyz, vertex.color.w,
+    R1, R0;\nDP3 R0.x, R1, c[7];\nADD R0.x, R0, c[7].w;\nMUL R0.xyz, R0.x, c[7];\nADD
+    R1.xyz, -R0, R1;\nMAD R0.xyz, R0, c[8].x, R1;\nMOV R0.w, c[0].y;\nMUL R1.x, vertex.attrib[14].w,
+    c[13];\nDP3 R1.y, vertex.normal, c[16];\nADD R1.w, R1.x, c[14].x;\nMAX R1.y, R1,
+    c[0].x;\nMUL R1.x, R1.w, R1.y;\nMAX R2.x, R2, c[0];\nMUL R2.y, R1.w, R2.x;\nMUL
+    R1.xyz, R1.x, c[20];\nADD R1.xyz, R1, c[1];\nDP3 R2.x, vertex.normal, c[18];\nMAD
+    R1.xyz, R2.y, c[21], R1;\nMAX R2.y, R2.x, c[0].x;\nMUL R2.y, R1.w, R2;\nDP3 R2.x,
+    vertex.normal, c[19];\nMAX R2.x, R2, c[0];\nMAD R1.xyz, R2.y, c[22], R1;\nMUL
+    R1.w, R2.x, R1;\nMAD R1.xyz, R1.w, c[23], R1;\nDP4 result.position.w, R0, c[5];\nDP4
+    result.position.z, R0, c[4];\nDP4 result.position.y, R0, c[3];\nDP4 result.position.x,
+    R0, c[2];\nMUL result.color.xyz, R1, c[15];\nMOV result.texcoord[0], vertex.texcoord[0];\nMOV
+    result.color.w, c[0].y;\nEND\n# 39 instructions, 3 R-regs\n\"\n}\nSubProgram \"d3d9
+    \" {\nBind \"vertex\" Vertex\nBind \"color\" Color\nBind \"normal\" Normal\nBind
+    \"texcoord\" TexCoord0\nBind \"tangent\" TexCoord2\nMatrix 4 [glstate_matrix_mvp]\nMatrix
+    8 [_TerrainEngineBendTree]\nVector 12 [glstate_lightmodel_ambient]\nVector 13
+    [_Scale]\nVector 14 [_SquashPlaneNormal]\nFloat 15 [_SquashAmount]\nFloat 16 [_AO]\nFloat
+    17 [_BaseLight]\nVector 18 [_Color]\nVector 19 [_TerrainTreeLightDirections0]\nVector
+    20 [_TerrainTreeLightDirections1]\nVector 21 [_TerrainTreeLightDirections2]\nVector
+    22 [_TerrainTreeLightDirections3]\nVector 23 [_TerrainTreeLightColors0]\nVector
+    24 [_TerrainTreeLightColors1]\nVector 25 [_TerrainTreeLightColors2]\nVector 26
+    [_TerrainTreeLightColors3]\n\"vs_2_0\n; 39 ALU\ndef c27, 0.00000000, 1.00000000,
+    0, 0\ndcl_position0 v0\ndcl_tangent0 v1\ndcl_normal0 v2\ndcl_color0 v3\ndcl_texcoord0
+    v4\ndp3 r2.x, v2, c20\nmul r0.xyz, v0, c13\nmov r0.w, c27.x\ndp4 r1.z, r0, c10\ndp4
+    r1.x, r0, c8\ndp4 r1.y, r0, c9\nadd r1.xyz, r1, -r0\nmad r1.xyz, v3.w, r1, r0\ndp3
+    r0.x, r1, c14\nadd r0.x, r0, c14.w\nmul r0.xyz, r0.x, c14\nadd r1.xyz, -r0, r1\nmad
+    r0.xyz, r0, c15.x, r1\nmov r0.w, c27.y\nmul r1.x, v1.w, c16\ndp3 r1.y, v2, c19\nadd
+    r1.w, r1.x, c17.x\nmax r1.y, r1, c27.x\nmul r1.x, r1.w, r1.y\nmax r2.x, r2, c27\nmul
+    r2.y, r1.w, r2.x\nmul r1.xyz, r1.x, c23\nadd r1.xyz, r1, c12\ndp3 r2.x, v2, c21\nmad
+    r1.xyz, r2.y, c24, r1\nmax r2.y, r2.x, c27.x\nmul r2.y, r1.w, r2\ndp3 r2.x, v2,
+    c22\nmax r2.x, r2, c27\nmad r1.xyz, r2.y, c25, r1\nmul r1.w, r2.x, r1\nmad r1.xyz,
+    r1.w, c26, r1\ndp4 oPos.w, r0, c7\ndp4 oPos.z, r0, c6\ndp4 oPos.y, r0, c5\ndp4
+    oPos.x, r0, c4\nmul oD0.xyz, r1, c18\nmov oT0, v4\nmov oD0.w, c27.y\n\"\n}\n}\nProgram
+    \"fp\" {\nSubProgram \"opengl \" {\nSetTexture 0 [_MainTex] 2D\n\"!!ARBfp1.0\n#
+    4 ALU, 1 TEX\nPARAM c[1] = { { 2 } };\nTEMP R0;\nTEX R0.xyz, fragment.texcoord[0],
+    texture[0], 2D;\nMUL R0.xyz, R0, c[0].x;\nMUL result.color.xyz, fragment.color.primary,
+    R0;\nMOV result.color.w, fragment.color.primary;\nEND\n# 4 instructions, 1 R-regs\n\"\n}\nSubProgram
+    \"d3d9 \" {\nSetTexture 0 [_MainTex] 2D\n\"ps_2_0\n; 4 ALU, 1 TEX\ndcl_2d s0\ndef
+    c0, 2.00000000, 0, 0, 0\ndcl t0.xy\ndcl v0\ntexld r0, t0, s0\nmul r0.xyz, r0,
+    c0.x\nmov_pp r0.w, v0\nmul_pp r0.xyz, v0, r0\nmov_pp oC0, r0\n\"\n}\n}\n }\n}\nSubShader
+    { \n Pass {\n  Lighting On\n  Fog { Mode Off }\nProgram \"vp\" {\nSubProgram \"opengl
+    \" {\nBind \"vertex\" Vertex\nBind \"color\" Color\nBind \"normal\" Normal\nBind
+    \"texcoord\" TexCoord0\nBind \"tangent\" ATTR14\nMatrix 9 [_TerrainEngineBendTree]\nVector
+    6 [_Scale]\nVector 7 [_SquashPlaneNormal]\nFloat 8 [_SquashAmount]\nFloat 13 [_AO]\nFloat
+    14 [_BaseLight]\nVector 15 [_Color]\nVector 16 [_TerrainTreeLightDirections0]\nVector
+    17 [_TerrainTreeLightDirections1]\nVector 18 [_TerrainTreeLightDirections2]\nVector
+    19 [_TerrainTreeLightDirections3]\nVector 20 [_TerrainTreeLightColors0]\nVector
+    21 [_TerrainTreeLightColors1]\nVector 22 [_TerrainTreeLightColors2]\nVector 23
+    [_TerrainTreeLightColors3]\n\"!!ARBvp1.0\n# 39 ALU\nPARAM c[24] = { { 0, 1 },\n\t\tstate.lightmodel.ambient,\n\t\tstate.matrix.mvp,\n\t\tprogram.local[6..23]
+    };\nTEMP R0;\nTEMP R1;\nTEMP R2;\nDP3 R2.x, vertex.normal, c[17];\nMUL R0.xyz,
+    vertex.position, c[6];\nMOV R0.w, c[0].x;\nDP4 R1.z, R0, c[11];\nDP4 R1.x, R0,
+    c[9];\nDP4 R1.y, R0, c[10];\nADD R1.xyz, R1, -R0;\nMAD R1.xyz, vertex.color.w,
+    R1, R0;\nDP3 R0.x, R1, c[7];\nADD R0.x, R0, c[7].w;\nMUL R0.xyz, R0.x, c[7];\nADD
+    R1.xyz, -R0, R1;\nMAD R0.xyz, R0, c[8].x, R1;\nMOV R0.w, c[0].y;\nMUL R1.x, vertex.attrib[14].w,
+    c[13];\nDP3 R1.y, vertex.normal, c[16];\nADD R1.w, R1.x, c[14].x;\nMAX R1.y, R1,
+    c[0].x;\nMUL R1.x, R1.w, R1.y;\nMAX R2.x, R2, c[0];\nMUL R2.y, R1.w, R2.x;\nMUL
+    R1.xyz, R1.x, c[20];\nADD R1.xyz, R1, c[1];\nDP3 R2.x, vertex.normal, c[18];\nMAD
+    R1.xyz, R2.y, c[21], R1;\nMAX R2.y, R2.x, c[0].x;\nMUL R2.y, R1.w, R2;\nDP3 R2.x,
+    vertex.normal, c[19];\nMAX R2.x, R2, c[0];\nMAD R1.xyz, R2.y, c[22], R1;\nMUL
+    R1.w, R2.x, R1;\nMAD R1.xyz, R1.w, c[23], R1;\nDP4 result.position.w, R0, c[5];\nDP4
+    result.position.z, R0, c[4];\nDP4 result.position.y, R0, c[3];\nDP4 result.position.x,
+    R0, c[2];\nMUL result.color.xyz, R1, c[15];\nMOV result.texcoord[0], vertex.texcoord[0];\nMOV
+    result.color.w, c[0].y;\nEND\n# 39 instructions, 3 R-regs\n\"\n}\nSubProgram \"d3d9
+    \" {\nBind \"vertex\" Vertex\nBind \"color\" Color\nBind \"normal\" Normal\nBind
+    \"texcoord\" TexCoord0\nBind \"tangent\" TexCoord2\nMatrix 4 [glstate_matrix_mvp]\nMatrix
+    8 [_TerrainEngineBendTree]\nVector 12 [glstate_lightmodel_ambient]\nVector 13
+    [_Scale]\nVector 14 [_SquashPlaneNormal]\nFloat 15 [_SquashAmount]\nFloat 16 [_AO]\nFloat
+    17 [_BaseLight]\nVector 18 [_Color]\nVector 19 [_TerrainTreeLightDirections0]\nVector
+    20 [_TerrainTreeLightDirections1]\nVector 21 [_TerrainTreeLightDirections2]\nVector
+    22 [_TerrainTreeLightDirections3]\nVector 23 [_TerrainTreeLightColors0]\nVector
+    24 [_TerrainTreeLightColors1]\nVector 25 [_TerrainTreeLightColors2]\nVector 26
+    [_TerrainTreeLightColors3]\n\"vs_2_0\n; 39 ALU\ndef c27, 0.00000000, 1.00000000,
+    0, 0\ndcl_position0 v0\ndcl_tangent0 v1\ndcl_normal0 v2\ndcl_color0 v3\ndcl_texcoord0
+    v4\ndp3 r2.x, v2, c20\nmul r0.xyz, v0, c13\nmov r0.w, c27.x\ndp4 r1.z, r0, c10\ndp4
+    r1.x, r0, c8\ndp4 r1.y, r0, c9\nadd r1.xyz, r1, -r0\nmad r1.xyz, v3.w, r1, r0\ndp3
+    r0.x, r1, c14\nadd r0.x, r0, c14.w\nmul r0.xyz, r0.x, c14\nadd r1.xyz, -r0, r1\nmad
+    r0.xyz, r0, c15.x, r1\nmov r0.w, c27.y\nmul r1.x, v1.w, c16\ndp3 r1.y, v2, c19\nadd
+    r1.w, r1.x, c17.x\nmax r1.y, r1, c27.x\nmul r1.x, r1.w, r1.y\nmax r2.x, r2, c27\nmul
+    r2.y, r1.w, r2.x\nmul r1.xyz, r1.x, c23\nadd r1.xyz, r1, c12\ndp3 r2.x, v2, c21\nmad
+    r1.xyz, r2.y, c24, r1\nmax r2.y, r2.x, c27.x\nmul r2.y, r1.w, r2\ndp3 r2.x, v2,
+    c22\nmax r2.x, r2, c27\nmad r1.xyz, r2.y, c25, r1\nmul r1.w, r2.x, r1\nmad r1.xyz,
+    r1.w, c26, r1\ndp4 oPos.w, r0, c7\ndp4 oPos.z, r0, c6\ndp4 oPos.y, r0, c5\ndp4
+    oPos.x, r0, c4\nmul oD0.xyz, r1, c18\nmov oT0, v4\nmov oD0.w, c27.y\n\"\n}\n}\n
+    \ SetTexture [_MainTex] { combine primary * texture double, primary alpha }\n
+    }\n}\nFallback Off\n}"
+  m_PathName: 
+  decompressedSize: 0
+  m_SubProgramBlob: 
+  m_Dependencies: []
+  m_ShaderIsBaked: 0
+  errors: []
+  m_DefaultTextures: {}
+  m_CompileInfo:
+    m_Snippets: {}
+    m_MeshComponentsFromSnippets: 0
+    m_HasSurfaceShaders: 0
+    m_HasFixedFunctionShaders: 0

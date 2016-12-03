@@ -8,12 +8,14 @@ public class Competition : MonoBehaviour {
 	GameObject player;
 	//допустимое количество ошибок на уровне
 	public int allowable_mistakes;
+	public Text mistakesOutput;
 	//количество ошибок игрока
 	int total_mistakes;
 	//всего препятсвий на уровне
 	public int total_barriers;
-	//количество преодоленных препятсвий
-	int barriers;
+	//номер текущего препятствия 
+	int currentBarrier = 0;
+	public Text barrierOutput;
 	//набор переменных для таймера
 	public static bool stop;
 	public static string result;
@@ -120,6 +122,8 @@ public class Competition : MonoBehaviour {
 			break;
 		}
 		textOutput.text = result;
+		barrierOutput.text = "Препятсвий: " + currentBarrier + " из " + total_barriers;
+		mistakesOutput.text = "Ошибки: " + total_mistakes + "\n" + "Допустимо: " + allowable_mistakes;
 	}
 
 	void OnTriggerEnter(Collider trig){
@@ -127,10 +131,35 @@ public class Competition : MonoBehaviour {
 			startAwake = true;
 			ControlTime();
 		}
-		if (trig.tag == "FinishOfComp") {
+		if (trig.tag == "FinishOfComp" && currentBarrier == total_barriers) {
 			startAwake = false;
 			ControlTime();
 		}
+
+		if (trig.tag == "Barrier") {
+			BarrierScript scr = trig.GetComponent<BarrierScript>();
+			if (scr != null) {
+				if (currentBarrier == (scr.numberOfBarrier - 1)) {
+					
+					currentBarrier++;
+					//scr.Jump ();
+				}
+			}
+		}
 		
 	}
+
+	void OnCollisionEnter(Collision coll) {
+		GameObject jerd = coll.gameObject;
+		if(jerd != null){
+			JerdScript scr = jerd.GetComponent<JerdScript> ();
+			if(scr != null){
+				if (jerd.tag == "Jerd" && scr.bringDown == false) {
+					total_mistakes++;
+					scr.bringDown = true;
+				}
+			}
+		}
+	}
+		
 }

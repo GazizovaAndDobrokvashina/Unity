@@ -3,10 +3,11 @@ using System.Collections;
 
 public class ChangeTexture : MonoBehaviour {
 
-	public Texture texture_1;
-	public Texture texture_2;
+	public Material material_1;
+	public Material material_2;
 	public Renderer render;
 	Shader shader;
+	public SkinnedMeshRenderer ren;
 	// Use this for initialization
 	void Start () {
 		
@@ -14,9 +15,11 @@ public class ChangeTexture : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown (KeyCode.E))
-			render.material.SetTexture("Horse_D",texture_2);
+		if (Input.GetKeyDown (KeyCode.E))
+			ren.material = material_2;
+			//render.material.SetTexture("Horse_D",texture_2);
 		if(Input.GetKeyDown (KeyCode.R))
-			render.material.SetTexture("Horse_D",texture_1);
+			ren.material = material_1;
+			//render.material.SetTexture("Horse_D",texture_1);
 	}
 }

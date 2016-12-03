@@ -3,6 +3,7 @@ using System.Collections;
 
 public class HorseMoving : MonoBehaviour {
 
+	bool paused = false;
 	float userSpeed = 10f;
 	float speed = 10f;
 	float turnSpeed = 50f;
@@ -32,8 +33,22 @@ public class HorseMoving : MonoBehaviour {
 	}
 
 	void Update () {
+
+		if (Input.GetKeyDown (KeyCode.Escape) && paused == false) {
+			Time.timeScale = 0;
+			paused = true;
+		} else if(Input.GetKeyDown (KeyCode.Escape) && paused == true){
+			Time.timeScale = 1;
+			paused = false;
+		}
+
 		valueMove = Input.GetAxis("Vertical");
 		valueTurn = Input.GetAxis("Horizontal");
+
+		if (valueMove == 0) {
+			CheckTime ();
+		}
+
 
 		if(valueMove != 0 || valueTurn != 0) {
 			anim.SetBool ("Move",true);
@@ -45,7 +60,7 @@ public class HorseMoving : MonoBehaviour {
 			if (valueMove > 0) {
 
 				if (isAxisInUse == false) {
-					if (count == 0 || count == 1) {
+					if (count == 0 || count == 1 || count == 2) {
 						count++;
 					}
 					isAxisInUse = true;
@@ -54,7 +69,7 @@ public class HorseMoving : MonoBehaviour {
 				tr.Translate (Vector3.forward * speed * Time.deltaTime);
 			} else {
 				if (isAxisInUse == false) {
-					if (count == 2) {
+					if (count == 2 || count == 3) {
 						count--;
 						ControlSpeed ();
 						tr.Translate (Vector3.forward * speed * Time.deltaTime);
@@ -93,13 +108,23 @@ public class HorseMoving : MonoBehaviour {
 		}
 	}
 
+	void CheckTime(){
+		new WaitForSeconds (2);
+		if (Input.GetAxis ("Vertical") == 0) {
+			count = 0;
+		}
+	}
+
 	void ControlSpeed() {
 		if (count == 1) {
 			speed = 5f;
-			anim.SetFloat ("vSpeed", speed);
+			anim.SetFloat ("vSpeed", 0f);
 		} else if (count == 2) {
+			speed = 7.5f;
+			anim.SetFloat ("vSpeed", 0.5f);
+		} else if (count == 3) {
 			speed = userSpeed;
-			anim.SetFloat ("vSpeed", speed);
+			anim.SetFloat ("vSpeed", 1f);
 		}
 	}
 }
