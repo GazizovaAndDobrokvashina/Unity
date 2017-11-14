@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Street : MonoBehaviour
 {
-	private int idStreet;
-	private int[] paths;
+	private int IdStreet;
+	private string NameStreet;
+	private string AboutStreet;
+	private int[] Paths;
 	
 }
