@@ -14,4 +14,5 @@ public class StreetPaths {
  	public double EndX { get; set; }
  	public double StartY { get; set; }
  	public double EndY { get; set; }
+	public bool IsBridge { get; set; }
  }

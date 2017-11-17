@@ -94,24 +94,24 @@ public class DataService  {
 
 		StreetPaths[] pathses = new[]
 		{
-			new StreetPaths {Renta = 25, IdStreetParent = 1, StartX = 5.63, StartY = -5.64, EndX = -1.57, EndY = -5.64},
-			new StreetPaths {Renta = 20, IdStreetParent = 1, StartX = -1.57, StartY = -5.64, EndX = -5.68, EndY = -5.64},
-			new StreetPaths {Renta = 20, IdStreetParent = 2, StartX = -5.68, StartY = -5.64, EndX = -5.68, EndY = -1.58},
-			new StreetPaths {Renta = 25, IdStreetParent = 2, StartX = -5.68, StartY = -1.58, EndX = -5.68, EndY = 5.62},
-			new StreetPaths {Renta = 20, IdStreetParent = 3, StartX = -5.68, StartY = 5.62, EndX = -2.63, EndY = 5.62},
-			new StreetPaths {Renta = 25, IdStreetParent = 3, StartX = -2.63, StartY = 5.62, EndX = 5.63, EndY = 5.62},
-			new StreetPaths {Renta = 20, IdStreetParent = 4, StartX = 5.63, StartY = 5.62, EndX = 5.63, EndY = 1.58},
-			new StreetPaths {Renta = 25, IdStreetParent = 4, StartX = 5.63, StartY = 1.58, EndX = 5.63, EndY = -5.64},
-			new StreetPaths {Renta = 15, IdStreetParent = 5, StartX = -1.57, StartY = -5.64, EndX = -1.57, EndY = -2.74},
-			new StreetPaths {Renta = 15, IdStreetParent = 6, StartX = -5.68, StartY = -1.58, EndX = -2.68, EndY = -1.58},
-			new StreetPaths {Renta = 15, IdStreetParent = 7, StartX = -2.63, StartY = 5.62, EndX = -2.63, EndY = 2.68},
-			new StreetPaths {Renta = 15, IdStreetParent = 8, StartX = 5.63, StartY = 1.58, EndX = 2.65, EndY = 1.58},
-			new StreetPaths {Renta = 25, IdStreetParent = 9, StartX = 2.65, StartY = -2.74, EndX = -1.57, EndY = -2.74},
-			new StreetPaths {Renta = 15, IdStreetParent = 9, StartX = -1.57, StartY = -2.74, EndX = -2.63, EndY = -2.74},
-			new StreetPaths {Renta = 15, IdStreetParent = 7, StartX = -2.63, StartY = -2.74, EndX = -2.63, EndY = 2.68},
-			new StreetPaths {Renta = 25, IdStreetParent = 10, StartX = -2.63, StartY = -5.62, EndX = 2.65, EndY = 2.68},
-			new StreetPaths {Renta = 25, IdStreetParent = 11, StartX = 2.65, StartY = 2.68, EndX = 2.65, EndY = 1.58},
-			new StreetPaths {Renta = 25, IdStreetParent = 11, StartX =  2.65, StartY = 1.58, EndX = 2.65, EndY = -2.74}
+			new StreetPaths {Renta = 25, IdStreetParent = 1, StartX = 5.63, StartY = -5.64, EndX = -1.57, EndY = -5.64, IsBridge = false},
+			new StreetPaths {Renta = 20, IdStreetParent = 1, StartX = -1.57, StartY = -5.64, EndX = -5.68, EndY = -5.64, IsBridge = false},
+			new StreetPaths {Renta = 20, IdStreetParent = 2, StartX = -5.68, StartY = -5.64, EndX = -5.68, EndY = -1.58, IsBridge = false},
+			new StreetPaths {Renta = 25, IdStreetParent = 2, StartX = -5.68, StartY = -1.58, EndX = -5.68, EndY = 5.62, IsBridge = false},
+			new StreetPaths {Renta = 20, IdStreetParent = 3, StartX = -5.68, StartY = 5.62, EndX = -2.63, EndY = 5.62, IsBridge = false},
+			new StreetPaths {Renta = 25, IdStreetParent = 3, StartX = -2.63, StartY = 5.62, EndX = 5.63, EndY = 5.62, IsBridge = false},
+			new StreetPaths {Renta = 20, IdStreetParent = 4, StartX = 5.63, StartY = 5.62, EndX = 5.63, EndY = 1.58, IsBridge = false},
+			new StreetPaths {Renta = 25, IdStreetParent = 4, StartX = 5.63, StartY = 1.58, EndX = 5.63, EndY = -5.64, IsBridge = false},
+			new StreetPaths {Renta = 15, IdStreetParent = 5, StartX = -1.57, StartY = -5.64, EndX = -1.57, EndY = -2.74, IsBridge = true},
+			new StreetPaths {Renta = 15, IdStreetParent = 6, StartX = -5.68, StartY = -1.58, EndX = -2.68, EndY = -1.58, IsBridge = true},
+			new StreetPaths {Renta = 15, IdStreetParent = 7, StartX = -2.63, StartY = 5.62, EndX = -2.63, EndY = 2.68, IsBridge = true},
+			new StreetPaths {Renta = 15, IdStreetParent = 8, StartX = 5.63, StartY = 1.58, EndX = 2.65, EndY = 1.58, IsBridge = true},
+			new StreetPaths {Renta = 25, IdStreetParent = 9, StartX = 2.65, StartY = -2.74, EndX = -1.57, EndY = -2.74, IsBridge = false},
+			new StreetPaths {Renta = 15, IdStreetParent = 9, StartX = -1.57, StartY = -2.74, EndX = -2.63, EndY = -2.74, IsBridge = false},
+			new StreetPaths {Renta = 15, IdStreetParent = 7, StartX = -2.63, StartY = -2.74, EndX = -2.63, EndY = 2.68, IsBridge = false},
+			new StreetPaths {Renta = 25, IdStreetParent = 10, StartX = -2.63, StartY = -5.62, EndX = 2.65, EndY = 2.68, IsBridge = false},
+			new StreetPaths {Renta = 25, IdStreetParent = 11, StartX = 2.65, StartY = 2.68, EndX = 2.65, EndY = 1.58, IsBridge = false},
+			new StreetPaths {Renta = 25, IdStreetParent = 11, StartX =  2.65, StartY = 1.58, EndX = 2.65, EndY = -2.74, IsBridge = false}
 		};
 
 		PathsForBuy[] pathsForBuys = new[]
