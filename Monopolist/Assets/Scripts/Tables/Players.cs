@@ -1,5 +1,5 @@
-﻿namespace SQLite4Unity3d.Tables
-{
+﻿using SQLite4Unity3d;
+
     public class Players
     {
         [PrimaryKey, AutoIncrement]
@@ -9,4 +9,3 @@
         public  double CoordinateX { get; set; }
         public double CoordinateY { get; set; }
     }
-}

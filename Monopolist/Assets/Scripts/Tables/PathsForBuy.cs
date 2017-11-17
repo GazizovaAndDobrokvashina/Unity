@@ -1,10 +1,10 @@
-﻿namespace SQLite4Unity3d.Tables
-{
-    public class PathsForBuy
+﻿using SQLite4Unity3d;
+
+
+public class PathsForBuy
     {
         [PrimaryKey, AutoIncrement]
         public int IdPathForBuy { get; set; }
         public int IdPlayer { get; set; }
         public int PriceStreetPath { get; set; }
     }
-}
