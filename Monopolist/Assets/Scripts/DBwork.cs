@@ -8,6 +8,7 @@ public class DBwork: MonoBehaviour
 	private Player[] players;
 	private Build[] builds;
 	private Street[] streets;
+	private StreetPath[] paths;
 
 	private DataService ds;
 	
@@ -43,7 +44,10 @@ public class DBwork: MonoBehaviour
 		DontDestroyOnLoad(transform.gameObject);
 	}
 
-	
+	public StreetPath[] GetAllPaths()
+	{
+		return paths;
+	}
 	
 	
 }

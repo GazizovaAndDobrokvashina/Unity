@@ -14,4 +14,28 @@ public class StreetPath: MonoBehaviour
 	{
 		
 	}
+
+	public void TakeData(StreetPath streetPath)
+	{
+		this.idStreetParent = streetPath.GetIdStreetParent();
+		this.idStreetPath = streetPath.GetIdStreetPath();
+		this.renta = streetPath.GetRenta();
+		this.start = streetPath.start;
+		this.end = streetPath.end;
+	}
+
+	public int GetIdStreetPath()
+	{
+		return idStreetPath;
+	}
+	
+	public int GetIdStreetParent()
+	{
+		return idStreetParent;
+	}
+	
+	public int GetRenta()
+	{
+		return renta;
+	}
 }
