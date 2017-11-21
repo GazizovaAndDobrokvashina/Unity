@@ -12,8 +12,11 @@ public class MainMenu : MonoBehaviour {
     public GameObject CreateNewGameObj;
     public GameObject ContinueObj;
     public GameObject BackButton;
+    public GameObject SettingsMenu;
     public Transform button;
-    public Slider slider;
+    public Slider sliderCountOfPlayers;
+    public Slider sliderSoundVolume;
+    public Slider sliderMusicVolume;
     public Text countOfPlayersText;
     public ScrollRect scroll;
     private int countOfPlayers;
@@ -23,8 +26,8 @@ public class MainMenu : MonoBehaviour {
 
     private void Start()
     {
-        slider.minValue = mincountOfPlayers;
-        slider.maxValue = maxcountOfPlayers;
+        sliderCountOfPlayers.minValue = mincountOfPlayers;
+        sliderCountOfPlayers.maxValue = maxcountOfPlayers;
         
         int gap = 0;
         List<string> names = SaveLoad.loadGamesList();
@@ -45,9 +48,9 @@ public class MainMenu : MonoBehaviour {
 
     private void Update()
     {
-        if (!slider.IsActive()) return;
-        countOfPlayers = (int) slider.value;
-        countOfPlayersText.text = "Количество игроков: " + (int) slider.value;
+        if (!sliderCountOfPlayers.IsActive()) return;
+        countOfPlayers = (int) sliderCountOfPlayers.value;
+        countOfPlayersText.text = "Количество игроков: " + (int) sliderCountOfPlayers.value;
     }
 
 
@@ -70,7 +73,15 @@ public class MainMenu : MonoBehaviour {
         
 
     }
-    
+
+    public void OpenSettings()
+    {
+        MainMenuObj.SetActive (false);
+        ContinueObj.SetActive (false);
+        BackButton.SetActive(true);
+        SettingsMenu.SetActive(true);
+    }
+
     private void onButtonClick(string dbName){
        SaveLoad.loadGame(dbName);
         SceneManager.LoadScene("Game");
@@ -84,6 +95,7 @@ public class MainMenu : MonoBehaviour {
         ContinueObj.SetActive (false);
         BackButton.SetActive(false);
         CreateNewGameObj.SetActive (false);  
+        SettingsMenu.SetActive(false);
     }
 
     public void QuitGame()
