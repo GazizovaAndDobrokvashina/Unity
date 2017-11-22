@@ -102,4 +102,9 @@ public class MainMenu : MonoBehaviour {
     {
         Application.Quit();
     }
+
+    public void StartNewGame()
+    {
+        SceneManager.LoadScene("Game");
+    }
 }

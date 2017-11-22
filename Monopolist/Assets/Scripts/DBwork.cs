@@ -41,7 +41,9 @@ public class DBwork: MonoBehaviour
 
 	private void Awake()
 	{
-		DontDestroyOnLoad(transform.gameObject);
+		DontDestroyOnLoad(gameObject);
+		transform.position = new Vector3(5.63f,0.43f,-5.63f);
+		transform.localEulerAngles = new Vector3(0,-90,0);
 	}
 
 	public StreetPath[] GetAllPaths()
