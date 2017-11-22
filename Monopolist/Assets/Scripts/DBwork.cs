@@ -48,6 +48,15 @@ public class DBwork: MonoBehaviour
 	{
 		return paths;
 	}
-	
-	
+
+	public void SaveGame()
+	{
+		
+	}
+
+	public void SaveGameAsNewFile(string newName)
+	{
+		
+	}
+
 }

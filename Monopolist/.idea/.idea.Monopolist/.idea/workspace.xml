@@ -21,10 +21,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainMenu.cs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainMenu.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/MainMenu.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
+            <state relative-caret-position="1564">
               <caret line="97" column="38" lean-forward="false" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
               <folding>
                 <marker date="1511283793942" expanded="false" signature="6:154" ph="..." />
@@ -39,6 +39,29 @@
                 <marker date="1511283793942" expanded="true" signature="2413:2495" ph="{...}" />
                 <marker date="1511283793942" expanded="true" signature="2534:2745" ph="{...}" />
                 <marker date="1511283793942" expanded="true" signature="2773:2813" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameCanvas.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/GameCanvas.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="379">
+              <caret line="30" column="4" lean-forward="true" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
+              <folding>
+                <marker date="1511363184210" expanded="true" signature="6:100" ph="..." />
+                <marker date="1511363184210" expanded="true" signature="141:1117" ph="{...}" />
+                <marker date="1511363184210" expanded="true" signature="378:494" ph="{...}" />
+                <marker date="1511363184210" expanded="true" signature="523:587" ph="{...}" />
+                <marker date="1511363184210" expanded="true" signature="619:628" ph="{...}" />
+                <marker date="1511363184210" expanded="true" signature="660:669" ph="{...}" />
+                <marker date="1511363184210" expanded="true" signature="700:709" ph="{...}" />
+                <marker date="1511363184210" expanded="true" signature="734:789" ph="{...}" />
+                <marker date="1511363184210" expanded="true" signature="819:948" ph="{...}" />
+                <marker date="1511363184210" expanded="true" signature="977:986" ph="{...}" />
+                <marker date="1511363184210" expanded="true" signature="1017:1081" ph="{...}" />
+                <marker date="1511363184210" expanded="true" signature="1106:1115" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -73,7 +96,7 @@
       <file leaf-file-name="StreetPath.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/StreetPath.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
+            <state relative-caret-position="697">
               <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
               <folding />
             </state>
@@ -83,9 +106,20 @@
       <file leaf-file-name="DBwork.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/DBwork.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
-              <caret line="52" column="1" lean-forward="false" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="1" />
-              <folding />
+            <state relative-caret-position="850">
+              <caret line="58" column="8" lean-forward="false" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
+              <folding>
+                <marker date="1511362872272" expanded="false" signature="6:95" ph="..." />
+                <marker date="1511362872272" expanded="true" signature="131:850" ph="{...}" />
+                <marker date="1511362872272" expanded="true" signature="284:303" ph="{...}" />
+                <marker date="1511362872272" expanded="true" signature="327:544" ph="{...}" />
+                <marker date="1511362872272" expanded="true" signature="415:538" ph="/* foreach (Streets streetse in ds.getStreets()) ... */" />
+                <marker date="1511362872272" expanded="true" signature="583:626" ph="{...}" />
+                <marker date="1511362872272" expanded="true" signature="649:698" ph="{...}" />
+                <marker date="1511362872272" expanded="true" signature="734:756" ph="{...}" />
+                <marker date="1511362872272" expanded="true" signature="781:790" ph="{...}" />
+                <marker date="1511362872272" expanded="true" signature="838:847" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -110,12 +144,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Street.cs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Street.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Street.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
+            <state relative-caret-position="119">
               <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-              <folding />
+              <folding>
+                <marker date="1511001484416" expanded="false" signature="6:78" ph="..." />
+                <marker date="1511001484416" expanded="true" signature="115:223" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -141,6 +178,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GovermantBuild.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Build.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Street.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameCanvas.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Event.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DataService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MouseController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -176,10 +214,11 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/DataService.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SaveLoad.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Tables/StreetPaths.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/DBwork.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/StreetPath.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MapBuilder.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MainMenu.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/DBwork.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameCanvas.cs" />
       </list>
     </option>
   </component>
@@ -266,6 +305,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="73637299-81bf-4846-a442-0eda322b7c13" name="Default" comment="" />
@@ -301,11 +343,12 @@
       <workItem from="1511014434671" duration="8805000" />
       <workItem from="1511203131038" duration="4819000" />
       <workItem from="1511282654210" duration="2272000" />
+      <workItem from="1511359536462" duration="3711000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67606000" />
+    <option name="totallyTimeSpent" value="71317000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -327,7 +370,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22447917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15729167" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -378,13 +421,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Tables/Players.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="8" lean-forward="false" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Tables/StreetPaths.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
@@ -412,7 +448,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
+          <folding>
+            <marker date="1511001484416" expanded="false" signature="6:78" ph="..." />
+            <marker date="1511001484416" expanded="true" signature="115:223" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -493,7 +532,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
+          <folding>
+            <marker date="1511001484416" expanded="false" signature="6:78" ph="..." />
+            <marker date="1511001484416" expanded="true" signature="115:223" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -568,7 +610,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
+          <folding>
+            <marker date="1511001484416" expanded="false" signature="6:78" ph="..." />
+            <marker date="1511001484416" expanded="true" signature="115:223" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -647,14 +692,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Street.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/SQLite.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4012">
@@ -715,17 +752,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/DBwork.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="52" column="1" lean-forward="false" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/StreetPath.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
+        <state relative-caret-position="697">
           <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
           <folding />
         </state>
@@ -747,7 +776,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/MainMenu.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
+        <state relative-caret-position="1564">
           <caret line="97" column="38" lean-forward="false" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
           <folding>
             <marker date="1511283793942" expanded="false" signature="6:154" ph="..." />
@@ -762,6 +791,57 @@
             <marker date="1511283793942" expanded="true" signature="2413:2495" ph="{...}" />
             <marker date="1511283793942" expanded="true" signature="2534:2745" ph="{...}" />
             <marker date="1511283793942" expanded="true" signature="2773:2813" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/DBwork.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="58" column="8" lean-forward="false" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
+          <folding>
+            <marker date="1511362872272" expanded="false" signature="6:95" ph="..." />
+            <marker date="1511362872272" expanded="true" signature="131:850" ph="{...}" />
+            <marker date="1511362872272" expanded="true" signature="284:303" ph="{...}" />
+            <marker date="1511362872272" expanded="true" signature="327:544" ph="{...}" />
+            <marker date="1511362872272" expanded="true" signature="415:538" ph="/* foreach (Streets streetse in ds.getStreets()) ... */" />
+            <marker date="1511362872272" expanded="true" signature="583:626" ph="{...}" />
+            <marker date="1511362872272" expanded="true" signature="649:698" ph="{...}" />
+            <marker date="1511362872272" expanded="true" signature="734:756" ph="{...}" />
+            <marker date="1511362872272" expanded="true" signature="781:790" ph="{...}" />
+            <marker date="1511362872272" expanded="true" signature="838:847" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/GameCanvas.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="30" column="4" lean-forward="true" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
+          <folding>
+            <marker date="1511363184210" expanded="true" signature="6:100" ph="..." />
+            <marker date="1511363184210" expanded="true" signature="141:1117" ph="{...}" />
+            <marker date="1511363184210" expanded="true" signature="378:494" ph="{...}" />
+            <marker date="1511363184210" expanded="true" signature="523:587" ph="{...}" />
+            <marker date="1511363184210" expanded="true" signature="619:628" ph="{...}" />
+            <marker date="1511363184210" expanded="true" signature="660:669" ph="{...}" />
+            <marker date="1511363184210" expanded="true" signature="700:709" ph="{...}" />
+            <marker date="1511363184210" expanded="true" signature="734:789" ph="{...}" />
+            <marker date="1511363184210" expanded="true" signature="819:948" ph="{...}" />
+            <marker date="1511363184210" expanded="true" signature="977:986" ph="{...}" />
+            <marker date="1511363184210" expanded="true" signature="1017:1081" ph="{...}" />
+            <marker date="1511363184210" expanded="true" signature="1106:1115" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Street.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <folding>
+            <marker date="1511001484416" expanded="false" signature="6:78" ph="..." />
+            <marker date="1511001484416" expanded="true" signature="115:223" ph="{...}" />
           </folding>
         </state>
       </provider>

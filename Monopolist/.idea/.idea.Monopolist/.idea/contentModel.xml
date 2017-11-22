@@ -19,6 +19,7 @@
           <e p="DataService.cs" t="Include" />
           <e p="DBwork.cs" t="Include" />
           <e p="Event.cs" t="Include" />
+          <e p="GameCanvas.cs" t="Include" />
           <e p="GameController.cs" t="Include" />
           <e p="GovermantBuild.cs" t="Include" />
           <e p="GovermentPath.cs" t="Include" />
