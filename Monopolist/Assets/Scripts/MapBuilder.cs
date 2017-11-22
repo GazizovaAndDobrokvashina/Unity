@@ -2,30 +2,39 @@
 
     public class MapBuilder: MonoBehaviour
     {
-        public Transform empty;
+        public GameObject empty;
 
         void Start()
         {
             DBwork data = Camera.main.GetComponent<DBwork>();
-            
-            foreach (StreetPath path in data.GetAllPaths())
+
+            StreetPath[] pathForBuys = data.GetAllPaths();
+            for(int i = 1; i< pathForBuys.Length; i++)
             {
-                Transform newStreetPath = Instantiate(empty);
                 
+                GameObject newStreetPath = Instantiate(empty) as GameObject;
+                newStreetPath.name = "StreetPath" + i;
                 BoxCollider coll = newStreetPath.GetComponent<BoxCollider>();
-                //coll.center = GetCenter(path.start, path.end);
-                coll.size = new Vector3(GetVectorLength(path.end - path.start),2,1);
+                coll.size = new Vector3(GetVectorLength(pathForBuys[i].end - pathForBuys[i].start), 2, 1);
 
-                newStreetPath.gameObject.AddComponent<StreetPath>();
-                newStreetPath.GetComponent<StreetPath>().TakeData(path);
+                newStreetPath.AddComponent<StreetPath>();
+                newStreetPath.GetComponent<StreetPath>().TakeData(pathForBuys[i]);
 
-                newStreetPath.rotation = Quaternion.FromToRotation(path.start, path.end);
-                newStreetPath.position = GetCenter(path.start, path.end);
+                newStreetPath.transform.rotation = Quaternion.Euler(0f, Angle(pathForBuys[i].start, pathForBuys[i].end) ,0f);
+                newStreetPath.transform.position = GetCenter(pathForBuys[i].start, pathForBuys[i].end);
+
 
             }
         }
 
-
+        public static float Angle(Vector3 start, Vector3 end)
+        {
+            float angle=Mathf.Atan2(end.z-start.z, end.x-start.x)*180/Mathf.PI;
+            if(0.0f>angle)
+                angle+=360.0f;
+            return angle;
+        }
+        
         Vector3 GetCenter(Vector3 start, Vector3 end)
         {
             Vector3 vec = new Vector3(start.x +((end.x - start.x)/2), start.y +((end.y - start.y)/2), start.z +((end.z - start.z)/2) );

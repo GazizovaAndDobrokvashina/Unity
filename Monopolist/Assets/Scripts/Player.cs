@@ -25,6 +25,13 @@ public class Player : MonoBehaviour
 		destination =  new Vector3(path.end.x, path.end.y);
 		
 	}
-	
-	
+
+
+	public Player(int idPlayer, int money, bool isBankrupt, Vector3 destination)
+	{
+		this.idPlayer = idPlayer;
+		this.money = money;
+		this.isBankrupt = isBankrupt;
+		this.destination = destination;
+	}
 }

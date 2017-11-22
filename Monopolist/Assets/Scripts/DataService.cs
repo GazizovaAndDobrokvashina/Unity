@@ -109,7 +109,7 @@ public class DataService  {
 			new StreetPaths {Renta = 25, IdStreetParent = 9, StartX = 2.65, StartY = -2.74, EndX = -1.57, EndY = -2.74, IsBridge = false},
 			new StreetPaths {Renta = 15, IdStreetParent = 9, StartX = -1.57, StartY = -2.74, EndX = -2.63, EndY = -2.74, IsBridge = false},
 			new StreetPaths {Renta = 15, IdStreetParent = 7, StartX = -2.63, StartY = -2.74, EndX = -2.63, EndY = 2.68, IsBridge = false},
-			new StreetPaths {Renta = 25, IdStreetParent = 10, StartX = -2.63, StartY = -5.62, EndX = 2.65, EndY = 2.68, IsBridge = false},
+			new StreetPaths {Renta = 25, IdStreetParent = 10, StartX = -2.63, StartY = 2.68, EndX = 2.65, EndY = 2.68, IsBridge = false},
 			new StreetPaths {Renta = 25, IdStreetParent = 11, StartX = 2.65, StartY = 2.68, EndX = 2.65, EndY = 1.58, IsBridge = false},
 			new StreetPaths {Renta = 25, IdStreetParent = 11, StartX =  2.65, StartY = 1.58, EndX = 2.65, EndY = -2.74, IsBridge = false}
 		};

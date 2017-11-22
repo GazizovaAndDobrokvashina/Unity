@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
 	
 	public void nextStep()
 	{
-		CurrentPlayer = new Player();
+		
 	}
 
 	public void cheet()

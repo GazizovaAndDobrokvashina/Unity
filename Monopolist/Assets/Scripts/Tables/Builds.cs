@@ -7,4 +7,9 @@ public class Builds
         public int IdStreetPath{ get; set; }
         public int PriceBuild{ get; set; }
         public bool Enabled { get; set; }
+
+        public Build getBuild()
+        {
+            return new Build(IdBuild, IdStreetPath, PriceBuild, Enabled);
+        }
     }

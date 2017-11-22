@@ -7,8 +7,9 @@ public class StreetPath: MonoBehaviour
 	private int idStreetPath;
 	private int idStreetParent;
 	private int renta;
-	public Vector2 start;
-	public Vector2 end;
+	public Vector3 start;
+	public Vector3 end;
+	public bool isBridge;
 
 	public void StepOnMe()
 	{
@@ -22,6 +23,7 @@ public class StreetPath: MonoBehaviour
 		this.renta = streetPath.GetRenta();
 		this.start = streetPath.start;
 		this.end = streetPath.end;
+		this.isBridge = streetPath.isBridge;
 	}
 
 	public int GetIdStreetPath()
@@ -37,5 +39,15 @@ public class StreetPath: MonoBehaviour
 	public int GetRenta()
 	{
 		return renta;
+	}
+
+	public StreetPath(int idStreetPath, int idStreetParent, int renta, Vector3 start, Vector3 end, bool isBridge)
+	{
+		this.idStreetPath = idStreetPath;
+		this.idStreetParent = idStreetParent;
+		this.renta = renta;
+		this.start = start;
+		this.end = end;
+		this.isBridge = isBridge;
 	}
 }

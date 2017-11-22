@@ -16,4 +16,12 @@ public class Build : MonoBehaviour
 	{
 		
 	}
+
+	public Build(int idBuild, int idStreetPath, int priceBuild, bool enable)
+	{
+		this.idBuild = idBuild;
+		this.idStreetPath = idStreetPath;
+		this.priceBuild = priceBuild;
+		this.enable = enable;
+	}
 }

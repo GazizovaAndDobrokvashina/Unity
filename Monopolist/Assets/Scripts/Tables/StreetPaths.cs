@@ -16,4 +16,11 @@ public class StreetPaths {
  	public double EndY { get; set; }
 	public bool IsBridge { get; set; }
 
+
+	public GovermentPath GetGovermentPath( Event[] events)
+	{
+		Vector3 start = new Vector3((float)StartX,0, (float)StartY);
+		Vector3 end = new Vector3((float)EndX,0, (float)EndY);
+		return new GovermentPath(IdStreetPath, IdStreetParent, Renta, start, end, IsBridge, events);
+	} 
  }

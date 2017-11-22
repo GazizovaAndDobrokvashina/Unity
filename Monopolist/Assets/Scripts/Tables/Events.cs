@@ -8,6 +8,10 @@
         public string NameEvent { get; set; }
         public string Info { get; set; }
         public int Price { get; set; }
-        
         public int IdGovermentPath { get; set; }
+
+        public Event GetEvent()
+        {
+            return new Event(IdEvent, Info, NameEvent, Price, IdGovermentPath);
+        }
     }
