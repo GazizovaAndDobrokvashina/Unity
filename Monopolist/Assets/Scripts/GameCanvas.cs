@@ -12,8 +12,11 @@ public class GameCanvas : MonoBehaviour
 	public Text stepsText;
 	public Text moneyText;
 	public InputField inputField;
+	[SerializeField]
 	public static int currentSteps;
+	[SerializeField]
 	public static int maxSteps;
+	[SerializeField]
 	public static int money;
 	public string newName;
 
@@ -66,6 +69,7 @@ public class GameCanvas : MonoBehaviour
 
 	public void OpenMainMenu()
 	{
+		Destroy(Camera.main);
 		SceneManager.LoadScene("MainMenu");
 	}
 

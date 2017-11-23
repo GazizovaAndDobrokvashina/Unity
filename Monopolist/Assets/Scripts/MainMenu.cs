@@ -104,7 +104,8 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void StartNewGame()
-    {
+    {    
+        Camera.main.GetComponent<DBwork>().CreateNewGame(countOfPlayers, 1000);
         SceneManager.LoadScene("Game");
     }
 }

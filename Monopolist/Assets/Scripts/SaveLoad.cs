@@ -8,7 +8,7 @@ public class SaveLoad {
 	{
 	
 		//DirectoryInfo dir = new DirectoryInfo(@"Assets\SavedGames");
-		DirectoryInfo dir = new DirectoryInfo(@"Assets\Scripts");
+		DirectoryInfo dir = new DirectoryInfo(@"Assets\SavedGames");
 		List<string> names = new List<string>();
 		
 		foreach (var item in dir.GetFiles())

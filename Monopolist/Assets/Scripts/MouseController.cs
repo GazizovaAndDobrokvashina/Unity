@@ -4,11 +4,18 @@ using UnityEngine.EventSystems;
 
 public class MouseController : MonoBehaviour
 {
-	public GameController GameController;
+	//public GameController GameController;
+	private DBwork _dBwork;
+	
     private Build selectedBuild;
     private Player selectedPlayer;
     private StreetPath selectedStreetPath;
 
+	void Start()
+	{
+		_dBwork = Camera.main.GetComponent<DBwork>();
+		
+	}
     void Update () {
 
 		if(EventSystem.current.IsPointerOverGameObject()) {
@@ -16,7 +23,7 @@ public class MouseController : MonoBehaviour
 			return;
 		}
 
-		Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
+		Ray ray = gameObject.GetComponent<Camera>().ScreenPointToRay( Input.mousePosition );
 
 		RaycastHit hitInfo;
 
@@ -44,8 +51,8 @@ public class MouseController : MonoBehaviour
 	void MouseOver_Street(GameObject ourHitObject) {
 		
 
-		if (Input.GetMouseButton (0) && Camera.main.GetComponentInParent<CameraMove>().mode != 3) {
-			GameController.CurrentPlayer.move(ourHitObject.GetComponent<StreetPath>());
+		if (Input.GetMouseButton (0) && CameraMove.mode == 1) {
+			_dBwork.GetPlayerbyId(1).move(ourHitObject.GetComponent<StreetPath>());
 		} else if (Input.GetMouseButton(0))
 		{
 			// показать информацию о улице

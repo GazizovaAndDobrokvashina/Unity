@@ -15,8 +15,8 @@ public class DBwork: MonoBehaviour
 
 	void Start()
 	{
-		DBStart();
-		GetEverithing();
+		//DBStart();
+		//GetEverithing();
 	}
 
 	public void DBStart()
@@ -36,7 +36,7 @@ public class DBwork: MonoBehaviour
 	public void SetGameDB(string dbName)
 	{
 		ds = new DataService(dbName);
-		
+		GetEverithing();		
 	
 	}
 
@@ -127,4 +127,35 @@ public class DBwork: MonoBehaviour
 		
 	}
 
+	public Player GetPlayerbyId(int idPlayer)
+	{
+		return players[idPlayer];
+	}
+
+	public void CreateNewGame(int countOfPlayers, int startMoney)
+	{
+		
+		File.Copy(@"Assets\StreamingAssets\Monopolist.db", @"Assets\SavedGames\Firstgame.db");
+		SetGameDB("Firstgame.db");
+		GetEverithing();
+		players = new Player[countOfPlayers + 1];
+		for (int i = 1; i < countOfPlayers + 1; i++)
+		{
+			Player player = new Player(i, startMoney, false, paths[1].start);
+			players[i] = player;
+			ds.AddPlayer(player);
+			
+		}
+		
+	}
+
+	public Player[] GetAllPlayers()
+	{
+		return players;
+	}
+
+	public void updatePlayer(Player player)
+	{
+		players[player.IdPlayer] = player;
+	}
 }

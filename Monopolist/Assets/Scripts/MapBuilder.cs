@@ -2,7 +2,9 @@
 
     public class MapBuilder: MonoBehaviour
     {
-        public GameObject empty;
+        public GameObject emptyStreet;
+        public GameObject emptyPlayer;
+        public GameObject emptyBot;
 
         void Start()
         {
@@ -12,7 +14,7 @@
             for(int i = 1; i< pathForBuys.Length; i++)
             {
                 
-                GameObject newStreetPath = Instantiate(empty) as GameObject;
+                GameObject newStreetPath = Instantiate(emptyStreet) as GameObject;
                 newStreetPath.name = "StreetPath" + i;
                 BoxCollider coll = newStreetPath.GetComponent<BoxCollider>();
                 coll.size = new Vector3(GetVectorLength(pathForBuys[i].end - pathForBuys[i].start), 2, 1);
@@ -24,6 +26,22 @@
                 newStreetPath.transform.position = GetCenter(pathForBuys[i].start, pathForBuys[i].end);
 
 
+            }
+
+            Player[] players = data.GetAllPlayers();
+            
+            GameObject newPlayer = Instantiate(emptyPlayer) as GameObject;
+            newPlayer.GetComponent<Player>().GetData(players[1]);
+            newPlayer.transform.position = players[1].getDestination();
+            data.updatePlayer(newPlayer.GetComponent<Player>());
+        
+            
+            for (int j = 2; j < players.Length; j++)
+            {
+                GameObject newBot = Instantiate(emptyBot) as GameObject;
+                newBot.GetComponent<Player>().GetData(players[j]);
+                newBot.transform.position = players[j].getDestination();
+                data.updatePlayer(newBot.GetComponent<Player>());
             }
         }
 
