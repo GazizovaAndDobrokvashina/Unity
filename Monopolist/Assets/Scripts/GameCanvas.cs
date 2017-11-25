@@ -74,11 +74,6 @@ public class GameCanvas : MonoBehaviour
 	}
 
 
-	public void NextStep()
-	{
-		
-	}
-
 	public void returnToGame()
 	{
 		ChangeMenu(1);
