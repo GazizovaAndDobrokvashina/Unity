@@ -1,5 +1,4 @@
-﻿
-    public interface GovermantBuild
-    {
-        Event GetRandomEvent();
-    }
+﻿public interface GovermantBuild
+{
+    Event GetRandomEvent();
+}

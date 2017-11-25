@@ -3,47 +3,46 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Experimental.UIElements;
 using UnityEngine.SceneManagement;
+using Button = UnityEngine.UI.Button;
+using Slider = UnityEngine.UI.Slider;
+using Toggle = UnityEngine.UI.Toggle;
 
 
-public class MainMenu : MonoBehaviour {
-
+public class MainMenu : MonoBehaviour
+{
     public GameObject MainMenuObj;
     public GameObject CreateNewGameObj;
     public GameObject ContinueObj;
     public GameObject BackButton;
     public GameObject SettingsMenu;
     public Transform button;
+    public InputField InputFieldNameOfGame;
     public Slider sliderCountOfPlayers;
     public Slider sliderSoundVolume;
     public Slider sliderMusicVolume;
     public Text countOfPlayersText;
-    public ScrollRect scroll;
+    public Text NameOfGameText;
+    public Text NameOfTown;
+    public ScrollRect scrollSavedGames;
+    public ScrollRect scrollTowns;
     private int countOfPlayers;
     private int maxcountOfPlayers = 4;
     private int mincountOfPlayers = 1;
-    
+    private string newNameGame = "Monopolist.db";
+    private int startMoney;
+    private string nameTownForNewGame;
+    private bool online = false;
+
 
     private void Start()
     {
         sliderCountOfPlayers.minValue = mincountOfPlayers;
         sliderCountOfPlayers.maxValue = maxcountOfPlayers;
-        
-        int gap = 0;
-        List<string> names = SaveLoad.loadGamesList();
-        foreach(string dbName in names) {
-			
-            Transform but = Instantiate (button) as Transform;
-            //but.SetParent (ContinueObj.transform);
-            but.SetParent (scroll.content,false);
-            RectTransform tr = but.GetComponent<RectTransform> ();
-            //tr.anchoredPosition = new Vector2 (0,gap);
-            //gap -= -39;
-            but.GetComponentInChildren<Text> ().text = dbName;
-            Button b = but.GetComponent<Button> ();
-            b.onClick.AddListener (() => onButtonClick(dbName));
 
-        }
+        CreateButtonsSaves();
+        CreateButtonTowns();
     }
 
     private void Update()
@@ -53,49 +52,65 @@ public class MainMenu : MonoBehaviour {
         countOfPlayersText.text = "Количество игроков: " + (int) sliderCountOfPlayers.value;
     }
 
+    private void CreateButtonsSaves()
+    {
+        List<string> namesSavedGames = SaveLoad.loadGamesList("SavedGames");
+        foreach (string dbName in namesSavedGames)
+        {
+            Transform but = Instantiate(button) as Transform;
+            but.SetParent(scrollSavedGames.content, false);
+            RectTransform tr = but.GetComponent<RectTransform>();
+            but.GetComponentInChildren<Text>().text = dbName;
+            Button b = but.GetComponent<Button>();
+            b.onClick.AddListener(() => onButtonClickLoadGame(dbName));
+        }
+    }
+
+    private void CreateButtonTowns()
+    {
+        List<string> townsList = SaveLoad.loadGamesList("StreamingAssets");
+        foreach (string nameTown in townsList)
+        {
+            Transform but = Instantiate(button) as Transform;
+            but.SetParent(scrollTowns.content, false);
+            RectTransform tr = but.GetComponent<RectTransform>();
+            but.GetComponentInChildren<Text>().text = nameTown;
+            Button b = but.GetComponent<Button>();
+            b.onClick.AddListener(() => onButtonClickChoseTown(nameTown));
+        }
+    }
 
     public void OpenMenuNewGame()
     {
-        MainMenuObj.SetActive (false);
-        ContinueObj.SetActive (false);
-        BackButton.SetActive(true);
-        CreateNewGameObj.SetActive (true);
-
+        ChangeMenuObject(1);
     }
 
     public void OpenMenuLoadGame()
     {
-        MainMenuObj.SetActive (false);
-        ContinueObj.SetActive (true);
-        BackButton.SetActive(true);
-        CreateNewGameObj.SetActive (false);
-        
-        
-
+        ChangeMenuObject(2);
     }
 
     public void OpenSettings()
     {
-        MainMenuObj.SetActive (false);
-        ContinueObj.SetActive (false);
-        BackButton.SetActive(true);
-        SettingsMenu.SetActive(true);
+        ChangeMenuObject(3);
     }
 
-    private void onButtonClick(string dbName){
-       SaveLoad.loadGame(dbName);
+    private void onButtonClickLoadGame(string dbName)
+    {
+        SaveLoad.loadGame(dbName);
         SceneManager.LoadScene("Game");
-
     }
 
-    
+    private void onButtonClickChoseTown(string nameTown)
+    {
+        NameOfTown.text = "Город: " + nameTown;
+        nameTownForNewGame = nameTown;
+    }
+
+
     public void BackToMainMenu()
     {
-        MainMenuObj.SetActive (true);
-        ContinueObj.SetActive (false);
-        BackButton.SetActive(false);
-        CreateNewGameObj.SetActive (false);  
-        SettingsMenu.SetActive(false);
+        ChangeMenuObject(4);
     }
 
     public void QuitGame()
@@ -104,8 +119,121 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void StartNewGame()
-    {    
-        Camera.main.GetComponent<DBwork>().CreateNewGame(countOfPlayers, 1000);
+    {
+        // Debug.Log(countOfPlayers + ", " + startMoney + ", " + newNameGame + ", " + online + ", " + nameTownForNewGame);
+        Camera.main.GetComponent<DBwork>()
+            .CreateNewGame(countOfPlayers, startMoney, newNameGame, online, nameTownForNewGame);
         SceneManager.LoadScene("Game");
+    }
+
+    public void ChangeNameOfGame()
+    {
+        if (InputFieldNameOfGame.text.Length != 0)
+        {
+            newNameGame = InputFieldNameOfGame.text;
+        }
+
+        NameOfGameText.text = "Название игры: " + newNameGame;
+    }
+
+    private void ChangeMenuObject(int state)
+    {
+        switch (state)
+        {
+            //открыть меню настройки новой игры
+            case 1:
+                MainMenuObj.SetActive(false);
+                ContinueObj.SetActive(false);
+                BackButton.SetActive(true);
+                CreateNewGameObj.SetActive(true);
+                SettingsMenu.SetActive(false);
+                break;
+            //открыть меню загрузки игры
+            case 2:
+                MainMenuObj.SetActive(false);
+                ContinueObj.SetActive(true);
+                BackButton.SetActive(true);
+                CreateNewGameObj.SetActive(false);
+                SettingsMenu.SetActive(false);
+                break;
+            //открыть настройки        
+            case 3:
+                MainMenuObj.SetActive(false);
+                ContinueObj.SetActive(false);
+                BackButton.SetActive(true);
+                CreateNewGameObj.SetActive(false);
+                SettingsMenu.SetActive(true);
+                break;
+            //Вернуться в глввное меню
+            case 4:
+                MainMenuObj.SetActive(true);
+                ContinueObj.SetActive(false);
+                BackButton.SetActive(false);
+                CreateNewGameObj.SetActive(false);
+                SettingsMenu.SetActive(false);
+                break;
+            default:
+            {
+                MainMenuObj.SetActive(true);
+                ContinueObj.SetActive(false);
+                BackButton.SetActive(false);
+                CreateNewGameObj.SetActive(false);
+                SettingsMenu.SetActive(false);
+                break;
+            }
+        }
+    }
+
+    public void ChangeToggles(ToggleGroup group)
+    {
+        Toggle active = GetActive(group);
+
+        switch (group.name)
+        {
+            case "ToggleGroupTypeOfGame":
+                ChangeTypeOfGame(active);
+                break;
+            case "ToggleGroupMoney":
+                ChangeStartMoney(active);
+                break;
+        }
+    }
+
+    Toggle GetActive(ToggleGroup aGroup)
+    {
+        return aGroup.ActiveToggles().FirstOrDefault();
+    }
+
+
+    private void ChangeTypeOfGame(Toggle active)
+    {
+        switch (active.name)
+        {
+            case "Offlane":
+                online = false;
+                break;
+            case "Online":
+                online = true;
+                break;
+        }
+    }
+
+    private void ChangeStartMoney(Toggle active)
+    {
+        switch (active.name)
+        {
+            case "FirstMoney":
+                startMoney = 2000;
+                break;
+            case "SecondMoney":
+                startMoney = 2500;
+                break;
+            case "ThirdMoney":
+                startMoney = 3500;
+                break;
+            case "FourthMoney":
+                startMoney = 4000;
+                break;
+        }
     }
 }
