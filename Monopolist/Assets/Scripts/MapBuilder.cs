@@ -21,6 +21,8 @@
 
                 newStreetPath.AddComponent<StreetPath>();
                 newStreetPath.GetComponent<StreetPath>().TakeData(pathForBuys[i]);
+                newStreetPath.GetComponent<StreetPath>().GetNeighbors();
+                data.updatePath(newStreetPath.GetComponent<StreetPath>());
 
                 newStreetPath.transform.rotation = Quaternion.Euler(0f, Angle(pathForBuys[i].start, pathForBuys[i].end) ,0f);
                 newStreetPath.transform.position = GetCenter(pathForBuys[i].start, pathForBuys[i].end);
@@ -43,6 +45,8 @@
                 newBot.transform.position = players[j].getDestination();
                 data.updatePlayer(newBot.GetComponent<Player>());
             }
+            
+            
         }
 
         public static float Angle(Vector3 start, Vector3 end)

@@ -6,10 +6,10 @@ public class MouseController : MonoBehaviour
 {
 	//public GameController GameController;
 	private DBwork _dBwork;
-	
     private Build selectedBuild;
     private Player selectedPlayer;
     private StreetPath selectedStreetPath;
+	public float sensitivity = 0.5f;
 
 	void Start()
 	{
@@ -27,23 +27,43 @@ public class MouseController : MonoBehaviour
 
 		RaycastHit hitInfo;
 
-		if( Physics.Raycast(ray, out hitInfo) ) {
-			GameObject ourHitObject = hitInfo.collider.transform.gameObject;
+	    if (Physics.Raycast(ray, out hitInfo))
+	    {
+		    GameObject ourHitObject = hitInfo.collider.transform.gameObject;
+		    
+			    if (ourHitObject.GetComponent<StreetPath>() != null)
+			    {
 
-			if (ourHitObject.GetComponent<StreetPath> () != null ) {
-				
-				MouseOver_Street (ourHitObject);
-			} else if (ourHitObject.GetComponentInParent<Player> () != null) {
-				
-				MouseOver_Player (ourHitObject);
-			} else if (ourHitObject.GetComponentInParent<Build> () != null) {
-				
-				MouseOver_Build (ourHitObject);
-			}
+				    MouseOver_Street(ourHitObject);
+			    }
+			    else if (ourHitObject.GetComponentInParent<Player>() != null)
+			    {
+
+				    MouseOver_Player(ourHitObject);
+			    }
+			    else if (ourHitObject.GetComponentInParent<Build>() != null)
+			    {
+
+				    MouseOver_Build(ourHitObject);
+			    }
+	    
+    }
 
 
-		}
 
+
+
+
+
+	    if (Screen.width - Input.mousePosition.x  < sensitivity)
+	    {
+		    transform.RotateAround(transform.position, Vector3.up, 2.5f);
+	    }
+
+	    if (Input.mousePosition.x < sensitivity)
+	    {
+		    transform.RotateAround(transform.position, Vector3.up, -2.5f);
+	    }
 
 	}
 
@@ -58,7 +78,7 @@ public class MouseController : MonoBehaviour
 			// показать информацию о улице
 			selectedStreetPath = ourHitObject.GetComponent<StreetPath>();
 		}
-			
+
 	}
 
 	void MouseOver_Build(GameObject ourHitObject) {
@@ -68,7 +88,6 @@ public class MouseController : MonoBehaviour
 			// показать информацию о здании
 			selectedBuild = ourHitObject.GetComponent<Build>();
 		}
-
 	}
 
 	void MouseOver_Player(GameObject ourHitObject) {
@@ -82,4 +101,5 @@ public class MouseController : MonoBehaviour
 
 	}
     
+	
 }

@@ -40,6 +40,19 @@ public class DBwork: MonoBehaviour
 	
 	}
 
+	public StreetPath GetPathByCoordinates(Vector3 coordinate)
+	{
+		foreach (StreetPath path in paths)
+		{
+			Debug.Log(coordinate + "   " + path.start);
+			if (path.GetIdStreetPath()!=0 && coordinate.Equals(path.start))
+			{
+				return path;
+			}
+		}
+		return null;
+	}
+	
 	public void GetEverithing()
 	{
 	
@@ -100,6 +113,12 @@ public class DBwork: MonoBehaviour
 		{
 			players[player.IdPlayer] = player.GetPlayer();
 		}
+		players[0] = new Player(0,0,true,Vector3.zero);
+		streets[0] = new Street(0,"","", new int[1]);
+		paths[0] = new StreetPath(0,0,0,Vector3.zero, Vector3.zero, false);
+		builds[0] = new Build(0,0,0,false);
+
+		
 		
 	}
 	
@@ -135,8 +154,11 @@ public class DBwork: MonoBehaviour
 	public void CreateNewGame(int countOfPlayers, int startMoney)
 	{
 		
-		File.Copy(@"Assets\StreamingAssets\Monopolist.db", @"Assets\SavedGames\Firstgame.db");
-		SetGameDB("Firstgame.db");
+		//File.Copy(@"Assets\StreamingAssets\Monopolist.db", @"Assets\SavedGames\Firstgame.db");
+		ds =  new DataService("Firstgame.db");
+		if(!ds.IsExist())
+			ds.CreateDB();
+		//SetGameDB("Firstgame.db");
 		GetEverithing();
 		players = new Player[countOfPlayers + 1];
 		for (int i = 1; i < countOfPlayers + 1; i++)
@@ -157,5 +179,15 @@ public class DBwork: MonoBehaviour
 	public void updatePlayer(Player player)
 	{
 		players[player.IdPlayer] = player;
+	}
+
+	public void updatePath(StreetPath path)
+	{
+		paths[path.GetIdStreetPath()] = path;
+	}
+
+	public StreetPath GetPathById(int id)
+	{
+		return paths[id];
 	}
 }
