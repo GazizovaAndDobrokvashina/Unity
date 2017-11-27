@@ -43,6 +43,8 @@ public class MapBuilder : MonoBehaviour
             newBot.transform.position = players[j].getDestination();
             data.updatePlayer(newBot.GetComponent<Player>());
         }
+        
+        data.createWays();
     }
 
     public static float Angle(Vector3 start, Vector3 end)
@@ -53,7 +55,7 @@ public class MapBuilder : MonoBehaviour
         return angle;
     }
 
-    Vector3 GetCenter(Vector3 start, Vector3 end)
+    public static Vector3 GetCenter(Vector3 start, Vector3 end)
     {
         Vector3 vec = new Vector3(start.x + ((end.x - start.x) / 2), start.y + ((end.y - start.y) / 2),
             start.z + ((end.z - start.z) / 2));

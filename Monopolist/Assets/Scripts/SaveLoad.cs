@@ -26,7 +26,4 @@ public class SaveLoad
         Camera.main.GetComponent<DBwork>().SetGameDB(dbName);
     }
 
-    public void createNewGame(string gameName, int playerCount)
-    {
-    }
 }

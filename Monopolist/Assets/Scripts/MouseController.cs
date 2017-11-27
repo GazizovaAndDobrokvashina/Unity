@@ -11,6 +11,7 @@ public class MouseController : MonoBehaviour
     private Player selectedPlayer;
     private StreetPath selectedStreetPath;
     public float sensitivity = 0.5f;
+    private bool canMove;
 
     void Start()
     {
@@ -61,14 +62,18 @@ public class MouseController : MonoBehaviour
 
     void MouseOver_Street(GameObject ourHitObject)
     {
-        if (Input.GetMouseButton(0) && CameraMove.mode == 1)
+        if (Input.GetMouseButton(0) && CameraMove.mode == 1 && canMove)
         {
+            canMove = false;
             _dBwork.GetPlayerbyId(1).move(ourHitObject.GetComponent<StreetPath>());
         }
-        else if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButton(0) && CameraMove.mode != 1)
         {
             // показать информацию о улице
             selectedStreetPath = ourHitObject.GetComponent<StreetPath>();
+        } else if (!Input.GetMouseButton(0))
+        {
+            canMove = true;
         }
     }
 

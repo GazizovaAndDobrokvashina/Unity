@@ -11,6 +11,9 @@ public class DBwork : MonoBehaviour
     private StreetPath[] paths;
 
     private DataService ds;
+    private Ways ways;
+    
+    private string nameOfTown;
 
 
     void Start()
@@ -36,14 +39,17 @@ public class DBwork : MonoBehaviour
     {
         ds = new DataService(dbName);
         GetEverithing();
+
+        nameOfTown = dbName.Substring(0, dbName.IndexOf("_") - 1);
+        //ways = new Ways(dbName.Substring(0, dbName.IndexOf("_")-1), paths);
     }
 
     public StreetPath GetPathByCoordinates(Vector3 coordinate)
     {
         foreach (StreetPath path in paths)
         {
-            Debug.Log(coordinate + "   " + path.start);
-            if (path.GetIdStreetPath() != 0 && coordinate.Equals(path.start))
+            //Debug.Log(coordinate + "   " + path.start)((int)coordinate.x == (int)path.end.x && (int)coordinate.z == (int)path.end.z)((int)coordinate.x == (int)path.start.x && (int)coordinate.z == (int)path.start.z));
+            if (path.GetIdStreetPath() != 0 && ( coordinate.Equals(path.end) || (path.isBridge && coordinate.Equals(path.start))))
             {
                 return path;
             }
@@ -148,15 +154,15 @@ public class DBwork : MonoBehaviour
 
         if (NameOfGame.Length != 0 && !NameOfGame.EndsWith(".db"))
         {
-            ds = new DataService(NameOfGame + ".db");
+            ds = new DataService(nameOfTown+"_"+NameOfGame + ".db");
         }
         else if (NameOfGame.Length != 0 && NameOfGame.EndsWith(".db"))
         { 
-            ds = new DataService(NameOfGame);
+            ds = new DataService(nameOfTown+"_"+NameOfGame);
         }
         else
         { 
-            ds = new DataService("Firstgame.db");
+            ds = new DataService(nameOfTown+"_Firstgame.db");
         }
 
         if (!ds.IsExist())
@@ -166,17 +172,31 @@ public class DBwork : MonoBehaviour
         players = new Player[countOfPlayers + 1];
         for (int i = 1; i < countOfPlayers + 1; i++)
         {
-            Player player = new Player(i, startMoney, false, paths[1].start);
+            Player player = new Player(i, startMoney, false, MapBuilder.GetCenter(paths[1].start, paths[1].end));
             players[i] = player;
             ds.AddPlayer(player);
         }
+
+        this.nameOfTown = nameOfTown;
+        //ways = new Ways(nameOfTown, paths);
     }
+
 
     public Player[] GetAllPlayers()
     {
         return players;
     }
 
+    public Queue<int> GetWay(int startId, int endId)
+    {
+        return ways.Queues[startId, endId];
+    }
+
+    public void createWays()
+    {
+        ways = new Ways(nameOfTown, paths);
+    }
+    
     public void updatePlayer(Player player)
     {
         players[player.IdPlayer] = player;

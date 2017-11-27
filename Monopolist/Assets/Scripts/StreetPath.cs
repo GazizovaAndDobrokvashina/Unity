@@ -11,6 +11,7 @@ public class StreetPath : MonoBehaviour
     public Vector3 end;
     public bool isBridge;
     public int[] neighborsId;
+    
 
     public void StepOnMe()
     {
@@ -42,6 +43,7 @@ public class StreetPath : MonoBehaviour
             }
         }
         neighborsId = neighs.ToArray();
+        
     }
 
     public int GetIdStreetPath()

@@ -31,7 +31,7 @@ public class MainMenu : MonoBehaviour
     private int maxcountOfPlayers = 4;
     private int mincountOfPlayers = 1;
     private string newNameGame = "Monopolist.db";
-    private int startMoney;
+    private int startMoney =  2000;
     private string nameTownForNewGame;
     private bool online = false;
 
