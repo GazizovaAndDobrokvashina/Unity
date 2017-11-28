@@ -58,6 +58,8 @@ public class Player : MonoBehaviour
         GameCanvas.currentSteps = currentSteps;
         GameCanvas.maxSteps = maxSteps;
         GameCanvas.money = money;
+        //переделать на нормальное название, когда появится
+        GameCanvas.destination = currentStreetPath.name;
     }
 
     //Корутина движения

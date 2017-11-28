@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using NUnit.Framework.Internal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -27,6 +28,12 @@ public class GameCanvas : MonoBehaviour
 
     //Вывод денег игрока
     public Text moneyText;
+    
+    //улица, на которой стоит игрок
+    public Text destinationText;
+
+    //рабочая информация об улице
+    public Text ImportantInfoAboutStreetText;
 
     //Первый скроллВью
     public ScrollRect ScrollRectFirst;
@@ -48,7 +55,10 @@ public class GameCanvas : MonoBehaviour
 
     //Деньги игрока
     public static int money;
-
+    
+    //месторасположение игрока
+    public static string destination;
+    
     //Строка для сохранения нового названия игры
     private string newName;
 
@@ -80,6 +90,9 @@ public class GameCanvas : MonoBehaviour
         moneyText.text = "Капитал: " + money;
         //вывод ходов игрока на экран
         stepsText.text = "Сделано ходов: " + currentSteps + "/" + maxSteps;
+        //вывод информации, где находится игрок
+        destinationText.text = "Улица: " + destination;
+
     }
 
     //открыть меню паузы
@@ -315,6 +328,7 @@ public class GameCanvas : MonoBehaviour
     //создание кнопок с улицами
     private void CreateStreetsButtons()
     {
+        //переделать с айдишников на нормальные названия когда появятся
         _dBwork = Camera.main.GetComponent<DBwork>();
         StreetPath[] streetsPaths = _dBwork.GetAllPaths();
         streetsPathsRectTransforms = new RectTransform[streetsPaths.Length];
@@ -346,6 +360,7 @@ public class GameCanvas : MonoBehaviour
     //создание кнопок с игроками
     private void CreatePlayersButtons()
     {
+        //переделать с айдишников на нормальные названия когда появятся
         _dBwork = Camera.main.GetComponent<DBwork>();
         Player[] Players = _dBwork.GetAllPlayers();
         playersRectTransforms = new RectTransform[Players.Length];
@@ -378,6 +393,8 @@ public class GameCanvas : MonoBehaviour
     //создание кнопок со зданиями конкретной улицы
     private void CreateBuildsButtons(int idPath)
     {
+        //переделать с айдишников на нормальные названия когда появятся
+        
         _dBwork = Camera.main.GetComponent<DBwork>();
         Build[] builds = _dBwork.GetBuildsForThisPath(idPath);
         buildsRectTransforms = new RectTransform[builds.Length];
@@ -405,10 +422,12 @@ public class GameCanvas : MonoBehaviour
         }
     }
 
-    //перемещение к выбранной улице, включение кнопки зданий на этой улице
+    //перемещение к выбранной улице, включение кнопки зданий на этой улице и важной информации об улице
     private void onButtonStreetClick(int idPath)
     {
         buildsButton.SetActive(true);
+        ImportantInfoAboutStreetText.gameObject.SetActive(true);
+        ImportantInfoAboutStreetText.text = "Название: " + "\n" + "Владелец: " + "\n" + "Рента: " + "\n" + "Здания: ";
     }
 
     //окно покупки улиц
@@ -478,7 +497,20 @@ public class GameCanvas : MonoBehaviour
             scroll.gameObject.SetActive(false);
             for (int i = scroll.content.childCount - 1; i >= 0; i--)
                 Destroy(scroll.content.GetChild(i).gameObject);
+                
+            //пока что корявнько так
+            if (type == 1)
+            {
+                ImportantInfoAboutStreetText.gameObject.SetActive(false);
+                buildsButton.gameObject.SetActive(false);
+            }
         }
+    }
+    
+    //перемещение камеры к улице, где стоит игрок 
+    public void GoToStreetUpButton()
+    {
+        //через destination наверн
     }
 
 //    private void OpenLists(int type)
