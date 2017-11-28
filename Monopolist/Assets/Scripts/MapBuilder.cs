@@ -2,10 +2,16 @@
 
 public class MapBuilder : MonoBehaviour
 {
+    //префаб улицы
     public GameObject emptyStreet;
+
+    //префаб игрока
     public GameObject emptyPlayer;
+
+    //префаб бота
     public GameObject emptyBot;
 
+    //создание и заполнение карты, основываясь на данных из базы данных
     void Start()
     {
         DBwork data = Camera.main.GetComponent<DBwork>();
@@ -43,10 +49,11 @@ public class MapBuilder : MonoBehaviour
             newBot.transform.position = players[j].getDestination();
             data.updatePlayer(newBot.GetComponent<Player>());
         }
-        
+
         data.createWays();
     }
 
+    //найти угол между векторами
     public static float Angle(Vector3 start, Vector3 end)
     {
         float angle = Mathf.Atan2(end.z - start.z, end.x - start.x) * 180 / Mathf.PI;
@@ -55,14 +62,16 @@ public class MapBuilder : MonoBehaviour
         return angle;
     }
 
+    //найти центр вектора
     public static Vector3 GetCenter(Vector3 start, Vector3 end)
     {
         Vector3 vec = new Vector3(start.x + ((end.x - start.x) / 2), start.y + ((end.y - start.y) / 2),
-            start.z + ((end.z - start.z) / 2));
+            start.z + (end.z - start.z) / 2);
 
         return vec;
     }
 
+    //найти длину вектора
     float GetVectorLength(Vector3 vector3)
     {
         return vector3.magnitude;

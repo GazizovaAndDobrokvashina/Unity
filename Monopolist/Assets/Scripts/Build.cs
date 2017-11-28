@@ -20,4 +20,24 @@ public class Build : MonoBehaviour
         this.priceBuild = priceBuild;
         this.enable = enable;
     }
+
+    public int IdBuild
+    {
+        get { return idBuild; }
+    }
+
+    public int IdStreetPath
+    {
+        get { return idStreetPath; }
+    }
+
+    public int PriceBuild
+    {
+        get { return priceBuild; }
+    }
+
+    public bool Enable
+    {
+        get { return enable; }
+    }
 }

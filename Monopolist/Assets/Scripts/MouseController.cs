@@ -4,20 +4,31 @@ using UnityEngine.EventSystems;
 
 public class MouseController : MonoBehaviour
 {
-    //public GameController GameController;
+    //ссылка на текущий ДБворк
     private DBwork _dBwork;
 
+    //выбранное здание
     private Build selectedBuild;
+
+    //выбранный игрок
     private Player selectedPlayer;
+
+    //выбранная часть улицы
     private StreetPath selectedStreetPath;
+
+    //
     public float sensitivity = 0.5f;
+
+    //
     private bool canMove;
 
+    //инициализация ДБворка
     void Start()
     {
         _dBwork = Camera.main.GetComponent<DBwork>();
     }
-
+    
+    //
     void Update()
     {
         if (EventSystem.current.IsPointerOverGameObject())
@@ -71,7 +82,8 @@ public class MouseController : MonoBehaviour
         {
             // показать информацию о улице
             selectedStreetPath = ourHitObject.GetComponent<StreetPath>();
-        } else if (!Input.GetMouseButton(0))
+        }
+        else if (!Input.GetMouseButton(0))
         {
             canMove = true;
         }

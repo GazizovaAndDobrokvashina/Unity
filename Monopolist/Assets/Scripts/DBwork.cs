@@ -5,16 +5,26 @@ using UnityEngine;
 
 public class DBwork : MonoBehaviour
 {
+    //массив игроков
     private Player[] players;
+
+    //массив зданий
     private Build[] builds;
+
+    //масссив улиц
     private Street[] streets;
+
+    //массив частей улиц
     private StreetPath[] paths;
 
-    private DataService ds;
-    private Ways ways;
-    
-    private string nameOfTown;
+    //ссылка на DataService
+    private DataService dataService;
 
+    //список всех путей между улицами
+    private Ways ways;
+
+    //название текущего города
+    private string nameOfTown;
 
     void Start()
     {
@@ -24,32 +34,25 @@ public class DBwork : MonoBehaviour
 
     public void DBStart()
     {
-        ds = new DataService("Monopolist.db");
-        if (!ds.IsExist())
-            ds.CreateDB();
-
-
-        /*foreach (Streets streetse in ds.getStreets())
-        {
-            Debug.Log(streetse.NameStreet + "   " + streetse.AboutStreet);
-        }*/
+        dataService = new DataService("Monopolist.db");
+        if (!dataService.IsExist())
+            dataService.CreateDB();
     }
 
     public void SetGameDB(string dbName)
     {
-        ds = new DataService(dbName);
+        dataService = new DataService(dbName);
         GetEverithing();
-
         nameOfTown = dbName.Substring(0, dbName.IndexOf("_") - 1);
-        //ways = new Ways(dbName.Substring(0, dbName.IndexOf("_")-1), paths);
     }
 
+    //возврат части улицы исходя из её координат
     public StreetPath GetPathByCoordinates(Vector3 coordinate)
     {
         foreach (StreetPath path in paths)
         {
-            //Debug.Log(coordinate + "   " + path.start)((int)coordinate.x == (int)path.end.x && (int)coordinate.z == (int)path.end.z)((int)coordinate.x == (int)path.start.x && (int)coordinate.z == (int)path.start.z));
-            if (path.GetIdStreetPath() != 0 && ( coordinate.Equals(path.end) || (path.isBridge && coordinate.Equals(path.start))))
+            if (path.GetIdStreetPath() != 0 &&
+                (coordinate.Equals(path.end) || (path.isBridge && coordinate.Equals(path.start))))
             {
                 return path;
             }
@@ -57,27 +60,27 @@ public class DBwork : MonoBehaviour
         return null;
     }
 
+    //заполнение массивов игроков, улиц, частей улиц и зданий, исходя из данных в базе данных
     public void GetEverithing()
     {
-        players = new Player[ds.getPlayers().Count + 1];
-        builds = new Build[ds.getBuilds().Count + 1];
-        streets = new Street[ds.getStreets().Count + 1];
-        paths = new StreetPath[ds.getStreetPaths().Count + 1];
+        players = new Player[dataService.getPlayers().Count + 1];
+        builds = new Build[dataService.getBuilds().Count + 1];
+        streets = new Street[dataService.getStreets().Count + 1];
+        paths = new StreetPath[dataService.getStreetPaths().Count + 1];
 
-        foreach (Streets streetse in ds.getStreets())
+        foreach (Streets streetse in dataService.getStreets())
         {
-            List<StreetPaths> streetPathses = ds.getAllPathsOfStreet(streetse.IdStreet);
-            //Debug.Log(streetPathses.Count);
+            List<StreetPaths> streetPathses = dataService.getAllPathsOfStreet(streetse.IdStreet);
             int[] pathses = new int[streetPathses.Count];
 
             int k = 0;
             foreach (StreetPaths streetPathse in streetPathses)
             {
-                PathsForBuy ifExist = ds.getPathForBuyById(streetPathse.IdStreetPath);
+                PathsForBuy ifExist = dataService.getPathForBuyById(streetPathse.IdStreetPath);
 
                 if (ifExist != null)
                 {
-                    List<Builds> buildses = ds.getBuildsOnTheStreet(streetPathse.IdStreetPath);
+                    List<Builds> buildses = dataService.getBuildsOnTheStreet(streetPathse.IdStreetPath);
                     int[] buildes = new int[buildses.Count];
 
                     int i = 0;
@@ -92,7 +95,7 @@ public class DBwork : MonoBehaviour
                 }
                 else
                 {
-                    List<Events> eventses = ds.getEventsOnTheStreet(streetPathse.IdStreetPath);
+                    List<Events> eventses = dataService.getEventsOnTheStreet(streetPathse.IdStreetPath);
                     Event[] events = new Event[eventses.Count];
 
                     int j = 0;
@@ -111,7 +114,7 @@ public class DBwork : MonoBehaviour
             streets[streetse.IdStreet] = streetse.GetStreet(pathses);
         }
 
-        foreach (Players player in ds.getPlayers())
+        foreach (Players player in dataService.getPlayers())
         {
             players[player.IdPlayer] = player.GetPlayer();
         }
@@ -122,6 +125,7 @@ public class DBwork : MonoBehaviour
     }
 
 
+    //помещение камеры в поле DontDestroyOnLoad для перенесения информации из главного меню в саму игру
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -129,86 +133,98 @@ public class DBwork : MonoBehaviour
         transform.localEulerAngles = new Vector3(0, -90, 0);
     }
 
+    //возврат массива частей улиц
     public StreetPath[] GetAllPaths()
     {
         return paths;
     }
 
+    //сохранение игры
     public void SaveGame()
     {
     }
 
+    //сохранение игры как новый файл
     public void SaveGameAsNewFile(string newName)
     {
     }
 
+    //возвращение игрока по его айдишнику
     public Player GetPlayerbyId(int idPlayer)
     {
         return players[idPlayer];
     }
-    
-    //дописать для онлайна и разых городов
+
+    //Создание новой игры (дописать для онлайна и разых городов)
     public void CreateNewGame(int countOfPlayers, int startMoney, string NameOfGame, bool online, string nameOfTown)
     {
-        //File.Copy(@"Assets\StreamingAssets\Monopolist.db", @"Assets\SavedGames\Firstgame.db");
-
         if (NameOfGame.Length != 0 && !NameOfGame.EndsWith(".db"))
         {
-            ds = new DataService(nameOfTown+"_"+NameOfGame + ".db");
+            dataService = new DataService(nameOfTown + "_" + NameOfGame + ".db");
         }
         else if (NameOfGame.Length != 0 && NameOfGame.EndsWith(".db"))
-        { 
-            ds = new DataService(nameOfTown+"_"+NameOfGame);
+        {
+            dataService = new DataService(nameOfTown + "_" + NameOfGame);
         }
         else
-        { 
-            ds = new DataService(nameOfTown+"_Firstgame.db");
+        {
+            dataService = new DataService(nameOfTown + "_Firstgame.db");
         }
 
-        if (!ds.IsExist())
-            ds.CreateDB();
-        //SetGameDB("Firstgame.db");
+        if (!dataService.IsExist())
+            dataService.CreateDB();
+
         GetEverithing();
         players = new Player[countOfPlayers + 1];
         for (int i = 1; i < countOfPlayers + 1; i++)
         {
             Player player = new Player(i, startMoney, false, MapBuilder.GetCenter(paths[1].start, paths[1].end));
             players[i] = player;
-            ds.AddPlayer(player);
+            dataService.AddPlayer(player);
         }
 
         this.nameOfTown = nameOfTown;
-        //ways = new Ways(nameOfTown, paths);
     }
 
-
+    //возврат массива игроков
     public Player[] GetAllPlayers()
     {
         return players;
     }
 
+    //возврат очереди частей улиц между начальной и конечной точкой
     public Queue<int> GetWay(int startId, int endId)
     {
         return ways.Queues[startId, endId];
     }
 
+    //создание массива путей из одной точки в другую, исходя из названия города и его частей улиц
     public void createWays()
     {
         ways = new Ways(nameOfTown, paths);
     }
-    
+
+    //обновить данные игрока
     public void updatePlayer(Player player)
     {
         players[player.IdPlayer] = player;
     }
 
+    //обновить данные о части улицы
     public void updatePath(StreetPath path)
     {
         paths[path.GetIdStreetPath()] = path;
     }
 
+    //возврат части улицы по её айдишнику
     public StreetPath GetPathById(int id)
     {
         return paths[id];
+    }
+
+    //возврат зданий по айдишнику улицы, на которой они находятся (дописать метод нормально)
+    public Build[] GetBuildsForThisPath(int idPath)
+    {
+        return builds;
     }
 }

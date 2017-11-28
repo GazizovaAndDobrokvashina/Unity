@@ -3,20 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StreetPath : MonoBehaviour
-{
+{    
+    //айди части улицы
     private int idStreetPath;
+    //айди родительской улицы
     private int idStreetParent;
+    //плата других игроков владельцу этой части улицы
     private int renta;
+    //координаты начала улицы
     public Vector3 start;
+    //координаты конца улицы
     public Vector3 end;
+    //является ли мостом часть улицы
     public bool isBridge;
+    //список соседей улицы
     public int[] neighborsId;
     
-
+    //если игрок наступает на эту часть улицы
     public void StepOnMe()
     {
     }
-
+    
+    //
     public void TakeData(StreetPath streetPath)
     {
         this.idStreetParent = streetPath.GetIdStreetParent();
@@ -26,7 +34,8 @@ public class StreetPath : MonoBehaviour
         this.end = streetPath.end;
         this.isBridge = streetPath.isBridge;
     }
-
+    
+    //нахождение сосених частей улиц с этой
     public void GetNeighbors()
     {
         DBwork ds = Camera.main.GetComponent<DBwork>();
@@ -45,22 +54,26 @@ public class StreetPath : MonoBehaviour
         neighborsId = neighs.ToArray();
         
     }
-
+    
+    //возврат Айдишника этой части улицы
     public int GetIdStreetPath()
     {
         return idStreetPath;
     }
-
+    
+    //Возврат айдишника родительской улицы
     public int GetIdStreetParent()
     {
         return idStreetParent;
     }
-
+    
+    //возврат ренты на этой части улицы
     public int GetRenta()
     {
         return renta;
     }
-
+    
+    //конструктор 
     public StreetPath(int idStreetPath, int idStreetParent, int renta, Vector3 start, Vector3 end, bool isBridge)
     {
         this.idStreetPath = idStreetPath;
@@ -70,7 +83,8 @@ public class StreetPath : MonoBehaviour
         this.end = end;
         this.isBridge = isBridge;
     }
-
+    
+    //возврат айдишников соседей
     public int[] NeighborsId
     {
         get { return neighborsId; }
