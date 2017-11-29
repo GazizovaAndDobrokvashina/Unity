@@ -38,7 +38,7 @@ public class MapBuilder : MonoBehaviour
 
         GameObject newPlayer = Instantiate(emptyPlayer) as GameObject;
         newPlayer.GetComponent<Player>().GetData(players[1]);
-        newPlayer.transform.position = players[1].getDestination();
+        newPlayer.transform.position = players[1].Destination;
         data.updatePlayer(newPlayer.GetComponent<Player>());
 
 
@@ -46,7 +46,7 @@ public class MapBuilder : MonoBehaviour
         {
             GameObject newBot = Instantiate(emptyBot) as GameObject;
             newBot.GetComponent<Player>().GetData(players[j]);
-            newBot.transform.position = players[j].getDestination();
+            newBot.transform.position = players[j].Destination;
             data.updatePlayer(newBot.GetComponent<Player>());
         }
 

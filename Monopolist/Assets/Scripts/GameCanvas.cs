@@ -18,7 +18,10 @@ public class GameCanvas : MonoBehaviour
     public GameObject returnButton;
     
     //кнопка включения/выключения списка зданий
-    public GameObject buildsButton; 
+    public GameObject buildsButton;
+    
+    
+    public GameObject warningWindow;
 
     //Префаб кнопок, появляющихся в контекте скроллов
     public RectTransform prefabButtonsinScrolls;
@@ -83,6 +86,20 @@ public class GameCanvas : MonoBehaviour
     //открыто ли уже онкно со зданиями и на какой вьюхе
     private int openedBuilds = 0;
 
+    private Player currentPlayer;
+
+    public void OpenWarningWindow(Player player)
+    {
+        currentPlayer = player;
+        warningWindow.SetActive(true);
+    }
+
+    public void GetRespons(bool respons)
+    {
+        currentPlayer.takeResponse(respons);
+        warningWindow.SetActive(false);
+    }
+    
     //вывод данных об игроке
     void Update()
     {

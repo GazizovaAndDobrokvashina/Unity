@@ -28,10 +28,10 @@ public class Player : MonoBehaviour
     //ссылка на ДБворк
     private DBwork _dbWork;
 
-    private List<Queue<int>> _list;
-
+    //движется ли грок
     private bool isMoving = false;
-
+    
+    //запущена ли корутина
     private bool corutine = false;
 
     //улица, на которой находится игрок
@@ -39,8 +39,19 @@ public class Player : MonoBehaviour
 
     //путь от одной улицы к другой
     private Queue<int> way;
+    
+    //пытается ли считерить игрок
+    private bool isCheating;
+    
+    //будет ли игрок пойман прb попытке считерить
+    private bool isGonnaBeCathced;
 
+    private GameCanvas _gameCanvas;
 
+    private void Start()
+    {
+        _gameCanvas = transform.Find("/Canvas").GetComponent<GameCanvas>();
+    }
     private void Update()
     {
         if (!transform.position.Equals(destination))
@@ -62,9 +73,31 @@ public class Player : MonoBehaviour
         GameCanvas.destination = currentStreetPath.name;
     }
 
+    public void takeResponse(bool responce)
+    {
+        isCheating = false;
+        isGonnaBeCathced = responce;
+    }
     //Корутина движения
     private IEnumerator Go()
     {
+//        yield return new WaitUntil(() => isCheating == false);
+//
+//        if (isGonnaBeCathced)
+//        {
+//            if (Random.Range(0, 2) == 1)
+//            {
+//                corutine = false;
+//                GameController.cathedPlayer();
+//                yield break;
+//            } else
+//            {
+//                isGonnaBeCathced = false;
+//            }
+//        }
+        
+        
+        
         bool endFirstStep = false;
         int num = way.Count;
         StreetPath somewhere = null;
@@ -124,18 +157,16 @@ public class Player : MonoBehaviour
             corutine = true;
             way = _dbWork.GetWay(currentStreetPath.GetIdStreetPath(),
                 path.GetIdStreetPath());
-
+            if (currentSteps + way.Count > maxSteps)
+            {    _gameCanvas.OpenWarningWindow(this);
+                isCheating = true;
+            }
             StartCoroutine(Go());
 
             currentStreetPath = path;
         }
     }
 
-    //положение игрока на карте
-    public Vector3 getDestination()
-    {
-        return destination;
-    }
 
     //конструктор игрока
     public Player(int idPlayer, int money, bool isBankrupt, Vector3 destination)
@@ -209,7 +240,6 @@ public class Player : MonoBehaviour
         this.maxSteps = player.MaxSteps;
         this.money = player.Money;
         this.speed = player.Speed;
-        _list = new List<Queue<int>>();
 
         _dbWork = Camera.main.GetComponent<DBwork>();
 

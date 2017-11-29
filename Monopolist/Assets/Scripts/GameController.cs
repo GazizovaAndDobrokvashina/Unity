@@ -21,9 +21,10 @@ public class GameController : MonoBehaviour
 		//}
 	}
 
-	public void cheet()
+	public static void cathedPlayer()
 	{
-		
+		//перевести плеера в суд, так как он пойман
+		Debug.Log("попался");
 	}
 
 	void checkPlayer()
