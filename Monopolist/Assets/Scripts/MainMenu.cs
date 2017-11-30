@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using System.Linq;
+using NUnit.Framework.Internal;
 using UnityEngine.Experimental.UIElements;
 using UnityEngine.SceneManagement;
 using Button = UnityEngine.UI.Button;
@@ -33,6 +34,8 @@ public class MainMenu : MonoBehaviour
     //поле для ввода нового названия игры
     public InputField InputFieldNameOfGame;
 
+    public InputField InputFieldPlayerName;
+
     //слайдер количества игроков
     public Slider sliderCountOfPlayers;
 
@@ -50,6 +53,8 @@ public class MainMenu : MonoBehaviour
 
     //вывод названия выбранного города
     public Text NameOfTown;
+
+    public Text NamePlayerText;
 
     //вьюха для отображения кнопок с сохранениями
     public ScrollRect scrollSavedGames;
@@ -78,6 +83,8 @@ public class MainMenu : MonoBehaviour
     //онлайн или оффлайн игра
     private bool online = false;
 
+    private string namePlayer = "Jonny";
+
     //инициализация главного меню
     private void Start()
     {
@@ -97,7 +104,17 @@ public class MainMenu : MonoBehaviour
         countOfPlayers = (int) sliderCountOfPlayers.value;
         countOfPlayersText.text = "Количество игроков: " + (int) sliderCountOfPlayers.value;
     }
+    
+    public void ChangeNameOfGPlyer()
+    {
+        if (InputFieldPlayerName.text.Length != 0)
+        {
+            namePlayer = InputFieldPlayerName.text;
+        }
 
+        NamePlayerText.text = "Ваше имя: " + namePlayer;
+    }
+    
     //создание кнопок сохранений
     private void CreateButtonsSaves()
     {
@@ -176,7 +193,7 @@ public class MainMenu : MonoBehaviour
     public void StartNewGame()
     {
         Camera.main.GetComponent<DBwork>()
-            .CreateNewGame(countOfPlayers, startMoney, newNameGame, online, nameTownForNewGame, "");
+            .CreateNewGame(countOfPlayers, startMoney, newNameGame, online, nameTownForNewGame, namePlayer);
         SceneManager.LoadScene("Game");
     }
 
