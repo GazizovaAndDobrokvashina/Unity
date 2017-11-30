@@ -20,7 +20,7 @@ public class MouseController : MonoBehaviour
     public float sensitivity = 0.5f;
 
     //
-    private bool canMove;
+    private bool canMove = true;
 
     //инициализация ДБворка
     void Start()
@@ -73,7 +73,7 @@ public class MouseController : MonoBehaviour
 
     void MouseOver_Street(GameObject ourHitObject)
     {
-        if (Input.GetMouseButton(0) && CameraMove.mode == 1 && canMove)
+        if (Input.GetMouseButton(0) && canMove)// && CameraMove.mode == 1 )
         {
             canMove = false;
             _dBwork.GetPlayerbyId(1).move(ourHitObject.GetComponent<StreetPath>());

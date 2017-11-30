@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     //ID игрока
     private int idPlayer;
 
+    private string nickName;
+
     //деньги игрока
     private int money;
 
@@ -75,26 +77,32 @@ public class Player : MonoBehaviour
 
     public void takeResponse(bool responce)
     {
-        isCheating = false;
         isGonnaBeCathced = responce;
+        isCheating = false;
     }
     //Корутина движения
     private IEnumerator Go()
     {
-//        yield return new WaitUntil(() => isCheating == false);
-//
-//        if (isGonnaBeCathced)
-//        {
-//            if (Random.Range(0, 2) == 1)
-//            {
-//                corutine = false;
-//                GameController.cathedPlayer();
-//                yield break;
-//            } else
-//            {
-//                isGonnaBeCathced = false;
-//            }
-//        }
+        yield return new WaitUntil(() => isCheating == false);
+
+        if (isGonnaBeCathced)
+        {
+            if (Random.Range(0, 2) == 1)
+            {
+                corutine = false;
+                GameController.cathedPlayer();
+                yield break;
+            }
+            else
+            {
+                isGonnaBeCathced = false;
+            }
+        }
+        else
+        {
+            corutine = false;
+            yield break;
+        }
         
         
         
@@ -129,6 +137,8 @@ public class Player : MonoBehaviour
             if (i == num - 1)
             {
                 destination = MapBuilder.GetCenter(somewhere.start, somewhere.end);
+                
+                currentStreetPath = somewhere;
                 yield return new WaitUntil(() => transform.position == destination);
             }
             else
@@ -163,14 +173,14 @@ public class Player : MonoBehaviour
             }
             StartCoroutine(Go());
 
-            currentStreetPath = path;
         }
     }
 
 
     //конструктор игрока
-    public Player(int idPlayer, int money, bool isBankrupt, Vector3 destination)
+    public Player(int idPlayer, string nickName, int money, bool isBankrupt, Vector3 destination)
     {
+        this.nickName = nickName;
         this.idPlayer = idPlayer;
         this.money = money;
         this.isBankrupt = isBankrupt;
@@ -181,6 +191,7 @@ public class Player : MonoBehaviour
     {
         Players players = new Players();
         players.IdPlayer = idPlayer;
+        players.NickName = nickName;
         players.CoordinateX = destination.x;
         players.CoordinateY = destination.z;
         players.IsBankrupt = isBankrupt;

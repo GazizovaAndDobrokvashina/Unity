@@ -118,7 +118,7 @@ public class DBwork : MonoBehaviour
         {
             players[player.IdPlayer] = player.GetPlayer();
         }
-        players[0] = new Player(0, 0, true, Vector3.zero);
+        players[0] = new Player(0, "", 0, true, Vector3.zero);
         streets[0] = new Street(0, "", "", new int[1]);
         paths[0] = new StreetPath(0, 0, 0, Vector3.zero, Vector3.zero, false);
         builds[0] = new Build(0, 0, 0, false);
@@ -156,7 +156,7 @@ public class DBwork : MonoBehaviour
     }
 
     //Создание новой игры (дописать для онлайна и разых городов)
-    public void CreateNewGame(int countOfPlayers, int startMoney, string NameOfGame, bool online, string nameOfTown)
+    public void CreateNewGame(int countOfPlayers, int startMoney, string NameOfGame, bool online, string nameOfTown, string nickName)
     {
         if (NameOfGame.Length != 0 && !NameOfGame.EndsWith(".db"))
         {
@@ -178,7 +178,7 @@ public class DBwork : MonoBehaviour
         players = new Player[countOfPlayers + 1];
         for (int i = 1; i < countOfPlayers + 1; i++)
         {
-            Player player = new Player(i, startMoney, false, MapBuilder.GetCenter(paths[1].start, paths[1].end));
+            Player player = new Player(i, nickName, startMoney, false, MapBuilder.GetCenter(paths[1].start, paths[1].end));
             players[i] = player;
             dataService.AddPlayer(player);
         }

@@ -176,7 +176,7 @@ public class MainMenu : MonoBehaviour
     public void StartNewGame()
     {
         Camera.main.GetComponent<DBwork>()
-            .CreateNewGame(countOfPlayers, startMoney, newNameGame, online, nameTownForNewGame);
+            .CreateNewGame(countOfPlayers, startMoney, newNameGame, online, nameTownForNewGame, "");
         SceneManager.LoadScene("Game");
     }
 

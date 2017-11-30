@@ -10,6 +10,7 @@ public class StreetPaths
     public int IdStreetPath { get; set; }
 
     public int IdStreetParent { get; set; }
+    public string namePath { get; set; }
     public int Renta { get; set; }
     public double StartX { get; set; }
     public double EndX { get; set; }

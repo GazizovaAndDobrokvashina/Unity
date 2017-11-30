@@ -15,6 +15,6 @@ public class Players
     public Player GetPlayer()
     {
         Vector3 position = new Vector3((float) CoordinateX, 0, (float) CoordinateY);
-        return new Player(IdPlayer, Money, IsBankrupt, position);
+        return new Player(IdPlayer,NickName, Money, IsBankrupt, position);
     }
 }
