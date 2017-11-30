@@ -382,8 +382,10 @@ public class GameCanvas : MonoBehaviour
         Player[] Players = _dBwork.GetAllPlayers();
         playersRectTransforms = new RectTransform[Players.Length];
 
+        Debug.Log(Players.Length);
         foreach (Player player in Players)
         {
+            
             var prefButtons = Instantiate(prefabButtonsinScrolls);
             playersRectTransforms[player.IdPlayer] = prefButtons;
 

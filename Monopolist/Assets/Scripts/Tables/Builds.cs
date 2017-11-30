@@ -5,14 +5,14 @@ public class Builds
 {
     [PrimaryKey, AutoIncrement]
     public int IdBuild { get; set; }
-    public string nameBuild { get; set; }
-    public string aboutBuild { get; set; }
+    public string NameBuild { get; set; }
+    public string AboutBuild { get; set; }
     public int IdStreetPath { get; set; }
     public int PriceBuild { get; set; }
     public bool Enabled { get; set; }
 
     public Build getBuild()
     {
-        return new Build(IdBuild, IdStreetPath, PriceBuild, Enabled);
+        return new Build(IdBuild, NameBuild, AboutBuild, IdStreetPath, PriceBuild, Enabled);
     }
 }

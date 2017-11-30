@@ -14,8 +14,8 @@ public class PathForBuy : StreetPath
     {
     }
 
-    public PathForBuy(int idPath, int idStreetParent, int renta, Vector3 start, Vector3 end, int idPlayer, int[] builds,
-        int priceStreetPath, bool isBridge) : base(idPath, idStreetParent, renta, start, end, isBridge)
+    public PathForBuy(int idPath, string namePath, int idStreetParent, int renta, Vector3 start, Vector3 end, int idPlayer, int[] builds,
+        int priceStreetPath, bool isBridge) : base(idPath, namePath, idStreetParent, renta, start, end, isBridge)
     {
         this.idPlayer = idPlayer;
         this.builds = builds;

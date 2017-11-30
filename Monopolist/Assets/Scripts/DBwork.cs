@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class DBwork : MonoBehaviour
@@ -23,13 +24,31 @@ public class DBwork : MonoBehaviour
     //список всех путей между улицами
     private Ways ways;
 
+    private List<string> names;
+
     //название текущего города
     private string nameOfTown;
 
     void Start()
     {
-        //DBStart();
-        //GetEverithing();
+        names = new List<string>();
+        names.Add("Равшан");
+        names.Add("Джамшут");
+        names.Add("Мафусаил");
+        names.Add("Инокентий");
+        names.Add("Геннадий");
+        names.Add("Ариэль");
+        names.Add("Алтынбек");
+        names.Add("Коловрат");
+        names.Add("Джаник");
+        names.Add("Марфа");
+        names.Add("Бадигулжамал");
+        names.Add("Дурия");
+        names.Add("Антуанетта");
+        names.Add("Каламкас");
+        names.Add("Еркежан");
+        names.Add("Жумабике");
+        
     }
 
     public void DBStart()
@@ -120,8 +139,8 @@ public class DBwork : MonoBehaviour
         }
         players[0] = new Player(0, "", 0, true, Vector3.zero);
         streets[0] = new Street(0, "", "", new int[1]);
-        paths[0] = new StreetPath(0, 0, 0, Vector3.zero, Vector3.zero, false);
-        builds[0] = new Build(0, 0, 0, false);
+        paths[0] = new StreetPath(0, "", 0, 0, Vector3.zero, Vector3.zero, false);
+        builds[0] = new Build(0,"", "", 0, 0, false);
     }
 
 
@@ -137,6 +156,11 @@ public class DBwork : MonoBehaviour
     public StreetPath[] GetAllPaths()
     {
         return paths;
+    }
+
+    public Build[] GetAllBuilds()
+    {
+        return builds;
     }
 
     //сохранение игры
@@ -178,7 +202,11 @@ public class DBwork : MonoBehaviour
         players = new Player[countOfPlayers + 1];
         for (int i = 1; i < countOfPlayers + 1; i++)
         {
-            Player player = new Player(i, nickName, startMoney, false, MapBuilder.GetCenter(paths[1].start, paths[1].end));
+            Player player;
+            if (i==1)
+                player = new Player(i, nickName, startMoney, false, MapBuilder.GetCenter(paths[1].start, paths[1].end));
+            else 
+                player = new Player(i, names[Random.Range(0, names.Count)], startMoney, false, MapBuilder.GetCenter(paths[1].start, paths[1].end));
             players[i] = player;
             dataService.AddPlayer(player);
         }
@@ -210,6 +238,11 @@ public class DBwork : MonoBehaviour
         players[player.IdPlayer] = player;
     }
 
+    public void updateBuild(Build build)
+    {
+        builds[build.IdBuild] = build;
+    }
+
     //обновить данные о части улицы
     public void updatePath(StreetPath path)
     {
@@ -225,6 +258,16 @@ public class DBwork : MonoBehaviour
     //возврат зданий по айдишнику улицы, на которой они находятся (дописать метод нормально)
     public Build[] GetBuildsForThisPath(int idPath)
     {
-        return builds;
+        List<Build> buildes = new List<Build>();
+
+        foreach (Build build in this.builds)
+        {
+            if (build.IdStreetPath == idPath)
+            {
+                buildes.Add(build);
+            }
+        }
+        
+        return buildes.ToArray();
     }
 }

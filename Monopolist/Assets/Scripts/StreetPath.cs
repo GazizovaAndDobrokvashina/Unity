@@ -18,6 +18,9 @@ public class StreetPath : MonoBehaviour
     public bool isBridge;
     //список соседей улицы
     public int[] neighborsId;
+
+    public string namePath;
+    
     
     //если игрок наступает на эту часть улицы
     public void StepOnMe()
@@ -33,6 +36,7 @@ public class StreetPath : MonoBehaviour
         this.start = streetPath.start;
         this.end = streetPath.end;
         this.isBridge = streetPath.isBridge;
+        this.namePath = streetPath.namePath;
     }
     
     //нахождение сосених частей улиц с этой
@@ -74,7 +78,7 @@ public class StreetPath : MonoBehaviour
     }
     
     //конструктор 
-    public StreetPath(int idStreetPath, int idStreetParent, int renta, Vector3 start, Vector3 end, bool isBridge)
+    public StreetPath(int idStreetPath, string namePath, int idStreetParent, int renta, Vector3 start, Vector3 end, bool isBridge)
     {
         this.idStreetPath = idStreetPath;
         this.idStreetParent = idStreetParent;
@@ -82,6 +86,7 @@ public class StreetPath : MonoBehaviour
         this.start = start;
         this.end = end;
         this.isBridge = isBridge;
+        this.namePath = namePath;
     }
     
     //возврат айдишников соседей

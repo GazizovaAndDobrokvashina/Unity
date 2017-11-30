@@ -11,6 +11,8 @@ public class MapBuilder : MonoBehaviour
     //префаб бота
     public GameObject emptyBot;
 
+    public GameObject emptyBuild;
+
     //создание и заполнение карты, основываясь на данных из базы данных
     void Start()
     {
@@ -32,6 +34,23 @@ public class MapBuilder : MonoBehaviour
             newStreetPath.transform.rotation =
                 Quaternion.Euler(0f, Angle(pathForBuys[i].start, pathForBuys[i].end), 0f);
             newStreetPath.transform.position = GetCenter(pathForBuys[i].start, pathForBuys[i].end);
+        }
+
+        Build[] builds = data.GetAllBuilds();
+
+        for (int i = 1; i < builds.Length; i++)
+        {
+            GameObject newBuild = Instantiate(emptyBuild) as GameObject;
+            newBuild.name = builds[i].NameBuild;
+
+            newBuild.AddComponent<Build>();
+            newBuild.GetComponent<Build>().TakeData(builds[i]);
+            data.updateBuild(newBuild.GetComponent<Build>());
+
+            newBuild.transform.rotation = data.GetPathById(builds[i].IdStreetPath).transform.rotation;
+            newBuild.transform.position = data.GetPathById(builds[i].IdStreetPath).transform.position;
+            
+
         }
 
         Player[] players = data.GetAllPlayers();

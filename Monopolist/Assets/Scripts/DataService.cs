@@ -89,29 +89,29 @@ public class DataService  {
             new Streets {NameStreet = "Street8", AboutStreet = "Коричневая улица"},
             new Streets {NameStreet = "Street9", AboutStreet = "Голубая улица, короткая часть - суд"},
             new Streets {NameStreet = "Street10", AboutStreet = "Оранжевая улица"},
-            new Streets {NameStreet = "Street11", AboutStreet = "Бардовая улица, длинная часть = парк"},
+            new Streets {NameStreet = "Street11", AboutStreet = "Бордовая улица, длинная часть = парк"},
         };
 
         StreetPaths[] pathses = new[]
         {
-            new StreetPaths {Renta = 25, IdStreetParent = 1, StartX = 5.63, StartY = -5.64, EndX = -1.57, EndY = -5.64, IsBridge = false},
-            new StreetPaths {Renta = 20, IdStreetParent = 1, StartX = -1.57, StartY = -5.64, EndX = -5.68, EndY = -5.64, IsBridge = false},
-            new StreetPaths {Renta = 20, IdStreetParent = 2, StartX = -5.68, StartY = -5.64, EndX = -5.68, EndY = -1.58, IsBridge = false},
-            new StreetPaths {Renta = 25, IdStreetParent = 2, StartX = -5.68, StartY = -1.58, EndX = -5.68, EndY = 5.62, IsBridge = false},
-            new StreetPaths {Renta = 20, IdStreetParent = 3, StartX = -5.68, StartY = 5.62, EndX = -2.63, EndY = 5.62, IsBridge = false},
-            new StreetPaths {Renta = 25, IdStreetParent = 3, StartX = -2.63, StartY = 5.62, EndX = 5.63, EndY = 5.62, IsBridge = false},
-            new StreetPaths {Renta = 20, IdStreetParent = 4, StartX = 5.63, StartY = 5.62, EndX = 5.63, EndY = 1.58, IsBridge = false},
-            new StreetPaths {Renta = 25, IdStreetParent = 4, StartX = 5.63, StartY = 1.58, EndX = 5.63, EndY = -5.64, IsBridge = false},
-            new StreetPaths {Renta = 15, IdStreetParent = 5, StartX = -1.57, StartY = -5.64, EndX = -1.57, EndY = -2.74, IsBridge = true},
-            new StreetPaths {Renta = 15, IdStreetParent = 6, StartX = -5.68, StartY = -1.58, EndX = -2.68, EndY = -1.58, IsBridge = true},
-            new StreetPaths {Renta = 15, IdStreetParent = 7, StartX = -2.63, StartY = 5.62, EndX = -2.63, EndY = 2.68, IsBridge = true},
-            new StreetPaths {Renta = 15, IdStreetParent = 8, StartX = 5.63, StartY = 1.58, EndX = 2.65, EndY = 1.58, IsBridge = true},
-            new StreetPaths {Renta = 25, IdStreetParent = 9, StartX = 2.65, StartY = -2.74, EndX = -1.57, EndY = -2.74, IsBridge = false},
-            new StreetPaths {Renta = 15, IdStreetParent = 9, StartX = -1.57, StartY = -2.74, EndX = -2.68, EndY = -1.58, IsBridge = false},
-            new StreetPaths {Renta = 15, IdStreetParent = 7, StartX = -2.68, StartY = -1.58, EndX = -2.63, EndY = 2.68, IsBridge = false},
-            new StreetPaths {Renta = 25, IdStreetParent = 10, StartX = -2.63, StartY = 2.68, EndX = 2.65, EndY = 2.68, IsBridge = false},
-            new StreetPaths {Renta = 25, IdStreetParent = 11, StartX = 2.65, StartY = 2.68, EndX = 2.65, EndY = 1.58, IsBridge = false},
-            new StreetPaths {Renta = 25, IdStreetParent = 11, StartX =  2.65, StartY = 1.58, EndX = 2.65, EndY = -2.74, IsBridge = false}
+            new StreetPaths {Renta = 25, NamePath = "Желтая 1", IdStreetParent = 1, StartX = 5.63, StartY = -5.64, EndX = -1.57, EndY = -5.64, IsBridge = false},
+            new StreetPaths {Renta = 20, NamePath = "Желтая 2", IdStreetParent = 1, StartX = -1.57, StartY = -5.64, EndX = -5.68, EndY = -5.64, IsBridge = false},
+            new StreetPaths {Renta = 20, NamePath = "Красная 1", IdStreetParent = 2, StartX = -5.68, StartY = -5.64, EndX = -5.68, EndY = -1.58, IsBridge = false},
+            new StreetPaths {Renta = 25, NamePath = "Красная 2", IdStreetParent = 2, StartX = -5.68, StartY = -1.58, EndX = -5.68, EndY = 5.62, IsBridge = false},
+            new StreetPaths {Renta = 20, NamePath = "Зеленая 1", IdStreetParent = 3, StartX = -5.68, StartY = 5.62, EndX = -2.63, EndY = 5.62, IsBridge = false},
+            new StreetPaths {Renta = 25, NamePath = "Зеленая 2", IdStreetParent = 3, StartX = -2.63, StartY = 5.62, EndX = 5.63, EndY = 5.62, IsBridge = false},
+            new StreetPaths {Renta = 20, NamePath = "Синяя 1", IdStreetParent = 4, StartX = 5.63, StartY = 5.62, EndX = 5.63, EndY = 1.58, IsBridge = false},
+            new StreetPaths {Renta = 25, NamePath = "Синяя 2", IdStreetParent = 4, StartX = 5.63, StartY = 1.58, EndX = 5.63, EndY = -5.64, IsBridge = false},
+            new StreetPaths {Renta = 15, NamePath = "Розовая", IdStreetParent = 5, StartX = -1.57, StartY = -5.64, EndX = -1.57, EndY = -2.74, IsBridge = true},
+            new StreetPaths {Renta = 15, NamePath = "Фиолетовая", IdStreetParent = 6, StartX = -5.68, StartY = -1.58, EndX = -2.68, EndY = -1.58, IsBridge = true},
+            new StreetPaths {Renta = 15, NamePath = "Салатовая 1", IdStreetParent = 7, StartX = -2.63, StartY = 5.62, EndX = -2.63, EndY = 2.68, IsBridge = true},
+            new StreetPaths {Renta = 15, NamePath = "Коричневая", IdStreetParent = 8, StartX = 5.63, StartY = 1.58, EndX = 2.65, EndY = 1.58, IsBridge = true},
+            new StreetPaths {Renta = 25, NamePath = "Голубая 1", IdStreetParent = 9, StartX = 2.65, StartY = -2.74, EndX = -1.57, EndY = -2.74, IsBridge = false},
+            new StreetPaths {Renta = 15, NamePath = "Голубая 2", IdStreetParent = 9, StartX = -1.57, StartY = -2.74, EndX = -2.68, EndY = -1.58, IsBridge = false},
+            new StreetPaths {Renta = 15, NamePath = "Салатовая 2", IdStreetParent = 7, StartX = -2.68, StartY = -1.58, EndX = -2.63, EndY = 2.68, IsBridge = false},
+            new StreetPaths {Renta = 25, NamePath = "Оранжевая", IdStreetParent = 10, StartX = -2.63, StartY = 2.68, EndX = 2.65, EndY = 2.68, IsBridge = false},
+            new StreetPaths {Renta = 25, NamePath = "Бордовая 1", IdStreetParent = 11, StartX = 2.65, StartY = 2.68, EndX = 2.65, EndY = 1.58, IsBridge = false},
+            new StreetPaths {Renta = 25, NamePath = "Бородовая 2", IdStreetParent = 11, StartX =  2.65, StartY = 1.58, EndX = 2.65, EndY = -2.74, IsBridge = false}
         };
 
         PathsForBuy[] pathsForBuys = new[]
@@ -134,29 +134,29 @@ public class DataService  {
 		
         Builds[] buildses = new[]
         {
-            new Builds {Enabled = false, IdStreetPath = 1, PriceBuild = 100},
-            new Builds {Enabled = false, IdStreetPath = 3, PriceBuild = 100},
-            new Builds {Enabled = false, IdStreetPath = 4, PriceBuild = 100},
-            new Builds {Enabled = false, IdStreetPath = 6, PriceBuild = 100},
-            new Builds {Enabled = false, IdStreetPath = 7, PriceBuild = 100},
-            new Builds {Enabled = false, IdStreetPath = 8, PriceBuild = 100},
-            new Builds {Enabled = false, IdStreetPath = 9, PriceBuild = 100},
-            new Builds {Enabled = false, IdStreetPath = 10, PriceBuild = 100},
-            new Builds {Enabled = false, IdStreetPath = 11, PriceBuild = 100},
-            new Builds {Enabled = false, IdStreetPath = 12, PriceBuild = 100},
-            new Builds {Enabled = false, IdStreetPath = 13, PriceBuild = 100},
-            new Builds {Enabled = false, IdStreetPath = 15, PriceBuild = 100},
-            new Builds {Enabled = false, IdStreetPath = 16, PriceBuild = 100},
-            new Builds {Enabled = false, IdStreetPath = 17, PriceBuild = 100}
+            new Builds {NameBuild = "Дом на Желтой 1", AboutBuild = "", Enabled = false, IdStreetPath = 1, PriceBuild = 100},
+            new Builds {NameBuild = "Дом на Красной 1", AboutBuild = "", Enabled = false, IdStreetPath = 3, PriceBuild = 100},
+            new Builds {NameBuild = "Дом на Красной 2", AboutBuild = "", Enabled = false, IdStreetPath = 4, PriceBuild = 100},
+            new Builds {NameBuild = "Дом на Зеленой 2", AboutBuild = "", Enabled = false, IdStreetPath = 6, PriceBuild = 100},
+            new Builds {NameBuild = "Дом на Синей 1", AboutBuild = "", Enabled = false, IdStreetPath = 7, PriceBuild = 100},
+            new Builds {NameBuild = "Дом на Синей 2", AboutBuild = "", Enabled = false, IdStreetPath = 8, PriceBuild = 100},
+            new Builds {NameBuild = "Дом на Розовой", AboutBuild = "", Enabled = false, IdStreetPath = 9, PriceBuild = 100},
+            new Builds {NameBuild = "Дом на Фиолетовой", AboutBuild = "", Enabled = false, IdStreetPath = 10, PriceBuild = 100},
+            new Builds {NameBuild = "Дом на Салатовой 1", AboutBuild = "", Enabled = false, IdStreetPath = 11, PriceBuild = 100},
+            new Builds {NameBuild = "Дом на Коричневой", AboutBuild = "", Enabled = false, IdStreetPath = 12, PriceBuild = 100},
+            new Builds {NameBuild = "Дом на Голубой 1", AboutBuild = "", Enabled = false, IdStreetPath = 13, PriceBuild = 100},
+            new Builds {NameBuild = "Дои на Салатовая 2", AboutBuild = "", Enabled = false, IdStreetPath = 15, PriceBuild = 100},
+            new Builds {NameBuild = "Дом на Оранжевой", AboutBuild = "", Enabled = false, IdStreetPath = 16, PriceBuild = 100},
+            new Builds {NameBuild = "Дом на Бордовой 1", AboutBuild = "", Enabled = false, IdStreetPath = 17, PriceBuild = 100}
 			
         };
 
         Events[] events = new[]
         {
-            new Events {IdGovermentPath = 2, Info = "", NameEvent = "Surprize bitch", Price = 20},
-            new Events {IdGovermentPath = 5, Info = "", NameEvent = "Surprize bitch", Price = 20},
-            new Events {IdGovermentPath = 14, Info = "", NameEvent = "Surprize bitch", Price = 20},
-            new Events {IdGovermentPath = 18, Info = "", NameEvent = "Surprize bitch", Price = 20}
+            new Events {IdGovermentPath = 2, Info = "", NameEvent = "Surprize bitch1", Price = 20},
+            new Events {IdGovermentPath = 5, Info = "", NameEvent = "Surprize bitch2", Price = 20},
+            new Events {IdGovermentPath = 14, Info = "", NameEvent = "Surprize bitch3", Price = 20},
+            new Events {IdGovermentPath = 18, Info = "", NameEvent = "Surprize bitch4", Price = 20}
 			
         };
 

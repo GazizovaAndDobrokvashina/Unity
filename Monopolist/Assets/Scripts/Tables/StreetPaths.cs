@@ -10,7 +10,7 @@ public class StreetPaths
     public int IdStreetPath { get; set; }
 
     public int IdStreetParent { get; set; }
-    public string namePath { get; set; }
+    public string NamePath { get; set; }
     public int Renta { get; set; }
     public double StartX { get; set; }
     public double EndX { get; set; }
@@ -23,6 +23,6 @@ public class StreetPaths
     {
         Vector3 start = new Vector3((float) StartX, 0, (float) StartY);
         Vector3 end = new Vector3((float) EndX, 0, (float) EndY);
-        return new GovermentPath(IdStreetPath, IdStreetParent, Renta, start, end, IsBridge, events);
+        return new GovermentPath(IdStreetPath, NamePath, IdStreetParent, Renta, start, end, IsBridge, events);
     }
 }

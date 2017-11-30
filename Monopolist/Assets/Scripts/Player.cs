@@ -83,9 +83,10 @@ public class Player : MonoBehaviour
     //Корутина движения
     private IEnumerator Go()
     {
+        bool tried = isCheating;
         yield return new WaitUntil(() => isCheating == false);
 
-        if (isGonnaBeCathced)
+        if (tried && isGonnaBeCathced)
         {
             if (Random.Range(0, 2) == 1)
             {
@@ -96,9 +97,10 @@ public class Player : MonoBehaviour
             else
             {
                 isGonnaBeCathced = false;
+                corutine = false;
             }
         }
-        else
+        else if (tried)
         {
             corutine = false;
             yield break;
