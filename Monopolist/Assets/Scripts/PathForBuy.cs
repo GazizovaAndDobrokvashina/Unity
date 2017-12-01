@@ -2,6 +2,7 @@
 
 public class PathForBuy : StreetPath
 {
+    [SerializeField]
     private int idPlayer;
     private int[] builds;
     private int priceStreetPath;
@@ -10,8 +11,11 @@ public class PathForBuy : StreetPath
     {
     }
 
-    public void Buy()
+    public void Buy(Player player)
     {
+        //Debug.Log("Buying it");
+        idPlayer = player.IdPlayer;
+        player.Money -= priceStreetPath;
     }
 
     public PathForBuy(int idPath, string namePath, int idStreetParent, int renta, Vector3 start, Vector3 end, int idPlayer, int[] builds,
@@ -20,5 +24,44 @@ public class PathForBuy : StreetPath
         this.idPlayer = idPlayer;
         this.builds = builds;
         this.priceStreetPath = priceStreetPath;
+        base.CanBuy = true;
+    }
+
+    public int IdPlayer
+    {
+        get { return idPlayer; }
+    }
+
+    public int[] Builds
+    {
+        get { return builds; }
+    }
+
+    public int PriceStreetPath
+    {
+        get { return priceStreetPath; }
+    }
+
+    public Vector3 Start
+    {
+        get { return start; }
+    }
+
+    public Vector3 End
+    {
+        get { return end; }
+    }
+
+    public bool IsBridge
+    {
+        get { return isBridge; }
+    }
+
+    public void TakeData(PathForBuy PathForBuy) 
+    {
+     base.TakeData(PathForBuy);
+        this.idPlayer = PathForBuy.IdPlayer;
+        this.builds = PathForBuy.Builds;
+        this.priceStreetPath = PathForBuy.PriceStreetPath;
     }
 }

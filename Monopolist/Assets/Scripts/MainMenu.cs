@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using System.Linq;
-using NUnit.Framework.Internal;
-using UnityEngine.Experimental.UIElements;
 using UnityEngine.SceneManagement;
 using Button = UnityEngine.UI.Button;
 using Slider = UnityEngine.UI.Slider;

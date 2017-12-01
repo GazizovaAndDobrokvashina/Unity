@@ -13,5 +13,14 @@ public class GovermentPath : StreetPath, GovermantBuild
         Event[] events) : base(idStreetPath, namePath, idStreetParent, renta, start, end, isBridge)
     {
         events = events;
+        base.canBuy = false;
     }
+
+    public void TakeData(GovermentPath govermentPath)
+    {
+        base.TakeData(govermentPath);
+        this.events = govermentPath.events;
+    }
+    
+    
 }

@@ -26,11 +26,20 @@ public class MapBuilder : MonoBehaviour
             BoxCollider coll = newStreetPath.GetComponent<BoxCollider>();
             coll.size = new Vector3(GetVectorLength(pathForBuys[i].end - pathForBuys[i].start), 2, 1);
 
-            newStreetPath.AddComponent<StreetPath>();
-            newStreetPath.GetComponent<StreetPath>().TakeData(pathForBuys[i]);
-            newStreetPath.GetComponent<StreetPath>().GetNeighbors();
-            data.updatePath(newStreetPath.GetComponent<StreetPath>());
-
+            if (pathForBuys[i].canBuy)
+            {
+                newStreetPath.AddComponent<PathForBuy>();
+                newStreetPath.GetComponent<PathForBuy>().TakeData(data.GetPathForBuy(i));
+                newStreetPath.GetComponent<PathForBuy>().GetNeighbors();
+                data.updatePath(newStreetPath.GetComponent<PathForBuy>());
+            }
+            else
+            {
+                newStreetPath.AddComponent<GovermentPath>();
+                newStreetPath.GetComponent<GovermentPath>().TakeData(data.GetGovermentPath(i));
+                newStreetPath.GetComponent<GovermentPath>().GetNeighbors();
+                data.updatePath(newStreetPath.GetComponent<GovermentPath>());
+            }
             newStreetPath.transform.rotation =
                 Quaternion.Euler(0f, Angle(pathForBuys[i].start, pathForBuys[i].end), 0f);
             newStreetPath.transform.position = GetCenter(pathForBuys[i].start, pathForBuys[i].end);
@@ -59,6 +68,7 @@ public class MapBuilder : MonoBehaviour
         newPlayer.GetComponent<Player>().GetData(players[1]);
         newPlayer.transform.position = players[1].Destination;
         data.updatePlayer(newPlayer.GetComponent<Player>());
+        Debug.Log(newPlayer.GetComponent<Player>().NickName);
 
 
         for (int j = 2; j < players.Length; j++)

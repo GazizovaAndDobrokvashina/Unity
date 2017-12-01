@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework.Internal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -203,6 +202,9 @@ public class GameCanvas : MonoBehaviour
     //открыть список зданий на конкретной улице
     public void OpenBuildsList(int idPath)
     {
+        if (Camera.main.GetComponent<DBwork>().GetBuildsForThisPath(idPath).Length == 0)
+            return;
+            
         if (openedBuilds == 0)
         {
             if (!ScrollRectFirst.IsActive())
@@ -418,11 +420,13 @@ public class GameCanvas : MonoBehaviour
         Build[] builds = _dBwork.GetBuildsForThisPath(idPath);
         if (builds.Length > 0){
             buildsRectTransforms = new RectTransform[builds.Length];
+        int i = 0;
         foreach (Build build in builds)
         {
+            Debug.Log(build.IdBuild);
             var prefButtons = Instantiate(prefabButtonsinScrolls);
-            buildsRectTransforms[build.IdBuild] = prefButtons;
-
+            buildsRectTransforms[i] = prefButtons;
+            i++;
             prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text =
                 build.NameBuild;
             //prefButtons.GetChild(0).GetComponent<Button>().onClick
@@ -451,9 +455,28 @@ public class GameCanvas : MonoBehaviour
         ImportantInfoAboutStreetText.text = "Название: " + "\n" + "Владелец: " + "\n" + "Рента: " + "\n" + "Здания: ";
     }
 
+    private DBwork getDbWork()
+    {
+        if (_dBwork == null)
+            _dBwork = Camera.main.GetComponent<DBwork>();
+
+        return _dBwork;
+    }
+
+    private Player getCurrentPlayer()
+    {
+
+        return getDbWork().GetPlayerbyId(1);
+    }
+
     //окно покупки улиц
     private void onButtonBuyClick(int idPath)
     {
+        if (getCurrentPlayer().CurrentStreetPath.GetIdStreetPath() == idPath && getDbWork().GetPathById(idPath).CanBuy && getDbWork().GetPathForBuy(idPath).IdPlayer == 0 && getDbWork().GetPathForBuy(idPath).PriceStreetPath < getCurrentPlayer().Money)
+        {
+            //Debug.Log("I'd buy that for a dollar!");
+            getDbWork().GetPathForBuy(idPath).Buy(getCurrentPlayer());
+        }
     }
 
     //показать информацию об объекте

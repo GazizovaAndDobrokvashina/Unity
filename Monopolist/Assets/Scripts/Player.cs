@@ -61,6 +61,7 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        
         if (!transform.position.Equals(destination))
         {
             transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
@@ -216,6 +217,7 @@ public class Player : MonoBehaviour
     public int Money
     {
         get { return money; }
+        set { money = value; }
     }
 
     //возврат количества ходов, выпавших игроку
@@ -254,6 +256,7 @@ public class Player : MonoBehaviour
         this.currentSteps = player.CurrentSteps;
         this.destination = player.Destination;
         this.idPlayer = player.IdPlayer;
+        this.nickName = player.NickName;
         this.isBankrupt = player.IsBankrupt;
         this.maxSteps = player.MaxSteps;
         this.money = player.Money;
@@ -263,6 +266,11 @@ public class Player : MonoBehaviour
 
 
         this.currentStreetPath = _dbWork.GetPathById(1);
+    }
+
+    public StreetPath CurrentStreetPath
+    {
+        get { return currentStreetPath; }
     }
 
     //следующий ход, генерация ходов, выпадающих на кубике

@@ -5,11 +5,11 @@ using UnityEngine;
 public class StreetPath : MonoBehaviour
 {    
     //айди части улицы
-    private int idStreetPath;
+    protected int idStreetPath;
     //айди родительской улицы
-    private int idStreetParent;
+    protected int idStreetParent;
     //плата других игроков владельцу этой части улицы
-    private int renta;
+    protected int renta;
     //координаты начала улицы
     public Vector3 start;
     //координаты конца улицы
@@ -21,9 +21,17 @@ public class StreetPath : MonoBehaviour
 
     public string namePath;
 
+    public bool canBuy;
+    
     public string NamePath
     {
         get { return namePath; }
+    }
+
+    public bool CanBuy
+    {
+        get { return canBuy; }
+        set { canBuy = value; }
     }
 
     //если игрок наступает на эту часть улицы
@@ -41,6 +49,7 @@ public class StreetPath : MonoBehaviour
         this.end = streetPath.end;
         this.isBridge = streetPath.isBridge;
         this.namePath = streetPath.namePath;
+        this.CanBuy = streetPath.canBuy;
     }
     
     //нахождение сосених частей улиц с этой

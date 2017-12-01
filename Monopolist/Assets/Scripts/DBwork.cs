@@ -18,6 +18,10 @@ public class DBwork : MonoBehaviour
     //массив частей улиц
     private StreetPath[] paths;
 
+    private List<PathForBuy> pathForBuys;
+
+    private List<GovermentPath> govermentPaths;
+
     //ссылка на DataService
     private DataService dataService;
 
@@ -86,6 +90,8 @@ public class DBwork : MonoBehaviour
         builds = new Build[dataService.getBuilds().Count + 1];
         streets = new Street[dataService.getStreets().Count + 1];
         paths = new StreetPath[dataService.getStreetPaths().Count + 1];
+        pathForBuys = new List<PathForBuy>();
+        govermentPaths = new List<GovermentPath>();
 
         foreach (Streets streetse in dataService.getStreets())
         {
@@ -108,9 +114,11 @@ public class DBwork : MonoBehaviour
                         builds[buildse.IdBuild] = buildse.getBuild();
                         buildes[i] = buildse.IdBuild;
                         i++;
+                        Debug.Log(buildse.NameBuild);
                     }
 
                     paths[streetPathse.IdStreetPath] = ifExist.GetPathForBuy(streetPathse, buildes);
+                    pathForBuys.Add(ifExist.GetPathForBuy(streetPathse, buildes));
                 }
                 else
                 {
@@ -125,6 +133,7 @@ public class DBwork : MonoBehaviour
                     }
 
                     paths[streetPathse.IdStreetPath] = streetPathse.GetGovermentPath(events);
+                    govermentPaths.Add(streetPathse.GetGovermentPath(events));
                 }
 
                 pathses[k] = streetPathse.IdStreetPath;
@@ -210,6 +219,9 @@ public class DBwork : MonoBehaviour
             players[i] = player;
             dataService.AddPlayer(player);
         }
+        
+        
+        GetEverithing();
 
         this.nameOfTown = nameOfTown;
     }
@@ -247,12 +259,65 @@ public class DBwork : MonoBehaviour
     public void updatePath(StreetPath path)
     {
         paths[path.GetIdStreetPath()] = path;
+        
+    }
+    
+
+    public void updatePath(PathForBuy path)
+    {
+        paths[path.GetIdStreetPath()] = path;
+        for (int i=0; i<pathForBuys.Count; i++ )
+        {
+            if (pathForBuys[i].GetIdStreetPath() == path.GetIdStreetPath())
+                pathForBuys[i] = path;
+        }
+    }
+
+    public void UpdatePath(GovermentPath path)
+    {
+        paths[path.GetIdStreetPath()] = path;
+        for (int i=0; i<govermentPaths.Count; i++ )
+        {
+            if (govermentPaths[i].GetIdStreetPath() == path.GetIdStreetPath())
+                govermentPaths[i] = path;
+        }
     }
 
     //возврат части улицы по её айдишнику
     public StreetPath GetPathById(int id)
     {
         return paths[id];
+    }
+
+
+    public PathForBuy GetPathForBuy(int id)
+    {
+        if (paths[id].canBuy)
+        {
+            foreach (PathForBuy pathForBuy in pathForBuys)
+            {
+                if (pathForBuy.GetIdStreetPath() == id)
+                    return pathForBuy;
+            }
+        }
+            return null;
+        
+            
+    }
+
+
+    public GovermentPath GetGovermentPath(int id)
+    {
+        if (!paths[id].canBuy)
+        {
+            foreach (GovermentPath govermentPath in govermentPaths)
+            {
+                if (govermentPath.GetIdStreetPath() == id)
+                    return govermentPath;
+            }
+        }
+
+        return null;
     }
 
     //возврат зданий по айдишнику улицы, на которой они находятся (дописать метод нормально)
