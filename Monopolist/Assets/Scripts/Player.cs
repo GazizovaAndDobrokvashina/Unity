@@ -50,6 +50,11 @@ public class Player : MonoBehaviour
 
     private GameCanvas _gameCanvas;
 
+    public string NickName
+    {
+        get { return nickName; }
+    }
+
     private void Start()
     {
         _gameCanvas = transform.Find("/Canvas").GetComponent<GameCanvas>();
@@ -72,7 +77,7 @@ public class Player : MonoBehaviour
         GameCanvas.maxSteps = maxSteps;
         GameCanvas.money = money;
         //переделать на нормальное название, когда появится
-        GameCanvas.destination = currentStreetPath.name;
+        GameCanvas.destination = currentStreetPath.NamePath;
     }
 
     public void takeResponse(bool responce)

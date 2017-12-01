@@ -356,7 +356,7 @@ public class GameCanvas : MonoBehaviour
             // prefButtons.SetParent(ScrollRectFirst.content, false);
 
             prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text =
-                path.GetIdStreetPath().ToString();
+                path.NamePath;
             prefButtons.GetChild(0).GetComponent<Button>().onClick
                 .AddListener(() => onButtonStreetClick(path.GetIdStreetPath()));
 
@@ -382,15 +382,15 @@ public class GameCanvas : MonoBehaviour
         Player[] Players = _dBwork.GetAllPlayers();
         playersRectTransforms = new RectTransform[Players.Length];
 
-        Debug.Log(Players.Length);
         foreach (Player player in Players)
         {
             
             var prefButtons = Instantiate(prefabButtonsinScrolls);
+            Debug.Log(player.IdPlayer);
             playersRectTransforms[player.IdPlayer] = prefButtons;
-
+               Debug.Log("NamePlayer" + player.NickName);
             prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text =
-                player.IdPlayer.ToString();
+                player.NickName;
             prefButtons.GetChild(0).GetComponent<Button>().onClick
                 .AddListener(() => onButtonClickPlayer(player.IdPlayer));
 
@@ -413,17 +413,18 @@ public class GameCanvas : MonoBehaviour
     private void CreateBuildsButtons(int idPath)
     {
         //переделать с айдишников на нормальные названия когда появятся
-        
+
         _dBwork = Camera.main.GetComponent<DBwork>();
         Build[] builds = _dBwork.GetBuildsForThisPath(idPath);
-        buildsRectTransforms = new RectTransform[builds.Length];
+        if (builds.Length > 0){
+            buildsRectTransforms = new RectTransform[builds.Length];
         foreach (Build build in builds)
         {
             var prefButtons = Instantiate(prefabButtonsinScrolls);
-            streetsPathsRectTransforms[build.IdBuild] = prefButtons;
+            buildsRectTransforms[build.IdBuild] = prefButtons;
 
             prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text =
-                build.IdBuild.ToString();
+                build.NameBuild;
             //prefButtons.GetChild(0).GetComponent<Button>().onClick
             //    .AddListener(() => onButtonStreetClick(build.GetIdStreetPath()));
 
@@ -440,6 +441,7 @@ public class GameCanvas : MonoBehaviour
             //    .AddListener(() => onButtonBuildsClick(build.GetIdStreetPath()));
         }
     }
+}
 
     //перемещение к выбранной улице, включение кнопки зданий на этой улице и важной информации об улице
     private void onButtonStreetClick(int idPath)

@@ -20,8 +20,12 @@ public class StreetPath : MonoBehaviour
     public int[] neighborsId;
 
     public string namePath;
-    
-    
+
+    public string NamePath
+    {
+        get { return namePath; }
+    }
+
     //если игрок наступает на эту часть улицы
     public void StepOnMe()
     {
