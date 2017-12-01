@@ -10,9 +10,11 @@ public class Builds
     public int IdStreetPath { get; set; }
     public int PriceBuild { get; set; }
     public bool Enabled { get; set; }
+    public double posX { get; set; }
+    public double posY { get; set; }
 
     public Build getBuild()
     {
-        return new Build(IdBuild, NameBuild, AboutBuild, IdStreetPath, PriceBuild, Enabled);
+        return new Build(IdBuild, NameBuild, AboutBuild, IdStreetPath, PriceBuild, Enabled, posX, posY);
     }
 }

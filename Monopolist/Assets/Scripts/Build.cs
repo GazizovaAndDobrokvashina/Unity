@@ -10,13 +10,16 @@ public class Build : MonoBehaviour
     private int idStreetPath;
     private int priceBuild;
     private bool enable;
+    private Vector3 place;
     
-    public void build()
+    public void build(Player player)
     {
+        player.Money -= priceBuild;
         enabled = true;
+        gameObject.SetActive(true);
     }
 
-    public Build(int idBuild, string nameBuild, string aboutBuild, int idStreetPath, int priceBuild, bool enable)
+    public Build(int idBuild, string nameBuild, string aboutBuild, int idStreetPath, int priceBuild, bool enable, double posX, double posY)
     {
         this.idBuild = idBuild;
         this.idStreetPath = idStreetPath;
@@ -24,6 +27,7 @@ public class Build : MonoBehaviour
         this.enable = enable;
         this.nameBuild = nameBuild;
         this.aboutBuild = aboutBuild;
+        this.place = new Vector3((float)posX, 0, (float)posY);
     }
 
     public void TakeData(Build build)
@@ -34,6 +38,12 @@ public class Build : MonoBehaviour
         idStreetPath = build.IdStreetPath;
         priceBuild = build.PriceBuild;
         enable = build.Enable;
+        place = build.Place;
+    }
+
+    public Vector3 Place
+    {
+        get { return place; }
     }
 
     public int IdBuild

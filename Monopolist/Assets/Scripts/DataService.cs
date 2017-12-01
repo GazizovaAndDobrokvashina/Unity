@@ -134,20 +134,21 @@ public class DataService  {
 		
         Builds[] buildses = new[]
         {
-            new Builds {NameBuild = "Дом на Желтой 1", AboutBuild = "", Enabled = false, IdStreetPath = 1, PriceBuild = 100},
-            new Builds {NameBuild = "Дом на Красной 1", AboutBuild = "", Enabled = false, IdStreetPath = 3, PriceBuild = 100},
-            new Builds {NameBuild = "Дом на Красной 2", AboutBuild = "", Enabled = false, IdStreetPath = 4, PriceBuild = 100},
-            new Builds {NameBuild = "Дом на Зеленой 2", AboutBuild = "", Enabled = false, IdStreetPath = 6, PriceBuild = 100},
-            new Builds {NameBuild = "Дом на Синей 1", AboutBuild = "", Enabled = false, IdStreetPath = 7, PriceBuild = 100},
-            new Builds {NameBuild = "Дом на Синей 2", AboutBuild = "", Enabled = false, IdStreetPath = 8, PriceBuild = 100},
-            new Builds {NameBuild = "Дом на Розовой", AboutBuild = "", Enabled = false, IdStreetPath = 9, PriceBuild = 100},
-            new Builds {NameBuild = "Дом на Фиолетовой", AboutBuild = "", Enabled = false, IdStreetPath = 10, PriceBuild = 100},
-            new Builds {NameBuild = "Дом на Салатовой 1", AboutBuild = "", Enabled = false, IdStreetPath = 11, PriceBuild = 100},
-            new Builds {NameBuild = "Дом на Коричневой", AboutBuild = "", Enabled = false, IdStreetPath = 12, PriceBuild = 100},
-            new Builds {NameBuild = "Дом на Голубой 1", AboutBuild = "", Enabled = false, IdStreetPath = 13, PriceBuild = 100},
-            new Builds {NameBuild = "Дои на Салатовая 2", AboutBuild = "", Enabled = false, IdStreetPath = 15, PriceBuild = 100},
-            new Builds {NameBuild = "Дом на Оранжевой", AboutBuild = "", Enabled = false, IdStreetPath = 16, PriceBuild = 100},
-            new Builds {NameBuild = "Дом на Бордовой 1", AboutBuild = "", Enabled = false, IdStreetPath = 17, PriceBuild = 100}
+            new Builds {NameBuild = "Дом на Желтой 1", AboutBuild = "", Enabled = false, IdStreetPath = 1, PriceBuild = 100, posX = 2.25 , posY = -7},
+            new Builds {NameBuild = "Дом на Красной 1", AboutBuild = "", Enabled = false, IdStreetPath = 3, PriceBuild = 100, posX = -7, posY = -3.5},
+            new Builds {NameBuild = "Дом на Красной 2", AboutBuild = "", Enabled = false, IdStreetPath = 4, PriceBuild = 100, posX = -7, posY = 2},
+            new Builds {NameBuild = "Дом на Зеленой 2", AboutBuild = "", Enabled = false, IdStreetPath = 6, PriceBuild = 100, posX = 1.5, posY = 7},
+            new Builds {NameBuild = "Дом на Синей 1", AboutBuild = "", Enabled = false, IdStreetPath = 7, PriceBuild = 100, posX = 7, posY = 4},
+            new Builds {NameBuild = "Дом на Синей 2.1", AboutBuild = "", Enabled = false, IdStreetPath = 8, PriceBuild = 100, posX = 7, posY = -1},
+            new Builds {NameBuild = "Дом на Синей 2.2", AboutBuild = "", Enabled = false, IdStreetPath = 8, PriceBuild = 100, posX = 7, posY = -3.5},
+            new Builds {NameBuild = "Дом на Розовой", AboutBuild = "", Enabled = false, IdStreetPath = 9, PriceBuild = 100, posX = 0, posY = -4},
+            new Builds {NameBuild = "Дом на Фиолетовой", AboutBuild = "", Enabled = false, IdStreetPath = 10, PriceBuild = 100, posX = -4, posY = 0},
+            new Builds {NameBuild = "Дом на Салатовой 1", AboutBuild = "", Enabled = false, IdStreetPath = 11, PriceBuild = 100, posX = -4, posY = 4.5},
+            new Builds {NameBuild = "Дом на Коричневой", AboutBuild = "", Enabled = false, IdStreetPath = 12, PriceBuild = 100, posX = 4.2, posY = 0},
+            new Builds {NameBuild = "Дом на Голубой 1", AboutBuild = "", Enabled = false, IdStreetPath = 13, PriceBuild = 100, posX = 0, posY = -1},
+            new Builds {NameBuild = "Дои на Салатовая 2", AboutBuild = "", Enabled = false, IdStreetPath = 15, PriceBuild = 100, posX = -1.3, posY = 1},
+            new Builds {NameBuild = "Дом на Оранжевой", AboutBuild = "", Enabled = false, IdStreetPath = 16, PriceBuild = 100, posX = 0, posY = 4},
+            new Builds {NameBuild = "Дом на Бордовой 1", AboutBuild = "", Enabled = false, IdStreetPath = 17, PriceBuild = 100, posX = 4, posY = 3.35}
 			
         };
 

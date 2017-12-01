@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 public class DBwork : MonoBehaviour
@@ -83,6 +84,36 @@ public class DBwork : MonoBehaviour
         return null;
     }
 
+    public Build GetBuild(int id)
+    {
+        return builds[id];
+    }
+
+    public PathForBuy GetPathOfBuild(int id)
+    {
+        foreach (PathForBuy pathForBuy in pathForBuys)
+        {
+            if (pathForBuy.GetIdStreetPath() == (builds[id].IdStreetPath))
+            return pathForBuy;
+        }
+        return null;
+    }
+
+    public Street getStreetById(int id)
+    {
+        return streets[id];
+    }
+
+    public bool isAllPathsMine(int buildId, int playerId)
+    {
+        foreach (int i in getStreetById(GetPathById(GetBuild(buildId).IdStreetPath).GetIdStreetParent()).Paths1)
+        {
+            if (GetPathById(i).canBuy && GetPathForBuy(i).IdPlayer != playerId)
+                return false;
+        }
+        return true;
+    }
+
     //заполнение массивов игроков, улиц, частей улиц и зданий, исходя из данных в базе данных
     public void GetEverithing()
     {
@@ -114,7 +145,6 @@ public class DBwork : MonoBehaviour
                         builds[buildse.IdBuild] = buildse.getBuild();
                         buildes[i] = buildse.IdBuild;
                         i++;
-                        Debug.Log(buildse.NameBuild);
                     }
 
                     paths[streetPathse.IdStreetPath] = ifExist.GetPathForBuy(streetPathse, buildes);
@@ -149,7 +179,7 @@ public class DBwork : MonoBehaviour
         players[0] = new Player(0, "", 0, true, Vector3.zero);
         streets[0] = new Street(0, "", "", new int[1]);
         paths[0] = new StreetPath(0, "", 0, 0, Vector3.zero, Vector3.zero, false);
-        builds[0] = new Build(0,"", "", 0, 0, false);
+        builds[0] = new Build(0,"", "", 0, 0, false, 0, 0);
     }
 
 

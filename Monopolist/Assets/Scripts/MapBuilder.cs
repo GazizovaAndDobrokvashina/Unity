@@ -57,8 +57,8 @@ public class MapBuilder : MonoBehaviour
             data.updateBuild(newBuild.GetComponent<Build>());
 
             newBuild.transform.rotation = data.GetPathById(builds[i].IdStreetPath).transform.rotation;
-            newBuild.transform.position = data.GetPathById(builds[i].IdStreetPath).transform.position;
-            
+            newBuild.transform.position = newBuild.GetComponent<Build>().Place;
+            newBuild.SetActive(newBuild.GetComponent<Build>().Enable);            
 
         }
 
@@ -68,7 +68,6 @@ public class MapBuilder : MonoBehaviour
         newPlayer.GetComponent<Player>().GetData(players[1]);
         newPlayer.transform.position = players[1].Destination;
         data.updatePlayer(newPlayer.GetComponent<Player>());
-        Debug.Log(newPlayer.GetComponent<Player>().NickName);
 
 
         for (int j = 2; j < players.Length; j++)

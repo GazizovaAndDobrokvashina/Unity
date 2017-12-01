@@ -15,11 +15,11 @@ public class GameCanvas : MonoBehaviour
 
     //кнопка отмены сохранения
     public GameObject returnButton;
-    
+
     //кнопка включения/выключения списка зданий
     public GameObject buildsButton;
-    
-    
+
+
     public GameObject warningWindow;
 
     //Префаб кнопок, появляющихся в контекте скроллов
@@ -30,7 +30,7 @@ public class GameCanvas : MonoBehaviour
 
     //Вывод денег игрока
     public Text moneyText;
-    
+
     //улица, на которой стоит игрок
     public Text destinationText;
 
@@ -57,10 +57,10 @@ public class GameCanvas : MonoBehaviour
 
     //Деньги игрока
     public static int money;
-    
+
     //месторасположение игрока
     public static string destination;
-    
+
     //Строка для сохранения нового названия игры
     private string newName;
 
@@ -98,7 +98,7 @@ public class GameCanvas : MonoBehaviour
         currentPlayer.takeResponse(respons);
         warningWindow.SetActive(false);
     }
-    
+
     //вывод данных об игроке
     void Update()
     {
@@ -108,7 +108,6 @@ public class GameCanvas : MonoBehaviour
         stepsText.text = "Сделано ходов: " + currentSteps + "/" + maxSteps;
         //вывод информации, где находится игрок
         destinationText.text = "Улица: " + destination;
-
     }
 
     //открыть меню паузы
@@ -204,7 +203,7 @@ public class GameCanvas : MonoBehaviour
     {
         if (Camera.main.GetComponent<DBwork>().GetBuildsForThisPath(idPath).Length == 0)
             return;
-            
+
         if (openedBuilds == 0)
         {
             if (!ScrollRectFirst.IsActive())
@@ -324,7 +323,7 @@ public class GameCanvas : MonoBehaviour
                 break;
             //если че, игровая канва
             default:
-            {    
+            {
                 buildsButton.SetActive(false);
                 inputField.gameObject.SetActive(false);
                 playMenu.SetActive(true);
@@ -386,11 +385,8 @@ public class GameCanvas : MonoBehaviour
 
         foreach (Player player in Players)
         {
-            
             var prefButtons = Instantiate(prefabButtonsinScrolls);
-            Debug.Log(player.IdPlayer);
             playersRectTransforms[player.IdPlayer] = prefButtons;
-               Debug.Log("NamePlayer" + player.NickName);
             prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text =
                 player.NickName;
             prefButtons.GetChild(0).GetComponent<Button>().onClick
@@ -414,45 +410,50 @@ public class GameCanvas : MonoBehaviour
     //создание кнопок со зданиями конкретной улицы
     private void CreateBuildsButtons(int idPath)
     {
-        //переделать с айдишников на нормальные названия когда появятся
-
         _dBwork = Camera.main.GetComponent<DBwork>();
         Build[] builds = _dBwork.GetBuildsForThisPath(idPath);
-        if (builds.Length > 0){
-            buildsRectTransforms = new RectTransform[builds.Length];
-        int i = 0;
-        foreach (Build build in builds)
+        if (builds.Length > 0)
         {
-            Debug.Log(build.IdBuild);
-            var prefButtons = Instantiate(prefabButtonsinScrolls);
-            buildsRectTransforms[i] = prefButtons;
-            i++;
-            prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text =
-                build.NameBuild;
-            //prefButtons.GetChild(0).GetComponent<Button>().onClick
-            //    .AddListener(() => onButtonStreetClick(build.GetIdStreetPath()));
+            buildsRectTransforms = new RectTransform[builds.Length];
+            int i = 0;
+            foreach (Build build in builds)
+            {
+                var prefButtons = Instantiate(prefabButtonsinScrolls);
+                buildsRectTransforms[i] = prefButtons;
+                i++;
+                prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text =
+                    build.NameBuild;
 
-            prefButtons.GetChild(1).GetComponent<Button>().GetComponentInChildren<Text>().text = "Buy";
-            //prefButtons.GetChild(1).GetComponent<Button>().onClick
-            //    .AddListener(() => onButtonBuyClick(build.GetIdStreetPath()));
+                prefButtons.GetChild(1).GetComponent<Button>().GetComponentInChildren<Text>().text = "Buy";
+                prefButtons.GetChild(1).GetComponent<Button>().onClick
+                    .AddListener(() => OnButtonClickBuyBild(build.IdBuild));
 
-            prefButtons.GetChild(2).GetComponent<Button>().GetComponentInChildren<Text>().text = "Info";
-            //prefButtons.GetChild(2).GetComponent<Button>().onClick
-            //   .AddListener(() => onButtonInfoClick(build.GetIdStreetPath()));
+                prefButtons.GetChild(2).GetComponent<Button>().GetComponentInChildren<Text>().text = "Info";
+                //prefButtons.GetChild(2).GetComponent<Button>().onClick
+                //   .AddListener(() => onButtonInfoClick(build.GetIdStreetPath()));
 
-            prefButtons.GetChild(3).GetComponent<Button>().GetComponentInChildren<Text>().text = "none";
-            //prefButtons.GetChild(3).GetComponent<Button>().onClick
-            //    .AddListener(() => onButtonBuildsClick(build.GetIdStreetPath()));
+                prefButtons.GetChild(3).GetComponent<Button>().GetComponentInChildren<Text>().text = "none";
+                prefButtons.GetChild(3).gameObject.SetActive(false);
+            }
         }
     }
-}
+
+    private void OnButtonClickBuyBild(int idBuild)
+    {
+        if (!getDbWork().GetBuild(idBuild).Enable && getDbWork().isAllPathsMine(idBuild, getCurrentPlayer().IdPlayer) &&
+            getCurrentPlayer().Money >= getDbWork().GetBuild(idBuild).PriceBuild)
+        {
+            getDbWork().GetBuild(idBuild).build(getCurrentPlayer());
+        }
+    }
 
     //перемещение к выбранной улице, включение кнопки зданий на этой улице и важной информации об улице
     private void onButtonStreetClick(int idPath)
     {
         buildsButton.SetActive(true);
         ImportantInfoAboutStreetText.gameObject.SetActive(true);
-        ImportantInfoAboutStreetText.text = "Название: " + "\n" + "Владелец: " + "\n" + "Рента: " + "\n" + "Здания: ";
+        _dBwork = getDbWork();
+        ImportantInfoAboutStreetText.text = "Название: " + _dBwork.GetPathById(idPath).namePath  + "\n" + "Владелец: " + "\n" + "Рента: " + "\n" + "Здания: ";
     }
 
     private DBwork getDbWork()
@@ -465,16 +466,16 @@ public class GameCanvas : MonoBehaviour
 
     private Player getCurrentPlayer()
     {
-
         return getDbWork().GetPlayerbyId(1);
     }
 
     //окно покупки улиц
     private void onButtonBuyClick(int idPath)
     {
-        if (getCurrentPlayer().CurrentStreetPath.GetIdStreetPath() == idPath && getDbWork().GetPathById(idPath).CanBuy && getDbWork().GetPathForBuy(idPath).IdPlayer == 0 && getDbWork().GetPathForBuy(idPath).PriceStreetPath < getCurrentPlayer().Money)
+        if (getCurrentPlayer().CurrentStreetPath.GetIdStreetPath() == idPath &&
+            getDbWork().GetPathById(idPath).CanBuy && getDbWork().GetPathForBuy(idPath).IdPlayer == 0 &&
+            getDbWork().GetPathForBuy(idPath).PriceStreetPath < getCurrentPlayer().Money)
         {
-            //Debug.Log("I'd buy that for a dollar!");
             getDbWork().GetPathForBuy(idPath).Buy(getCurrentPlayer());
         }
     }
@@ -541,7 +542,7 @@ public class GameCanvas : MonoBehaviour
             scroll.gameObject.SetActive(false);
             for (int i = scroll.content.childCount - 1; i >= 0; i--)
                 Destroy(scroll.content.GetChild(i).gameObject);
-                
+
             //пока что корявнько так
             if (type == 1)
             {
@@ -550,70 +551,11 @@ public class GameCanvas : MonoBehaviour
             }
         }
     }
-    
+
     //перемещение камеры к улице, где стоит игрок 
     public void GoToStreetUpButton()
     {
         //через destination наверн
     }
 
-//    private void OpenLists(int type)
-//    {
-//        
-//        /**
-//         * Тип это что конкретно открываем: улицы, игроков или здания
-//         * i - это проверка открыта ли уже вьюха с этими данными
-//         */
-//        int i = 0;
-//        switch (type)
-//        {
-//            case 1:
-//                i = openedStreets;
-//                break;
-//            case 2:
-//                i = openedPlayers;
-//                break;
-//            case 3:
-//                i = openedBuilds;
-//                break;
-//        }
-//        
-//        
-//        if (i == 0)
-//        {
-//            if (!ScrollRectFirst.IsActive())
-//            {
-//                ChooseScrollView(ScrollRectFirst,type);
-//                openedStreets = 1;
-//            }
-//            else if (!ScrollRectSecond.IsActive())
-//            {
-//                ChooseScrollView(ScrollRectSecond,type);
-//                openedStreets = 2;
-//            }
-//            else if (!ScrollRectThird.IsActive())
-//            {
-//                ChooseScrollView(ScrollRectThird,type);
-//                openedStreets = 3;
-//            }
-//        }
-//        else
-//        {
-//            if (i == 1)
-//            {
-//                ChooseScrollView(ScrollRectFirst,type);
-//                openedStreets = 0;
-//            }
-//            else if (i == 2)
-//            {
-//                ChooseScrollView(ScrollRectSecond,type);
-//                openedStreets = 0;
-//            }
-//            else if (i == 3)
-//            {
-//                ChooseScrollView(ScrollRectThird,type);
-//                openedStreets = 0;
-//            }
-//        }
-//    }
 }
