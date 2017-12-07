@@ -55,6 +55,10 @@ public class Player : MonoBehaviour
         get { return nickName; }
     }
 
+    public StreetPath GetCurrentStreetPath()
+    {
+        return currentStreetPath;
+    }
     private void Start()
     {
         _gameCanvas = transform.Find("/Canvas").GetComponent<GameCanvas>();

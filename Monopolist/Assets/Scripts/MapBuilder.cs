@@ -58,8 +58,7 @@ public class MapBuilder : MonoBehaviour
 
             newBuild.transform.rotation = data.GetPathById(builds[i].IdStreetPath).transform.rotation;
             newBuild.transform.position = newBuild.GetComponent<Build>().Place;
-            newBuild.SetActive(newBuild.GetComponent<Build>().Enable);            
-
+            newBuild.SetActive(newBuild.GetComponent<Build>().Enable);
         }
 
         Player[] players = data.GetAllPlayers();
@@ -68,7 +67,8 @@ public class MapBuilder : MonoBehaviour
         newPlayer.GetComponent<Player>().GetData(players[1]);
         newPlayer.transform.position = players[1].Destination;
         data.updatePlayer(newPlayer.GetComponent<Player>());
-
+        transform.Find("/firstTown3Painted2").GetComponent<Cameras>()
+            .SetCamera(newPlayer.GetComponentInChildren<Camera>());
 
         for (int j = 2; j < players.Length; j++)
         {

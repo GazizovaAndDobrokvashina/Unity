@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: 0.5
+  currentCamera: 1
 --- !u!114 &114524761012086172
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -16,6 +16,7 @@
         <e p="Scripts" t="Include">
           <e p="Build.cs" t="Include" />
           <e p="CameraMove.cs" t="Include" />
+          <e p="Cameras.cs" t="Include" />
           <e p="DataService.cs" t="Include" />
           <e p="DBwork.cs" t="Include" />
           <e p="Event.cs" t="Include" />

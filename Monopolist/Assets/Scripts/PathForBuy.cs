@@ -2,8 +2,7 @@
 
 public class PathForBuy : StreetPath
 {
-    [SerializeField]
-    private int idPlayer;
+    [SerializeField] private int idPlayer;
     private int[] builds;
     private int priceStreetPath;
 
@@ -18,7 +17,8 @@ public class PathForBuy : StreetPath
         player.Money -= priceStreetPath;
     }
 
-    public PathForBuy(int idPath, string namePath, int idStreetParent, int renta, Vector3 start, Vector3 end, int idPlayer, int[] builds,
+    public PathForBuy(int idPath, string namePath, int idStreetParent, int renta, Vector3 start, Vector3 end,
+        int idPlayer, int[] builds,
         int priceStreetPath, bool isBridge) : base(idPath, namePath, idStreetParent, renta, start, end, isBridge)
     {
         this.idPlayer = idPlayer;
@@ -57,11 +57,21 @@ public class PathForBuy : StreetPath
         get { return isBridge; }
     }
 
-    public void TakeData(PathForBuy PathForBuy) 
+    public void TakeData(PathForBuy PathForBuy)
     {
-     base.TakeData(PathForBuy);
+        base.TakeData(PathForBuy);
         this.idPlayer = PathForBuy.IdPlayer;
         this.builds = PathForBuy.Builds;
         this.priceStreetPath = PathForBuy.PriceStreetPath;
+    }
+
+    public string GetBuildsName()
+    {
+        string result = "";
+        foreach (int i in builds)
+        {
+            result += Camera.main.GetComponent<DBwork>().GetBuild(i).NameBuild + "\n";
+        }
+        return result;
     }
 }

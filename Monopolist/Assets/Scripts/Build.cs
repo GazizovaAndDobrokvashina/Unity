@@ -15,7 +15,7 @@ public class Build : MonoBehaviour
     public void build(Player player)
     {
         player.Money -= priceBuild;
-        enabled = true;
+        enable = true;
         gameObject.SetActive(true);
     }
 

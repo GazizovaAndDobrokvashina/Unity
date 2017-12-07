@@ -53,7 +53,6 @@ public class DBwork : MonoBehaviour
         names.Add("Каламкас");
         names.Add("Еркежан");
         names.Add("Жумабике");
-        
     }
 
     public void DBStart()
@@ -94,7 +93,7 @@ public class DBwork : MonoBehaviour
         foreach (PathForBuy pathForBuy in pathForBuys)
         {
             if (pathForBuy.GetIdStreetPath() == (builds[id].IdStreetPath))
-            return pathForBuy;
+                return pathForBuy;
         }
         return null;
     }
@@ -108,6 +107,7 @@ public class DBwork : MonoBehaviour
     {
         foreach (int i in getStreetById(GetPathById(GetBuild(buildId).IdStreetPath).GetIdStreetParent()).Paths1)
         {
+            Debug.Log(GetPathById(i).namePath);
             if (GetPathById(i).canBuy && GetPathForBuy(i).IdPlayer != playerId)
                 return false;
         }
@@ -167,6 +167,7 @@ public class DBwork : MonoBehaviour
                 }
 
                 pathses[k] = streetPathse.IdStreetPath;
+                k++;
             }
 
             streets[streetse.IdStreet] = streetse.GetStreet(pathses);
@@ -176,10 +177,10 @@ public class DBwork : MonoBehaviour
         {
             players[player.IdPlayer] = player.GetPlayer();
         }
-        players[0] = new Player(0, "", 0, true, Vector3.zero);
+        players[0] = new Player(0, "никто", 0, true, Vector3.zero);
         streets[0] = new Street(0, "", "", new int[1]);
         paths[0] = new StreetPath(0, "", 0, 0, Vector3.zero, Vector3.zero, false);
-        builds[0] = new Build(0,"", "", 0, 0, false, 0, 0);
+        builds[0] = new Build(0, "", "", 0, 0, false, 0, 0);
     }
 
 
@@ -219,7 +220,8 @@ public class DBwork : MonoBehaviour
     }
 
     //Создание новой игры (дописать для онлайна и разых городов)
-    public void CreateNewGame(int countOfPlayers, int startMoney, string NameOfGame, bool online, string nameOfTown, string nickName)
+    public void CreateNewGame(int countOfPlayers, int startMoney, string NameOfGame, bool online, string nameOfTown,
+        string nickName)
     {
         if (NameOfGame.Length != 0 && !NameOfGame.EndsWith(".db"))
         {
@@ -242,15 +244,16 @@ public class DBwork : MonoBehaviour
         for (int i = 1; i < countOfPlayers + 1; i++)
         {
             Player player;
-            if (i==1)
+            if (i == 1)
                 player = new Player(i, nickName, startMoney, false, MapBuilder.GetCenter(paths[1].start, paths[1].end));
-            else 
-                player = new Player(i, names[Random.Range(0, names.Count)], startMoney, false, MapBuilder.GetCenter(paths[1].start, paths[1].end));
+            else
+                player = new Player(i, names[Random.Range(0, names.Count)], startMoney, false,
+                    MapBuilder.GetCenter(paths[1].start, paths[1].end));
             players[i] = player;
             dataService.AddPlayer(player);
         }
-        
-        
+
+
         GetEverithing();
 
         this.nameOfTown = nameOfTown;
@@ -289,14 +292,13 @@ public class DBwork : MonoBehaviour
     public void updatePath(StreetPath path)
     {
         paths[path.GetIdStreetPath()] = path;
-        
     }
-    
+
 
     public void updatePath(PathForBuy path)
     {
         paths[path.GetIdStreetPath()] = path;
-        for (int i=0; i<pathForBuys.Count; i++ )
+        for (int i = 0; i < pathForBuys.Count; i++)
         {
             if (pathForBuys[i].GetIdStreetPath() == path.GetIdStreetPath())
                 pathForBuys[i] = path;
@@ -306,7 +308,7 @@ public class DBwork : MonoBehaviour
     public void UpdatePath(GovermentPath path)
     {
         paths[path.GetIdStreetPath()] = path;
-        for (int i=0; i<govermentPaths.Count; i++ )
+        for (int i = 0; i < govermentPaths.Count; i++)
         {
             if (govermentPaths[i].GetIdStreetPath() == path.GetIdStreetPath())
                 govermentPaths[i] = path;
@@ -330,9 +332,7 @@ public class DBwork : MonoBehaviour
                     return pathForBuy;
             }
         }
-            return null;
-        
-            
+        return null;
     }
 
 
@@ -362,7 +362,7 @@ public class DBwork : MonoBehaviour
                 buildes.Add(build);
             }
         }
-        
+
         return buildes.ToArray();
     }
 }

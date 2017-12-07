@@ -22,12 +22,14 @@ public class MouseController : MonoBehaviour
     //
     private bool canMove = true;
 
+    [SerializeField] private int currentCamera;
+
     //инициализация ДБворка
     void Start()
     {
         _dBwork = Camera.main.GetComponent<DBwork>();
     }
-    
+
     //
     void Update()
     {
@@ -58,22 +60,24 @@ public class MouseController : MonoBehaviour
             }
         }
 
-
-        if (Screen.width - Input.mousePosition.x < sensitivity)
+        if (currentCamera == 1)
         {
-            transform.RotateAround(transform.position, Vector3.up, 2.5f);
-        }
+            if (Screen.width - Input.mousePosition.x < sensitivity)
+            {
+                transform.RotateAround(transform.position, Vector3.up, 2.5f);
+            }
 
-        if (Input.mousePosition.x < sensitivity)
-        {
-            transform.RotateAround(transform.position, Vector3.up, -2.5f);
+            if (Input.mousePosition.x < sensitivity)
+            {
+                transform.RotateAround(transform.position, Vector3.up, -2.5f);
+            }
         }
     }
 
 
     void MouseOver_Street(GameObject ourHitObject)
     {
-        if (Input.GetMouseButton(0) && canMove)// && CameraMove.mode == 1 )
+        if (Input.GetMouseButton(0) && canMove) // && CameraMove.mode == 1 )
         {
             canMove = false;
             _dBwork.GetPlayerbyId(1).move(ourHitObject.GetComponent<StreetPath>());

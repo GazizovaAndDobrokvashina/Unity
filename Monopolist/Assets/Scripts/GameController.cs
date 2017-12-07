@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Principal;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -7,6 +8,8 @@ public class GameController : MonoBehaviour
 
 	public Player CurrentPlayer;
 	private DBwork _dBwork;
+	private int CountStepsInAllGame;
+	private int salary = 1000;
 
 	void Start()
 	{
@@ -14,6 +17,9 @@ public class GameController : MonoBehaviour
 	}
 	public void nextStep()
 	{
+		CountStepsInAllGame++;
+		if (CountStepsInAllGame % 10 == 0)
+			_dBwork.GetPlayerbyId(1).Money += salary;
 		//foreach (Player player in _dBwork.GetAllPlayers())
 		//{
 			//if(player.IdPlayer != 0)
