@@ -63,6 +63,7 @@ public class Ways
             }
         }
     }
+    
 
     //возвращение массива очередей улиц
     public Queue<int>[,] Queues

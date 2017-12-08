@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking.NetworkSystem;
 
 public class Player : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class Player : MonoBehaviour
 
     //движется ли грок
     private bool isMoving = false;
-    
+
     //запущена ли корутина
     private bool corutine = false;
 
@@ -41,33 +42,43 @@ public class Player : MonoBehaviour
 
     //путь от одной улицы к другой
     private Queue<int> way;
-    
+
     //пытается ли считерить игрок
     private bool isCheating;
-    
+
     //будет ли игрок пойман прb попытке считерить
     private bool isGonnaBeCathced;
 
     private GameCanvas _gameCanvas;
+
+    private float angle;
+
+    public bool ready;
 
     public string NickName
     {
         get { return nickName; }
     }
 
+   
+
     public StreetPath GetCurrentStreetPath()
     {
         return currentStreetPath;
     }
+
     private void Start()
     {
         _gameCanvas = transform.Find("/Canvas").GetComponent<GameCanvas>();
     }
+
     private void Update()
     {
-        
         if (!transform.position.Equals(destination))
         {
+            //if(transform.rotation != Quaternion.Euler(0, angle ,0) )
+            //  transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, angle ,0), Time.deltaTime*50f);
+            //else
             transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
             isMoving = true;
         }
@@ -90,6 +101,7 @@ public class Player : MonoBehaviour
         isGonnaBeCathced = responce;
         isCheating = false;
     }
+
     //Корутина движения
     private IEnumerator Go()
     {
@@ -104,20 +116,14 @@ public class Player : MonoBehaviour
                 GameController.cathedPlayer();
                 yield break;
             }
-            else
-            {
-                isGonnaBeCathced = false;
-                corutine = false;
-            }
         }
         else if (tried)
         {
             corutine = false;
             yield break;
         }
-        
-        
-        
+
+
         bool endFirstStep = false;
         int num = way.Count;
         StreetPath somewhere = null;
@@ -134,11 +140,13 @@ public class Player : MonoBehaviour
                      currentStreetPath.start.Equals(somewhere.end)))
                 {
                     destination = currentStreetPath.start;
+                    angle = MapBuilder.Angle(transform.position, destination);
                     yield return new WaitUntil(() => transform.position == destination);
                 }
                 else
                 {
                     destination = currentStreetPath.end;
+                    angle = MapBuilder.Angle(transform.position, destination);
                     yield return new WaitUntil(() => transform.position == destination);
                 }
 
@@ -149,7 +157,8 @@ public class Player : MonoBehaviour
             if (i == num - 1)
             {
                 destination = MapBuilder.GetCenter(somewhere.start, somewhere.end);
-                
+                angle = MapBuilder.Angle(transform.position, destination);
+
                 currentStreetPath = somewhere;
                 yield return new WaitUntil(() => transform.position == destination);
             }
@@ -158,17 +167,23 @@ public class Player : MonoBehaviour
                 if (somewhere.isBridge && transform.position.Equals(somewhere.end))
                 {
                     destination = somewhere.start;
+                    angle = MapBuilder.Angle(transform.position, destination);
                     yield return new WaitUntil(() => transform.position == destination);
                 }
                 else
                 {
                     destination = somewhere.end;
+                    angle = MapBuilder.Angle(transform.position, destination);
                     yield return new WaitUntil(() => transform.position == destination);
                 }
             }
             currentSteps++;
         }
         corutine = false;
+        if (tried && isGonnaBeCathced)
+        {
+            _gameCanvas.GetComponent<GameController>().nextStep();
+        }
     }
 
     //запуск корутины движения
@@ -180,11 +195,11 @@ public class Player : MonoBehaviour
             way = _dbWork.GetWay(currentStreetPath.GetIdStreetPath(),
                 path.GetIdStreetPath());
             if (currentSteps + way.Count > maxSteps)
-            {    _gameCanvas.OpenWarningWindow(this);
+            {
+                _gameCanvas.OpenWarningWindow(this);
                 isCheating = true;
             }
             StartCoroutine(Go());
-
         }
     }
 
@@ -240,6 +255,7 @@ public class Player : MonoBehaviour
     public bool IsBankrupt
     {
         get { return isBankrupt; }
+        set { isBankrupt = value; }
     }
 
     //возврат положения игрока на карте
@@ -282,5 +298,105 @@ public class Player : MonoBehaviour
     {
         maxSteps = Random.Range(2, 13);
         currentSteps = 0;
+    }
+
+    public void NextStepBot()
+    {
+        NextStep();
+
+        StartCoroutine(GoBot());
+    }
+
+    private IEnumerator GoBot()
+    {
+//        bool tried = isCheating;
+//
+//        if (tried && isGonnaBeCathced)
+//        {
+//            if (Random.Range(0, 2) == 1)
+//            {
+//                corutine = false;
+//                GameController.cathedPlayer();
+//                yield break;
+//            }
+//        }
+//        else if (tried)
+//        {
+//            corutine = false;
+//            yield break;
+//        }
+
+
+        while (currentSteps < maxSteps)
+        {
+            way = _dbWork.GetWayOfSteps(currentStreetPath.GetIdStreetPath(), maxSteps-currentSteps);
+            
+            bool endFirstStep = false;
+            int num = way.Count;
+            StreetPath somewhere = null;
+            for (int i = 0; i < num; i++)
+            {
+                if (i != 0)
+                    somewhere = _dbWork.GetPathById(way.Dequeue());
+
+                if (i == 0 && !endFirstStep)
+                {
+                    somewhere = _dbWork.GetPathById(way.Dequeue());
+                    if (currentStreetPath.isBridge &&
+                        (currentStreetPath.start.Equals(somewhere.start) ||
+                         currentStreetPath.start.Equals(somewhere.end)))
+                    {
+                        destination = currentStreetPath.start;
+                        angle = MapBuilder.Angle(transform.position, destination);
+                        yield return new WaitUntil(() => transform.position == destination);
+                    }
+                    else
+                    {
+                        destination = currentStreetPath.end;
+                        angle = MapBuilder.Angle(transform.position, destination);
+                        yield return new WaitUntil(() => transform.position == destination);
+                    }
+
+                    endFirstStep = true;
+                    i--;
+                    continue;
+                }
+                if (i == num - 1)
+                {
+                    destination = MapBuilder.GetCenter(somewhere.start, somewhere.end);
+                    angle = MapBuilder.Angle(transform.position, destination);
+
+                    currentStreetPath = somewhere;
+                    yield return new WaitUntil(() => transform.position == destination);
+                }
+                else
+                {
+                    if (somewhere.isBridge && transform.position.Equals(somewhere.end))
+                    {
+                        destination = somewhere.start;
+                        angle = MapBuilder.Angle(transform.position, destination);
+                        yield return new WaitUntil(() => transform.position == destination);
+                    }
+                    else
+                    {
+                        destination = somewhere.end;
+                        angle = MapBuilder.Angle(transform.position, destination);
+                        yield return new WaitUntil(() => transform.position == destination);
+                    }
+                }
+                currentSteps++;
+            }
+        }
+
+        PathForBuy pathForBuy = _dbWork.GetPathForBuy(currentStreetPath.GetIdStreetPath());
+        if(currentStreetPath.CanBuy && pathForBuy.IdPlayer == 0 && money > pathForBuy.PriceStreetPath)
+            pathForBuy.Buy(this);
+        
+        corutine = false;
+        ready = true;
+//        if (tried && isGonnaBeCathced)
+//        {
+//            _gameCanvas.GetComponent<GameController>().nextStep();
+//        }
     }
 }

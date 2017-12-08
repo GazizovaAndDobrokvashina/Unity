@@ -74,4 +74,12 @@ public class PathForBuy : StreetPath
         }
         return result;
     }
+
+    public void StepOnMe(int idPlayer)
+    {
+        DBwork dBwork = Camera.main.GetComponent<DBwork>();
+
+        dBwork.GetPlayerbyId(idPlayer).Money -= renta;
+        dBwork.GetPlayerbyId(this.idPlayer).Money += renta;
+    }
 }

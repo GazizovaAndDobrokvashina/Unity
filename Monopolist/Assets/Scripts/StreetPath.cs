@@ -35,7 +35,7 @@ public class StreetPath : MonoBehaviour
     }
 
     //если игрок наступает на эту часть улицы
-    public void StepOnMe()
+    public void StepOnMe(int idPlayer)
     {
     }
     

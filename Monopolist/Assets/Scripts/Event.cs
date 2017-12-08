@@ -14,4 +14,29 @@
         this.price = price;
         this.idGovermentPath = idGovermentPath;
     }
+
+    public int Id
+    {
+        get { return id; }
+    }
+
+    public string Info
+    {
+        get { return info; }
+    }
+
+    public string Name
+    {
+        get { return name; }
+    }
+
+    public int Price
+    {
+        get { return price; }
+    }
+
+    public int IdGovermentPath
+    {
+        get { return idGovermentPath; }
+    }
 }

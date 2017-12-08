@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
+using System.Threading;
 using UnityEngine;
 
 public class DBwork : MonoBehaviour
@@ -269,6 +270,24 @@ public class DBwork : MonoBehaviour
     public Queue<int> GetWay(int startId, int endId)
     {
         return ways.Queues[startId, endId];
+    }
+
+    public Queue<int> GetWayOfSteps(int startId, int steps)
+    {
+        Queue<int> queue = new Queue<int>();
+        int count = 0;
+
+        for (int i = 1; i < paths.Length; i++)
+        {
+            if (ways.Queues[startId, i].Count == steps)
+                return ways.Queues[startId, i];
+            if (ways.Queues[startId, i].Count > count)
+            {
+                count = ways.Queues[startId, i].Count;
+                queue = ways.Queues[startId, i];
+            }
+        }
+        return queue;
     }
 
     //создание массива путей из одной точки в другую, исходя из названия города и его частей улиц

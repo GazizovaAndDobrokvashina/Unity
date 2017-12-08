@@ -5,37 +5,98 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public Player CurrentPlayer;
+    private DBwork _dBwork;
+    private int CountStepsInAllGame;
+    private int salary = 1000;
 
-	public Player CurrentPlayer;
-	private DBwork _dBwork;
-	private int CountStepsInAllGame;
-	private int salary = 1000;
+    void Start()
+    {
+        _dBwork = Camera.main.GetComponent<DBwork>();
 
-	void Start()
-	{
-		_dBwork = Camera.main.GetComponent<DBwork>();
-	}
-	public void nextStep()
-	{
-		CountStepsInAllGame++;
-		if (CountStepsInAllGame % 10 == 0)
-			_dBwork.GetPlayerbyId(1).Money += salary;
-		//foreach (Player player in _dBwork.GetAllPlayers())
-		//{
-			//if(player.IdPlayer != 0)
-			_dBwork.GetPlayerbyId(1).NextStep();
-		//}
-	}
+        _dBwork.GetPlayerbyId(1).NextStep();
+    }
 
-	public static void cathedPlayer()
-	{
-		//перевести плеера в суд, так как он пойман
-		Debug.Log("попался");
-	}
+    public void nextStep()
+    {
+        if (GameCanvas.currentSteps < GameCanvas.maxSteps)
+        {
+            StartCoroutine(Cheating());
+        }
+            else
+        {
+            StartCoroutine(GoNextStep());
+        }
+    }
 
-	void checkPlayer()
-	{
-		
-	}
-	
+    private IEnumerator Cheating()
+    {
+        GameCanvas gameCanvas = gameObject.GetComponent<GameCanvas>();
+        gameCanvas.OpenWarningWindow(CurrentPlayer);
+        yield return new WaitWhile(() => gameCanvas.warningWindow.activeInHierarchy);
+        if (gameCanvas.response)
+        {
+            StartCoroutine(GoNextStep());
+        }
+        else 
+        {yield break;}
+    }
+    
+
+    private IEnumerator GoNextStep()
+    {
+        checkPlayer(1);
+        gameObject.GetComponent<CanvasGroup>().interactable = false;
+        CountStepsInAllGame++;
+
+        if (CountStepsInAllGame % 10 == 0)
+            _dBwork.GetPlayerbyId(1).Money += salary;
+
+        Player[] players = _dBwork.GetAllPlayers();
+
+        for (int index = 2; index < players.Length; index++)
+        {
+            players[index].ready = false;
+            if (CountStepsInAllGame % 10 == 0)
+                players[index].Money += salary;
+            players[index].NextStepBot();
+            yield return new WaitUntil(() => players[index].ready);
+            checkPlayer(index);
+            
+        }
+
+        _dBwork.GetPlayerbyId(1).NextStep();
+        gameObject.GetComponent<CanvasGroup>().interactable = true;
+    }
+    
+    public static void cathedPlayer()
+    {
+        //перевести плеера в суд, так как он пойман
+        Debug.Log("попался");
+    }
+
+    void checkPlayer(int idPlayer)
+    {
+        Player ourPlayer = _dBwork.GetPlayerbyId(idPlayer);
+
+        if (ourPlayer.GetCurrentStreetPath().canBuy)
+        {
+            PathForBuy path = _dBwork.GetPathForBuy(ourPlayer.GetCurrentStreetPath().GetIdStreetPath());
+            if (path.IdPlayer != 0 && path.IdPlayer != idPlayer)
+            {
+                path.StepOnMe(idPlayer);
+            }
+        }
+        else
+        {
+            GovermentPath path = _dBwork.GetGovermentPath(ourPlayer.GetCurrentStreetPath().GetIdStreetPath());
+            path.StepOnMe(idPlayer);
+        }
+
+        if (ourPlayer.Money < 0)
+        {
+            ourPlayer.IsBankrupt = true;
+        }
+        
+    }
 }

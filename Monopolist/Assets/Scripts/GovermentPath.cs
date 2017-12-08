@@ -6,13 +6,14 @@ public class GovermentPath : StreetPath, GovermantBuild
 
     public Event GetRandomEvent()
     {
-        return events[Random.Range(0, events.Length - 1)];
+        return events[Random.Range(0, events.Length )];
     }
 
-    public GovermentPath(int idStreetPath, string namePath, int idStreetParent, int renta, Vector3 start, Vector3 end, bool isBridge,
+    public GovermentPath(int idStreetPath, string namePath, int idStreetParent, int renta, Vector3 start, Vector3 end,
+        bool isBridge,
         Event[] events) : base(idStreetPath, namePath, idStreetParent, renta, start, end, isBridge)
     {
-        events = events;
+        this.events = events;
         base.canBuy = false;
     }
 
@@ -21,6 +22,11 @@ public class GovermentPath : StreetPath, GovermantBuild
         base.TakeData(govermentPath);
         this.events = govermentPath.events;
     }
-    
-    
+
+    public void StepOnMe(int idPlayer)
+    {
+        DBwork dBwork = Camera.main.GetComponent<DBwork>();
+        Event newEvent = GetRandomEvent();
+        dBwork.GetPlayerbyId(idPlayer).Money += newEvent.Price;
+    }
 }

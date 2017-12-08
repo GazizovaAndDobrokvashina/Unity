@@ -92,15 +92,18 @@ public class GameCanvas : MonoBehaviour
 
     public Cameras cameras;
 
+    public bool response;
+
     public void OpenWarningWindow(Player player)
     {
         currentPlayer = player;
         warningWindow.SetActive(true);
     }
 
-    public void GetRespons(bool respons)
+    public void GetRespons(bool response)
     {
-        getCurrentPlayer().takeResponse(respons);
+        getCurrentPlayer().takeResponse(response);
+        this.response = response;
         warningWindow.SetActive(false);
     }
 
@@ -521,7 +524,32 @@ public class GameCanvas : MonoBehaviour
             getDbWork().GetPathById(idPath).CanBuy && getDbWork().GetPathForBuy(idPath).IdPlayer == 0 &&
             getDbWork().GetPathForBuy(idPath).PriceStreetPath < getCurrentPlayer().Money)
         {
+            if (currentSteps < maxSteps)
+            {
+                OpenWarningWindow(getCurrentPlayer());
+                StartCoroutine(WaitForAnswer(idPath));
+                return;
+            }
+
+
             getDbWork().GetPathForBuy(idPath).Buy(getCurrentPlayer());
+            gameObject.GetComponent<GameController>().nextStep();
+        }
+    }
+
+    private IEnumerator WaitForAnswer(int idPath)
+    {
+        yield return new WaitForSeconds(0.5f);
+        yield return new WaitWhile(() => warningWindow.activeInHierarchy);
+
+        if (response)
+        {
+            getDbWork().GetPathForBuy(idPath).Buy(getCurrentPlayer());
+            gameObject.GetComponent<GameController>().nextStep();
+        }
+        else
+        {
+            yield break;
         }
     }
 
@@ -552,7 +580,7 @@ public class GameCanvas : MonoBehaviour
                 }
                 break;
             case 2:
-                info = getDbWork().GetPlayerbyId(id).NickName;
+                info = getDbWork().GetPlayerbyId(id).NickName + " " + getDbWork().GetPlayerbyId(id).Money;
                 break;
             case 3:
                 info = getDbWork().GetBuild(id).NameBuild + "\n" + getDbWork().GetBuild(id).AboutBuild;
