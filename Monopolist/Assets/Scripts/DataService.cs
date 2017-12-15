@@ -14,11 +14,11 @@ public class DataService  {
  
     public DataService(string DatabaseName){
 #if UNITY_EDITOR
-       // var dbPath = string.Format(@"Assets\SavedGames\{0}", DatabaseName);
-        var dbPath = string.Format(Application.dataPath+@"/{0}", DatabaseName);
+        var dbPath = string.Format(@"Assets\SavedGames\{0}", DatabaseName);
+        //var dbPath = string.Format(Application.persistentDataPath+@"\SavedGames\{0}", DatabaseName);
 #else
 // check if file exists in Application.persistentDataPath
-        	var filepath = string.Format("{0}/{1}", Application.persistentDataPath, DatabaseName);
+        	var filepath = string.Format("{0}/SavedGames/{1}", Application.persistentDataPath, DatabaseName);
  
         	if (!File.Exists(filepath))
 		{

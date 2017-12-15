@@ -116,7 +116,7 @@ public class MainMenu : MonoBehaviour
     //создание кнопок сохранений
     private void CreateButtonsSaves()
     {
-        List<string> namesSavedGames = SaveLoad.loadGamesList("");
+        List<string> namesSavedGames = SaveLoad.loadGamesList("SavedGames");
         foreach (string dbName in namesSavedGames)
         {
             Transform but = Instantiate(button) as Transform;
@@ -131,7 +131,7 @@ public class MainMenu : MonoBehaviour
     //создание кнопок городов
     private void CreateButtonTowns()
     {
-        List<string> townsList = SaveLoad.loadGamesList("");
+        List<string> townsList = SaveLoad.loadGamesList("StreamingAssets");
         foreach (string nameTown in townsList)
         {
             Transform but = Instantiate(button) as Transform;

@@ -194,8 +194,11 @@ public class DBwork : MonoBehaviour
 
     //помещение камеры в поле DontDestroyOnLoad для перенесения информации из главного меню в саму игру
     private void Awake()
-    {Directory.CreateDirectory(Application.dataPath + @"\SavedGames");
-        Directory.CreateDirectory(Application.dataPath + @"\StreamingAssets");
+    {
+        //Directory.CreateDirectory(Application.dataPath + @"\SavedGames");
+       // Directory.CreateDirectory(Application.dataPath + @"\StreamingAssets");
+        Directory.CreateDirectory(Application.persistentDataPath + @"\SavedGames");
+         Directory.CreateDirectory(Application.persistentDataPath + @"\StreamingAssets");
         DontDestroyOnLoad(gameObject);
         transform.position = new Vector3(5.63f, 0.43f, -5.63f);
         transform.localEulerAngles = new Vector3(0, -90, 0);
@@ -232,6 +235,10 @@ public class DBwork : MonoBehaviour
     public void CreateNewGame(int countOfPlayers, int startMoney, string NameOfGame, bool online, string nameOfTown,
         string nickName)
     {
+        if (string.IsNullOrEmpty(nameOfTown))
+        {
+            nameOfTown = "Monopolist";
+        } 
         if (NameOfGame.Length != 0 && !NameOfGame.EndsWith(".db"))
         {
             dataService = new DataService(nameOfTown + "_" + NameOfGame + ".db");
