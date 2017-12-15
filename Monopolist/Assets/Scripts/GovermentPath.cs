@@ -29,4 +29,5 @@ public class GovermentPath : StreetPath, GovermantBuild
         Event newEvent = GetRandomEvent();
         dBwork.GetPlayerbyId(idPlayer).Money += newEvent.Price;
     }
+    
 }

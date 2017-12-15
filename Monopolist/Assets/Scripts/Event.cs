@@ -39,4 +39,9 @@
     {
         get { return idGovermentPath; }
     }
+
+    public Events getEntity()
+    {
+        return new Events(id, name, info, price, idGovermentPath);
+    }
 }

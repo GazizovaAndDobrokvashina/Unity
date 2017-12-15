@@ -18,6 +18,6 @@ public class ToDoList
      * 11. докомментировать MouseController
      * 12. сделать отображение списка улиц только нашего игрока
      * 13. переписать сохранение дб в другую папку
-     * 14. дописать cathedPlayers в gameController
+     * 14. дополнить cathedPlayers в gameController
      */
 }

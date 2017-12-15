@@ -82,4 +82,9 @@ public class PathForBuy : StreetPath
         dBwork.GetPlayerbyId(idPlayer).Money -= renta;
         dBwork.GetPlayerbyId(this.idPlayer).Money += renta;
     }
+
+    public PathsForBuy GetEntityForBuy()
+    {
+        return new PathsForBuy(idStreetPath, idPlayer, priceStreetPath);
+    }
 }

@@ -107,4 +107,9 @@ public class StreetPath : MonoBehaviour
     {
         get { return neighborsId; }
     }
+
+    public StreetPaths getEntity()
+    {
+        return null;
+    }
 }

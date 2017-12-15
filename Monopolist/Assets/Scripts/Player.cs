@@ -92,7 +92,6 @@ public class Player : MonoBehaviour
         GameCanvas.currentSteps = currentSteps;
         GameCanvas.maxSteps = maxSteps;
         GameCanvas.money = money;
-        //переделать на нормальное название, когда появится
         GameCanvas.destination = currentStreetPath.NamePath;
     }
 
@@ -113,9 +112,14 @@ public class Player : MonoBehaviour
             if (Random.Range(0, 2) == 1)
             {
                 corutine = false;
-                GameController.cathedPlayer();
+                _gameCanvas.gameObject.GetComponent<GameController>().cathedPlayer();
                 yield break;
             }
+            else
+            {
+                isGonnaBeCathced = false;
+            }
+           
         }
         else if (tried)
         {
@@ -194,7 +198,7 @@ public class Player : MonoBehaviour
             corutine = true;
             way = _dbWork.GetWay(currentStreetPath.GetIdStreetPath(),
                 path.GetIdStreetPath());
-            if (currentSteps + way.Count > maxSteps)
+            if (currentSteps + way.Count > maxSteps && !isGonnaBeCathced)
             {
                 _gameCanvas.OpenWarningWindow(this);
                 isCheating = true;
@@ -398,5 +402,10 @@ public class Player : MonoBehaviour
 //        {
 //            _gameCanvas.GetComponent<GameController>().nextStep();
 //        }
+    }
+
+    public Players getEntity()
+    {
+        return new Players(idPlayer, nickName, money, destination.x, destination.z, isBankrupt);
     }
 }

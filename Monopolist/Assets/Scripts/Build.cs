@@ -75,4 +75,9 @@ public class Build : MonoBehaviour
     {
         get { return aboutBuild; }
     }
+
+    public Builds getEntity()
+    {
+        return new Builds(idBuild, nameBuild, aboutBuild, idStreetPath, priceBuild, enable, place.x, place.z);
+    }
 }

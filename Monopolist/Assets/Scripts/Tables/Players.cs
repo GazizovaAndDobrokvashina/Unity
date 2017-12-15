@@ -17,4 +17,19 @@ public class Players
         Vector3 position = new Vector3((float) CoordinateX, 0, (float) CoordinateY);
         return new Player(IdPlayer,NickName, Money, IsBankrupt, position);
     }
+
+    public Players(int idPlayer, string nickName, int money, double coordinateX, double coordinateY, bool isBankrupt)
+    {
+        IdPlayer = idPlayer;
+        NickName = nickName;
+        Money = money;
+        CoordinateX = coordinateX;
+        CoordinateY = coordinateY;
+        IsBankrupt = isBankrupt;
+    }
+
+    public Players()
+    {
+    }
+
 }

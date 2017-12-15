@@ -13,4 +13,8 @@ public class Streets
     {
         return new Street(IdStreet, NameStreet, AboutStreet, paths);
     }
+
+    public Streets()
+    {
+    }
 }

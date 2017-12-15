@@ -69,10 +69,14 @@ public class GameController : MonoBehaviour
         gameObject.GetComponent<CanvasGroup>().interactable = true;
     }
     
-    public static void cathedPlayer()
+    public void cathedPlayer()
     {
         //перевести плеера в суд, так как он пойман
+        CurrentPlayer = _dBwork.GetPlayerbyId(1);
         Debug.Log("попался");
+        CurrentPlayer.move(_dBwork.GetPathById(14));
+        
+        
     }
 
     void checkPlayer(int idPlayer)

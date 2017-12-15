@@ -333,7 +333,7 @@ public class DataService  {
         return  _connection.Update(path)==1;
     }
      	
-    public bool UpdateObject(Player player)
+    public bool UpdateObject(Players player)
     {
         return  _connection.Update(player)==1;
     }

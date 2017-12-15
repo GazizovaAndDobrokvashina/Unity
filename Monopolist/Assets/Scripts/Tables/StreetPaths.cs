@@ -25,4 +25,21 @@ public class StreetPaths
         Vector3 end = new Vector3((float) EndX, 0, (float) EndY);
         return new GovermentPath(IdStreetPath, NamePath, IdStreetParent, Renta, start, end, IsBridge, events);
     }
+
+    public StreetPaths(int idStreetPath, int idStreetParent, string namePath, int renta, double startX, double endX, double startY, double endY, bool isBridge)
+    {
+        IdStreetPath = idStreetPath;
+        IdStreetParent = idStreetParent;
+        NamePath = namePath;
+        Renta = renta;
+        StartX = startX;
+        EndX = endX;
+        StartY = startY;
+        EndY = endY;
+        IsBridge = isBridge;
+    }
+
+    public StreetPaths()
+    {
+    }
 }
