@@ -55,12 +55,20 @@ public class Player : MonoBehaviour
 
     public bool ready;
 
+    private int StepsInJail;
+
+    private bool alreadyCheat;
+
+
     public string NickName
     {
         get { return nickName; }
     }
 
-   
+    public GameCanvas GetGameCanvas()
+    {
+        return _gameCanvas;
+    }
 
     public StreetPath GetCurrentStreetPath()
     {
@@ -76,9 +84,6 @@ public class Player : MonoBehaviour
     {
         if (!transform.position.Equals(destination))
         {
-            //if(transform.rotation != Quaternion.Euler(0, angle ,0) )
-            //  transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, angle ,0), Time.deltaTime*50f);
-            //else
             transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
             isMoving = true;
         }
@@ -104,22 +109,31 @@ public class Player : MonoBehaviour
     //Корутина движения
     private IEnumerator Go()
     {
+        if (alreadyCheat)
+        {
+            _gameCanvas.ShowInfoAboutEvent("вы уже мухлевали на этом ходе :(");
+            corutine = false;
+            yield break;
+        }
+
         bool tried = isCheating;
         yield return new WaitUntil(() => isCheating == false);
 
         if (tried && isGonnaBeCathced)
         {
-            if (Random.Range(0, 2) == 1)
+            if (Random.Range(0, 2) != 1)
             {
+                GameController.aboutPlayer += "Игрок " + NickName + " не попался \n";
+                alreadyCheat = true;
+                isGonnaBeCathced = false;
+            }
+            else
+            {
+                GameController.aboutPlayer += "Игрок " + NickName + " попался \n";
                 corutine = false;
                 _gameCanvas.gameObject.GetComponent<GameController>().cathedPlayer();
                 yield break;
             }
-            else
-            {
-                isGonnaBeCathced = false;
-            }
-           
         }
         else if (tried)
         {
@@ -193,17 +207,25 @@ public class Player : MonoBehaviour
     //запуск корутины движения
     public void move(StreetPath path)
     {
-        if (!isMoving && !corutine)
+        if (StepsInJail == 0)
         {
-            corutine = true;
-            way = _dbWork.GetWay(currentStreetPath.GetIdStreetPath(),
-                path.GetIdStreetPath());
-            if (currentSteps + way.Count > maxSteps && !isGonnaBeCathced)
+            if (!isMoving && !corutine)
             {
-                _gameCanvas.OpenWarningWindow(this);
-                isCheating = true;
+                corutine = true;
+                way = _dbWork.GetWay(currentStreetPath.GetIdStreetPath(),
+                    path.GetIdStreetPath());
+                if (currentSteps + way.Count > maxSteps && !isGonnaBeCathced && !alreadyCheat)
+                {
+                    GameController.aboutPlayer += "Игрок " + NickName + " пытается смухлевать" + "\n";
+                    _gameCanvas.OpenWarningWindow(this);
+                    isCheating = true;
+                }
+                StartCoroutine(Go());
             }
-            StartCoroutine(Go());
+        }
+        else
+        {
+            _gameCanvas.ShowInfoAboutEvent("Вы заключены под стражу" + "\n" + "Осталось ходов: " + StepsInJail);
         }
     }
 
@@ -300,8 +322,29 @@ public class Player : MonoBehaviour
     //следующий ход, генерация ходов, выпадающих на кубике
     public void NextStep()
     {
-        maxSteps = Random.Range(2, 13);
+        if(idPlayer == 1) {
+            GameController.aboutPlayer = "";
+            
+        }
+
+        alreadyCheat = false;
+        if (StepsInJail > 0)
+        {
+            StepsInJail--;
+            maxSteps = 0;
+        }
+
+        if (StepsInJail == 0)
+        {
+            maxSteps = Random.Range(2, 13);
+        }
+        GameController.aboutPlayer += "Игроку " + NickName + " выпало ходов: " + maxSteps + "\n";
         currentSteps = 0;
+    }
+
+    public bool isInJail()
+    {
+        return StepsInJail > 0;
     }
 
     public void NextStepBot()
@@ -333,8 +376,8 @@ public class Player : MonoBehaviour
 
         while (currentSteps < maxSteps)
         {
-            way = _dbWork.GetWayOfSteps(currentStreetPath.GetIdStreetPath(), maxSteps-currentSteps);
-            
+            way = _dbWork.GetWayOfSteps(currentStreetPath.GetIdStreetPath(), maxSteps - currentSteps);
+
             bool endFirstStep = false;
             int num = way.Count;
             StreetPath somewhere = null;
@@ -392,10 +435,14 @@ public class Player : MonoBehaviour
             }
         }
 
+        GameController.aboutPlayer += "Игрок " + NickName + " пришел на " + currentStreetPath.namePath + "\n";
         PathForBuy pathForBuy = _dbWork.GetPathForBuy(currentStreetPath.GetIdStreetPath());
-        if(currentStreetPath.CanBuy && pathForBuy.IdPlayer == 0 && money > pathForBuy.PriceStreetPath)
+        if (currentStreetPath.CanBuy && pathForBuy.IdPlayer == 0 && money > pathForBuy.PriceStreetPath)
+        {
+            GameController.aboutPlayer += "Игрок " + NickName + " купил " + currentStreetPath.namePath + "\n";
             pathForBuy.Buy(this);
-        
+        }
+
         corutine = false;
         ready = true;
 //        if (tried && isGonnaBeCathced)
@@ -407,5 +454,11 @@ public class Player : MonoBehaviour
     public Players getEntity()
     {
         return new Players(idPlayer, nickName, money, destination.x, destination.z, isBankrupt);
+    }
+
+    //если игрок попадается на жульничестве, то он не может двигаться с клетки суда несколько ходов
+    public void InJail(int steps)
+    {
+        StepsInJail = steps;
     }
 }

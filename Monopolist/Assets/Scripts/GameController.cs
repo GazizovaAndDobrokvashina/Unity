@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Principal;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class GameController : MonoBehaviour
     private DBwork _dBwork;
     private int CountStepsInAllGame;
     private int salary = 1000;
+    public Text aboutPlayerText;
+    public static string aboutPlayer;
 
     void Start()
     {
@@ -17,6 +20,10 @@ public class GameController : MonoBehaviour
         _dBwork.GetPlayerbyId(1).NextStep();
     }
 
+    void Update()
+    {
+        aboutPlayerText.text = aboutPlayer;
+    }
     public void nextStep()
     {
         if (GameCanvas.currentSteps < GameCanvas.maxSteps)
@@ -75,6 +82,7 @@ public class GameController : MonoBehaviour
         CurrentPlayer = _dBwork.GetPlayerbyId(1);
         Debug.Log("попался");
         CurrentPlayer.move(_dBwork.GetPathById(14));
+        _dBwork.GetGovermentPath(14).GoToJail(CurrentPlayer.IdPlayer, gameObject.GetComponent<GameCanvas>());
         
         
     }

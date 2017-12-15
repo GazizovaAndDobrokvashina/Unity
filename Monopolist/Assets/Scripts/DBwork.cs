@@ -35,8 +35,10 @@ public class DBwork : MonoBehaviour
     //название текущего города
     private string nameOfTown;
 
+    
     void Start()
     {
+        
         names = new List<string>();
         names.Add("Равшан");
         names.Add("Джамшут");
@@ -157,6 +159,11 @@ public class DBwork : MonoBehaviour
                     Event[] events = new Event[eventses.Count];
 
                     int j = 0;
+                    if (!streetse.AboutStreet.Contains("суд"))
+                    {
+                        events = new Event[eventses.Count + 1];
+                        j++;
+                    }
                     foreach (Events eventse in eventses)
                     {
                         events[j] = eventse.GetEvent();
@@ -187,7 +194,8 @@ public class DBwork : MonoBehaviour
 
     //помещение камеры в поле DontDestroyOnLoad для перенесения информации из главного меню в саму игру
     private void Awake()
-    {
+    {Directory.CreateDirectory(Application.dataPath + @"\SavedGames");
+        Directory.CreateDirectory(Application.dataPath + @"\StreamingAssets");
         DontDestroyOnLoad(gameObject);
         transform.position = new Vector3(5.63f, 0.43f, -5.63f);
         transform.localEulerAngles = new Vector3(0, -90, 0);

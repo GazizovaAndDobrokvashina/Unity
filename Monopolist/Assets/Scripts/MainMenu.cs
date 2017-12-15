@@ -116,12 +116,12 @@ public class MainMenu : MonoBehaviour
     //создание кнопок сохранений
     private void CreateButtonsSaves()
     {
-        List<string> namesSavedGames = SaveLoad.loadGamesList("SavedGames");
+        List<string> namesSavedGames = SaveLoad.loadGamesList("");
         foreach (string dbName in namesSavedGames)
         {
             Transform but = Instantiate(button) as Transform;
             but.SetParent(scrollSavedGames.content, false);
-            RectTransform tr = but.GetComponent<RectTransform>();
+            //RectTransform tr = but.GetComponent<RectTransform>();
             but.GetComponentInChildren<Text>().text = dbName;
             Button b = but.GetComponent<Button>();
             b.onClick.AddListener(() => onButtonClickLoadGame(dbName));
@@ -131,12 +131,12 @@ public class MainMenu : MonoBehaviour
     //создание кнопок городов
     private void CreateButtonTowns()
     {
-        List<string> townsList = SaveLoad.loadGamesList("StreamingAssets");
+        List<string> townsList = SaveLoad.loadGamesList("");
         foreach (string nameTown in townsList)
         {
             Transform but = Instantiate(button) as Transform;
             but.SetParent(scrollTowns.content, false);
-            RectTransform tr = but.GetComponent<RectTransform>();
+            //RectTransform tr = but.GetComponent<RectTransform>();
             but.GetComponentInChildren<Text>().text = nameTown;
             Button b = but.GetComponent<Button>();
             b.onClick.AddListener(() => onButtonClickChoseTown(nameTown));

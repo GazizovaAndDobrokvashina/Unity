@@ -592,6 +592,12 @@ public class GameCanvas : MonoBehaviour
         ButtonWithInfo.SetActive(true);
     }
 
+    public void ShowInfoAboutEvent(string info)
+    {
+        ButtonWithInfo.GetComponentInChildren<Text>().text = info + "\n\n" + "(нажмите, чтобы закрыть)";
+        ButtonWithInfo.SetActive(true);
+    }
+    
     //показать список зданий этой улицы
     private void onButtonBuildsClick(int idPath)
     {

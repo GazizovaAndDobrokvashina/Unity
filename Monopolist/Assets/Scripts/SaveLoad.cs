@@ -7,7 +7,7 @@ public class SaveLoad
     //загрузка названий файлов из укаанной папки
     public static List<string> loadGamesList(string nameFolder)
     {
-        DirectoryInfo dir = new DirectoryInfo(@"Assets\" + nameFolder);
+        DirectoryInfo dir = new DirectoryInfo(Application.dataPath +"/"+ nameFolder);
         List<string> names = new List<string>();
 
         foreach (var item in dir.GetFiles())

@@ -14,7 +14,8 @@ public class DataService  {
  
     public DataService(string DatabaseName){
 #if UNITY_EDITOR
-        var dbPath = string.Format(@"Assets\SavedGames\{0}", DatabaseName);
+       // var dbPath = string.Format(@"Assets\SavedGames\{0}", DatabaseName);
+        var dbPath = string.Format(Application.dataPath+@"/{0}", DatabaseName);
 #else
 // check if file exists in Application.persistentDataPath
         	var filepath = string.Format("{0}/{1}", Application.persistentDataPath, DatabaseName);
@@ -154,10 +155,11 @@ public class DataService  {
 
         Events[] events = new[]
         {
-            new Events {IdGovermentPath = 2, Info = "", NameEvent = "Surprize bitch1", Price = 20},
-            new Events {IdGovermentPath = 5, Info = "", NameEvent = "Surprize bitch2", Price = 20},
-            new Events {IdGovermentPath = 14, Info = "", NameEvent = "Surprize bitch3", Price = 20},
-            new Events {IdGovermentPath = 18, Info = "", NameEvent = "Surprize bitch4", Price = 20}
+            new Events {IdGovermentPath = 2, Info = "", NameEvent = "Surprize :/", Price = 20},
+            new Events {IdGovermentPath = 5, Info = "", NameEvent = "Surprize :3", Price = 20},
+            new Events {IdGovermentPath = 14, Info = "", NameEvent = "You're catched bad gay", Price = -20},
+            new Events {IdGovermentPath = 14, Info = "", NameEvent = "Surprize :)", Price = 20},
+            new Events {IdGovermentPath = 18, Info = "", NameEvent = "Surprize :0", Price = 20}
 			
         };
 
