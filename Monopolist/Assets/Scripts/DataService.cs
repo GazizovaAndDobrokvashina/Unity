@@ -173,7 +173,7 @@ public class DataService  {
 
     public void AddPlayer(Player player)
     {
-        _connection.Insert(player.GetPlayers());
+        _connection.Insert(player.getEntity());
     }
 
     public List<Builds> getBuilds()

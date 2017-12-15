@@ -14,6 +14,13 @@ public class Streets
         return new Street(IdStreet, NameStreet, AboutStreet, paths);
     }
 
+    public Streets(int idStreet, string nameStreet, string aboutStreet)
+    {
+        IdStreet = idStreet;
+        NameStreet = nameStreet;
+        AboutStreet = aboutStreet;
+    }
+
     public Streets()
     {
     }

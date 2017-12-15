@@ -214,6 +214,8 @@ public class Player : MonoBehaviour
                 corutine = true;
                 way = _dbWork.GetWay(currentStreetPath.GetIdStreetPath(),
                     path.GetIdStreetPath());
+                Debug.Log(currentStreetPath.GetIdStreetParent());
+                Debug.Log(path.GetIdStreetPath());
                 if (currentSteps + way.Count > maxSteps && !isGonnaBeCathced && !alreadyCheat)
                 {
                     GameController.aboutPlayer += "Игрок " + NickName + " пытается смухлевать" + "\n";
@@ -240,17 +242,7 @@ public class Player : MonoBehaviour
         this.destination = destination;
     }
 
-    public Players GetPlayers()
-    {
-        Players players = new Players();
-        players.IdPlayer = idPlayer;
-        players.NickName = nickName;
-        players.CoordinateX = destination.x;
-        players.CoordinateY = destination.z;
-        players.IsBankrupt = isBankrupt;
-        players.Money = money;
-        return players;
-    }
+    
 
     //возврат айдишника игрока
     public int IdPlayer
@@ -311,7 +303,23 @@ public class Player : MonoBehaviour
         _dbWork = Camera.main.GetComponent<DBwork>();
 
 
-        this.currentStreetPath = _dbWork.GetPathById(1);
+        this.currentStreetPath = findMyPath(destination);
+    }
+
+    private StreetPath findMyPath(Vector3 vector3)
+    {
+        foreach (StreetPath streetPath in _dbWork.GetAllPaths())
+        {
+            if (streetPath.GetIdStreetPath() == 0)
+                continue;
+            //if (vector3.Equals(MapBuilder.GetCenter(streetPath.start, streetPath.end)))
+            //Vector3 center = MapBuilder.GetCenter(streetPath.start, streetPath.end);
+            //if((int)vector3.x == (int)center.x && (int)vector3.z == (int)center.z)  
+            Vector3 pos = streetPath.transform.position;
+            if((int)pos.x == (int)vector3.x && (int)pos.z == (int)vector3.z)
+            return streetPath;
+        }
+        return _dbWork.GetPathById(1);
     }
 
     public StreetPath CurrentStreetPath

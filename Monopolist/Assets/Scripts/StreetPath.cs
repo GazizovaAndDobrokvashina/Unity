@@ -110,6 +110,6 @@ public class StreetPath : MonoBehaviour
 
     public StreetPaths getEntity()
     {
-        return null;
+        return new StreetPaths(idStreetPath, idStreetParent, namePath, renta, start.x, end.x, start.z, end.z, isBridge);
     }
 }

@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class DBwork : MonoBehaviour
 {
@@ -34,6 +36,8 @@ public class DBwork : MonoBehaviour
 
     //название текущего города
     private string nameOfTown;
+
+    private string nameOfGane;
 
     
     void Start()
@@ -69,7 +73,8 @@ public class DBwork : MonoBehaviour
     {
         dataService = new DataService(dbName);
         GetEverithing();
-        nameOfTown = dbName.Substring(0, dbName.IndexOf("_") - 1);
+        nameOfTown = dbName.Substring(0, dbName.IndexOf("_"));
+        nameOfGane = dbName.Substring(dbName.IndexOf("_") + 1);
     }
 
     //возврат части улицы исходя из её координат
@@ -195,10 +200,14 @@ public class DBwork : MonoBehaviour
     //помещение камеры в поле DontDestroyOnLoad для перенесения информации из главного меню в саму игру
     private void Awake()
     {
-        //Directory.CreateDirectory(Application.dataPath + @"\SavedGames");
-       // Directory.CreateDirectory(Application.dataPath + @"\StreamingAssets");
+#if UNITY_EDITOR
+        Directory.CreateDirectory( @"Assets\SavedGames");
+        Directory.CreateDirectory( @"Assets\StreamingAssets");
+#else
         Directory.CreateDirectory(Application.persistentDataPath + @"\SavedGames");
          Directory.CreateDirectory(Application.persistentDataPath + @"\StreamingAssets");
+#endif
+        
         DontDestroyOnLoad(gameObject);
         transform.position = new Vector3(5.63f, 0.43f, -5.63f);
         transform.localEulerAngles = new Vector3(0, -90, 0);
@@ -218,11 +227,46 @@ public class DBwork : MonoBehaviour
     //сохранение игры
     public void SaveGame()
     {
+        for (int i = 1; i < players.Length; i++)
+        {
+            dataService.UpdateObject(players[i].getEntity());
+        }
+        for (int i = 1; i < streets.Length; i++)
+        {
+            dataService.UpdateObject(streets[i].getEntity());
+        }
+        for (int i = 1; i < paths.Length; i++)
+        {
+            dataService.UpdateObject(paths[i].getEntity());
+        }
+        for (int i = 1; i < pathForBuys.Count; i++)
+        {
+            dataService.UpdateObject(pathForBuys[i].GetEntityForBuy());
+        }
+        for (int i = 1; i < builds.Length; i++)
+        {
+            dataService.UpdateObject(builds[i].getEntity());
+        }
     }
 
     //сохранение игры как новый файл
     public void SaveGameAsNewFile(string newName)
     {
+        
+        SaveGame();
+        string currentGame;
+        string newGame;
+#if UNITY_EDITOR
+        currentGame = @"Assets\SavedGames\" + nameOfTown + "_" + nameOfGane ;
+        newGame = @"Assets\SavedGames\"+ nameOfTown + "_" + newName + ".db";
+        //DirectoryInfo dir = new DirectoryInfo(@"Assets\SavedGames\" +  );
+#else
+        currentGame = Application.persistentDataPath +@"/SavedGames/"+ nameOfTown + "_" + nameOfGane ;
+        newGame = Application.persistentDataPath +@"/SavedGames/"+ nameOfTown + "_" + newName + ".db";
+        //DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath +"/SavedGames/"+ nameFolder);
+#endif
+        
+        File.Copy(currentGame, newGame, true);
     }
 
     //возвращение игрока по его айдишнику
@@ -235,21 +279,25 @@ public class DBwork : MonoBehaviour
     public void CreateNewGame(int countOfPlayers, int startMoney, string NameOfGame, bool online, string nameOfTown,
         string nickName)
     {
+        
         if (string.IsNullOrEmpty(nameOfTown))
         {
-            nameOfTown = "Monopolist";
-        } 
+            nameOfTown = "Monopolist.db";
+        }
         if (NameOfGame.Length != 0 && !NameOfGame.EndsWith(".db"))
         {
             dataService = new DataService(nameOfTown + "_" + NameOfGame + ".db");
+            nameOfGane = NameOfGame+ ".db";
         }
         else if (NameOfGame.Length != 0 && NameOfGame.EndsWith(".db"))
         {
             dataService = new DataService(nameOfTown + "_" + NameOfGame);
+            nameOfGane = NameOfGame;
         }
         else
         {
-            dataService = new DataService(nameOfTown + "_Firstgame.db");
+            dataService = new DataService(nameOfTown + "_Firstgame.db");  
+            nameOfGane = "Firstgame.db";
         }
 
         if (!dataService.IsExist())
