@@ -6,11 +6,13 @@ public class Cameras : MonoBehaviour
 {
     public Camera[] cameras = new Camera[2];
 
-    private int currentCamera;
+    //0 - просмотр карты, 1- от первого лица, 2 - от третьего карты
+    public static int mode { get; set; }
 
     public void SetCamera(Camera camera)
     {
         cameras[1] = camera;
+        cameras[0].GetComponentInParent<CameraMove>().setRestrictions(15, -8.5f, 8.5f, 8.6f, -8.6f);
     }
 
     public Camera GetGCamera(int index)

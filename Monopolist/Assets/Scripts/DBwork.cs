@@ -205,7 +205,7 @@ public class DBwork : MonoBehaviour
         Directory.CreateDirectory( @"Assets\StreamingAssets");
 #else
         Directory.CreateDirectory(Application.persistentDataPath + @"\SavedGames");
-         Directory.CreateDirectory(Application.persistentDataPath + @"\StreamingAssets");
+        Directory.CreateDirectory(Application.persistentDataPath + @"\StreamingAssets");
 #endif
         
         DontDestroyOnLoad(gameObject);

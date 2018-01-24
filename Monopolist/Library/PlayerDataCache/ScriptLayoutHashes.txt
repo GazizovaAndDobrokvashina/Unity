@@ -114,7 +114,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 59f8c33e5deee03c7800d211ffd64bde Assembly-CSharp.dll:.Player
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DBwork
-883c90ece762cd49e5248e65b521b4a0 Assembly-CSharp.dll:.CameraMove
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CameraMove
 39e4b4c28a6ab73b0c342ade0979b602 Assembly-CSharp.dll:.GovermentPath
 954e9435a6618cfc90b4f9d7e69a3785 Assembly-CSharp.dll:.GameController
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator

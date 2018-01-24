@@ -86,6 +86,10 @@ public class MainMenu : MonoBehaviour
     //инициализация главного меню
     private void Start()
     {
+        if (GameObject.FindGameObjectsWithTag("MainCamera").Length > 1)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("MainCamera"));
+        }
         //задаем значения для слайдера количества игроков
         sliderCountOfPlayers.minValue = mincountOfPlayers;
         sliderCountOfPlayers.maxValue = maxcountOfPlayers;
