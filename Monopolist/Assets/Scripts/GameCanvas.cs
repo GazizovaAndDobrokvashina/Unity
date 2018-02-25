@@ -533,7 +533,7 @@ public class GameCanvas : MonoBehaviour
 
 
             getDbWork().GetPathForBuy(idPath).Buy(getCurrentPlayer());
-            gameObject.GetComponent<GameController>().nextStep();
+            //gameObject.GetComponent<GameController>().nextStep();
         }
     }
 

@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     private int CountStepsInAllGame;
     private int salary = 1000;
     public Text aboutPlayerText;
+    public GameObject nextStepButton;
     public static string aboutPlayer;
 
     void Start()
@@ -53,7 +54,8 @@ public class GameController : MonoBehaviour
     private IEnumerator GoNextStep()
     {
         checkPlayer(1);
-        gameObject.GetComponent<CanvasGroup>().interactable = false;
+       // gameObject.GetComponent<CanvasGroup>().interactable = false;
+        nextStepButton.GetComponent<CanvasGroup>().interactable = false;
         CountStepsInAllGame++;
 
         if (CountStepsInAllGame % 10 == 0)
@@ -73,7 +75,8 @@ public class GameController : MonoBehaviour
         }
 
         _dBwork.GetPlayerbyId(1).NextStep();
-        gameObject.GetComponent<CanvasGroup>().interactable = true;
+        //gameObject.GetComponent<CanvasGroup>().interactable = true;
+        nextStepButton.GetComponent<CanvasGroup>().interactable = true;
     }
     
     public void cathedPlayer()

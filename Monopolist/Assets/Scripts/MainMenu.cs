@@ -172,6 +172,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
+    private void DelGame()
+    {
+        
+    }
+
     //действия при клике кнопки города
     private void onButtonClickChoseTown(string nameTown)
     {
