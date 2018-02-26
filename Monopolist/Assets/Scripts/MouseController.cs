@@ -77,7 +77,8 @@ public class MouseController : MonoBehaviour
 
     void MouseOver_Street(GameObject ourHitObject)
     {
-        if (Input.GetMouseButton(0) && canMove) // && Cameras.mode == 1 )
+       // Debug.Log(_dBwork.GetPlayerbyId(1).GetCurrentStep());
+        if (Input.GetMouseButton(0) && canMove) // && Cameras.mode == 1 ) && _dBwork.GetPlayerbyId(1).GetCurrentStep()
         {
             canMove = false;
             _dBwork.GetPlayerbyId(1).move(ourHitObject.GetComponent<StreetPath>());

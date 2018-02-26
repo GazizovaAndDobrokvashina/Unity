@@ -58,6 +58,19 @@ public class Player : MonoBehaviour
     private int StepsInJail;
 
     private bool alreadyCheat;
+    
+    //является ли текущий ход ходом игрока
+    private bool CurrentStep = true;
+
+    //public void SetCurrentStep(bool value)
+   // {
+   //     CurrentStep = value;
+   // }
+
+    public bool GetCurrentStep()
+    {
+        return CurrentStep;
+    }
 
 
     public string NickName

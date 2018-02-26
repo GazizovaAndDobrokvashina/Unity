@@ -27,7 +27,7 @@ public class MainMenu : MonoBehaviour
     public GameObject SettingsMenu;
 
     //префаб кнопки для создания меню с сохраненными играми
-    public Transform button;
+    public RectTransform buttonsSaves;
 
     //поле для ввода нового названия игры
     public InputField InputFieldNameOfGame;
@@ -95,8 +95,8 @@ public class MainMenu : MonoBehaviour
         sliderCountOfPlayers.maxValue = maxcountOfPlayers;
 
         //создаем кнопки сохранений и городов
-        CreateButtonsSaves();
         CreateButtonTowns();
+        CreateButtonsSaves();
     }
 
     //выводим значения слайдеров на экран, если они активны
@@ -121,30 +121,44 @@ public class MainMenu : MonoBehaviour
     private void CreateButtonsSaves()
     {
         List<string> namesSavedGames = SaveLoad.loadGamesList("SavedGames");
+
         foreach (string dbName in namesSavedGames)
         {
-            Transform but = Instantiate(button) as Transform;
-            but.SetParent(scrollSavedGames.content, false);
-            //RectTransform tr = but.GetComponent<RectTransform>();
-            but.GetComponentInChildren<Text>().text = dbName;
-            Button b = but.GetComponent<Button>();
+            var prefButtons = Instantiate(buttonsSaves);
+            prefButtons.SetParent(scrollSavedGames.content, false);
+            prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text = dbName;
+            Button b = prefButtons.GetChild(0).GetComponent<Button>();
             b.onClick.AddListener(() => onButtonClickLoadGame(dbName));
+            
+            prefButtons.GetChild(1).GetComponent<Button>().GetComponentInChildren<Text>().text = "X";
+            b = prefButtons.GetChild(1).GetComponent<Button>();
+            b.onClick.AddListener(() => DeleteGame(dbName, prefButtons.gameObject));          
         }
+        
+//        foreach (string dbName in namesSavedGames)
+//        {
+//            Transform but = Instantiate(button) as Transform;
+//            but.SetParent(scrollSavedGames.content, false);
+//            //RectTransform tr = but.GetComponent<RectTransform>();
+//            but.GetComponentInChildren<Text>().text = dbName;
+//            Button b = but.GetComponent<Button>();
+//            b.onClick.AddListener(() => onButtonClickLoadGame(dbName));
+//        }
     }
 
     //создание кнопок городов
     private void CreateButtonTowns()
     {
         List<string> townsList = SaveLoad.loadGamesList("StreamingAssets");
-        foreach (string nameTown in townsList)
-        {
-            Transform but = Instantiate(button) as Transform;
-            but.SetParent(scrollTowns.content, false);
-            //RectTransform tr = but.GetComponent<RectTransform>();
-            but.GetComponentInChildren<Text>().text = nameTown;
-            Button b = but.GetComponent<Button>();
-            b.onClick.AddListener(() => onButtonClickChoseTown(nameTown));
-        }
+//        foreach (string nameTown in townsList)
+//        {
+//            Transform but = Instantiate(buttonTowns) as Transform;
+//            but.SetParent(scrollTowns.content, false);
+//            //RectTransform tr = but.GetComponent<RectTransform>();
+//            but.GetComponentInChildren<Text>().text = nameTown;
+//            Button b = but.GetComponent<Button>();
+//            b.onClick.AddListener(() => onButtonClickChoseTown(nameTown));
+//        }
     }
 
     //открыть меню создания новой игры
@@ -172,8 +186,10 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
-    private void DelGame()
+    private void DeleteGame(string dbName, GameObject pref)
     {
+        SaveLoad.deleteGame(dbName);
+        Destroy(pref);
         
     }
 

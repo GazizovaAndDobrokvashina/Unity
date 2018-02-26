@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     public Text aboutPlayerText;
     public GameObject nextStepButton;
     public static string aboutPlayer;
+    
 
     void Start()
     {
@@ -55,6 +56,7 @@ public class GameController : MonoBehaviour
     {
         checkPlayer(1);
        // gameObject.GetComponent<CanvasGroup>().interactable = false;
+        //_dBwork.GetPlayerbyId(1).SetCurrentStep(false);
         nextStepButton.GetComponent<CanvasGroup>().interactable = false;
         CountStepsInAllGame++;
 
@@ -65,6 +67,7 @@ public class GameController : MonoBehaviour
 
         for (int index = 2; index < players.Length; index++)
         {
+            
             players[index].ready = false;
             if (CountStepsInAllGame % 10 == 0)
                 players[index].Money += salary;
@@ -77,6 +80,7 @@ public class GameController : MonoBehaviour
         _dBwork.GetPlayerbyId(1).NextStep();
         //gameObject.GetComponent<CanvasGroup>().interactable = true;
         nextStepButton.GetComponent<CanvasGroup>().interactable = true;
+       // _dBwork.GetPlayerbyId(1).SetCurrentStep(true);
     }
     
     public void cathedPlayer()
