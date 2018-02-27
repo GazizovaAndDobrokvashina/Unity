@@ -33,7 +33,7 @@ public class MouseController : MonoBehaviour
     //
     void Update()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current.IsPointerOverGameObject() || Time.timeScale==0)
         {
             return;
         }
@@ -77,13 +77,13 @@ public class MouseController : MonoBehaviour
 
     void MouseOver_Street(GameObject ourHitObject)
     {
-       // Debug.Log(_dBwork.GetPlayerbyId(1).GetCurrentStep());
-        if (Input.GetMouseButton(0) && canMove) // && Cameras.mode == 1 ) && _dBwork.GetPlayerbyId(1).GetCurrentStep()
+        Debug.Log(_dBwork.GetPlayerbyId(1).GetCurrentStep());
+        if (Input.GetMouseButton(0) && canMove && _dBwork.GetPlayerbyId(1).GetCurrentStep()) // && Cameras.mode == 1 ) 
         {
             canMove = false;
             _dBwork.GetPlayerbyId(1).move(ourHitObject.GetComponent<StreetPath>());
         }
-        else if (Input.GetMouseButton(0) && Cameras.mode != 1)
+        else if (Input.GetMouseButton(1) && Cameras.mode != 1)
         {
             // показать информацию о улице
             selectedStreetPath = ourHitObject.GetComponent<StreetPath>();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using Button = UnityEngine.UI.Button;
 using Slider = UnityEngine.UI.Slider;
@@ -68,6 +69,9 @@ public class MainMenu : MonoBehaviour
 
     //минимальное количество игроков
     private int mincountOfPlayers = 1;
+    
+    //
+    public AudioMixer MainMenuMixer;
 
     //название игры
     private string newNameGame = "Monopolist.db";
@@ -334,5 +338,10 @@ public class MainMenu : MonoBehaviour
                 startMoney = 4000;
                 break;
         }
+    }
+
+    public void ChangeVolumeLevel(float input)
+    {
+        MainMenuMixer.SetFloat("Volume", input);
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -94,6 +95,8 @@ public class GameCanvas : MonoBehaviour
 
     public bool response;
 
+    public AudioMixer GameMixer;
+
     public void OpenWarningWindow(Player player)
     {
         currentPlayer = player;
@@ -122,6 +125,7 @@ public class GameCanvas : MonoBehaviour
     public void OpenGameMenu()
     {
         ChangeMenu(2);
+        Time.timeScale = 0;
     }
 
     //скрыть информацию
@@ -290,6 +294,7 @@ public class GameCanvas : MonoBehaviour
     public void returnToGame()
     {
         ChangeMenu(1);
+        Time.timeScale = 1;
     }
 
     //метод переключения меню между собой
@@ -735,5 +740,15 @@ public class GameCanvas : MonoBehaviour
         cameras.GetGCamera(0).transform.position = new Vector3(getCurrentPlayer().GetCurrentStreetPath().start.x, 15,
             getCurrentPlayer().GetCurrentStreetPath().start.z);
         cameras.SetActiveFirstCamera();
+    }
+
+    public void ChangeSoundLevel(float input)
+    {
+        GameMixer.SetFloat("Sound", input);
+    }
+
+    public void ChangeMusicLevel(float input)
+    {
+        GameMixer.SetFloat("Music", input);
     }
 }

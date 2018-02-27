@@ -56,7 +56,7 @@ public class GameController : MonoBehaviour
     {
         checkPlayer(1);
        // gameObject.GetComponent<CanvasGroup>().interactable = false;
-        //_dBwork.GetPlayerbyId(1).SetCurrentStep(false);
+        _dBwork.GetPlayerbyId(1).SetCurrentStep(false);
         nextStepButton.GetComponent<CanvasGroup>().interactable = false;
         CountStepsInAllGame++;
 
@@ -80,7 +80,7 @@ public class GameController : MonoBehaviour
         _dBwork.GetPlayerbyId(1).NextStep();
         //gameObject.GetComponent<CanvasGroup>().interactable = true;
         nextStepButton.GetComponent<CanvasGroup>().interactable = true;
-       // _dBwork.GetPlayerbyId(1).SetCurrentStep(true);
+        _dBwork.GetPlayerbyId(1).SetCurrentStep(true);
     }
     
     public void cathedPlayer()

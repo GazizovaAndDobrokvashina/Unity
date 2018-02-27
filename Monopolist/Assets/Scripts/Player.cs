@@ -60,12 +60,13 @@ public class Player : MonoBehaviour
     private bool alreadyCheat;
     
     //является ли текущий ход ходом игрока
-    private bool CurrentStep = true;
+    [SerializeField]
+    private bool CurrentStep;
 
-    //public void SetCurrentStep(bool value)
-   // {
-   //     CurrentStep = value;
-   // }
+    public void SetCurrentStep(bool value)
+    {
+        CurrentStep = value;
+    }
 
     public bool GetCurrentStep()
     {
@@ -91,6 +92,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _gameCanvas = transform.Find("/Canvas").GetComponent<GameCanvas>();
+        CurrentStep = true;
     }
 
     private void Update()
