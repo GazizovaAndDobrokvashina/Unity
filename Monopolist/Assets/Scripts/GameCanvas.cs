@@ -97,6 +97,18 @@ public class GameCanvas : MonoBehaviour
 
     public AudioMixer GameMixer;
 
+    public Cameras camerasScript;
+
+    public void ChangeCamera()
+    {
+        camerasScript.ChangeCamera();
+    }
+
+    public void ChangeTypeOfCamera()
+    {
+        camerasScript.ChangeTypeOfCamera();
+    }
+
     public void OpenWarningWindow(Player player)
     {
         currentPlayer = player;
@@ -379,6 +391,7 @@ public class GameCanvas : MonoBehaviour
 
             prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text =
                 path.NamePath;
+            prefButtons.SetSiblingIndex(path.GetIdStreetPath());
             prefButtons.GetChild(0).GetComponent<Button>().onClick
                 .AddListener(() => onButtonStreetClick(path.GetIdStreetPath()));
 
@@ -485,23 +498,51 @@ public class GameCanvas : MonoBehaviour
         }
     }
 
+    private int currentIdPath;
     //перемещение к выбранной улице, включение кнопки зданий на этой улице и важной информации об улице
     private void onButtonStreetClick(int idPath)
     {
-        buildsButton.SetActive(true);
-        ImportantInfoAboutStreetText.gameObject.SetActive(true);
-        PathForBuy pathForBuy = getDbWork().GetPathForBuy(idPath);
-        if (pathForBuy != null)
+        
+        if (buildsButton.activeInHierarchy && idPath == currentIdPath)
         {
-            ImportantInfoAboutStreetText.text = "Название: " + pathForBuy.namePath + "\n" +
-                                                "Владелец: " + getDbWork().GetPlayerbyId(pathForBuy.IdPlayer).NickName +
-                                                "\n" + "Рента: " + pathForBuy.GetRenta() + "\n" + "Здания: " +
-                                                pathForBuy.GetBuildsName();
+            buildsButton.SetActive(false);
+            ImportantInfoAboutStreetText.transform.parent.gameObject.SetActive(false);
         }
         else
         {
-            ImportantInfoAboutStreetText.text = "Название: " + getDbWork().GetPathById(idPath).namePath + "\n" +
-                                                "Гос. учереждение";
+            currentIdPath = idPath;
+            buildsButton.SetActive(true);
+            ImportantInfoAboutStreetText.transform.parent.gameObject.SetActive(true);
+
+            PathForBuy pathForBuy = getDbWork().GetPathForBuy(idPath);
+
+            if (camerasScript.isActiveOrtoCamera())
+            {
+                camerasScript.moveOrtoCamera(getDbWork().GetPathById(idPath).transform.position);
+            }
+
+
+            if (pathForBuy != null)
+            {
+                ImportantInfoAboutStreetText.text = "Название: " + pathForBuy.namePath + "\n" +
+                                                    "Владелец: " + getDbWork().GetPlayerbyId(pathForBuy.IdPlayer)
+                                                        .NickName +
+                                                    "\n" + "Рента: " + pathForBuy.GetRenta() + "\n" + "Здания: " +
+                                                    pathForBuy.GetBuildsName();
+            }
+            else
+            {
+                ImportantInfoAboutStreetText.text = "Название: " + getDbWork().GetPathById(idPath).namePath + "\n" +
+                                                    "Гос. учереждение";
+            }
+        }
+    }
+
+    public void ShowJustMineStreet(bool activeTogle)
+    {
+        if (activeTogle)
+        {
+//            List<StreetPath> paths = getDbWork()
         }
     }
 
@@ -737,8 +778,8 @@ public class GameCanvas : MonoBehaviour
     //перемещение камеры к улице, где стоит игрок 
     public void GoToStreetUpButton()
     {
-        cameras.GetGCamera(0).transform.position = new Vector3(getCurrentPlayer().GetCurrentStreetPath().start.x, 15,
-            getCurrentPlayer().GetCurrentStreetPath().start.z);
+        
+        onButtonStreetClick(getCurrentPlayer().GetCurrentStreetPath().GetIdStreetPath());
         cameras.SetActiveFirstCamera();
     }
 

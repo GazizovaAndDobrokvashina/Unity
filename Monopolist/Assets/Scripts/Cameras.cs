@@ -27,25 +27,59 @@ public class Cameras : MonoBehaviour
         cameras[0].gameObject.SetActive(true);
         cameras[0].gameObject.GetComponent<MouseController>().enabled = true;
     }
+//
+//    public void SetActiveSecondCamera()
+//    {
+//        cameras[0].gameObject.GetComponent<MouseController>().enabled = false;
+//        cameras[0].gameObject.SetActive(false);
+//        cameras[1].gameObject.SetActive(true);
+//        cameras[1].gameObject.GetComponent<MouseController>().enabled = true;
+//    }
 
-    public void SetActiveSecondCamera()
+    public void ChangeTypeOfCamera()
     {
-        cameras[0].gameObject.GetComponent<MouseController>().enabled = false;
-        cameras[0].gameObject.SetActive(false);
-        cameras[1].gameObject.SetActive(true);
-        cameras[1].gameObject.GetComponent<MouseController>().enabled = true;
+        cameras[0].orthographic = !cameras[0].orthographic;
+    }
+    
+    public void ChangeCamera()
+    {
+        if (cameras[1].gameObject.activeInHierarchy)
+        {
+            cameras[1].gameObject.GetComponent<MouseController>().enabled = false;
+            cameras[1].gameObject.SetActive(false);
+            cameras[0].gameObject.SetActive(true);
+            cameras[0].gameObject.GetComponent<MouseController>().enabled = true;
+        }
+        else
+        {   
+            cameras[0].gameObject.GetComponent<MouseController>().enabled = false;
+            cameras[0].gameObject.SetActive(false);
+            cameras[1].gameObject.SetActive(true);
+            cameras[1].gameObject.GetComponent<MouseController>().enabled = true;
+        }
+    }
+
+    public bool isActiveOrtoCamera()
+    {
+        return cameras[0].gameObject.activeInHierarchy;
+    }
+
+    public void moveOrtoCamera(Vector3 pos)
+    {
+        //cameras[0].transform.position = Vector3.MoveTowards(cameras[0].transform.position, new Vector3(pos.x, 0, pos.z), 1f);
+        cameras[0].transform.parent.transform.position = pos;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            SetActiveSecondCamera();
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            SetActiveFirstCamera();
-        }
-    }
+//    void Update()
+//    {
+//        if (Input.GetKeyDown(KeyCode.A))
+//        {
+//            SetActiveSecondCamera();
+//        }
+//        if (Input.GetKeyDown(KeyCode.D))
+//        {
+//            SetActiveFirstCamera();
+//        }
+//    }
 }
