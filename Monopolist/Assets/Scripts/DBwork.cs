@@ -447,4 +447,19 @@ public class DBwork : MonoBehaviour
 
         return buildes.ToArray();
     }
+
+    public List<int> GetMyPathes(int id)
+    {
+        List<int> res = new List<int>();
+        
+        foreach (PathForBuy pathForBuy in pathForBuys)
+        {
+            if (pathForBuy.IdPlayer == id)
+            {
+                res.Add(pathForBuy.GetIdStreetPath());
+            }
+        }
+
+        return res;
+    }
 }

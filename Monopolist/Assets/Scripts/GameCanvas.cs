@@ -25,6 +25,9 @@ public class GameCanvas : MonoBehaviour
 
     //кнопка с информацией
     public GameObject ButtonWithInfo;
+    
+    //галочка "Только мои улицы"
+    public GameObject MineTogle;
 
     //Префаб кнопок, появляющихся в контекте скроллов
     public RectTransform prefabButtonsinScrolls;
@@ -151,6 +154,7 @@ public class GameCanvas : MonoBehaviour
     {
         if (openedStreets == 0)
         {
+            MineTogle.SetActive(true);
             if (!ScrollRectFirst.IsActive())
             {
                 ChooseScrollView(ScrollRectFirst, 1, -1);
@@ -169,6 +173,7 @@ public class GameCanvas : MonoBehaviour
         }
         else
         {
+            MineTogle.SetActive(false);
             if (openedStreets == 1)
             {
                 ChooseScrollView(ScrollRectFirst, 1, -1);
@@ -542,7 +547,37 @@ public class GameCanvas : MonoBehaviour
     {
         if (activeTogle)
         {
-//            List<StreetPath> paths = getDbWork()
+            List<int> paths = getDbWork().GetMyPathes(1);
+
+            foreach (RectTransform rectTransform in streetsPathsRectTransforms)
+            {
+                
+                if (rectTransform == null)
+                {
+                    continue;
+                }
+                if (paths.Contains(rectTransform.GetSiblingIndex()))
+                {
+                    paths.Remove(rectTransform.GetSiblingIndex());
+                }
+                else
+                {
+                    rectTransform.gameObject.SetActive(false);
+                }
+            }
+                                                                                                                                                         
+        }
+        else
+        {
+            foreach (RectTransform rectTransform in streetsPathsRectTransforms)
+            {
+                
+                if (rectTransform == null)
+                {
+                    continue;
+                }
+                rectTransform.gameObject.SetActive(true);
+            }
         }
     }
 
