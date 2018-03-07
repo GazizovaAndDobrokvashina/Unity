@@ -516,9 +516,9 @@ MonoBehaviour:
     height: 488
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 50280000
+    m_SelectedIDs: fc070000
     m_LastClickedID: 0
-    m_ExpandedIDs: 4e0bfeff6815fefffc3afeff803cfeffd06efeffdafbfeffc0fffeff261fffff6c65ffff5291ffffc0f1ffffa0fbffff00000000a22c0000942e0000204200003a4300000a4400006244000066460000364700008e470000c2590000925a0000ea5a00008c5b00001c5c0000165e0000546e00004e700000
+    m_ExpandedIDs: c0b5fdff26cbfdff700bfeffb812feffc418feff5027feff6442feff8a7efeff268ffeff78c2feff26c4feffcafdfeff8e00fffff40dffff8a1effffe4a6ffffc8ceffffaee9ffffa0fbffff00000000183d0000123f0000f04b0000264c0000204e000004580000d4590000fe590000265e00005c5e0000566000002e6d0000646d00005e6f00009a7f000094810000ac8d0000068e00003c8e000036900000d89000006891000062930000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -568,14 +568,14 @@ MonoBehaviour:
     width: 1314
     height: 488
   m_SceneLighting: 1
-  lastFramingTime: 1189.2355407644686
+  lastFramingTime: 968.790134221384
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 375.2331, y: 216.602, z: 0}
+    m_Target: {x: 106.209045, y: 346.9369, z: 0}
     speed: 2
-    m_Value: {x: 375.2331, y: 216.602, z: 0}
+    m_Value: {x: 106.209045, y: 346.9369, z: 0}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -600,11 +600,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: -0, y: 0, z: -0, w: -1}
+    m_Value: {x: -0, y: -0, z: 0, w: -1}
   m_Size:
-    m_Target: 895.8604
+    m_Target: 163.1795
     speed: 2
-    m_Value: 895.8604
+    m_Value: 163.1795
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -680,18 +680,18 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 46
   m_LastFolders:
-  - Assets
+  - Assets/Scripts
   m_LastFoldersGridSize: 46
   m_LastProjectPath: C:\Users\aleks\Desktop\University\Unity\Unity\Monopolist
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 7e270000
-    m_LastClickedID: 10110
+    m_SelectedIDs: a2280000
+    m_LastClickedID: 10402
     m_ExpandedIDs: 000000007e270000be280000f62b0000f82b000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
