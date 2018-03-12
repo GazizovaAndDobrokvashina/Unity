@@ -693,6 +693,7 @@ public class GameCanvas : MonoBehaviour
     //открыть окно торговли с этим игроком
     private void onButtonClickTrade(int idPlayer)
     {
+        
     }
 
     //выбор ещё не активной вьюхи для отображения информации

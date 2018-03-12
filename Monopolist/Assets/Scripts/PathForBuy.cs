@@ -16,6 +16,12 @@ public class PathForBuy : StreetPath
         idPlayer = player.IdPlayer;
         player.Money -= priceStreetPath;
     }
+    
+    public void Trade(int IDplayer)
+    {
+        idPlayer = IDplayer;
+       
+    }
 
     public PathForBuy(int idPath, string namePath, int idStreetParent, int renta, Vector3 start, Vector3 end,
         int idPlayer, int[] builds,
