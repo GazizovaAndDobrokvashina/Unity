@@ -5,15 +5,20 @@ using UnityEngine;
 
 public static class Trade
 {
+    //список торговых предложений от одного игрока другому, где индексы в массиве - ID игрока
     public static List<ThingForTrade>[,] things;
 
+    //создание списка предложений
     public static void CreateListThings(Player playerFrom, Player playerFor)
     {
+        //если вдруг массив не инициализирован
         if (things == null)
         {
+            //захардкоджено, исправить; размерность количество игроков на половину (?) количества игроков
             things = new List<ThingForTrade>[6, 6];
         }
 
+        //инициализация списка предложений между конкретными игроками
         if (playerFrom.IdPlayer < playerFor.IdPlayer)
         {
             things[playerFrom.IdPlayer, playerFor.IdPlayer] =
@@ -26,6 +31,7 @@ public static class Trade
         }
     }
 
+    //добавление в список предложений товара (дописать сюда денежку)
     public static void AddItemToList(Player playerFrom, Player playerFor, PathForBuy path)
     {
         if (playerFrom.IdPlayer < playerFor.IdPlayer)
@@ -38,6 +44,7 @@ public static class Trade
         }
     }
 
+    //удаление из списка предложений товара
     public static void RemoveItemFromList(Player playerFrom, Player playerFor, PathForBuy path)
     {
         if (playerFrom.IdPlayer < playerFor.IdPlayer)
@@ -66,8 +73,10 @@ public static class Trade
         }
     }
 
+    //применение результата торговли к игровым объектам
     public static void TradeApply(Player playerFrom, Player playerFor, GameCanvas GC)
     {
+        //очистка канвы торговли
         GC.ClearTradeMenu();
 
         if (playerFrom.IdPlayer < playerFor.IdPlayer)
@@ -90,6 +99,7 @@ public static class Trade
         }
     }
 
+    //очистка списка предложений между конкретными игроками
     private static void TradeClear(Player playerFrom, Player playerFor)
     {
         if (playerFrom.IdPlayer < playerFor.IdPlayer)

@@ -123,9 +123,23 @@ public class GameCanvas : MonoBehaviour
     //предложение второго игрока
     public ScrollRect scrollSecondPlayerOffer;
 
+    //префаб кнопочки с названием удицы для торговли
     public GameObject prefButStreetForTrade;
 
+    //кнопка предложения обмена
     public Button ApplyTrade;
+
+    //слайдер денег первого игрока
+    public Slider sliderMoneyFirst;
+
+    //слайдер денег второго игрока
+    public Slider sliderMoneySecond;
+
+    //ИнпутФилд денег первого игрока
+    public InputField InputFieldMoneyFirst;
+
+    //ИнпутФилд денег второго игрока
+    public InputField InputFieldMoneySecond;
 
     //переключение между видом от первого и от третьего лица
     public void ChangeCamera()
@@ -158,8 +172,10 @@ public class GameCanvas : MonoBehaviour
     {
         //вывод количества денег игрока на экран
         moneyText.text = "Капитал: " + money;
+        
         //вывод ходов игрока на экран
         stepsText.text = "Сделано ходов: " + currentSteps + "/" + maxSteps;
+        
         //вывод информации, где находится игрок
         destinationText.text = "Улица: " + destination;
     }
@@ -438,7 +454,6 @@ public class GameCanvas : MonoBehaviour
 
             var prefButtons = Instantiate(prefabButtonsinScrolls);
             streetsPathsRectTransforms[path.GetIdStreetPath()] = prefButtons;
-            // prefButtons.SetParent(ScrollRectFirst.content, false);
 
             prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text =
                 path.NamePath;
@@ -505,8 +520,6 @@ public class GameCanvas : MonoBehaviour
 
             prefButtons.GetChild(3).GetComponent<Button>().GetComponentInChildren<Text>().text = "none";
             prefButtons.GetChild(3).gameObject.SetActive(false);
-            //prefButtons.GetChild(3).GetComponent<Button>().onClick
-            //    .AddListener(() => onButtonBuildsClick(player.GetIdStreetPath()));
         }
     }
 
@@ -638,7 +651,7 @@ public class GameCanvas : MonoBehaviour
         return _dBwork;
     }
 
-    //найти текущего игрока
+    //найти текущего игрока (работает только для игрока с ID = 1, для мультиплеера не подходит)
     private Player getCurrentPlayer()
     {
         if (currentPlayer == null)
@@ -659,13 +672,12 @@ public class GameCanvas : MonoBehaviour
                 StartCoroutine(WaitForAnswer(idPath));
                 return;
             }
-
-
+            
             getDbWork().GetPathForBuy(idPath).Buy(getCurrentPlayer());
-            //gameObject.GetComponent<GameController>().nextStep();
         }
     }
-
+    
+    //ожидание ответа от игрока
     private IEnumerator WaitForAnswer(int idPath)
     {
         yield return new WaitForSeconds(0.5f);
@@ -721,7 +733,8 @@ public class GameCanvas : MonoBehaviour
         ButtonWithInfo.GetComponentInChildren<Text>().text = info + "\n\n" + "(нажмите, чтобы закрыть)";
         ButtonWithInfo.SetActive(true);
     }
-
+    
+    //показать информацию о событии
     public void ShowInfoAboutEvent(string info)
     {
         ButtonWithInfo.GetComponentInChildren<Text>().text = info + "\n\n" + "(нажмите, чтобы закрыть)";
@@ -745,7 +758,6 @@ public class GameCanvas : MonoBehaviour
         ChangeMenu(4);
         _dBwork = getDbWork();
 
-        //исправить на что-то более логичное
         Trade.CreateListThings(getCurrentPlayer(), _dBwork.GetPlayerbyId(idPlayerSecond));
 
         ApplyTrade.onClick.AddListener(() =>
@@ -780,7 +792,9 @@ public class GameCanvas : MonoBehaviour
                         _dBwork.GetPlayerbyId(idPlayerSecond), path));
         }
     }
-
+    
+    
+    //очистить канву торговли
     public void ClearTradeMenu()
     {
         if (scrollFirstPlayerStreets.content.childCount != 0)
