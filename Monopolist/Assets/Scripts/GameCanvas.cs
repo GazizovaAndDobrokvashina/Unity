@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -8,6 +9,8 @@ using UnityEngine.UI;
 
 public class GameCanvas : MonoBehaviour
 {
+    public GameObject TradeMenu;
+
     //Объект с кнопками, присутвующими на экране во время игры
     public GameObject playMenu;
 
@@ -25,7 +28,7 @@ public class GameCanvas : MonoBehaviour
 
     //кнопка с информацией
     public GameObject ButtonWithInfo;
-    
+
     //галочка "Только мои улицы"
     public GameObject MineTogle;
 
@@ -102,16 +105,41 @@ public class GameCanvas : MonoBehaviour
 
     public Cameras camerasScript;
 
+    //кнопка с именем первого игрока в торговле
+    public GameObject firstPlayer;
+
+    //кнопка с именем второго игрока в торговле
+    public GameObject secondPlayer;
+
+    //имеющиеся у первого игрока улицы
+    public ScrollRect scrollFirstPlayerStreets;
+
+    //имеющиеся у второго игрока улицы
+    public ScrollRect scrollSecondPlayerStreets;
+
+    //предложение первого игрока
+    public ScrollRect scrollFirstPlayerOffer;
+
+    //предложение второго игрока
+    public ScrollRect scrollSecondPlayerOffer;
+
+    public GameObject prefButStreetForTrade;
+
+    public Button ApplyTrade;
+
+    //переключение между видом от первого и от третьего лица
     public void ChangeCamera()
     {
         camerasScript.ChangeCamera();
     }
 
+    //переключение ежду орто и перспективой верхней камеры
     public void ChangeTypeOfCamera()
     {
         camerasScript.ChangeTypeOfCamera();
     }
 
+    //открыть окно с предупреждением
     public void OpenWarningWindow(Player player)
     {
         currentPlayer = player;
@@ -326,18 +354,22 @@ public class GameCanvas : MonoBehaviour
                 playMenu.SetActive(true);
                 pauseMenu.SetActive(false);
                 returnButton.SetActive(false);
+                TradeMenu.SetActive(false);
                 if (openedBuilds == 1 || openedPlayers == 1 || openedStreets == 1)
                 {
                     ScrollRectFirst.gameObject.SetActive(true);
                 }
+
                 if (openedBuilds == 2 || openedPlayers == 2 || openedStreets == 2)
                 {
                     ScrollRectSecond.gameObject.SetActive(true);
                 }
+
                 if (openedBuilds == 3 || openedPlayers == 3 || openedStreets == 3)
                 {
                     ScrollRectThird.gameObject.SetActive(true);
                 }
+
                 break;
             //меню паузы
             case 2:
@@ -346,6 +378,7 @@ public class GameCanvas : MonoBehaviour
                 playMenu.SetActive(false);
                 pauseMenu.SetActive(true);
                 returnButton.SetActive(false);
+                TradeMenu.SetActive(false);
                 CloseViews();
                 break;
             //меню записи
@@ -355,6 +388,17 @@ public class GameCanvas : MonoBehaviour
                 playMenu.SetActive(false);
                 pauseMenu.SetActive(false);
                 returnButton.SetActive(true);
+                TradeMenu.SetActive(false);
+                CloseViews();
+                break;
+            //меню торговли
+            case 4:
+                buildsButton.SetActive(false);
+                inputField.gameObject.SetActive(false);
+                playMenu.SetActive(false);
+                pauseMenu.SetActive(false);
+                returnButton.SetActive(false);
+                TradeMenu.SetActive(true);
                 CloseViews();
                 break;
             //если че, игровая канва
@@ -365,6 +409,7 @@ public class GameCanvas : MonoBehaviour
                 playMenu.SetActive(true);
                 pauseMenu.SetActive(false);
                 returnButton.SetActive(false);
+                TradeMenu.SetActive(false);
                 CloseViews();
                 break;
             }
@@ -390,6 +435,7 @@ public class GameCanvas : MonoBehaviour
             {
                 continue;
             }
+
             var prefButtons = Instantiate(prefabButtonsinScrolls);
             streetsPathsRectTransforms[path.GetIdStreetPath()] = prefButtons;
             // prefButtons.SetParent(ScrollRectFirst.content, false);
@@ -441,6 +487,7 @@ public class GameCanvas : MonoBehaviour
             {
                 continue;
             }
+
             var prefButtons = Instantiate(prefabButtonsinScrolls);
             playersRectTransforms[player.IdPlayer] = prefButtons;
             prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text =
@@ -503,11 +550,12 @@ public class GameCanvas : MonoBehaviour
         }
     }
 
+    //ID улицы, на которой сейчас игрок
     private int currentIdPath;
+
     //перемещение к выбранной улице, включение кнопки зданий на этой улице и важной информации об улице
     private void onButtonStreetClick(int idPath)
     {
-        
         if (buildsButton.activeInHierarchy && idPath == currentIdPath)
         {
             buildsButton.SetActive(false);
@@ -543,6 +591,7 @@ public class GameCanvas : MonoBehaviour
         }
     }
 
+    //показать улицы в списке, принадлежащие только этому игроку
     public void ShowJustMineStreet(bool activeTogle)
     {
         if (activeTogle)
@@ -551,11 +600,11 @@ public class GameCanvas : MonoBehaviour
 
             foreach (RectTransform rectTransform in streetsPathsRectTransforms)
             {
-                
                 if (rectTransform == null)
                 {
                     continue;
                 }
+
                 if (paths.Contains(rectTransform.GetSiblingIndex()))
                 {
                     paths.Remove(rectTransform.GetSiblingIndex());
@@ -565,17 +614,16 @@ public class GameCanvas : MonoBehaviour
                     rectTransform.gameObject.SetActive(false);
                 }
             }
-                                                                                                                                                         
         }
         else
         {
             foreach (RectTransform rectTransform in streetsPathsRectTransforms)
             {
-                
                 if (rectTransform == null)
                 {
                     continue;
                 }
+
                 rectTransform.gameObject.SetActive(true);
             }
         }
@@ -659,6 +707,7 @@ public class GameCanvas : MonoBehaviour
                            "Гос. учереждение \n\n Информация об улице: " +
                            getDbWork().getStreetById(path.GetIdStreetParent()).AboutStreet1;
                 }
+
                 break;
             case 2:
                 info = getDbWork().GetPlayerbyId(id).NickName + " " + getDbWork().GetPlayerbyId(id).Money;
@@ -678,7 +727,7 @@ public class GameCanvas : MonoBehaviour
         ButtonWithInfo.GetComponentInChildren<Text>().text = info + "\n\n" + "(нажмите, чтобы закрыть)";
         ButtonWithInfo.SetActive(true);
     }
-    
+
     //показать список зданий этой улицы
     private void onButtonBuildsClick(int idPath)
     {
@@ -691,9 +740,113 @@ public class GameCanvas : MonoBehaviour
     }
 
     //открыть окно торговли с этим игроком
-    private void onButtonClickTrade(int idPlayer)
+    private void onButtonClickTrade(int idPlayerSecond)
     {
-        
+        ChangeMenu(4);
+        _dBwork = getDbWork();
+
+        //исправить на что-то более логичное
+        Trade.CreateListThings(getCurrentPlayer(), _dBwork.GetPlayerbyId(idPlayerSecond));
+
+        ApplyTrade.onClick.AddListener(() =>
+            Trade.TradeApply(getCurrentPlayer(), _dBwork.GetPlayerbyId(idPlayerSecond), this));
+
+        firstPlayer.GetComponentInChildren<Text>().text = getCurrentPlayer().NickName;
+        secondPlayer.GetComponentInChildren<Text>().text = _dBwork.GetPlayerbyId(idPlayerSecond).NickName;
+
+        List<int> pathsFirstPlayer = _dBwork.GetMyPathes(getCurrentPlayer().IdPlayer);
+
+        foreach (var path in pathsFirstPlayer)
+        {
+            GameObject prefButton = Instantiate(prefButStreetForTrade);
+            prefButton.GetComponentInChildren<Text>().text = _dBwork.GetPathById(path).namePath;
+            prefButton.GetComponent<RectTransform>().SetParent(scrollFirstPlayerStreets.content, false);
+            prefButton.GetComponent<Button>().onClick
+                .AddListener(() =>
+                    onButtonAddOrDeleteOfferStreet(prefButton, getCurrentPlayer(),
+                        _dBwork.GetPlayerbyId(idPlayerSecond), path));
+        }
+
+        List<int> pathsSecondPlayer = _dBwork.GetMyPathes(idPlayerSecond);
+
+        foreach (var path in pathsSecondPlayer)
+        {
+            GameObject prefButton = Instantiate(prefButStreetForTrade);
+            prefButton.GetComponentInChildren<Text>().text = _dBwork.GetPathById(path).namePath;
+            prefButton.GetComponent<RectTransform>().SetParent(scrollSecondPlayerStreets.content, false);
+            prefButton.GetComponent<Button>().onClick
+                .AddListener(() =>
+                    onButtonAddOrDeleteOfferStreet(prefButton, getCurrentPlayer(),
+                        _dBwork.GetPlayerbyId(idPlayerSecond), path));
+        }
+    }
+
+    public void ClearTradeMenu()
+    {
+        if (scrollFirstPlayerStreets.content.childCount != 0)
+        {
+            for (int i = scrollFirstPlayerStreets.content.childCount - 1; i >= 0; i--)
+            {
+                Destroy(scrollFirstPlayerStreets.content.GetChild(i).gameObject);
+            }
+        }
+
+        if (scrollFirstPlayerOffer.content.childCount != 0)
+        {
+            for (int i = scrollFirstPlayerOffer.content.childCount - 1; i >= 0; i--)
+            {
+                Destroy(scrollFirstPlayerOffer.content.GetChild(i).gameObject);
+            }
+        }
+
+        if (scrollSecondPlayerOffer.content.childCount != 0)
+        {
+            for (int i = scrollSecondPlayerOffer.content.childCount - 1; i >= 0; i--)
+            {
+                Destroy(scrollSecondPlayerOffer.content.GetChild(i).gameObject);
+            }
+        }
+
+        if (scrollSecondPlayerStreets.content.childCount != 0)
+        {
+            for (int i = scrollSecondPlayerStreets.content.childCount - 1; i >= 0; i--)
+            {
+                Destroy(scrollSecondPlayerStreets.content.GetChild(i).gameObject);
+            }
+        }
+
+        ChangeMenu(1);
+    }
+
+    //добавить или убрать кнопку в список предложений от игрока
+    private void onButtonAddOrDeleteOfferStreet(GameObject button, Player playerOne, Player playerTwo, int idPath)
+    {
+        string nameParent = button.transform.parent.parent.parent.gameObject.name;
+
+        switch (nameParent)
+        {
+            case "FirstPlayerItem":
+                button.GetComponent<RectTransform>().SetParent(scrollFirstPlayerOffer.content, false);
+                Trade.AddItemToList(playerOne, playerTwo, getDbWork().GetPathForBuy(idPath));
+                break;
+            case "FirstPlayerOffer":
+                button.GetComponent<RectTransform>().SetParent(scrollFirstPlayerStreets.content, false);
+                Trade.RemoveItemFromList(playerOne, playerTwo, getDbWork().GetPathForBuy(idPath));
+                break;
+            case "SecondPlayerItem":
+                button.GetComponent<RectTransform>().SetParent(scrollSecondPlayerOffer.content, false);
+                Trade.AddItemToList(playerTwo, playerOne, getDbWork().GetPathForBuy(idPath));
+                break;
+            case "SecondPlayerOffer":
+                button.GetComponent<RectTransform>().SetParent(scrollSecondPlayerStreets.content, false);
+                Trade.RemoveItemFromList(playerTwo, playerOne, getDbWork().GetPathForBuy(idPath));
+                break;
+        }
+    }
+
+    public void CancelTrade()
+    {
+        ChangeMenu(1);
     }
 
     //выбор ещё не активной вьюхи для отображения информации
@@ -714,6 +867,7 @@ public class GameCanvas : MonoBehaviour
                         RectTransform rectTransform = streetsPathsRectTransforms[index];
                         rectTransform.SetParent(scroll.content, false);
                     }
+
                     //тип 2 - игроки
                     break;
                 case 2:
@@ -723,6 +877,7 @@ public class GameCanvas : MonoBehaviour
                         RectTransform rectTransform = playersRectTransforms[index];
                         rectTransform.SetParent(scroll.content, false);
                     }
+
                     //тип 3 - здания
                     break;
                 case 3:
@@ -731,6 +886,7 @@ public class GameCanvas : MonoBehaviour
                     {
                         rectTransform.SetParent(scroll.content, false);
                     }
+
                     break;
             }
         }
@@ -762,6 +918,7 @@ public class GameCanvas : MonoBehaviour
             {
                 ScrollRectSecond.content.GetChild(0).SetParent(ScrollRectFirst.content, false);
             }
+
             ScrollRectFirst.gameObject.SetActive(true);
             ScrollRectSecond.gameObject.SetActive(false);
         }
@@ -776,6 +933,7 @@ public class GameCanvas : MonoBehaviour
                 {
                     ScrollRectThird.content.GetChild(0).SetParent(ScrollRectFirst.content, false);
                 }
+
                 ScrollRectFirst.gameObject.SetActive(true);
                 ScrollRectThird.gameObject.SetActive(false);
                 ChangeTypesScrolls(3, 1);
@@ -787,6 +945,7 @@ public class GameCanvas : MonoBehaviour
                 {
                     ScrollRectThird.content.GetChild(0).SetParent(ScrollRectSecond.content, false);
                 }
+
                 ScrollRectSecond.gameObject.SetActive(true);
                 ScrollRectThird.gameObject.SetActive(false);
                 ChangeTypesScrolls(3, 2);
@@ -801,10 +960,12 @@ public class GameCanvas : MonoBehaviour
         {
             openedBuilds = end;
         }
+
         if (openedPlayers == start)
         {
             openedPlayers = end;
         }
+
         if (openedStreets == start)
         {
             openedStreets = end;
@@ -814,7 +975,6 @@ public class GameCanvas : MonoBehaviour
     //перемещение камеры к улице, где стоит игрок 
     public void GoToStreetUpButton()
     {
-        
         onButtonStreetClick(getCurrentPlayer().GetCurrentStreetPath().GetIdStreetPath());
         cameras.SetActiveFirstCamera();
     }

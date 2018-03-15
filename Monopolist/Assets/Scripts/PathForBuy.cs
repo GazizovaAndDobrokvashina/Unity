@@ -36,6 +36,7 @@ public class PathForBuy : StreetPath
     public int IdPlayer
     {
         get { return idPlayer; }
+        set { idPlayer = value; }
     }
 
     public int[] Builds

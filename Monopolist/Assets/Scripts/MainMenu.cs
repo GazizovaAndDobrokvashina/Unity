@@ -222,7 +222,10 @@ public class MainMenu : MonoBehaviour
         Camera.main.GetComponent<DBwork>()
             .CreateNewGame(countOfPlayers, startMoney, newNameGame, online, nameTownForNewGame, namePlayer);
         SceneManager.LoadScene("Game");
-        Trade.things = new ThingForTrade[countOfPlayers, countOfPlayers];
+        if (Trade.things == null)
+        {
+            Trade.things = new List<ThingForTrade>[countOfPlayers,countOfPlayers];
+        }
     }
 
     //изменить название игры

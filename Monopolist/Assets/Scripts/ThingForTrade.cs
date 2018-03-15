@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ThingForTrade
 {
-    public List<PathForBuy> PathforTrade { get; set; }
+    public PathForBuy PathforTrade { get; set; }
 
     public int Price { get; set; }
 
@@ -13,7 +13,7 @@ public class ThingForTrade
 
     public Player FromWhichPlayer { get; set; }
 
-    public ThingForTrade(List<PathForBuy> pathforTrade, int price, Player forWhichPlayer, Player fromWhichPlayer)
+    public ThingForTrade(PathForBuy pathforTrade, int price, Player forWhichPlayer, Player fromWhichPlayer)
     {
         PathforTrade = pathforTrade;
         Price = price;
