@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class ThingForTrade
+public class  ThingForTrade
 {
     public PathForBuy PathforTrade { get; set; }
 

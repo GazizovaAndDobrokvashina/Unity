@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.Serialization.Formatters;
 using System.Text;
 using UnityEngine;
@@ -141,6 +142,10 @@ public class GameCanvas : MonoBehaviour
     //ИнпутФилд денег второго игрока
     public InputField InputFieldMoneySecond;
 
+    private int moneyFirstPlayer;
+
+    private int moneySecondPlayer;
+
     //переключение между видом от первого и от третьего лица
     public void ChangeCamera()
     {
@@ -172,12 +177,62 @@ public class GameCanvas : MonoBehaviour
     {
         //вывод количества денег игрока на экран
         moneyText.text = "Капитал: " + money;
-        
+
         //вывод ходов игрока на экран
         stepsText.text = "Сделано ходов: " + currentSteps + "/" + maxSteps;
-        
+
         //вывод информации, где находится игрок
         destinationText.text = "Улица: " + destination;
+
+        if (TradeMenu.active)
+        {
+            if (moneyFirstPlayer != (int) sliderMoneyFirst.value)
+            {
+                moneyFirstPlayer = (int) sliderMoneyFirst.value;
+                InputFieldMoneyFirst.text = moneyFirstPlayer.ToString();
+            }
+
+            if (moneySecondPlayer != (int) sliderMoneySecond.value)
+            {
+                moneySecondPlayer = (int) sliderMoneySecond.value;
+                InputFieldMoneySecond.text = moneySecondPlayer.ToString();
+            }
+        }
+    }
+
+
+    //изменнение значения поля ввода суммы денег первого игрока
+    public void OnValueChangedFirstInputFielid(string price)
+    {
+        if (!int.TryParse(price, out moneyFirstPlayer))
+        {
+            moneyFirstPlayer = 0;
+            sliderMoneyFirst.value = 0;
+            InputFieldMoneyFirst.text = "0";
+        }
+        else
+        {
+            moneyFirstPlayer = int.Parse(price);
+            sliderMoneyFirst.value = (float) moneyFirstPlayer;
+            InputFieldMoneyFirst.text = moneyFirstPlayer.ToString();
+        }
+    }
+
+    //изменнение значения поля ввода суммы денег второго игрока
+    public void OnValueChangedSecondInputFielid(string price)
+    {
+        if (!int.TryParse(price, out moneySecondPlayer))
+        {
+            moneySecondPlayer = 0;
+            sliderMoneySecond.value = 0;
+            InputFieldMoneySecond.text = "0";
+        }
+        else
+        {
+            moneySecondPlayer = int.Parse(price);
+            sliderMoneySecond.value = (float) moneySecondPlayer;
+            InputFieldMoneySecond.text = moneySecondPlayer.ToString();
+        }
     }
 
     //открыть меню паузы
@@ -514,6 +569,11 @@ public class GameCanvas : MonoBehaviour
             prefButtons.GetChild(1).GetComponent<Button>().onClick
                 .AddListener(() => onButtonClickTrade(player.IdPlayer));
 
+            if (player == getCurrentPlayer())
+            {
+                prefButtons.GetChild(1).gameObject.SetActive(false);
+            }
+
             prefButtons.GetChild(2).GetComponent<Button>().GetComponentInChildren<Text>().text = "Info";
             prefButtons.GetChild(2).GetComponent<Button>().onClick
                 .AddListener(() => onButtonInfoClick(player.IdPlayer, 2));
@@ -672,11 +732,11 @@ public class GameCanvas : MonoBehaviour
                 StartCoroutine(WaitForAnswer(idPath));
                 return;
             }
-            
+
             getDbWork().GetPathForBuy(idPath).Buy(getCurrentPlayer());
         }
     }
-    
+
     //ожидание ответа от игрока
     private IEnumerator WaitForAnswer(int idPath)
     {
@@ -733,7 +793,7 @@ public class GameCanvas : MonoBehaviour
         ButtonWithInfo.GetComponentInChildren<Text>().text = info + "\n\n" + "(нажмите, чтобы закрыть)";
         ButtonWithInfo.SetActive(true);
     }
-    
+
     //показать информацию о событии
     public void ShowInfoAboutEvent(string info)
     {
@@ -761,7 +821,8 @@ public class GameCanvas : MonoBehaviour
         Trade.CreateListThings(getCurrentPlayer(), _dBwork.GetPlayerbyId(idPlayerSecond));
 
         ApplyTrade.onClick.AddListener(() =>
-            Trade.TradeApply(getCurrentPlayer(), _dBwork.GetPlayerbyId(idPlayerSecond), this));
+            Trade.TradeApply(getCurrentPlayer(), _dBwork.GetPlayerbyId(idPlayerSecond), this, moneyFirstPlayer,
+                moneySecondPlayer));
 
         firstPlayer.GetComponentInChildren<Text>().text = getCurrentPlayer().NickName;
         secondPlayer.GetComponentInChildren<Text>().text = _dBwork.GetPlayerbyId(idPlayerSecond).NickName;
@@ -791,9 +852,12 @@ public class GameCanvas : MonoBehaviour
                     onButtonAddOrDeleteOfferStreet(prefButton, getCurrentPlayer(),
                         _dBwork.GetPlayerbyId(idPlayerSecond), path));
         }
+
+        sliderMoneyFirst.maxValue = getCurrentPlayer().Money;
+        sliderMoneySecond.maxValue = _dBwork.GetPlayerbyId(idPlayerSecond).Money;
     }
-    
-    
+
+
     //очистить канву торговли
     public void ClearTradeMenu()
     {
@@ -856,6 +920,10 @@ public class GameCanvas : MonoBehaviour
                 Trade.RemoveItemFromList(playerTwo, playerOne, getDbWork().GetPathForBuy(idPath));
                 break;
         }
+    }
+
+    public void AddMoneyToTrade(Player playerOne, Player playerTwo, int price)
+    {
     }
 
     public void CancelTrade()

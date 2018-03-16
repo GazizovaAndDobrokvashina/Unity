@@ -31,7 +31,7 @@ public static class Trade
         }
     }
 
-    //добавление в список предложений товара (дописать сюда денежку)
+    //добавление в список предложений товара 
     public static void AddItemToList(Player playerFrom, Player playerFor, PathForBuy path)
     {
         if (playerFrom.IdPlayer < playerFor.IdPlayer)
@@ -44,6 +44,19 @@ public static class Trade
         }
     }
 
+    //Добавление денег в список
+    public static void AddMoneyToList(Player playerFrom, Player playerFor, int price)
+    {
+        if (playerFrom.IdPlayer < playerFor.IdPlayer)
+        {
+            things[playerFrom.IdPlayer, playerFor.IdPlayer].Add(new ThingForTrade(null, price, playerFor, playerFrom));
+        }
+        else
+        {
+            things[playerFor.IdPlayer, playerFrom.IdPlayer].Add(new ThingForTrade(null, price, playerFor, playerFrom));
+        }
+    }
+
     //удаление из списка предложений товара
     public static void RemoveItemFromList(Player playerFrom, Player playerFor, PathForBuy path)
     {
@@ -51,6 +64,7 @@ public static class Trade
         {
             foreach (ThingForTrade thingForTrade in things[playerFrom.IdPlayer, playerFor.IdPlayer])
             {
+                
                 if (thingForTrade.ForWhichPlayer == playerFor && thingForTrade.FromWhichPlayer == playerFrom &&
                     thingForTrade.PathforTrade == path)
                 {
@@ -74,26 +88,43 @@ public static class Trade
     }
 
     //применение результата торговли к игровым объектам
-    public static void TradeApply(Player playerFrom, Player playerFor, GameCanvas GC)
+    public static void TradeApply(Player playerFrom, Player playerFor, GameCanvas GC, int moneyFromFirstPlayer, int moneyFromSecondPlayer)
     {
+        //доавление денег, которые игроки зотят передать друг другу
+        AddMoneyToList(playerFrom, playerFor, moneyFromFirstPlayer);
+        AddMoneyToList(playerFor, playerFrom, moneyFromSecondPlayer);
+        
         //очистка канвы торговли
         GC.ClearTradeMenu();
 
         if (playerFrom.IdPlayer < playerFor.IdPlayer)
         {
             foreach (ThingForTrade thingForTrade in things[playerFrom.IdPlayer, playerFor.IdPlayer])
-            {
-                thingForTrade.PathforTrade.IdPlayer = thingForTrade.ForWhichPlayer.IdPlayer;
-            }
+
+                if (thingForTrade.PathforTrade != null)
+                {
+                    thingForTrade.PathforTrade.IdPlayer = thingForTrade.ForWhichPlayer.IdPlayer;
+                }
+                else
+                {
+                    thingForTrade.ForWhichPlayer.Money += thingForTrade.Price;
+                    thingForTrade.FromWhichPlayer.Money -= thingForTrade.Price;
+                }
 
             TradeClear(playerFrom, playerFor);
         }
         else
         {
             foreach (ThingForTrade thingForTrade in things[playerFor.IdPlayer, playerFrom.IdPlayer])
-            {
-                thingForTrade.PathforTrade.IdPlayer = thingForTrade.ForWhichPlayer.IdPlayer;
-            }
+                if (thingForTrade.PathforTrade != null)
+                {
+                    thingForTrade.PathforTrade.IdPlayer = thingForTrade.ForWhichPlayer.IdPlayer;
+                }
+                else
+                {
+                    thingForTrade.ForWhichPlayer.Money += thingForTrade.Price;
+                    thingForTrade.FromWhichPlayer.Money -= thingForTrade.Price;
+                }
 
             TradeClear(playerFor, playerFrom);
         }
