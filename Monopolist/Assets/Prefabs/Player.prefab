@@ -201,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   ready: 0
+  CurrentStep: 0
 --- !u!114 &114894409230501366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -212,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b8bc8db4b2e504095da17238ea77c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 0.5
+  sensitivity: 2
   currentCamera: 1
 --- !u!124 &124971934457430210
 Behaviour:

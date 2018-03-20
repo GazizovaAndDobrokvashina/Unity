@@ -43,6 +43,9 @@ public class CameraMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Cameras.mode == 1) 
+            return;
+        
         //Debug.Log(transform.position.x + " " + transform.position.z + " " + upRestriction + " " + downRestriction);
         if ((transform.position.x >= leftRestriction) && ((int) Input.mousePosition.x < 2))
             transform.position -= transform.right * Time.deltaTime * speed;

@@ -11,6 +11,7 @@ public class Cameras : MonoBehaviour
 
     public void SetCamera(Camera camera)
     {
+        mode = 1;
         cameras[1] = camera;
         cameras[0].GetComponentInParent<CameraMove>().setRestrictions(15, -8.5f, 8.5f, 8.6f, -8.6f);
     }
@@ -22,6 +23,7 @@ public class Cameras : MonoBehaviour
 
     public void SetActiveFirstCamera()
     {
+        mode = 0;
         cameras[1].gameObject.GetComponent<MouseController>().enabled = false;
         cameras[1].gameObject.SetActive(false);
         cameras[0].gameObject.SetActive(true);
@@ -45,13 +47,15 @@ public class Cameras : MonoBehaviour
     {
         if (cameras[1].gameObject.activeInHierarchy)
         {
+            mode = 0;
             cameras[1].gameObject.GetComponent<MouseController>().enabled = false;
             cameras[1].gameObject.SetActive(false);
             cameras[0].gameObject.SetActive(true);
             cameras[0].gameObject.GetComponent<MouseController>().enabled = true;
         }
         else
-        {   
+        {
+            mode = 1;
             cameras[0].gameObject.GetComponent<MouseController>().enabled = false;
             cameras[0].gameObject.SetActive(false);
             cameras[1].gameObject.SetActive(true);
