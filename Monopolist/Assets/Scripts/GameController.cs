@@ -71,7 +71,7 @@ public class GameController : MonoBehaviour
             players[index].ready = false;
             if (CountStepsInAllGame % 10 == 0)
                 players[index].Money += salary;
-            players[index].NextStepBot();
+            players[index].NextStep();
             yield return new WaitUntil(() => players[index].ready);
             checkPlayer(index);
             

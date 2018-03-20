@@ -5,6 +5,7 @@ public class PathForBuy : StreetPath
     [SerializeField] private int idPlayer;
     private int[] builds;
     private int priceStreetPath;
+    private bool isBlocked;
 
     public void StepOnMe()
     {
@@ -25,12 +26,13 @@ public class PathForBuy : StreetPath
 
     public PathForBuy(int idPath, string namePath, int idStreetParent, int renta, Vector3 start, Vector3 end,
         int idPlayer, int[] builds,
-        int priceStreetPath, bool isBridge) : base(idPath, namePath, idStreetParent, renta, start, end, isBridge)
+        int priceStreetPath, bool isBridge, bool isBlocked) : base(idPath, namePath, idStreetParent, renta, start, end, isBridge)
     {
         this.idPlayer = idPlayer;
         this.builds = builds;
         this.priceStreetPath = priceStreetPath;
         base.CanBuy = true;
+        this.isBlocked = isBlocked;
     }
 
     public int IdPlayer

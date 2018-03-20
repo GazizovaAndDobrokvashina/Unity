@@ -928,6 +928,7 @@ public class GameCanvas : MonoBehaviour
 
     public void CancelTrade()
     {
+        ClearTradeMenu();
         ChangeMenu(1);
     }
 

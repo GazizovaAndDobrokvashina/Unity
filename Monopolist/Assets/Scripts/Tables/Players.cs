@@ -11,14 +11,15 @@ public class Players
     public double CoordinateX { get; set; }
     public double CoordinateY { get; set; }
     public bool IsBankrupt { get; set; }
+    public bool IsBot { get; set; }
 
     public Player GetPlayer()
     {
         Vector3 position = new Vector3((float) CoordinateX, 0, (float) CoordinateY);
-        return new Player(IdPlayer,NickName, Money, IsBankrupt, position);
+        return new Player(IdPlayer,NickName, Money, IsBankrupt, IsBot, position);
     }
 
-    public Players(int idPlayer, string nickName, int money, double coordinateX, double coordinateY, bool isBankrupt)
+    public Players(int idPlayer, string nickName, int money, double coordinateX, double coordinateY, bool isBankrupt, bool isBot)
     {
         IdPlayer = idPlayer;
         NickName = nickName;
@@ -26,6 +27,7 @@ public class Players
         CoordinateX = coordinateX;
         CoordinateY = coordinateY;
         IsBankrupt = isBankrupt;
+        IsBot = isBot;
     }
 
     public Players()

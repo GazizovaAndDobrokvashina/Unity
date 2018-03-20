@@ -63,19 +63,38 @@ public class MapBuilder : MonoBehaviour
 
         Player[] players = data.GetAllPlayers();
 
-        GameObject newPlayer = Instantiate(emptyPlayer) as GameObject;
-        newPlayer.GetComponent<Player>().GetData(players[1]);
-        newPlayer.transform.position = players[1].Destination;
-        data.updatePlayer(newPlayer.GetComponent<Player>());
-        transform.Find("/firstTown3Painted2").GetComponent<Cameras>()
-            .SetCamera(newPlayer.GetComponentInChildren<Camera>());
+//        GameObject newPlayer = Instantiate(emptyPlayer) as GameObject;
+//        newPlayer.GetComponent<Player>().GetData(players[1]);
+//        newPlayer.transform.position = players[1].Destination;
+//        data.updatePlayer(newPlayer.GetComponent<Player>());
+//        
+//
+//        for (int j = 2; j < players.Length; j++)
+//        {
+//            GameObject newBot = Instantiate(emptyBot) as GameObject;
+//            newBot.GetComponent<Player>().GetData(players[j]);
+//            newBot.transform.position = players[j].Destination;
+//            data.updatePlayer(newBot.GetComponent<Player>());
+//        }
 
-        for (int j = 2; j < players.Length; j++)
+        for (int j = 1; j < players.Length; j++)
         {
-            GameObject newBot = Instantiate(emptyBot) as GameObject;
-            newBot.GetComponent<Player>().GetData(players[j]);
-            newBot.transform.position = players[j].Destination;
-            data.updatePlayer(newBot.GetComponent<Player>());
+            if (!players[j].IsBot())
+            {
+                GameObject newPlayer = Instantiate(emptyPlayer) as GameObject;
+                newPlayer.GetComponent<Player>().GetData(players[1]);
+                newPlayer.transform.position = players[1].Destination;
+                data.updatePlayer(newPlayer.GetComponent<Player>());transform.Find("/firstTown3Painted2").GetComponent<Cameras>()
+                    .SetCamera(newPlayer.GetComponentInChildren<Camera>());
+            }
+            else
+            {
+                GameObject newBot = Instantiate(emptyBot) as GameObject;
+                newBot.GetComponent<Bot>().GetData(players[j]);
+                newBot.transform.position = players[j].Destination;
+                data.updatePlayer(newBot.GetComponent<Bot>());
+            }
+
         }
 
         data.createWays();

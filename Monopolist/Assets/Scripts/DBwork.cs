@@ -60,6 +60,13 @@ public class DBwork : MonoBehaviour
         names.Add("Каламкас");
         names.Add("Еркежан");
         names.Add("Жумабике");
+        names.Add("Екакий");
+        names.Add("Петруша");
+        names.Add("Ньярлатотеп");
+        names.Add("Орозалы");
+        names.Add("Бабаназар");
+        names.Add("Орозалы Бабаназарович");
+        names.Add("Гундермурд Сигурдфлордбрадсен");
     }
 
     public void DBStart()
@@ -188,9 +195,9 @@ public class DBwork : MonoBehaviour
 
         foreach (Players player in dataService.getPlayers())
         {
-            players[player.IdPlayer] = player.GetPlayer();
+                players[player.IdPlayer] = player.GetPlayer();
         }
-        players[0] = new Player(0, "никто", 0, true, Vector3.zero);
+        players[0] = new Player(0, "никто", 0, true, true, Vector3.zero);
         streets[0] = new Street(0, "", "", new int[1]);
         paths[0] = new StreetPath(0, "", 0, 0, Vector3.zero, Vector3.zero, false);
         builds[0] = new Build(0, "", "", 0, 0, false, 0, 0);
@@ -309,9 +316,9 @@ public class DBwork : MonoBehaviour
         {
             Player player;
             if (i == 1)
-                player = new Player(i, nickName, startMoney, false, MapBuilder.GetCenter(paths[1].start, paths[1].end));
+                player = new Player(i, nickName, startMoney, false, false, MapBuilder.GetCenter(paths[1].start, paths[1].end));
             else
-                player = new Player(i, names[Random.Range(0, names.Count)], startMoney, false,
+                player = new Player(i, names[Random.Range(0, names.Count)], startMoney, false, true,
                     MapBuilder.GetCenter(paths[1].start, paths[1].end));
             players[i] = player;
             dataService.AddPlayer(player);
@@ -349,6 +356,19 @@ public class DBwork : MonoBehaviour
                 count = ways.Queues[startId, i].Count;
                 queue = ways.Queues[startId, i];
             }
+        }
+        return queue;
+    }
+
+    public List<int> GetPossibleEnds(int startId, int steps)
+    {
+        List<int> queue = new List<int>();
+        int count = 0;
+
+        for (int i = 1; i < paths.Length; i++)
+        {
+            if (ways.Queues[startId, i].Count == steps)
+                queue.Add(i);
         }
         return queue;
     }
@@ -462,4 +482,18 @@ public class DBwork : MonoBehaviour
 
         return res;
     }
+
+    public List<StreetPath> GetPathsOfStreet(int id)
+    {
+        List<StreetPath> paths = new List<StreetPath>();
+        for (int i = 1; i < paths.Count; i++)
+        {
+            if (paths[i].GetIdStreetParent() == id)
+            {
+                paths.Add(paths[i]);
+            }
+        }
+        
+        return paths;
+    } 
 }

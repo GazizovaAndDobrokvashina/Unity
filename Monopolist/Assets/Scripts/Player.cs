@@ -6,63 +6,73 @@ using UnityEngine.Networking.NetworkSystem;
 public class Player : MonoBehaviour
 {
     //ID игрока
-    private int idPlayer;
+    protected int idPlayer;
 
-    private string nickName;
+    protected string nickName;
 
     //деньги игрока
-    private int money;
+    protected int money;
 
     //количество ходов, выпавших на кубике
-    private int maxSteps;
+    protected int maxSteps;
 
     //сколько ходов уже сделал игрок
-    private int currentSteps;
+    protected int currentSteps;
 
     //банкрот ли игрок
-    private bool isBankrupt;
+    protected bool isBankrupt;
 
     //положение игрока на карте
-    private Vector3 destination;
+    protected Vector3 destination;
 
     //скорость передвижения
     public float speed = 2f;
 
     //ссылка на ДБворк
-    private DBwork _dbWork;
+    protected DBwork _dbWork;
 
     //движется ли грок
-    private bool isMoving = false;
+    protected bool isMoving = false;
 
     //запущена ли корутина
-    private bool corutine = false;
+    protected bool corutine = false;
 
     //улица, на которой находится игрок
-    private StreetPath currentStreetPath;
+    protected StreetPath currentStreetPath;
 
     //путь от одной улицы к другой
-    private Queue<int> way;
+    protected Queue<int> way;
 
     //пытается ли считерить игрок
-    private bool isCheating;
+    protected bool isCheating;
 
     //будет ли игрок пойман прb попытке считерить
-    private bool isGonnaBeCathced;
+    protected bool isGonnaBeCathced;
 
-    private GameCanvas _gameCanvas;
+    protected GameCanvas _gameCanvas;
 
-    private float angle;
+    protected float angle;
 
     public bool ready;
 
-    private int StepsInJail;
+    protected int StepsInJail;
 
-    private bool alreadyCheat;
+    protected bool alreadyCheat;
+
+    protected bool isBot;
     
     //является ли текущий ход ходом игрока
-    [SerializeField]
-    private bool CurrentStep;
+    [SerializeField] protected bool CurrentStep;
 
+    public Player()
+    {
+    }
+
+    public bool IsBot()
+    {
+        return isBot;
+    }
+    
     public void SetCurrentStep(bool value)
     {
         CurrentStep = value;
@@ -89,13 +99,13 @@ public class Player : MonoBehaviour
         return currentStreetPath;
     }
 
-    private void Start()
+    void Start()
     {
         _gameCanvas = transform.Find("/Canvas").GetComponent<GameCanvas>();
         CurrentStep = true;
     }
 
-    private void Update()
+   void Update()
     {
         if (!transform.position.Equals(destination))
         {
@@ -248,13 +258,14 @@ public class Player : MonoBehaviour
 
 
     //конструктор игрока
-    public Player(int idPlayer, string nickName, int money, bool isBankrupt, Vector3 destination)
+    public Player(int idPlayer, string nickName, int money, bool isBankrupt, bool isBot, Vector3 destination)
     {
         this.nickName = nickName;
         this.idPlayer = idPlayer;
         this.money = money;
         this.isBankrupt = isBankrupt;
         this.destination = destination;
+        this.isBot = isBot;
     }
 
     
@@ -314,6 +325,7 @@ public class Player : MonoBehaviour
         this.maxSteps = player.MaxSteps;
         this.money = player.Money;
         this.speed = player.Speed;
+        this.isBot = player.isBot;
 
         _dbWork = Camera.main.GetComponent<DBwork>();
 
@@ -321,7 +333,7 @@ public class Player : MonoBehaviour
         this.currentStreetPath = findMyPath(destination);
     }
 
-    private StreetPath findMyPath(Vector3 vector3)
+    protected StreetPath findMyPath(Vector3 vector3)
     {
         foreach (StreetPath streetPath in _dbWork.GetAllPaths())
         {
@@ -343,7 +355,7 @@ public class Player : MonoBehaviour
     }
 
     //следующий ход, генерация ходов, выпадающих на кубике
-    public void NextStep()
+    public virtual void NextStep()
     {
         if(idPlayer == 1) {
             GameController.aboutPlayer = "";
@@ -370,113 +382,10 @@ public class Player : MonoBehaviour
         return StepsInJail > 0;
     }
 
-    public void NextStepBot()
-    {
-        NextStep();
-
-        StartCoroutine(GoBot());
-    }
-
-    private IEnumerator GoBot()
-    {
-//        bool tried = isCheating;
-//
-//        if (tried && isGonnaBeCathced)
-//        {
-//            if (Random.Range(0, 2) == 1)
-//            {
-//                corutine = false;
-//                GameController.cathedPlayer();
-//                yield break;
-//            }
-//        }
-//        else if (tried)
-//        {
-//            corutine = false;
-//            yield break;
-//        }
-
-
-        while (currentSteps < maxSteps)
-        {
-            way = _dbWork.GetWayOfSteps(currentStreetPath.GetIdStreetPath(), maxSteps - currentSteps);
-
-            bool endFirstStep = false;
-            int num = way.Count;
-            StreetPath somewhere = null;
-            for (int i = 0; i < num; i++)
-            {
-                if (i != 0)
-                    somewhere = _dbWork.GetPathById(way.Dequeue());
-
-                if (i == 0 && !endFirstStep)
-                {
-                    somewhere = _dbWork.GetPathById(way.Dequeue());
-                    if (currentStreetPath.isBridge &&
-                        (currentStreetPath.start.Equals(somewhere.start) ||
-                         currentStreetPath.start.Equals(somewhere.end)))
-                    {
-                        destination = currentStreetPath.start;
-                        angle = MapBuilder.Angle(transform.position, destination);
-                        yield return new WaitUntil(() => transform.position == destination);
-                    }
-                    else
-                    {
-                        destination = currentStreetPath.end;
-                        angle = MapBuilder.Angle(transform.position, destination);
-                        yield return new WaitUntil(() => transform.position == destination);
-                    }
-
-                    endFirstStep = true;
-                    i--;
-                    continue;
-                }
-                if (i == num - 1)
-                {
-                    destination = MapBuilder.GetCenter(somewhere.start, somewhere.end);
-                    angle = MapBuilder.Angle(transform.position, destination);
-
-                    currentStreetPath = somewhere;
-                    yield return new WaitUntil(() => transform.position == destination);
-                }
-                else
-                {
-                    if (somewhere.isBridge && transform.position.Equals(somewhere.end))
-                    {
-                        destination = somewhere.start;
-                        angle = MapBuilder.Angle(transform.position, destination);
-                        yield return new WaitUntil(() => transform.position == destination);
-                    }
-                    else
-                    {
-                        destination = somewhere.end;
-                        angle = MapBuilder.Angle(transform.position, destination);
-                        yield return new WaitUntil(() => transform.position == destination);
-                    }
-                }
-                currentSteps++;
-            }
-        }
-
-        GameController.aboutPlayer += "Игрок " + NickName + " пришел на " + currentStreetPath.namePath + "\n";
-        PathForBuy pathForBuy = _dbWork.GetPathForBuy(currentStreetPath.GetIdStreetPath());
-        if (currentStreetPath.CanBuy && pathForBuy.IdPlayer == 0 && money > pathForBuy.PriceStreetPath)
-        {
-            GameController.aboutPlayer += "Игрок " + NickName + " купил " + currentStreetPath.namePath + "\n";
-            pathForBuy.Buy(this);
-        }
-
-        corutine = false;
-        ready = true;
-//        if (tried && isGonnaBeCathced)
-//        {
-//            _gameCanvas.GetComponent<GameController>().nextStep();
-//        }
-    }
 
     public Players getEntity()
     {
-        return new Players(idPlayer, nickName, money, destination.x, destination.z, isBankrupt);
+        return new Players(idPlayer, nickName, money, destination.x, destination.z, isBankrupt, isBot);
     }
 
     //если игрок попадается на жульничестве, то он не может двигаться с клетки суда несколько ходов
