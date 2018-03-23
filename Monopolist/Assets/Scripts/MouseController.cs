@@ -33,7 +33,7 @@ public class MouseController : MonoBehaviour
     //
     void Update()
     {
-        if (EventSystem.current.IsPointerOverGameObject() || Time.timeScale==0)
+        if (EventSystem.current.IsPointerOverGameObject() || Time.timeScale == 0)
         {
             return;
         }
@@ -77,11 +77,20 @@ public class MouseController : MonoBehaviour
 
     void MouseOver_Street(GameObject ourHitObject)
     {
-       // Debug.Log(_dBwork.GetPlayerbyId(1).GetCurrentStep());
-        if (Input.GetMouseButton(0) && canMove && _dBwork.GetPlayerbyId(1).GetCurrentStep()) // && Cameras.mode == 1 ) 
+        // Debug.Log(_dBwork.GetPlayerbyId(1).GetCurrentStep());
+        if (Input.GetMouseButton(0) && canMove && _dBwork.GetPlayerbyId(1).GetCurrentStep() && Cameras.mode != 1)
         {
             canMove = false;
             _dBwork.GetPlayerbyId(1).move(ourHitObject.GetComponent<StreetPath>());
+        }
+        else if (Input.GetMouseButton(0) && canMove && _dBwork.GetPlayerbyId(1).GetCurrentStep() && Cameras.mode == 1)
+        {
+            if (_dBwork.GetWay(_dBwork.GetPlayerbyId(1).CurrentStreetPath.GetIdStreetPath(),
+                    ourHitObject.GetComponent<StreetPath>().GetIdStreetPath()).Count == 1)
+            {
+                canMove = false;
+                _dBwork.GetPlayerbyId(1).move(ourHitObject.GetComponent<StreetPath>());
+            }
         }
         else if (Input.GetMouseButton(1) && Cameras.mode != 1)
         {

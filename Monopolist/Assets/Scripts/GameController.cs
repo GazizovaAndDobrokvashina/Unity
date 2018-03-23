@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Principal;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -17,6 +18,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        aboutPlayer = "";
         _dBwork = Camera.main.GetComponent<DBwork>();
 
         _dBwork.GetPlayerbyId(1).NextStep();
@@ -51,9 +53,10 @@ public class GameController : MonoBehaviour
         {yield break;}
     }
     
-
+    
     private IEnumerator GoNextStep()
     {
+        
         checkPlayer(1);
        // gameObject.GetComponent<CanvasGroup>().interactable = false;
         _dBwork.GetPlayerbyId(1).SetCurrentStep(false);

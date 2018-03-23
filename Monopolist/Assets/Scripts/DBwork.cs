@@ -363,13 +363,16 @@ public class DBwork : MonoBehaviour
     public List<int> GetPossibleEnds(int startId, int steps)
     {
         List<int> queue = new List<int>();
-        int count = 0;
+        //int count = 0;
 
         for (int i = 1; i < paths.Length; i++)
         {
+       // Debug.Log(ways.Queues[startId, i].Count + "   count");
             if (ways.Queues[startId, i].Count == steps)
                 queue.Add(i);
         }
+        
+       
         return queue;
     }
 

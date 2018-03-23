@@ -403,7 +403,8 @@ public class GameCanvas : MonoBehaviour
     public void OpenMainMenu()
     {
         //Destroy(Camera.main);
-        SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     //вернуться в игру
@@ -810,6 +811,8 @@ public class GameCanvas : MonoBehaviour
     //перемещает к этому игроку на карте
     private void onButtonClickPlayer(int idPlayer)
     {
+        camerasScript.moveOrtoCamera(getDbWork().GetPathById(getDbWork().GetPlayerbyId(idPlayer).GetCurrentStreetPath().GetIdStreetPath()).transform.position);
+        cameras.SetActiveFirstCamera();
     }
 
     //открыть окно торговли с этим игроком

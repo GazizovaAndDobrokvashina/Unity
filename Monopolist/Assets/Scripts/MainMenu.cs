@@ -187,7 +187,7 @@ public class MainMenu : MonoBehaviour
     private void onButtonClickLoadGame(string dbName)
     {
         SaveLoad.loadGame(dbName);
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 
     private void DeleteGame(string dbName, GameObject pref)
@@ -221,11 +221,12 @@ public class MainMenu : MonoBehaviour
     {
         Camera.main.GetComponent<DBwork>()
             .CreateNewGame(countOfPlayers, startMoney, newNameGame, online, nameTownForNewGame, namePlayer);
-        SceneManager.LoadScene("Game");
         if (Trade.things == null)
         {
             Trade.things = new List<ThingForTrade>[countOfPlayers,countOfPlayers];
         }
+        SceneManager.LoadScene("Game", LoadSceneMode.Single);
+       
     }
 
     //изменить название игры

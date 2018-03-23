@@ -128,7 +128,7 @@ public class Bot : Player
                 return possibleEnd;
             }
         }
-
+        //Debug.Log(ends.Count);
         return ends[(Random.Range(0,ends.Count-1))];
     }
 
@@ -148,6 +148,7 @@ public class Bot : Player
 
     private List<int> GetMyMonopolies(List<int> mypaths)
     {
+        ShakeSomeMix(mypaths);
         List<int> monopolies = new List<int>();
         foreach (int mypath in mypaths)
         {
@@ -161,6 +162,19 @@ public class Bot : Player
         return monopolies;
     }
 
+    private List<int> ShakeSomeMix(List<int> array)
+    {
+        List<int> result = new List<int>();
+        for (int i = 0; i < array.Count; i++)
+        {
+            int rand = Random.Range(0, array.Count);
+            result.Add(array[rand]);
+            array.RemoveAt(rand);
+        }
+
+        return result;
+    }
+    
     private void GetCheat()
     {
         foreach (int myMonopoly in GetMyMonopolies(_dbWork.GetMyPathes(idPlayer)))

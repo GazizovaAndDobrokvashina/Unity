@@ -9,6 +9,11 @@ public class Cameras : MonoBehaviour
     //0 - просмотр карты, 1- от первого лица, 2 - от третьего карты
     public static int mode { get; set; }
 
+    private void Start()
+    {
+        mode = 1;
+    }
+
     public void SetCamera(Camera camera)
     {
         mode = 1;

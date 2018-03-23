@@ -357,10 +357,10 @@ public class Player : MonoBehaviour
     //следующий ход, генерация ходов, выпадающих на кубике
     public virtual void NextStep()
     {
-        if(idPlayer == 1) {
-            GameController.aboutPlayer = "";
-            
-        }
+//        if(idPlayer == 1) {
+//            GameController.aboutPlayer = "";
+//            
+//        }
 
         alreadyCheat = false;
         if (StepsInJail > 0)
@@ -371,7 +371,7 @@ public class Player : MonoBehaviour
 
         if (StepsInJail == 0)
         {
-            maxSteps = Random.Range(2, 13);
+            maxSteps = Random.Range(2, 8);
         }
         GameController.aboutPlayer += "Игроку " + NickName + " выпало ходов: " + maxSteps + "\n";
         currentSteps = 0;
