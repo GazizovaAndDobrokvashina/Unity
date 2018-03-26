@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     //ID игрока
     protected int idPlayer;
 
+    //имя игрока
     protected string nickName;
 
     //деньги игрока
@@ -49,63 +50,77 @@ public class Player : MonoBehaviour
     //будет ли игрок пойман прb попытке считерить
     protected bool isGonnaBeCathced;
 
+    //игровая канва
     protected GameCanvas _gameCanvas;
 
+    //
     protected float angle;
 
+    //завершил ли игрок ход (см gamecontroller)
     public bool ready;
 
+    //сколько ходов игрок заключен под стражу
     protected int StepsInJail;
 
+    //пробовал ли уже игрок жульничать на этом ходе
     protected bool alreadyCheat;
 
+    //под управлением компьютера ли игрок?
     protected bool isBot;
-    
-    //является ли текущий ход ходом игрока
-    [SerializeField] protected bool CurrentStep;
 
+    //является ли текущий ход ходом игрока
+    protected bool CurrentStep;
+
+    //пустой консруктор для бота
     public Player()
     {
     }
 
+    //вернуть значение является ли ботом
     public bool IsBot()
     {
         return isBot;
     }
-    
+
+    //установить значение, идет ли сейчас ход этого игрока
     public void SetCurrentStep(bool value)
     {
         CurrentStep = value;
     }
 
+    //вернуть значение, идет ли ход игрока
     public bool GetCurrentStep()
     {
         return CurrentStep;
     }
 
-
+    //получить имя игрока
     public string NickName
     {
         get { return nickName; }
     }
 
+    //получить игровую канву
     public GameCanvas GetGameCanvas()
     {
         return _gameCanvas;
     }
 
+    //получить улицу, на которой стоит игрок
     public StreetPath GetCurrentStreetPath()
     {
         return currentStreetPath;
     }
 
+    //создаем ссылку на канву игры, объявляет ход игрока 
     void Start()
     {
         _gameCanvas = transform.Find("/Canvas").GetComponent<GameCanvas>();
         CurrentStep = true;
     }
 
-   void Update()
+    //перемещение игрока и отправка его данных в игровую канву
+    void Update()
     {
         if (!transform.position.Equals(destination))
         {
@@ -116,6 +131,7 @@ public class Player : MonoBehaviour
         {
             isMoving = false;
         }
+
         if (idPlayer != 1)
             return;
 
@@ -125,6 +141,7 @@ public class Player : MonoBehaviour
         GameCanvas.destination = currentStreetPath.NamePath;
     }
 
+    //получить ответ с канвы
     public void takeResponse(bool responce)
     {
         isGonnaBeCathced = responce;
@@ -197,6 +214,7 @@ public class Player : MonoBehaviour
                 i--;
                 continue;
             }
+
             if (i == num - 1)
             {
                 destination = MapBuilder.GetCenter(somewhere.start, somewhere.end);
@@ -220,8 +238,10 @@ public class Player : MonoBehaviour
                     yield return new WaitUntil(() => transform.position == destination);
                 }
             }
+
             currentSteps++;
         }
+
         corutine = false;
         if (tried && isGonnaBeCathced)
         {
@@ -238,15 +258,14 @@ public class Player : MonoBehaviour
             {
                 corutine = true;
                 way = _dbWork.GetWay(currentStreetPath.GetIdStreetPath(),
-                    path.GetIdStreetPath());
-                Debug.Log(currentStreetPath.GetIdStreetParent());
-                Debug.Log(path.GetIdStreetPath());
+                    path.GetIdStreetPath());               
                 if (currentSteps + way.Count > maxSteps && !isGonnaBeCathced && !alreadyCheat)
                 {
                     GameController.aboutPlayer += "Игрок " + NickName + " пытается смухлевать" + "\n";
                     _gameCanvas.OpenWarningWindow(this);
                     isCheating = true;
                 }
+
                 StartCoroutine(Go());
             }
         }
@@ -268,7 +287,6 @@ public class Player : MonoBehaviour
         this.isBot = isBot;
     }
 
-    
 
     //возврат айдишника игрока
     public int IdPlayer
@@ -314,7 +332,7 @@ public class Player : MonoBehaviour
         get { return speed; }
     }
 
-
+    //получить информацию об игроке из бд
     public void GetData(Player player)
     {
         this.currentSteps = player.CurrentSteps;
@@ -333,22 +351,22 @@ public class Player : MonoBehaviour
         this.currentStreetPath = findMyPath(destination);
     }
 
+    //получить улицу, на которой стоит игрок
     protected StreetPath findMyPath(Vector3 vector3)
     {
         foreach (StreetPath streetPath in _dbWork.GetAllPaths())
         {
             if (streetPath.GetIdStreetPath() == 0)
                 continue;
-            //if (vector3.Equals(MapBuilder.GetCenter(streetPath.start, streetPath.end)))
-            //Vector3 center = MapBuilder.GetCenter(streetPath.start, streetPath.end);
-            //if((int)vector3.x == (int)center.x && (int)vector3.z == (int)center.z)  
             Vector3 pos = streetPath.transform.position;
-            if((int)pos.x == (int)vector3.x && (int)pos.z == (int)vector3.z)
-            return streetPath;
+            if ((int) pos.x == (int) vector3.x && (int) pos.z == (int) vector3.z)
+                return streetPath;
         }
+
         return _dbWork.GetPathById(1);
     }
 
+    //получить текущую улицу
     public StreetPath CurrentStreetPath
     {
         get { return currentStreetPath; }
@@ -357,11 +375,6 @@ public class Player : MonoBehaviour
     //следующий ход, генерация ходов, выпадающих на кубике
     public virtual void NextStep()
     {
-//        if(idPlayer == 1) {
-//            GameController.aboutPlayer = "";
-//            
-//        }
-
         alreadyCheat = false;
         if (StepsInJail > 0)
         {
@@ -373,16 +386,18 @@ public class Player : MonoBehaviour
         {
             maxSteps = Random.Range(2, 8);
         }
+
         GameController.aboutPlayer += "Игроку " + NickName + " выпало ходов: " + maxSteps + "\n";
         currentSteps = 0;
     }
 
+    //находится ли игрок под арестом
     public bool isInJail()
     {
         return StepsInJail > 0;
     }
 
-
+    //передать информацию об игроке
     public Players getEntity()
     {
         return new Players(idPlayer, nickName, money, destination.x, destination.z, isBankrupt, isBot);

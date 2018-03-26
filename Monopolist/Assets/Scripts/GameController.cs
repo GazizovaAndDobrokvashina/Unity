@@ -7,15 +7,28 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    //текущий активный игрок
     public Player CurrentPlayer;
-    private DBwork _dBwork;
-    private int CountStepsInAllGame;
-    private int salary = 1000;
-    public Text aboutPlayerText;
-    public GameObject nextStepButton;
-    public static string aboutPlayer;
-    
 
+    //ссылка на дбворк
+    private DBwork _dBwork;
+
+    //счетчик сделанных ходов в игре
+    private int CountStepsInAllGame;
+
+    //зарплата игроков
+    private int salary = 1000;
+
+    //история действий (текстовое поле)
+    public Text aboutPlayerText;
+
+    //кнопка следующего хода
+    public GameObject nextStepButton;
+
+    //история действий
+    public static string aboutPlayer;
+
+    //сброс истории, обновление ссылки на дбворк, бросок кубиков первого игрока
     void Start()
     {
         aboutPlayer = "";
@@ -24,22 +37,26 @@ public class GameController : MonoBehaviour
         _dBwork.GetPlayerbyId(1).NextStep();
     }
 
+    //вывод истории на экран
     void Update()
     {
         aboutPlayerText.text = aboutPlayer;
     }
+
+    //передача хода между игроками, если игрок сделал достаточно ходов или, если недостаточно, то выяснить у игрока хочет ли он сжульничать
     public void nextStep()
     {
         if (GameCanvas.currentSteps < GameCanvas.maxSteps)
         {
             StartCoroutine(Cheating());
         }
-            else
+        else
         {
             StartCoroutine(GoNextStep());
         }
     }
 
+    //ожидание ответа от игрока, действительно ли он хочет сжульничать
     private IEnumerator Cheating()
     {
         GameCanvas gameCanvas = gameObject.GetComponent<GameCanvas>();
@@ -49,16 +66,16 @@ public class GameController : MonoBehaviour
         {
             StartCoroutine(GoNextStep());
         }
-        else 
-        {yield break;}
+        else
+        {
+            yield break;
+        }
     }
-    
-    
+
+    //обход игроков, выдача им зарплат
     private IEnumerator GoNextStep()
     {
-        
         checkPlayer(1);
-       // gameObject.GetComponent<CanvasGroup>().interactable = false;
         _dBwork.GetPlayerbyId(1).SetCurrentStep(false);
         nextStepButton.GetComponent<CanvasGroup>().interactable = false;
         CountStepsInAllGame++;
@@ -70,33 +87,29 @@ public class GameController : MonoBehaviour
 
         for (int index = 2; index < players.Length; index++)
         {
-            
             players[index].ready = false;
             if (CountStepsInAllGame % 10 == 0)
                 players[index].Money += salary;
             players[index].NextStep();
             yield return new WaitUntil(() => players[index].ready);
             checkPlayer(index);
-            
         }
 
         _dBwork.GetPlayerbyId(1).NextStep();
-        //gameObject.GetComponent<CanvasGroup>().interactable = true;
         nextStepButton.GetComponent<CanvasGroup>().interactable = true;
         _dBwork.GetPlayerbyId(1).SetCurrentStep(true);
     }
-    
+
+    //перевод игрока в место заключения под стражу, если он был поймат при жульничестве
     public void cathedPlayer()
     {
         //перевести плеера в суд, так как он пойман
         CurrentPlayer = _dBwork.GetPlayerbyId(1);
-        Debug.Log("попался");
         CurrentPlayer.move(_dBwork.GetPathById(14));
         _dBwork.GetGovermentPath(14).GoToJail(CurrentPlayer.IdPlayer, gameObject.GetComponent<GameCanvas>());
-        
-        
     }
 
+    //если игрок закончил ход на чужой улице, то с него снимается плата в пользу игрока, владеющего этой улицей
     void checkPlayer(int idPlayer)
     {
         Player ourPlayer = _dBwork.GetPlayerbyId(idPlayer);
@@ -119,6 +132,5 @@ public class GameController : MonoBehaviour
         {
             ourPlayer.IsBankrupt = true;
         }
-        
     }
 }

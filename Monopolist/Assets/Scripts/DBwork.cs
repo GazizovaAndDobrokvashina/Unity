@@ -22,8 +22,10 @@ public class DBwork : MonoBehaviour
     //массив частей улиц
     private StreetPath[] paths;
 
+    //список участков, доступных для продажи
     private List<PathForBuy> pathForBuys;
 
+    //список участков, принадлежащих городу
     private List<GovermentPath> govermentPaths;
 
     //ссылка на DataService
@@ -37,12 +39,12 @@ public class DBwork : MonoBehaviour
     //название текущего города
     private string nameOfTown;
 
+    //название игры
     private string nameOfGane;
 
-    
+
     void Start()
     {
-        
         names = new List<string>();
         names.Add("Равшан");
         names.Add("Джамшут");
@@ -52,6 +54,7 @@ public class DBwork : MonoBehaviour
         names.Add("Ариэль");
         names.Add("Алтынбек");
         names.Add("Коловрат");
+        names.Add("Жасмин");
         names.Add("Джаник");
         names.Add("Марфа");
         names.Add("Бадигулжамал");
@@ -59,9 +62,11 @@ public class DBwork : MonoBehaviour
         names.Add("Антуанетта");
         names.Add("Каламкас");
         names.Add("Еркежан");
+        names.Add("Рапунцель");
         names.Add("Жумабике");
         names.Add("Екакий");
         names.Add("Петруша");
+        names.Add("Белоснежка");
         names.Add("Ньярлатотеп");
         names.Add("Орозалы");
         names.Add("Бабаназар");
@@ -95,14 +100,17 @@ public class DBwork : MonoBehaviour
                 return path;
             }
         }
+
         return null;
     }
 
+    //получить здание по идентификатору
     public Build GetBuild(int id)
     {
         return builds[id];
     }
 
+    //получить улицу по идентификатору здания
     public PathForBuy GetPathOfBuild(int id)
     {
         foreach (PathForBuy pathForBuy in pathForBuys)
@@ -110,22 +118,25 @@ public class DBwork : MonoBehaviour
             if (pathForBuy.GetIdStreetPath() == (builds[id].IdStreetPath))
                 return pathForBuy;
         }
+
         return null;
     }
 
+    //получить монополию по её идентификатору
     public Street getStreetById(int id)
     {
         return streets[id];
     }
 
+    //принадлежат ли все участки в монополии одному игроку
     public bool isAllPathsMine(int buildId, int playerId)
     {
         foreach (int i in getStreetById(GetPathById(GetBuild(buildId).IdStreetPath).GetIdStreetParent()).Paths1)
         {
-            Debug.Log(GetPathById(i).namePath);
             if (GetPathById(i).canBuy && GetPathForBuy(i).IdPlayer != playerId)
                 return false;
         }
+
         return true;
     }
 
@@ -176,6 +187,7 @@ public class DBwork : MonoBehaviour
                         events = new Event[eventses.Count + 1];
                         j++;
                     }
+
                     foreach (Events eventse in eventses)
                     {
                         events[j] = eventse.GetEvent();
@@ -195,8 +207,9 @@ public class DBwork : MonoBehaviour
 
         foreach (Players player in dataService.getPlayers())
         {
-                players[player.IdPlayer] = player.GetPlayer();
+            players[player.IdPlayer] = player.GetPlayer();
         }
+
         players[0] = new Player(0, "никто", 0, true, true, Vector3.zero);
         streets[0] = new Street(0, "", "", new int[1]);
         paths[0] = new StreetPath(0, "", 0, 0, Vector3.zero, Vector3.zero, false);
@@ -208,13 +221,13 @@ public class DBwork : MonoBehaviour
     private void Awake()
     {
 #if UNITY_EDITOR
-        Directory.CreateDirectory( @"Assets\SavedGames");
-        Directory.CreateDirectory( @"Assets\StreamingAssets");
+        Directory.CreateDirectory(@"Assets\SavedGames");
+        Directory.CreateDirectory(@"Assets\StreamingAssets");
 #else
         Directory.CreateDirectory(Application.persistentDataPath + @"\SavedGames");
         Directory.CreateDirectory(Application.persistentDataPath + @"\StreamingAssets");
 #endif
-        
+
         DontDestroyOnLoad(gameObject);
         transform.position = new Vector3(5.63f, 0.43f, -5.63f);
         transform.localEulerAngles = new Vector3(0, -90, 0);
@@ -226,6 +239,7 @@ public class DBwork : MonoBehaviour
         return paths;
     }
 
+    //получить все здания в игре
     public Build[] GetAllBuilds()
     {
         return builds;
@@ -238,18 +252,22 @@ public class DBwork : MonoBehaviour
         {
             dataService.UpdateObject(players[i].getEntity());
         }
+
         for (int i = 1; i < streets.Length; i++)
         {
             dataService.UpdateObject(streets[i].getEntity());
         }
+
         for (int i = 1; i < paths.Length; i++)
         {
             dataService.UpdateObject(paths[i].getEntity());
         }
+
         for (int i = 1; i < pathForBuys.Count; i++)
         {
             dataService.UpdateObject(pathForBuys[i].GetEntityForBuy());
         }
+
         for (int i = 1; i < builds.Length; i++)
         {
             dataService.UpdateObject(builds[i].getEntity());
@@ -259,20 +277,19 @@ public class DBwork : MonoBehaviour
     //сохранение игры как новый файл
     public void SaveGameAsNewFile(string newName)
     {
-        
         SaveGame();
         string currentGame;
         string newGame;
 #if UNITY_EDITOR
-        currentGame = @"Assets\SavedGames\" + nameOfTown + "_" + nameOfGane ;
-        newGame = @"Assets\SavedGames\"+ nameOfTown + "_" + newName + ".db";
+        currentGame = @"Assets\SavedGames\" + nameOfTown + "_" + nameOfGane;
+        newGame = @"Assets\SavedGames\" + nameOfTown + "_" + newName + ".db";
         //DirectoryInfo dir = new DirectoryInfo(@"Assets\SavedGames\" +  );
 #else
         currentGame = Application.persistentDataPath +@"/SavedGames/"+ nameOfTown + "_" + nameOfGane ;
         newGame = Application.persistentDataPath +@"/SavedGames/"+ nameOfTown + "_" + newName + ".db";
         //DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath +"/SavedGames/"+ nameFolder);
 #endif
-        
+
         File.Copy(currentGame, newGame, true);
     }
 
@@ -286,15 +303,15 @@ public class DBwork : MonoBehaviour
     public void CreateNewGame(int countOfPlayers, int startMoney, string NameOfGame, bool online, string nameOfTown,
         string nickName)
     {
-        
         if (string.IsNullOrEmpty(nameOfTown))
         {
             nameOfTown = "Monopolist.db";
         }
+
         if (NameOfGame.Length != 0 && !NameOfGame.EndsWith(".db"))
         {
             dataService = new DataService(nameOfTown + "_" + NameOfGame + ".db");
-            nameOfGane = NameOfGame+ ".db";
+            nameOfGane = NameOfGame + ".db";
         }
         else if (NameOfGame.Length != 0 && NameOfGame.EndsWith(".db"))
         {
@@ -303,7 +320,7 @@ public class DBwork : MonoBehaviour
         }
         else
         {
-            dataService = new DataService(nameOfTown + "_Firstgame.db");  
+            dataService = new DataService(nameOfTown + "_Firstgame.db");
             nameOfGane = "Firstgame.db";
         }
 
@@ -316,7 +333,8 @@ public class DBwork : MonoBehaviour
         {
             Player player;
             if (i == 1)
-                player = new Player(i, nickName, startMoney, false, false, MapBuilder.GetCenter(paths[1].start, paths[1].end));
+                player = new Player(i, nickName, startMoney, false, false,
+                    MapBuilder.GetCenter(paths[1].start, paths[1].end));
             else
                 player = new Player(i, names[Random.Range(0, names.Count)], startMoney, false, true,
                     MapBuilder.GetCenter(paths[1].start, paths[1].end));
@@ -342,6 +360,7 @@ public class DBwork : MonoBehaviour
         return ways.Queues[startId, endId];
     }
 
+    //
     public Queue<int> GetWayOfSteps(int startId, int steps)
     {
         Queue<int> queue = new Queue<int>();
@@ -357,22 +376,22 @@ public class DBwork : MonoBehaviour
                 queue = ways.Queues[startId, i];
             }
         }
+
         return queue;
     }
 
+    //получить список идентификаторов улиц, на которые можно пойти
     public List<int> GetPossibleEnds(int startId, int steps)
     {
         List<int> queue = new List<int>();
-        //int count = 0;
 
         for (int i = 1; i < paths.Length; i++)
         {
-       // Debug.Log(ways.Queues[startId, i].Count + "   count");
             if (ways.Queues[startId, i].Count == steps)
                 queue.Add(i);
         }
-        
-       
+
+
         return queue;
     }
 
@@ -388,6 +407,7 @@ public class DBwork : MonoBehaviour
         players[player.IdPlayer] = player;
     }
 
+    //обновить данные о здании
     public void updateBuild(Build build)
     {
         builds[build.IdBuild] = build;
@@ -399,7 +419,7 @@ public class DBwork : MonoBehaviour
         paths[path.GetIdStreetPath()] = path;
     }
 
-
+    //обновить данные об участке для продажи
     public void updatePath(PathForBuy path)
     {
         paths[path.GetIdStreetPath()] = path;
@@ -410,6 +430,7 @@ public class DBwork : MonoBehaviour
         }
     }
 
+    //
     public void UpdatePath(GovermentPath path)
     {
         paths[path.GetIdStreetPath()] = path;
@@ -426,7 +447,7 @@ public class DBwork : MonoBehaviour
         return paths[id];
     }
 
-
+    //получить участок для продажи
     public PathForBuy GetPathForBuy(int id)
     {
         if (paths[id].canBuy)
@@ -437,10 +458,11 @@ public class DBwork : MonoBehaviour
                     return pathForBuy;
             }
         }
+
         return null;
     }
 
-
+    //получить участок, принадлежащий городу
     public GovermentPath GetGovermentPath(int id)
     {
         if (!paths[id].canBuy)
@@ -471,10 +493,11 @@ public class DBwork : MonoBehaviour
         return buildes.ToArray();
     }
 
+    //получить список участков, принадлежащих конкретному игроку
     public List<int> GetMyPathes(int id)
     {
         List<int> res = new List<int>();
-        
+
         foreach (PathForBuy pathForBuy in pathForBuys)
         {
             if (pathForBuy.IdPlayer == id)
@@ -486,6 +509,7 @@ public class DBwork : MonoBehaviour
         return res;
     }
 
+    //получить список участков, принадлежащих конкретной монополии
     public List<StreetPath> GetPathsOfStreet(int id)
     {
         List<StreetPath> paths = new List<StreetPath>();
@@ -496,7 +520,7 @@ public class DBwork : MonoBehaviour
                 paths.Add(paths[i]);
             }
         }
-        
+
         return paths;
-    } 
+    }
 }

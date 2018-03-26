@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 public class GameCanvas : MonoBehaviour
 {
+    //объект с енопками меню торговли
     public GameObject TradeMenu;
 
     //Объект с кнопками, присутвующими на экране во время игры
@@ -96,14 +97,16 @@ public class GameCanvas : MonoBehaviour
     //открыто ли уже онкно со зданиями и на какой вьюхе
     private int openedBuilds = 0;
 
+    //текущий активный игрок
     private Player currentPlayer;
 
-    public Cameras cameras;
-
+    //ответ игрока
     public bool response;
 
+    //аудиомикшер на сцене
     public AudioMixer GameMixer;
 
+    //скрипт камер
     public Cameras camerasScript;
 
     //кнопка с именем первого игрока в торговле
@@ -142,8 +145,10 @@ public class GameCanvas : MonoBehaviour
     //ИнпутФилд денег второго игрока
     public InputField InputFieldMoneySecond;
 
+    //сумма денег первого игрока (используется в торговле)
     private int moneyFirstPlayer;
 
+    //сумма денег второго игрока (используется в торговле)
     private int moneySecondPlayer;
 
     //переключение между видом от первого и от третьего лица
@@ -152,7 +157,7 @@ public class GameCanvas : MonoBehaviour
         camerasScript.ChangeCamera();
     }
 
-    //переключение ежду орто и перспективой верхней камеры
+    //переключение между орто и перспективой верхней камеры
     public void ChangeTypeOfCamera()
     {
         camerasScript.ChangeTypeOfCamera();
@@ -165,6 +170,7 @@ public class GameCanvas : MonoBehaviour
         warningWindow.SetActive(true);
     }
 
+    //отправить ответ игрока и закрыть окно предупреждения
     public void GetRespons(bool response)
     {
         getCurrentPlayer().takeResponse(response);
@@ -184,6 +190,7 @@ public class GameCanvas : MonoBehaviour
         //вывод информации, где находится игрок
         destinationText.text = "Улица: " + destination;
 
+        //если открыто меню торговли, то синхронизируем данные о деньгах игроков на слайдерах и инпутфилдах
         if (TradeMenu.active)
         {
             if (moneyFirstPlayer != (int) sliderMoneyFirst.value)
@@ -811,8 +818,10 @@ public class GameCanvas : MonoBehaviour
     //перемещает к этому игроку на карте
     private void onButtonClickPlayer(int idPlayer)
     {
-        camerasScript.moveOrtoCamera(getDbWork().GetPathById(getDbWork().GetPlayerbyId(idPlayer).GetCurrentStreetPath().GetIdStreetPath()).transform.position);
-        cameras.SetActiveFirstCamera();
+        camerasScript.moveOrtoCamera(getDbWork()
+            .GetPathById(getDbWork().GetPlayerbyId(idPlayer).GetCurrentStreetPath().GetIdStreetPath()).transform
+            .position);
+        camerasScript.SetActiveFirstCamera();
     }
 
     //открыть окно торговли с этим игроком
@@ -925,10 +934,7 @@ public class GameCanvas : MonoBehaviour
         }
     }
 
-    public void AddMoneyToTrade(Player playerOne, Player playerTwo, int price)
-    {
-    }
-
+    //отменить предложение торговли
     public void CancelTrade()
     {
         ClearTradeMenu();
@@ -1062,7 +1068,7 @@ public class GameCanvas : MonoBehaviour
     public void GoToStreetUpButton()
     {
         onButtonStreetClick(getCurrentPlayer().GetCurrentStreetPath().GetIdStreetPath());
-        cameras.SetActiveFirstCamera();
+        camerasScript.SetActiveFirstCamera();
     }
 
     public void ChangeSoundLevel(float input)

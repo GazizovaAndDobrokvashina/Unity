@@ -4,14 +4,28 @@ using UnityEngine;
 
 public class Build : MonoBehaviour
 {
+    //идентификатор здания
     private int idBuild;
+
+    //название здания
     private string nameBuild;
+
+    //дополнительная информация о здании
     private string aboutBuild;
+
+    //идентификатор улицы, на которой стоит здание
     private int idStreetPath;
+
+    //стоимость посторйки здания
     private int priceBuild;
+
+    //построено ли уже здание 
     private bool enable;
+
+    //координаты на карте 
     private Vector3 place;
-    
+
+    //построить здание
     public void build(Player player)
     {
         player.Money -= priceBuild;
@@ -19,7 +33,9 @@ public class Build : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public Build(int idBuild, string nameBuild, string aboutBuild, int idStreetPath, int priceBuild, bool enable, double posX, double posY)
+    //конструктор класса
+    public Build(int idBuild, string nameBuild, string aboutBuild, int idStreetPath, int priceBuild, bool enable,
+        double posX, double posY)
     {
         this.idBuild = idBuild;
         this.idStreetPath = idStreetPath;
@@ -27,9 +43,10 @@ public class Build : MonoBehaviour
         this.enable = enable;
         this.nameBuild = nameBuild;
         this.aboutBuild = aboutBuild;
-        this.place = new Vector3((float)posX, 0, (float)posY);
+        this.place = new Vector3((float) posX, 0, (float) posY);
     }
 
+    //заполнить данные о здании из бд
     public void TakeData(Build build)
     {
         idBuild = build.IdBuild;
@@ -76,6 +93,7 @@ public class Build : MonoBehaviour
         get { return aboutBuild; }
     }
 
+    //предоставить информацию о здании для бд
     public Builds getEntity()
     {
         return new Builds(idBuild, nameBuild, aboutBuild, idStreetPath, priceBuild, enable, place.x, place.z);

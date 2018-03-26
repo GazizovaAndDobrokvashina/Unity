@@ -16,13 +16,14 @@ public class MouseController : MonoBehaviour
     //выбранная часть улицы
     private StreetPath selectedStreetPath;
 
-    //
+    //отступ от краев экрана, на котором начинается движения камеры
     public float sensitivity = 0.5f;
 
-    //
+    //может ли камера двигаться
     private bool canMove = true;
-
-    [SerializeField] private int currentCamera;
+    
+    //какая камера активна
+    private int currentCamera;
 
     //инициализация ДБворка
     void Start()
@@ -30,7 +31,7 @@ public class MouseController : MonoBehaviour
         _dBwork = Camera.main.GetComponent<DBwork>();
     }
 
-    //
+    //движение камеры в сторону, к краю которой был приведен курсор
     void Update()
     {
         if (EventSystem.current.IsPointerOverGameObject() || Time.timeScale == 0)
@@ -74,10 +75,9 @@ public class MouseController : MonoBehaviour
         }
     }
 
-
+    //при клике на какую-нибудь улицу
     void MouseOver_Street(GameObject ourHitObject)
     {
-        // Debug.Log(_dBwork.GetPlayerbyId(1).GetCurrentStep());
         if (Input.GetMouseButton(0) && canMove && _dBwork.GetPlayerbyId(1).GetCurrentStep() && Cameras.mode != 1)
         {
             canMove = false;
@@ -103,6 +103,7 @@ public class MouseController : MonoBehaviour
         }
     }
 
+    //при клике на здание
     void MouseOver_Build(GameObject ourHitObject)
     {
         if (Input.GetMouseButton(0))
@@ -111,7 +112,8 @@ public class MouseController : MonoBehaviour
             selectedBuild = ourHitObject.GetComponent<Build>();
         }
     }
-
+    
+    //при клике на игрока
     void MouseOver_Player(GameObject ourHitObject)
     {
         if (Input.GetMouseButton(0))

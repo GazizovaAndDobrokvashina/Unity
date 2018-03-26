@@ -6,13 +6,14 @@ using UnityEngine;
 
 public class Bot : Player
 {
-    private int price = 80; 
-    
+    //сумма, которую компьютерный игрок готов предложить в торговле
+    private int price = 80;
+
+    //следующий ход компьютерного игрока
     public override void NextStep()
     {
         base.NextStep();
 
-        
         StartCoroutine(GoBot());
 
         if (Random.value > 0.7f)
@@ -21,6 +22,7 @@ public class Bot : Player
         }
     }
 
+    //корутина движенния бота
     private IEnumerator GoBot()
     {
         way = _dbWork.GetWay(currentStreetPath.GetIdStreetPath(), ThinkOfWay());
@@ -117,6 +119,7 @@ public class Bot : Player
         ready = true;
     }
 
+    //выбор компьютерным игроком пути
     private int ThinkOfWay()
     {
         List<int> ends = _dbWork.GetPossibleEnds(currentStreetPath.GetIdStreetPath(), maxSteps - currentSteps);
@@ -128,29 +131,24 @@ public class Bot : Player
                 return possibleEnd;
             }
         }
-        //Debug.Log(ends.Count);
-        return ends[(Random.Range(0,ends.Count-1))];
+
+        return ends[(Random.Range(0, ends.Count - 1))];
     }
 
+    //проверка, нужна ли этому игроку 
     private bool CheckIfNeed(int pathId)
     {
         List<int> monopolies = GetMyMonopolies(_dbWork.GetMyPathes(idPlayer));
 
-        if (monopolies.Contains(_dbWork.GetPathById(pathId).GetIdStreetParent()))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return monopolies.Contains(_dbWork.GetPathById(pathId).GetIdStreetParent());
     }
 
+    //получить список монополий, улицы в которых есть у игрока в наличии
     private List<int> GetMyMonopolies(List<int> mypaths)
     {
-        ShakeSomeMix(mypaths);
+        List<int> shakePaths = ShakeSomeMix(mypaths);
         List<int> monopolies = new List<int>();
-        foreach (int mypath in mypaths)
+        foreach (int mypath in shakePaths)
         {
             int id = _dbWork.GetPathById(mypath).GetIdStreetParent();
             if (!monopolies.Contains(id))
@@ -162,6 +160,7 @@ public class Bot : Player
         return monopolies;
     }
 
+    //перемешивание списков улиц игрока
     private List<int> ShakeSomeMix(List<int> array)
     {
         List<int> result = new List<int>();
@@ -174,7 +173,8 @@ public class Bot : Player
 
         return result;
     }
-    
+
+    //алгоритм, по которому компьютерный игрок принимает решение о выборе пути при нечестной игре
     private void GetCheat()
     {
         foreach (int myMonopoly in GetMyMonopolies(_dbWork.GetMyPathes(idPlayer)))
@@ -205,6 +205,7 @@ public class Bot : Player
         }
     }
 
+    //предложение о торговле от компьютерного игрока
     private void TryToTrade()
     {
         List<int> monopolies = GetMyMonopolies(_dbWork.GetMyPathes(idPlayer));
@@ -231,9 +232,9 @@ public class Bot : Player
                 break;
         }
 
-        if (trade == null) 
+        if (trade == null)
             return;
-        
+
         Player player = _dbWork.GetPlayerbyId(trade.IdPlayer);
         Trade.CreateListThings(player, this);
         Trade.AddItemToList(player, this, trade);
@@ -243,14 +244,14 @@ public class Bot : Player
             PathForBuy path = _dbWork.GetPathForBuy(streetPath.GetIdStreetPath());
             if (streetPath.CanBuy && path.GetIdStreetPath() != trade.GetIdStreetPath() &&
                 path.IdPlayer == trade.IdPlayer)
-            {   
+            {
                 Trade.AddItemToList(player, this, path);
                 count++;
             }
         }
-        
-        Trade.AddMoneyToList(player, this, count*price);
-        
+
+        Trade.AddMoneyToList(player, this, count * price);
+
         // ПРЕДЛОЖИТЬ СДЕЛКУ!!!
     }
 }

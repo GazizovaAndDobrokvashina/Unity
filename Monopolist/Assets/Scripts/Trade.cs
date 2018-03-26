@@ -64,7 +64,6 @@ public static class Trade
         {
             foreach (ThingForTrade thingForTrade in things[playerFrom.IdPlayer, playerFor.IdPlayer])
             {
-                
                 if (thingForTrade.ForWhichPlayer == playerFor && thingForTrade.FromWhichPlayer == playerFrom &&
                     thingForTrade.PathforTrade == path)
                 {
@@ -88,12 +87,13 @@ public static class Trade
     }
 
     //применение результата торговли к игровым объектам
-    public static void TradeApply(Player playerFrom, Player playerFor, GameCanvas GC, int moneyFromFirstPlayer, int moneyFromSecondPlayer)
+    public static void TradeApply(Player playerFrom, Player playerFor, GameCanvas GC, int moneyFromFirstPlayer,
+        int moneyFromSecondPlayer)
     {
         //доавление денег, которые игроки зотят передать друг другу
         AddMoneyToList(playerFrom, playerFor, moneyFromFirstPlayer);
         AddMoneyToList(playerFor, playerFrom, moneyFromSecondPlayer);
-        
+
         //очистка канвы торговли
         GC.ClearTradeMenu();
 

@@ -4,8 +4,9 @@ using System.IO;
 
 public class SaveLoad
 {
+    //имя директории
     private static string _nameFolder;
-    
+
     //загрузка названий файлов из укаанной папки
     public static List<string> loadGamesList(string nameFolder)
     {
@@ -42,18 +43,14 @@ public class SaveLoad
 #else
         DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath +"/"+ _nameFolder);
 #endif
-        Debug.Log(dir + " " +dbName);
+       
         foreach (var item in dir.GetFiles())
         {
-            
             if (item.Name.Equals(dbName))
             {
-                
-                Debug.Log("Нашел!");
                 item.Delete();
                 break;
             }
         }
     }
-
 }

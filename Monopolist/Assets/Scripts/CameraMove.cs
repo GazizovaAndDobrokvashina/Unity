@@ -11,14 +11,22 @@ public class CameraMove : MonoBehaviour
     //максимальная высота
     private float maxHeigth;
 
+    //коэффициенты для перемещения камеры
     float k1, k2, k3, k4, b;
 
-
+    //ограничение слева
     float leftRestriction;
+
+    //ограничение справа
     float rightRestriction;
+
+    //ограничение сверху
     float upRestriction;
+
+    //ограничение снизу
     float downRestriction;
 
+    //установить ограничения движения камеры
     public void setRestrictions(float maxHeigth, float left, float right, float up, float down)
     {
         leftRestriction = left;
@@ -26,11 +34,6 @@ public class CameraMove : MonoBehaviour
         upRestriction = up;
         downRestriction = down;
         this.maxHeigth = maxHeigth;
-//		if (MapInfo.current.gridWidth > MapInfo.current.gridHeigth) {
-//			maxHeigth = MapInfo.current.gridHeigth * 133/ (upRestriction);
-//		} else {
-//			maxHeigth = MapInfo.current.gridWidth * 133/ (leftRestriction);
-//		}
 
         k1 = maxHeigth / rightRestriction;
         k2 = maxHeigth / upRestriction;
@@ -40,13 +43,11 @@ public class CameraMove : MonoBehaviour
         b = maxHeigth + 10;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Cameras.mode == 1) 
+        if (Cameras.mode == 1)
             return;
-        
-        //Debug.Log(transform.position.x + " " + transform.position.z + " " + upRestriction + " " + downRestriction);
+
         if ((transform.position.x >= leftRestriction) && ((int) Input.mousePosition.x < 2))
             transform.position -= transform.right * Time.deltaTime * speed;
 

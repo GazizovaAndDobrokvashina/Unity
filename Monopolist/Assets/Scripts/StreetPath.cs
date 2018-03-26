@@ -3,31 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StreetPath : MonoBehaviour
-{    
+{
     //айди части улицы
     protected int idStreetPath;
+
     //айди родительской улицы
     protected int idStreetParent;
+
     //плата других игроков владельцу этой части улицы
     protected int renta;
+
     //координаты начала улицы
     public Vector3 start;
+
     //координаты конца улицы
     public Vector3 end;
+
     //является ли мостом часть улицы
     public bool isBridge;
+
     //список соседей улицы
     public int[] neighborsId;
 
+    //название участка
     public string namePath;
 
+    //можно ли приобрести
     public bool canBuy;
-    
+
+    //возврат названия улицы
     public string NamePath
     {
         get { return namePath; }
     }
 
+    //возврат значения о возможности покупки
     public bool CanBuy
     {
         get { return canBuy; }
@@ -38,8 +48,8 @@ public class StreetPath : MonoBehaviour
     public void StepOnMe(int idPlayer)
     {
     }
-    
-    //
+
+    //получить информацию об улице из бд
     public void TakeData(StreetPath streetPath)
     {
         this.idStreetParent = streetPath.GetIdStreetParent();
@@ -51,8 +61,8 @@ public class StreetPath : MonoBehaviour
         this.namePath = streetPath.namePath;
         this.CanBuy = streetPath.canBuy;
     }
-    
-    //нахождение сосених частей улиц с этой
+
+    //нахождение соседних частей улиц с этой
     public void GetNeighbors()
     {
         DBwork ds = Camera.main.GetComponent<DBwork>();
@@ -68,30 +78,31 @@ public class StreetPath : MonoBehaviour
                 neighs.Add(streetPaths[i].idStreetPath);
             }
         }
+
         neighborsId = neighs.ToArray();
-        
     }
-    
+
     //возврат Айдишника этой части улицы
     public int GetIdStreetPath()
     {
         return idStreetPath;
     }
-    
+
     //Возврат айдишника родительской улицы
     public int GetIdStreetParent()
     {
         return idStreetParent;
     }
-    
+
     //возврат ренты на этой части улицы
     public int GetRenta()
     {
         return renta;
     }
-    
+
     //конструктор 
-    public StreetPath(int idStreetPath, string namePath, int idStreetParent, int renta, Vector3 start, Vector3 end, bool isBridge)
+    public StreetPath(int idStreetPath, string namePath, int idStreetParent, int renta, Vector3 start, Vector3 end,
+        bool isBridge)
     {
         this.idStreetPath = idStreetPath;
         this.idStreetParent = idStreetParent;
@@ -101,13 +112,14 @@ public class StreetPath : MonoBehaviour
         this.isBridge = isBridge;
         this.namePath = namePath;
     }
-    
+
     //возврат айдишников соседей
     public int[] NeighborsId
     {
         get { return neighborsId; }
     }
 
+    //вернуть значение улицы
     public StreetPaths getEntity()
     {
         return new StreetPaths(idStreetPath, idStreetParent, namePath, renta, start.x, end.x, start.z, end.z, isBridge);

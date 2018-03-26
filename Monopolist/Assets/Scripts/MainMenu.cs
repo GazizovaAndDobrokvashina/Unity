@@ -32,7 +32,8 @@ public class MainMenu : MonoBehaviour
 
     //поле для ввода нового названия игры
     public InputField InputFieldNameOfGame;
-
+    
+    //поле для ввода имени игрока
     public InputField InputFieldPlayerName;
 
     //слайдер количества игроков
@@ -52,7 +53,8 @@ public class MainMenu : MonoBehaviour
 
     //вывод названия выбранного города
     public Text NameOfTown;
-
+    
+    //поле для вывода имени игрока
     public Text NamePlayerText;
 
     //вьюха для отображения кнопок с сохранениями
@@ -69,8 +71,8 @@ public class MainMenu : MonoBehaviour
 
     //минимальное количество игроков
     private int mincountOfPlayers = 1;
-    
-    //
+
+    //аудиомикшер звука
     public AudioMixer MainMenuMixer;
 
     //название игры
@@ -84,7 +86,8 @@ public class MainMenu : MonoBehaviour
 
     //онлайн или оффлайн игра
     private bool online = false;
-
+    
+    //имя игрока
     private string namePlayer = "Jonny";
 
     //инициализация главного меню
@@ -94,6 +97,7 @@ public class MainMenu : MonoBehaviour
         {
             Destroy(GameObject.FindGameObjectWithTag("MainCamera"));
         }
+
         //задаем значения для слайдера количества игроков
         sliderCountOfPlayers.minValue = mincountOfPlayers;
         sliderCountOfPlayers.maxValue = maxcountOfPlayers;
@@ -111,6 +115,7 @@ public class MainMenu : MonoBehaviour
         countOfPlayersText.text = "Количество игроков: " + (int) sliderCountOfPlayers.value;
     }
     
+    //изменение названия игры
     public void ChangeNameOfGPlyer()
     {
         if (InputFieldPlayerName.text.Length != 0)
@@ -120,7 +125,7 @@ public class MainMenu : MonoBehaviour
 
         NamePlayerText.text = "Ваше имя: " + namePlayer;
     }
-    
+
     //создание кнопок сохранений
     private void CreateButtonsSaves()
     {
@@ -133,21 +138,12 @@ public class MainMenu : MonoBehaviour
             prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text = dbName;
             Button b = prefButtons.GetChild(0).GetComponent<Button>();
             b.onClick.AddListener(() => onButtonClickLoadGame(dbName));
-            
+
             prefButtons.GetChild(1).GetComponent<Button>().GetComponentInChildren<Text>().text = "X";
             b = prefButtons.GetChild(1).GetComponent<Button>();
-            b.onClick.AddListener(() => DeleteGame(dbName, prefButtons.gameObject));          
+            b.onClick.AddListener(() => DeleteGame(dbName, prefButtons.gameObject));
         }
-        
-//        foreach (string dbName in namesSavedGames)
-//        {
-//            Transform but = Instantiate(button) as Transform;
-//            but.SetParent(scrollSavedGames.content, false);
-//            //RectTransform tr = but.GetComponent<RectTransform>();
-//            but.GetComponentInChildren<Text>().text = dbName;
-//            Button b = but.GetComponent<Button>();
-//            b.onClick.AddListener(() => onButtonClickLoadGame(dbName));
-//        }
+
     }
 
     //создание кнопок городов
@@ -194,7 +190,6 @@ public class MainMenu : MonoBehaviour
     {
         SaveLoad.deleteGame(dbName);
         Destroy(pref);
-        
     }
 
     //действия при клике кнопки города
@@ -223,10 +218,10 @@ public class MainMenu : MonoBehaviour
             .CreateNewGame(countOfPlayers, startMoney, newNameGame, online, nameTownForNewGame, namePlayer);
         if (Trade.things == null)
         {
-            Trade.things = new List<ThingForTrade>[countOfPlayers,countOfPlayers];
+            Trade.things = new List<ThingForTrade>[countOfPlayers, countOfPlayers];
         }
+
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
-       
     }
 
     //изменить название игры
@@ -345,6 +340,7 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    //изменение уровня громкости звуков в главном меню
     public void ChangeVolumeLevel(float input)
     {
         MainMenuMixer.SetFloat("Volume", input);

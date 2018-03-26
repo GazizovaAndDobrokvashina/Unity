@@ -33,7 +33,6 @@ public class Ways
 
         foreach (StreetPath path in streetPaths)
         {
-            
             _queues[path.GetIdStreetPath(), path.GetIdStreetPath()] = new Queue<int>();
             if (path.GetIdStreetPath() == 0)
                 continue;
@@ -110,9 +109,7 @@ public class Ways
         using (dir)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<int>[][]));
-          convertToWays((List<int>[][]) serializer.Deserialize(dir));
-            
-           // _queues = (Queue<int>[,]) serializer.Deserialize(dir);
+            convertToWays((List<int>[][]) serializer.Deserialize(dir));
         }
 
         return true;
@@ -140,53 +137,44 @@ public class Ways
         using (dir)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<int>[][]));
-            Debug.Log("before");
             serializer.Serialize(dir, list);
-            Debug.Log("after");
         }
     }
 
+    //преобразовать в очереди в листы
     private List<int>[][] convertToList()
     {
         List<int>[][] list = new List<int>[_queues.GetLongLength(1)][];
-        
-        for (int i = 0; i <_queues.GetLongLength(1); i++)
+
+        for (int i = 0; i < _queues.GetLongLength(1); i++)
         {
             list[i] = new List<int>[_queues.GetLongLength(1)];
-            if(i==0)
+            if (i == 0)
                 continue;
             for (int j = 0; j < _queues.GetLongLength(1); j++)
             {
-                if(j==0)
+                if (j == 0)
                     continue;
-//                string res = "";
-//                foreach (int i1 in new List<int>(_queues[i,j]))
-//                {
-//                    res += " " + i1;
-//                }
-//                
-//                list[i][ j] = res;
-                list[i][j] = new List<int>(_queues[i,j]);
+                list[i][j] = new List<int>(_queues[i, j]);
             }
         }
 
         return list;
     }
 
+    //преобразовать листы в очереди
     private void convertToWays(List<int>[][] list)
     {
-        Debug.Log(list[1].Length);
         _queues = new Queue<int>[list.Length, list.Length];
-        for (int i = 1; i <_queues.GetLongLength(1); i++)
+        for (int i = 1; i < _queues.GetLongLength(1); i++)
         {
             for (int j = 1; j < _queues.GetLongLength(1); j++)
             {
-                _queues[i,j] = new Queue<int>();
+                _queues[i, j] = new Queue<int>();
                 foreach (int i1 in list[i][j])
                 {
-                    _queues[i,j].Enqueue(i1);
+                    _queues[i, j].Enqueue(i1);
                 }
-                
             }
         }
     }

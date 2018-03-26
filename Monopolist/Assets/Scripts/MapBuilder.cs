@@ -10,7 +10,7 @@ public class MapBuilder : MonoBehaviour
 
     //префаб бота
     public GameObject emptyBot;
-
+    //префаб дома
     public GameObject emptyBuild;
 
     //создание и заполнение карты, основываясь на данных из базы данных
@@ -62,20 +62,6 @@ public class MapBuilder : MonoBehaviour
         }
 
         Player[] players = data.GetAllPlayers();
-
-//        GameObject newPlayer = Instantiate(emptyPlayer) as GameObject;
-//        newPlayer.GetComponent<Player>().GetData(players[1]);
-//        newPlayer.transform.position = players[1].Destination;
-//        data.updatePlayer(newPlayer.GetComponent<Player>());
-//        
-//
-//        for (int j = 2; j < players.Length; j++)
-//        {
-//            GameObject newBot = Instantiate(emptyBot) as GameObject;
-//            newBot.GetComponent<Player>().GetData(players[j]);
-//            newBot.transform.position = players[j].Destination;
-//            data.updatePlayer(newBot.GetComponent<Player>());
-//        }
 
         for (int j = 1; j < players.Length; j++)
         {

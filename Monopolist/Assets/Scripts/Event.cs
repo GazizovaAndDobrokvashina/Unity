@@ -1,17 +1,26 @@
-﻿
-public class Event
+﻿public class Event
 {
+    //идентификатор события
     private int id;
+
+    //информация о событии
     private string info;
-    private string name;
+
+    //название события
+    private string nameE;
+
+    //стоимость события
     private int price;
+
+    //идентификатор улицы, на которой это событие может произойти
     private int idGovermentPath;
 
-    public Event(int id, string info, string name, int price, int idGovermentPath)
+    //конструктор класса
+    public Event(int id, string info, string nameE, int price, int idGovermentPath)
     {
         this.id = id;
         this.info = info;
-        this.name = name;
+        this.nameE = nameE;
         this.price = price;
         this.idGovermentPath = idGovermentPath;
     }
@@ -28,7 +37,7 @@ public class Event
 
     public string Name
     {
-        get { return name; }
+        get { return nameE; }
     }
 
     public int Price
@@ -43,6 +52,6 @@ public class Event
 
     public Events getEntity()
     {
-        return new Events(id, name, info, price, idGovermentPath);
+        return new Events(id, nameE, info, price, idGovermentPath);
     }
 }
