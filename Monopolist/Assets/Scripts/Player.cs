@@ -100,12 +100,6 @@ public class Player : MonoBehaviour
         get { return nickName; }
     }
 
-    //получить игровую канву
-    public GameCanvas GetGameCanvas()
-    {
-        return _gameCanvas;
-    }
-
     //получить улицу, на которой стоит игрок
     public StreetPath GetCurrentStreetPath()
     {
@@ -116,6 +110,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         _gameCanvas = transform.Find("/Canvas").GetComponent<GameCanvas>();
+        if (idPlayer == 1)
         CurrentStep = true;
     }
 

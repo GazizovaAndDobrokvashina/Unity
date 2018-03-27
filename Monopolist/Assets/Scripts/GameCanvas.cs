@@ -298,6 +298,39 @@ public class GameCanvas : MonoBehaviour
         }
     }
 
+    public void CloseScroll(int idScroll)
+    {
+        
+        if (idScroll == 1)
+        {
+            ChooseScrollView(ScrollRectFirst, 1, -1);
+            resetOpenParametr(1);
+        } else if (idScroll == 2)
+        {
+            ChooseScrollView(ScrollRectSecond, 1, -1);
+            resetOpenParametr(2);
+        }
+        else
+        {
+            ChooseScrollView(ScrollRectThird, 1, -1);
+            resetOpenParametr(3);
+        }
+    }
+
+    private void resetOpenParametr(int number)
+    {
+        if (openedStreets == number)
+        {
+            openedStreets = 0;
+        } else if (openedPlayers == number)
+        {
+            openedPlayers = 0;
+        }
+        else
+        {
+            openedBuilds = 0;
+        }
+    }
     //открыть список игроков
     public void OpenPlayersList()
     {
@@ -778,14 +811,14 @@ public class GameCanvas : MonoBehaviour
                            "Владелец: " + getDbWork().GetPlayerbyId(pathForBuy.IdPlayer).NickName +
                            "\n" + "Рента: " + pathForBuy.GetRenta() + "\n" + "Здания: " + pathForBuy.GetBuildsName()
                            + "\n\n Информация об улице: " +
-                           getDbWork().getStreetById(pathForBuy.GetIdStreetParent()).AboutStreet1;
+                           getDbWork().getStreetById(pathForBuy.GetIdStreetParent()).AboutStreet;
                 }
                 else
                 {
                     StreetPath path = getDbWork().GetPathById(id);
                     info = "Название: " + path.namePath + "\n" +
                            "Гос. учереждение \n\n Информация об улице: " +
-                           getDbWork().getStreetById(path.GetIdStreetParent()).AboutStreet1;
+                           getDbWork().getStreetById(path.GetIdStreetParent()).AboutStreet;
                 }
 
                 break;

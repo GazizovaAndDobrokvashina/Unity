@@ -201,7 +201,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   ready: 0
-  CurrentStep: 0
 --- !u!114 &114894409230501366
 MonoBehaviour:
   m_ObjectHideFlags: 1

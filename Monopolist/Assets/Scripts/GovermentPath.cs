@@ -48,7 +48,7 @@ public class GovermentPath : StreetPath, GovermantBuild
 
         if (idPlayer == 1)
         {
-            _gameCanvas = dBwork.GetPlayerbyId(idPlayer).GetGameCanvas();
+            _gameCanvas = transform.Find("/Canvas").GetComponent<GameCanvas>();
             _gameCanvas.ShowInfoAboutEvent(newEvent.Name + "\n" + newEvent.Info + "\n" + "Стоимость: " +
                                            newEvent.Price);
         }

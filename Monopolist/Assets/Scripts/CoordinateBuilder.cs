@@ -22,7 +22,7 @@ public class CoordinateBuilder : EditorWindow {
 		NameOfDB = EditorGUILayout.TextField("Name Of DB", NameOfDB);
 		
 		parentOfPoints = (Transform)EditorGUILayout.ObjectField("Parent Object For Points", parentOfPoints , typeof(Transform));	
-		parentOfBuilds = (Transform)EditorGUILayout.ObjectField("Parent Object For Builds", parentOfPoints , typeof(Transform));
+		parentOfBuilds = (Transform)EditorGUILayout.ObjectField("Parent Object For Builds", parentOfBuilds , typeof(Transform));
 
 		if (GUILayout.Button("Get Coordinates"))
 		{
@@ -41,18 +41,129 @@ public class CoordinateBuilder : EditorWindow {
 				Match result =regex.Match(child.name);
 				foreach (Group resultGroup in result.Groups)
 				{
-					regex = new Regex(@"(?<name>\w+)_(?<number>\d+)_(?<IsBridge>\w)_(?<IsEnd>\w)_(?<renta>\d+)");
+					regex = new Regex(@"(?<name>\w+)_(?<number>\d+)_(?<IsBridge>\w)_(?<IsEnd>\w)_(?<renta>\d+)_(?<price>\d+)");
 					Match m = regex.Match(resultGroup.Value);
 					if (!streets.Contains(m.Groups["name"].Value))
 					{
 						streets.Add(m.Groups["name"].Value);
 					}
-					// нужен иф, в котором проверяем есть ли такой кусок улицы и если есть, добавить координаты начала или конца (тоже иф на это)
-					paths.Add(new StreetPaths{Renta = int.Parse(m.Groups["renta"].Value), NamePath = m.Groups["name"].Value + " " + m.Groups["nunber"].Value, IdStreetParent = 1, StartX = 5.63, StartY = -5.64, EndX = -1.57, EndY = -5.64, IsBridge = false});
+					string nameOfPath = m.Groups["name"].Value;
+					Debug.Log(m.Groups["name"].Value + " " +  m.Groups["renta"].Value);
+					int itWas = IfExist(paths, nameOfPath);
+					if (itWas != -1)
+					{
+						if (m.Groups["IsEnd"].Value.Equals("н"))
+						{
+							paths[itWas].StartX = child.position.x;
+							paths[itWas].StartY = child.position.z;
+						}
+						else
+						{
+							paths[itWas].EndX = child.position.x;
+							paths[itWas].EndY = child.position.z;
+						}
+					}
+					else
+					{
+						if (m.Groups["IsEnd"].Value.Equals("н"))
+						{
+							paths.Add(new StreetPaths
+							{
+								Renta = int.Parse(m.Groups["renta"].Value),
+								NamePath = nameOfPath,
+								IdStreetParent = streets.IndexOf(m.Groups["name"].Value)+1,
+								StartX = child.position.x,
+								StartY = child.position.z,
+								IsBridge = m.Groups["IsBridge"].Value.Equals("м")
+							});
+						}
+						else
+						{
+							//Debug.Log(m.Groups["name"].Value + " " +  m.Groups["renta"].Value);
+							paths.Add(new StreetPaths
+							{								
+								Renta = int.Parse(m.Groups["renta"].Value),
+								NamePath = nameOfPath,
+								IdStreetParent = streets.IndexOf(m.Groups["name"].Value)+1,
+								EndX = child.position.x,
+								EndY = child.position.z,
+								IsBridge = m.Groups["IsBridge"].Value.Equals("м")
+							});
+						}
+						itWas = paths.Count;
+
+						if (int.Parse(m.Groups["price"].Value) != 0)
+						{
+							pathsForBuys.Add(new PathsForBuy{IdPathForBuy = itWas, IdPlayer = 0, PriceStreetPath = int.Parse(m.Groups["price"].Value)});
+						}
+					}
+					
 				}
 			}
+			
+			
+			Streets[] streetses = new Streets[streets.Count];
+			for (int i = 0; i < streetses.Length; i++)
+			{
+				streetses[i] = new Streets {NameStreet = streets[i], AboutStreet = ""};
+			}
+
+			for (int i = 0; i < parentOfBuilds.childCount; i++)
+			{
+				Transform child = parentOfBuilds.GetChild(i);
+				
+					child.name += "_100";
+				
+				
+				Regex regex = new Regex(@"(?<name>Дом на \w+ \d+.\d+)_(?<price>\d+)");
+				Match result = regex.Match(child.name);
+				
+				buildses.Add(new Builds{
+					NameBuild = result.Groups["name"].Value,
+					AboutBuild = "Жилой дом",
+					Enabled = false,
+					IdStreetPath = GetPathForBuy(paths, result.Groups["name"].Value),
+					PriceBuild = int.Parse(result.Groups["price"].Value),
+					posX = child.position.x,
+					posY = child.position.z
+				});
+
+			}
+
+			StreetPaths[] path = paths.ToArray();
+			PathsForBuy[] forBuy = pathsForBuys.ToArray();
+			Builds[] builds = buildses.ToArray();
+			
+			service.FullTables(streetses,path, forBuy, builds);
 		}
 	}
-	
-	
+
+	private int IfExist(List<StreetPaths> paths, string name)
+	{
+		foreach (StreetPaths streetPath in paths)
+		{
+			if (streetPath.NamePath.Equals(name))
+				return paths.IndexOf(streetPath);
+		}
+
+		return -1;
+	}
+
+	private int GetPathForBuy(List<StreetPaths> streetses, string name)
+	{
+		Regex regex = new Regex(@"Дом на (?<name>\w+) (?<number>\d+).\d+");
+		Match m = regex.Match(name);
+		string part = m.Groups["name"].Value;
+		part = part.Substring(0, part.Length - 2);
+
+		
+		Regex find = new Regex(part + @"\w+ " + m.Groups["number"]);
+		for (int i = 0; i < streetses.Count; i++)
+		{
+			if (find.IsMatch(streetses[i].NamePath))
+				return i + 1;
+		}
+
+		return -1;
+	}
 }

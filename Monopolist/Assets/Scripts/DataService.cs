@@ -104,6 +104,18 @@ public class DataService
         _connection.InsertAll(events);
     }
 
+    public void FullTables(Streets[] streetses, StreetPaths[] streetPathses, PathsForBuy[] pathsForBuys,
+        Builds[] buildses)
+    {
+        
+        CreateTables();
+        
+        _connection.InsertAll(streetses);
+        _connection.InsertAll(streetPathses);
+        _connection.InsertAll(pathsForBuys);
+        _connection.InsertAll(buildses);
+    }
+
     public void AddPlayer(Player player)
     {
         _connection.Insert(player.getEntity());

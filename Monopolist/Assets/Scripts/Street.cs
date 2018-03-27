@@ -26,24 +26,24 @@ public class Street : MonoBehaviour
     }
 
 
-    public int IdStreet1
+    public int IdStreet
     {
         get { return idStreet; }
     }
 
-    public string NameStreet1
+    public string NameStreet
     {
         get { return nameStreet; }
     }
 
     //получить дополнительную информацию о монополии
-    public string AboutStreet1
+    public string AboutStreet
     {
         get { return aboutStreet; }
     }
 
     //получить массив участков, принадлежащих этой монополии
-    public int[] Paths1
+    public int[] Paths
     {
         get { return paths; }
     }

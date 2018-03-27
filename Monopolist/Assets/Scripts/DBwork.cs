@@ -74,13 +74,6 @@ public class DBwork : MonoBehaviour
         names.Add("Гундермурд Сигурдфлордбрадсен");
     }
 
-    public void DBStart()
-    {
-        dataService = new DataService("Monopolist.db");
-        if (!dataService.IsExist())
-            dataService.CreateDB();
-    }
-
     public void SetGameDB(string dbName)
     {
         dataService = new DataService(dbName);
@@ -89,37 +82,10 @@ public class DBwork : MonoBehaviour
         nameOfGane = dbName.Substring(dbName.IndexOf("_") + 1);
     }
 
-    //возврат части улицы исходя из её координат
-    public StreetPath GetPathByCoordinates(Vector3 coordinate)
-    {
-        foreach (StreetPath path in paths)
-        {
-            if (path.GetIdStreetPath() != 0 &&
-                (coordinate.Equals(path.end) || (path.isBridge && coordinate.Equals(path.start))))
-            {
-                return path;
-            }
-        }
-
-        return null;
-    }
-
     //получить здание по идентификатору
     public Build GetBuild(int id)
     {
         return builds[id];
-    }
-
-    //получить улицу по идентификатору здания
-    public PathForBuy GetPathOfBuild(int id)
-    {
-        foreach (PathForBuy pathForBuy in pathForBuys)
-        {
-            if (pathForBuy.GetIdStreetPath() == (builds[id].IdStreetPath))
-                return pathForBuy;
-        }
-
-        return null;
     }
 
     //получить монополию по её идентификатору
@@ -131,7 +97,7 @@ public class DBwork : MonoBehaviour
     //принадлежат ли все участки в монополии одному игроку
     public bool isAllPathsMine(int buildId, int playerId)
     {
-        foreach (int i in getStreetById(GetPathById(GetBuild(buildId).IdStreetPath).GetIdStreetParent()).Paths1)
+        foreach (int i in getStreetById(GetPathById(GetBuild(buildId).IdStreetPath).GetIdStreetParent()).Paths)
         {
             if (GetPathById(i).canBuy && GetPathForBuy(i).IdPlayer != playerId)
                 return false;
@@ -360,26 +326,6 @@ public class DBwork : MonoBehaviour
         return ways.Queues[startId, endId];
     }
 
-    //
-    public Queue<int> GetWayOfSteps(int startId, int steps)
-    {
-        Queue<int> queue = new Queue<int>();
-        int count = 0;
-
-        for (int i = 1; i < paths.Length; i++)
-        {
-            if (ways.Queues[startId, i].Count == steps)
-                return ways.Queues[startId, i];
-            if (ways.Queues[startId, i].Count > count)
-            {
-                count = ways.Queues[startId, i].Count;
-                queue = ways.Queues[startId, i];
-            }
-        }
-
-        return queue;
-    }
-
     //получить список идентификаторов улиц, на которые можно пойти
     public List<int> GetPossibleEnds(int startId, int steps)
     {
@@ -430,17 +376,6 @@ public class DBwork : MonoBehaviour
         }
     }
 
-    //
-    public void UpdatePath(GovermentPath path)
-    {
-        paths[path.GetIdStreetPath()] = path;
-        for (int i = 0; i < govermentPaths.Count; i++)
-        {
-            if (govermentPaths[i].GetIdStreetPath() == path.GetIdStreetPath())
-                govermentPaths[i] = path;
-        }
-    }
-
     //возврат части улицы по её айдишнику
     public StreetPath GetPathById(int id)
     {
@@ -482,12 +417,13 @@ public class DBwork : MonoBehaviour
     {
         List<Build> buildes = new List<Build>();
 
-        foreach (Build build in this.builds)
+        int[] builds = GetPathForBuy(idPath).Builds;
+        
+        foreach (int i in builds)
         {
-            if (build.IdStreetPath == idPath)
-            {
-                buildes.Add(build);
-            }
+            
+                buildes.Add(this.builds[i]);
+            
         }
 
         return buildes.ToArray();
@@ -513,12 +449,10 @@ public class DBwork : MonoBehaviour
     public List<StreetPath> GetPathsOfStreet(int id)
     {
         List<StreetPath> paths = new List<StreetPath>();
-        for (int i = 1; i < paths.Count; i++)
+        int[] pathes = streets[id].Paths;
+        for (int i = 0; i < pathes.Length; i++)
         {
-            if (paths[i].GetIdStreetParent() == id)
-            {
-                paths.Add(paths[i]);
-            }
+            paths.Add(this.paths[pathes[i]]);
         }
 
         return paths;

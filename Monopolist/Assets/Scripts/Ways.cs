@@ -16,7 +16,7 @@ public class Ways
     //конструктор, создает пути, если они ещё не созданы по массиву улиц, и загружает уже готовый массив, если таковой имеется
     public Ways(String nameOfTown, StreetPath[] streetPaths)
     {
-        //прописать подгрузку с файла
+        
 
         if (!GetWays(nameOfTown))
         {

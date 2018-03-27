@@ -23,6 +23,7 @@ public class MouseController : MonoBehaviour
     private bool canMove = true;
     
     //какая камера активна
+    [SerializeField]
     private int currentCamera;
 
     //инициализация ДБворка
