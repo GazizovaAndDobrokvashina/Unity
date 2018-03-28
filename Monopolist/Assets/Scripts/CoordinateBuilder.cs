@@ -37,11 +37,11 @@ public class CoordinateBuilder : EditorWindow {
 			for (int i = 0; i < parentOfPoints.childCount; i++)
 			{
 				Transform child = parentOfPoints.GetChild(i);
-				Regex regex = new Regex(@"()/()+");
+				Regex regex = new Regex(@"(\w+_\d+_\w_\w_\d+_\d+)(/\w+_\d+_\w_\w_\d+_\d+)+");
 				Match result =regex.Match(child.name);
 				foreach (Group resultGroup in result.Groups)
 				{
-					regex = new Regex(@"(?<name>\w+)_(?<number>\d+)_(?<IsBridge>\w)_(?<IsEnd>\w)_(?<renta>\d+)_(?<price>\d+)");
+					regex = new Regex(@"/*(?<name>\w+)_(?<number>\d+)_(?<IsBridge>\w)_(?<IsEnd>\w)_(?<renta>\d+)_(?<price>\d+)");
 					Match m = regex.Match(resultGroup.Value);
 					if (!streets.Contains(m.Groups["name"].Value))
 					{

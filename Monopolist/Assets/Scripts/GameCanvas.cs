@@ -150,7 +150,15 @@ public class GameCanvas : MonoBehaviour
 
     //сумма денег второго игрока (используется в торговле)
     private int moneySecondPlayer;
+    
+    //идентификатор улицы, информацию о которой нужно показать
+    private int idStreetWhichOPened;
 
+    public void OpenBuilds()
+    {
+        OpenBuildsList(idStreetWhichOPened);
+    }
+    
     //переключение между видом от первого и от третьего лица
     public void ChangeCamera()
     {
@@ -679,6 +687,7 @@ public class GameCanvas : MonoBehaviour
         {
             currentIdPath = idPath;
             buildsButton.SetActive(true);
+            idStreetWhichOPened = idPath;
             ImportantInfoAboutStreetText.transform.parent.gameObject.SetActive(true);
 
             PathForBuy pathForBuy = getDbWork().GetPathForBuy(idPath);
