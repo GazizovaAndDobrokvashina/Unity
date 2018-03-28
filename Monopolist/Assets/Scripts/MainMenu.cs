@@ -39,8 +39,8 @@ public class MainMenu : MonoBehaviour
     //слайдер количества игроков
     public Slider sliderCountOfPlayers;
 
-    //слайдер громкости звука
-    public Slider sliderSoundVolume;
+    //
+    public Transform buttonTown;
 
     //слайдер громкости музыки
     public Slider sliderMusicVolume;
@@ -149,16 +149,15 @@ public class MainMenu : MonoBehaviour
     //создание кнопок городов
     private void CreateButtonTowns()
     {
-        List<string> townsList = SaveLoad.loadGamesList("StreamingAssets");
-//        foreach (string nameTown in townsList)
-//        {
-//            Transform but = Instantiate(buttonTowns) as Transform;
-//            but.SetParent(scrollTowns.content, false);
-//            //RectTransform tr = but.GetComponent<RectTransform>();
-//            but.GetComponentInChildren<Text>().text = nameTown;
-//            Button b = but.GetComponent<Button>();
-//            b.onClick.AddListener(() => onButtonClickChoseTown(nameTown));
-//        }
+        List<string> townsList = SaveLoad.loadGamesList("Resources");
+        foreach (string nameTown in townsList)
+        {
+            Transform but = Instantiate(buttonTown) as Transform;
+            but.SetParent(scrollTowns.content, false);
+            but.GetComponentInChildren<Text>().text = nameTown;
+            Button b = but.GetComponent<Button>();
+            b.onClick.AddListener(() => onButtonClickChoseTown(nameTown));
+        }
     }
 
     //открыть меню создания новой игры

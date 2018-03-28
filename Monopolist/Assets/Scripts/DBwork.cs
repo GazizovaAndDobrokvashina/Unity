@@ -269,29 +269,39 @@ public class DBwork : MonoBehaviour
     public void CreateNewGame(int countOfPlayers, int startMoney, string NameOfGame, bool online, string nameOfTown,
         string nickName)
     {
-        if (string.IsNullOrEmpty(nameOfTown))
-        {
-            nameOfTown = "Monopolist.db";
-        }
-
-        if (NameOfGame.Length != 0 && !NameOfGame.EndsWith(".db"))
-        {
-            dataService = new DataService(nameOfTown + "_" + NameOfGame + ".db");
-            nameOfGane = NameOfGame + ".db";
-        }
-        else if (NameOfGame.Length != 0 && NameOfGame.EndsWith(".db"))
-        {
-            dataService = new DataService(nameOfTown + "_" + NameOfGame);
-            nameOfGane = NameOfGame;
-        }
-        else
-        {
-            dataService = new DataService(nameOfTown + "_Firstgame.db");
-            nameOfGane = "Firstgame.db";
-        }
-
-        if (!dataService.IsExist())
-            dataService.CreateDB();
+        
+#if UNITY_EDITOR
+        File.Copy(@"Assets\Resources\" + nameOfTown, @"Assets\SavedGames\" + nameOfTown + "_" + NameOfGame + "_0.db");
+#else
+        File.Copy(Application.persistentDataPath + @"\Resources\" + nameOfTown, Application.persistentDataPath +@"/SavedGames/" + nameOfTown + "_" + NameOfGame + "_0.db");
+#endif
+        
+//        if (string.IsNullOrEmpty(nameOfTown))
+//        {
+//            nameOfTown = "Monopolist.db";
+//        }
+//
+//        if (NameOfGame.Length != 0 && !NameOfGame.EndsWith(".db"))
+//        {
+//            dataService = new DataService(nameOfTown + "_" + NameOfGame + ".db");
+//            nameOfGane = NameOfGame + ".db";
+//        }
+//        else if (NameOfGame.Length != 0 && NameOfGame.EndsWith(".db"))
+//        {
+//            dataService = new DataService(nameOfTown + "_" + NameOfGame);
+//            nameOfGane = NameOfGame;
+//        }
+//        else
+//        {
+//            dataService = new DataService(nameOfTown + "_Firstgame.db");
+//            nameOfGane = "Firstgame.db";
+//        }
+//
+//        if (!dataService.IsExist())
+//            dataService.CreateDB(nameOfTown);
+        
+        dataService = new DataService(nameOfTown + "_" + NameOfGame + "_0.db");
+        nameOfGane = NameOfGame + "_0.db";
 
         GetEverithing();
         players = new Player[countOfPlayers + 1];

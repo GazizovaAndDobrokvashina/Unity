@@ -61,11 +61,13 @@ public class DataService
         Debug.Log("Final PATH: " + dbPath);
     }
 
-    public void CreateDB()
+    public void CreateDB(string nameOfTown)
     {
-        CreateTables();
+        //CreateTables();
 
-        FullTables();
+        
+        
+        //FullTables();
     }
 
     public bool IsExist()

@@ -37,66 +37,76 @@ public class CoordinateBuilder : EditorWindow {
 			for (int i = 0; i < parentOfPoints.childCount; i++)
 			{
 				Transform child = parentOfPoints.GetChild(i);
-				Regex regex = new Regex(@"(\w+_\d+_\w_\w_\d+_\d+)(/\w+_\d+_\w_\w_\d+_\d+)+");
+				Regex regex = new Regex(@"(/?\w+_\d+_\w_\w_\d+_\d+/?)*");
 				Match result =regex.Match(child.name);
 				foreach (Group resultGroup in result.Groups)
 				{
-					regex = new Regex(@"/*(?<name>\w+)_(?<number>\d+)_(?<IsBridge>\w)_(?<IsEnd>\w)_(?<renta>\d+)_(?<price>\d+)");
-					Match m = regex.Match(resultGroup.Value);
-					if (!streets.Contains(m.Groups["name"].Value))
+					
+					Debug.Log(resultGroup.Captures.Count);	
+					foreach (Capture resultGroupCapture in resultGroup.Captures)
 					{
-						streets.Add(m.Groups["name"].Value);
-					}
-					string nameOfPath = m.Groups["name"].Value;
-					Debug.Log(m.Groups["name"].Value + " " +  m.Groups["renta"].Value);
-					int itWas = IfExist(paths, nameOfPath);
-					if (itWas != -1)
-					{
-						if (m.Groups["IsEnd"].Value.Equals("н"))
+						Debug.Log(resultGroupCapture.Value);
+						regex = new Regex(@"/*(?<name>\w+)_(?<number>\d+)_(?<IsBridge>\w)_(?<IsEnd>\w)_(?<renta>\d+)_(?<price>\d+)");
+						Match m = regex.Match(resultGroupCapture.Value);
+						if (!streets.Contains(m.Groups["name"].Value))
 						{
-							paths[itWas].StartX = child.position.x;
-							paths[itWas].StartY = child.position.z;
+							streets.Add(m.Groups["name"].Value);
 						}
-						else
+						string nameOfPath = m.Groups["name"].Value +" "+ m.Groups["number"].Value;
+						int itWas = IfExist(paths, nameOfPath);
+						if (itWas != -1)
 						{
-							paths[itWas].EndX = child.position.x;
-							paths[itWas].EndY = child.position.z;
-						}
-					}
-					else
-					{
-						if (m.Groups["IsEnd"].Value.Equals("н"))
-						{
-							paths.Add(new StreetPaths
+						
+							Debug.Log(m.Groups["IsEnd"].Value+ "    " + m.Groups["IsEnd"].Value.Equals("н"));
+							if (m.Groups["IsEnd"].Value.Equals("н"))
 							{
-								Renta = int.Parse(m.Groups["renta"].Value),
-								NamePath = nameOfPath,
-								IdStreetParent = streets.IndexOf(m.Groups["name"].Value)+1,
-								StartX = child.position.x,
-								StartY = child.position.z,
-								IsBridge = m.Groups["IsBridge"].Value.Equals("м")
-							});
+								paths[itWas].StartX = child.position.x;
+								paths[itWas].StartY = child.position.z;
+							}
+							else
+							{
+								paths[itWas].EndX = child.position.x;
+								paths[itWas].EndY = child.position.z;
+							}
 						}
 						else
 						{
-							//Debug.Log(m.Groups["name"].Value + " " +  m.Groups["renta"].Value);
-							paths.Add(new StreetPaths
-							{								
-								Renta = int.Parse(m.Groups["renta"].Value),
-								NamePath = nameOfPath,
-								IdStreetParent = streets.IndexOf(m.Groups["name"].Value)+1,
-								EndX = child.position.x,
-								EndY = child.position.z,
-								IsBridge = m.Groups["IsBridge"].Value.Equals("м")
-							});
-						}
-						itWas = paths.Count;
+							Debug.Log(m.Groups["IsEnd"].Value+ "    " + m.Groups["IsEnd"].Value.Equals("н"));
+							if (m.Groups["IsEnd"].Value.Equals("н"))
+							{
+								paths.Add(new StreetPaths
+								{
+									Renta = int.Parse(m.Groups["renta"].Value),
+									NamePath = nameOfPath,
+									IdStreetParent = streets.IndexOf(m.Groups["name"].Value)+1,
+									StartX = child.position.x,
+									StartY = child.position.z,
+									IsBridge = m.Groups["IsBridge"].Value.Equals("м")
+								});
+							}
+							else
+							{
+								paths.Add(new StreetPaths
+								{								
+									Renta = int.Parse(m.Groups["renta"].Value),
+									NamePath = nameOfPath,
+									IdStreetParent = streets.IndexOf(m.Groups["name"].Value)+1,
+									EndX = child.position.x,
+									EndY = child.position.z,
+									IsBridge = m.Groups["IsBridge"].Value.Equals("м")
+								});
+							}
+							itWas = paths.Count;
 
-						if (int.Parse(m.Groups["price"].Value) != 0)
-						{
-							pathsForBuys.Add(new PathsForBuy{IdPathForBuy = itWas, IdPlayer = 0, PriceStreetPath = int.Parse(m.Groups["price"].Value)});
+							if (int.Parse(m.Groups["price"].Value) != 0)
+							{
+								pathsForBuys.Add(new PathsForBuy{IdPathForBuy = itWas, IdPlayer = 0, PriceStreetPath = int.Parse(m.Groups["price"].Value)});
+							}
 						}
 					}
+					//Debug.Log(resultGroup.Captures.Count);					
+					//Debug.Log(resultGroup.Value);
+					
 					
 				}
 			}
@@ -112,7 +122,6 @@ public class CoordinateBuilder : EditorWindow {
 			{
 				Transform child = parentOfBuilds.GetChild(i);
 				
-					child.name += "_100";
 				
 				
 				Regex regex = new Regex(@"(?<name>Дом на \w+ \d+.\d+)_(?<price>\d+)");

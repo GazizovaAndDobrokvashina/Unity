@@ -770,7 +770,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1996717101189954, guid: 0ad54a6526de9f342b8adc34c5224e08, type: 2}
       propertyPath: m_Name
-      value: "\u0421\u0440\u0435\u0442\u0435\u043D\u043A\u0430_1_\u043C_\u043A_50_100/\u0421\u0440\u0435\u0442\u0435\u043D\u043A\u0430_2_\u043C_\u043D_50_100/\u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u0430\u044F_3_\u043D_\u043A_50_100"
+      value: "\u0421\u0440\u0435\u0442\u0435\u043D\u043A\u0430_1_\u043C_\u043A_0_0/\u0421\u0440\u0435\u0442\u0435\u043D\u043A\u0430_2_\u043C_\u043D_0_0/\u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u0430\u044F_3_\u043D_\u043A_50_100"
       objectReference: {fileID: 0}
     - target: {fileID: 114019352133996020, guid: 0ad54a6526de9f342b8adc34c5224e08,
         type: 2}
@@ -894,7 +894,7 @@ GameObject:
   - component: {fileID: 87400826}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0411\u044D\u0442\u0423\u043B\u0438\u0446\u0435
-    2.2"
+    2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1316,7 +1316,7 @@ GameObject:
   - component: {fileID: 100214678}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u041C\u043E\u0432\u0441\u043A\u043E\u0439
-    4.2"
+    4.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1444,7 +1444,7 @@ GameObject:
   - component: {fileID: 101730281}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    4.1"
+    4.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1572,7 +1572,7 @@ GameObject:
   - component: {fileID: 124941721}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u041C\u043E\u0432\u0441\u043A\u043E\u0439
-    3.1"
+    3.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1700,7 +1700,7 @@ GameObject:
   - component: {fileID: 132304808}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    4.3"
+    4.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1730,7 +1730,7 @@ GameObject:
   - component: {fileID: 139097816}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u043E\u043C\u0430\u0442\u043D\u043E\u0439
-    1.6"
+    1.6_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1760,7 +1760,7 @@ GameObject:
   - component: {fileID: 142560470}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    3.5"
+    3.5_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1790,7 +1790,7 @@ GameObject:
   - component: {fileID: 144617351}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0438\u043D\u043E\u0433\u0440\u0430\u0434\u043D\u043E\u0439
-    1.6"
+    1.6_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1820,7 +1820,7 @@ GameObject:
   - component: {fileID: 146163245}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0415\u0434\u0438\u043D\u043E\u0440\u043E\u0433\u043E\u0432\u043E\u0439
-    2.2"
+    2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2144,7 +2144,7 @@ GameObject:
   - component: {fileID: 157628138}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    2.5"
+    2.5_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2205,7 +2205,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1996717101189954, guid: 0ad54a6526de9f342b8adc34c5224e08, type: 2}
       propertyPath: m_Name
-      value: "\u0412\u0430\u043A\u0430\u043D\u0434\u043E\u0432\u0430\u044F_1_\u043C_\u043A_50_100/\u0412\u0430\u043A\u0430\u043D\u0434\u043E\u0432\u0430\u044F_2_\u043C_\u043D_50_100/\u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u0430\u044F_1_\u043D_\u043A_50_100/\u0412\u0438\u043D\u043E\u0433\u0440\u0430\u0434\u043D\u0430\u044F_3_\u043D_\u043A_50_100"
+      value: "\u0412\u0430\u043A\u0430\u043D\u0434\u043E\u0432\u0430\u044F_1_\u043C_\u043A_50_100/\u0412\u0430\u043A\u0430\u043D\u0434\u043E\u0432\u0430\u044F_2_\u043C_\u043D_50_100/\u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u0430\u044F_2_\u043D_\u043D_50_100/\u0412\u0438\u043D\u043E\u0433\u0440\u0430\u0434\u043D\u0430\u044F_3_\u043D_\u043A_50_100"
       objectReference: {fileID: 0}
     - target: {fileID: 114019352133996020, guid: 0ad54a6526de9f342b8adc34c5224e08,
         type: 2}
@@ -2427,7 +2427,7 @@ GameObject:
   - component: {fileID: 176307512}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0415\u0434\u0438\u043D\u043E\u0440\u043E\u0433\u043E\u0432\u043E\u0439
-    3.2"
+    3.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2555,7 +2555,7 @@ GameObject:
   - component: {fileID: 190050075}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0415\u0434\u0438\u043D\u043E\u0440\u043E\u0433\u043E\u0432\u043E\u0439
-    1.1"
+    1.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2642,7 +2642,7 @@ GameObject:
   - component: {fileID: 220297119}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    4.2"
+    4.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2729,7 +2729,7 @@ GameObject:
   - component: {fileID: 234991935}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u043E\u0439
-    2.6"
+    2.6_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3053,7 +3053,7 @@ GameObject:
   - component: {fileID: 253686690}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0411\u0430\u043A\u043B\u0430\u0436\u0430\u043D\u043E\u0432\u043E\u0439
-    1.2"
+    1.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3083,7 +3083,7 @@ GameObject:
   - component: {fileID: 261566820}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u043E\u043C\u0430\u0442\u043D\u043E\u0439
-    1.2"
+    1.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3268,7 +3268,7 @@ GameObject:
   - component: {fileID: 283388333}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0438\u043D\u043E\u0433\u0440\u0430\u0434\u043D\u043E\u0439
-    1.5"
+    1.5_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3298,7 +3298,7 @@ GameObject:
   - component: {fileID: 288091365}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    4.3"
+    4.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3426,7 +3426,7 @@ GameObject:
   - component: {fileID: 294277751}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0438\u043D\u043E\u0433\u0440\u0430\u0434\u043D\u043E\u0439
-    2.2"
+    2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3456,7 +3456,7 @@ GameObject:
   - component: {fileID: 296082440}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    2.2"
+    2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3486,7 +3486,7 @@ GameObject:
   - component: {fileID: 313158475}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    3.3"
+    3.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3614,7 +3614,7 @@ GameObject:
   - component: {fileID: 315021502}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u042F\u0431\u043B\u043E\u0447\u043D\u043E\u0439
-    1.7"
+    1.7_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3644,7 +3644,7 @@ GameObject:
   - component: {fileID: 320610860}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    1.2"
+    1.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3674,7 +3674,7 @@ GameObject:
   - component: {fileID: 323070639}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u0430\u043D\u0434\u043E\u0432\u043E\u0439
-    2.1"
+    2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3704,7 +3704,7 @@ GameObject:
   - component: {fileID: 324107001}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u043E\u043C\u0430\u0442\u043D\u043E\u0439
-    1.3"
+    1.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3945,7 +3945,7 @@ GameObject:
   - component: {fileID: 328871113}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0415\u0434\u0438\u043D\u043E\u0440\u043E\u0433\u043E\u0432\u043E\u0439
-    1.4"
+    1.4_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4073,7 +4073,7 @@ GameObject:
   - component: {fileID: 340635669}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u043E\u0439
-    3.1"
+    3.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4397,7 +4397,7 @@ GameObject:
   - component: {fileID: 400420812}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u0430\u043D\u0434\u043E\u0432\u043E\u0439
-    1.1"
+    1.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4427,7 +4427,7 @@ GameObject:
   - component: {fileID: 402752847}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    2.6"
+    2.6_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4555,7 +4555,7 @@ GameObject:
   - component: {fileID: 426293209}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0415\u0434\u0438\u043D\u043E\u0440\u043E\u0433\u043E\u0432\u043E\u0439
-    1.5"
+    1.5_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4585,7 +4585,7 @@ GameObject:
   - component: {fileID: 436634549}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0421\u0435\u0434\u0430\u043D\u043E\u0432\u043E\u0439
-    1.3"
+    1.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4811,7 +4811,7 @@ GameObject:
   - component: {fileID: 453942417}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0421\u0435\u0434\u0430\u043D\u043E\u0432\u043E\u0439
-    1.5"
+    1.5_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5264,7 +5264,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1996717101189954, guid: 0ad54a6526de9f342b8adc34c5224e08, type: 2}
       propertyPath: m_Name
-      value: "\u0422\u043E\u043C\u0430\u0442\u043D\u0430\u044F_2_\u043D_\u043A_50_100/\u0422\u043E\u043C\u0430\u0442\u043D\u0430\u044F_3_\u043D_\u043D_50_100/\u041E\u0440\u043D\u0430\u044F_3_\u043C_\u043A_50_100"
+      value: "\u0422\u043E\u043C\u0430\u0442\u043D\u0430\u044F_2_\u043D_\u043A_50_100/\u0422\u043E\u043C\u0430\u0442\u043D\u0430\u044F_3_\u043D_\u043D_50_100/\u041E\u0440\u043D\u0430\u044F_2_\u043C_\u043A_50_100"
       objectReference: {fileID: 0}
     - target: {fileID: 114019352133996020, guid: 0ad54a6526de9f342b8adc34c5224e08,
         type: 2}
@@ -5290,7 +5290,7 @@ GameObject:
   - component: {fileID: 472809657}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u042F\u0431\u043B\u043E\u0447\u043D\u043E\u0439
-    1.10"
+    1.10_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5418,7 +5418,7 @@ GameObject:
   - component: {fileID: 486689338}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u043E\u043B\u044C\u043D\u043E\u0439
-    1.1"
+    1.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5603,7 +5603,7 @@ GameObject:
   - component: {fileID: 508520293}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    1.3"
+    1.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5633,7 +5633,7 @@ GameObject:
   - component: {fileID: 509049875}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    3.2"
+    3.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5761,7 +5761,7 @@ GameObject:
   - component: {fileID: 529994776}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u043E\u043C\u0430\u0442\u043D\u043E\u0439
-    2.2"
+    2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5791,7 +5791,7 @@ GameObject:
   - component: {fileID: 539176499}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    3.8"
+    3.8_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5850,7 +5850,7 @@ GameObject:
   - component: {fileID: 549816073}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u0430\u043D\u0434\u043E\u0432\u043E\u0439
-    3.1"
+    3.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6680,7 +6680,7 @@ GameObject:
   - component: {fileID: 580152950}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0421\u0435\u0434\u0430\u043D\u043E\u0432\u043E\u0439
-    3.1"
+    3.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7102,7 +7102,7 @@ GameObject:
   - component: {fileID: 603572328}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u042F\u0431\u043B\u043E\u0447\u043D\u043E\u0439
-    2.3"
+    2.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7132,7 +7132,7 @@ GameObject:
   - component: {fileID: 615323680}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0415\u0434\u0438\u043D\u043E\u0440\u043E\u0433\u043E\u0432\u043E\u0439
-    1.3"
+    1.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7260,7 +7260,7 @@ GameObject:
   - component: {fileID: 624999664}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u043E\u0439
-    2.1"
+    2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7388,7 +7388,7 @@ GameObject:
   - component: {fileID: 632477413}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u043E\u043B\u044C\u043D\u043E\u0439
-    2.2"
+    2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7418,7 +7418,7 @@ GameObject:
   - component: {fileID: 635330122}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    3.4"
+    3.4_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7546,7 +7546,7 @@ GameObject:
   - component: {fileID: 640079829}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u041C\u043E\u0432\u0441\u043A\u043E\u0439
-    3.3"
+    3.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7870,7 +7870,7 @@ GameObject:
   - component: {fileID: 651389963}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u042F\u0431\u043B\u043E\u0447\u043D\u043E\u0439
-    3.1"
+    3.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7929,7 +7929,7 @@ GameObject:
   - component: {fileID: 674009942}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    2.3"
+    2.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7959,7 +7959,7 @@ GameObject:
   - component: {fileID: 676143114}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0438\u043D\u043E\u0433\u0440\u0430\u0434\u043D\u043E\u0439
-    3.2"
+    3.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8087,7 +8087,7 @@ GameObject:
   - component: {fileID: 689460938}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u043E\u043C\u0430\u0442\u043D\u043E\u0439
-    1.7"
+    1.7_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8117,7 +8117,7 @@ GameObject:
   - component: {fileID: 691436810}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0421\u0435\u0434\u0430\u043D\u043E\u0432\u043E\u0439
-    2.2"
+    2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8302,7 +8302,7 @@ GameObject:
   - component: {fileID: 715238412}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0430\u043A\u0430\u043D\u0434\u043E\u0432\u043E\u0439
-    1.1"
+    1.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8332,7 +8332,7 @@ GameObject:
   - component: {fileID: 716376653}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u043E\u0439
-    3.2"
+    3.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8558,7 +8558,7 @@ GameObject:
   - component: {fileID: 744363531}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    3.1"
+    3.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8980,7 +8980,7 @@ GameObject:
   - component: {fileID: 769433303}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    2.4"
+    2.4_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9039,7 +9039,7 @@ GameObject:
   - component: {fileID: 780846063}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u042F\u0431\u043B\u043E\u0447\u043D\u043E\u0439
-    3.3"
+    3.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9294,7 +9294,7 @@ GameObject:
   - component: {fileID: 808166254}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u043E\u0439
-    1.2"
+    1.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9618,7 +9618,7 @@ GameObject:
   - component: {fileID: 824243997}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0438\u043D\u043E\u0433\u0440\u0430\u0434\u043D\u043E\u0439
-    1.2"
+    1.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9746,7 +9746,7 @@ GameObject:
   - component: {fileID: 832518470}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0411\u044D\u0442\u0423\u043B\u0438\u0446\u0435
-    1.1"
+    1.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9776,7 +9776,7 @@ GameObject:
   - component: {fileID: 839598928}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u043E\u043B\u044C\u043D\u043E\u0439
-    1.4"
+    1.4_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10100,7 +10100,7 @@ GameObject:
   - component: {fileID: 876738508}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u043E\u043C\u0430\u0442\u043D\u043E\u0439
-    1.4"
+    1.4_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10130,7 +10130,7 @@ GameObject:
   - component: {fileID: 880983252}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u042F\u0431\u043B\u043E\u0447\u043D\u043E\u0439
-    1.2"
+    1.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10319,7 +10319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 888686102}
   m_Layer: 0
-  m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041E\u0440\u043D\u043E\u0439 1.1"
+  m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041E\u0440\u043D\u043E\u0439 1.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10349,7 +10349,7 @@ GameObject:
   - component: {fileID: 890122670}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    3.1"
+    3.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10379,7 +10379,7 @@ GameObject:
   - component: {fileID: 890740682}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u043E\u0439
-    1.3"
+    1.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10507,7 +10507,7 @@ GameObject:
   - component: {fileID: 903382832}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    3.7"
+    3.7_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10568,7 +10568,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1996717101189954, guid: 0ad54a6526de9f342b8adc34c5224e08, type: 2}
       propertyPath: m_Name
-      value: "\u0411\u0430\u043A\u043B\u0430\u0436\u0430\u043D\u043E\u0432\u0430\u044F_2_\u043C_\u043A_50_100/\u0411\u0430\u043A\u043B\u0430\u0436\u0430\u043D\u043E\u0432\u0430\u044F_3_\u043C_\u043D_50_100/\u0415\u0434\u0438\u043D\u043E\u0440\u043E\u0433\u043E\u0432\u0430\u044F_3_\u043D_\u043A_50_100/\u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u0430\u044F_2_\u043D_\u043D_50_100"
+      value: "\u0411\u0430\u043A\u043B\u0430\u0436\u0430\u043D\u043E\u0432\u0430\u044F_2_\u043C_\u043A_50_100/\u0411\u0430\u043A\u043B\u0430\u0436\u0430\u043D\u043E\u0432\u0430\u044F_3_\u043C_\u043D_50_100/\u0415\u0434\u0438\u043D\u043E\u0440\u043E\u0433\u043E\u0432\u0430\u044F_3_\u043D_\u043A_50_100/\u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u0430\u044F_3_\u043D_\u043D_50_100"
       objectReference: {fileID: 0}
     - target: {fileID: 114019352133996020, guid: 0ad54a6526de9f342b8adc34c5224e08,
         type: 2}
@@ -10594,7 +10594,7 @@ GameObject:
   - component: {fileID: 906137140}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0438\u043D\u043E\u0433\u0440\u0430\u0434\u043D\u043E\u0439
-    1.3"
+    1.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10624,7 +10624,7 @@ GameObject:
   - component: {fileID: 910682997}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u043E\u0439
-    2.2"
+    2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10850,7 +10850,7 @@ GameObject:
   - component: {fileID: 919055701}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0421\u0435\u0434\u0430\u043D\u043E\u0432\u043E\u0439
-    2.3"
+    2.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10880,7 +10880,7 @@ GameObject:
   - component: {fileID: 940313943}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u0430\u043D\u0434\u043E\u0432\u043E\u0439
-    3.3"
+    3.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10967,7 +10967,7 @@ GameObject:
   - component: {fileID: 950040376}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u043E\u0439
-    2.3"
+    2.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10997,7 +10997,7 @@ GameObject:
   - component: {fileID: 952142550}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u043E\u043C\u0430\u0442\u043D\u043E\u0439
-    3.3"
+    3.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11027,7 +11027,7 @@ GameObject:
   - component: {fileID: 960157687}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0438\u043D\u043E\u0433\u0440\u0430\u0434\u043D\u043E\u0439
-    1.4"
+    1.4_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11114,7 +11114,7 @@ GameObject:
   - component: {fileID: 972296644}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0421\u0435\u0434\u0430\u043D\u043E\u0432\u043E\u0439
-    2.1"
+    2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11242,7 +11242,7 @@ GameObject:
   - component: {fileID: 976981489}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u043E\u043C\u0430\u0442\u043D\u043E\u0439
-    2.1"
+    2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11272,7 +11272,7 @@ GameObject:
   - component: {fileID: 978090794}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0421\u0435\u0434\u0430\u043D\u043E\u0432\u043E\u0439
-    3.2"
+    3.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11596,7 +11596,7 @@ GameObject:
   - component: {fileID: 999253235}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0430\u043A\u0430\u043D\u0434\u043E\u0432\u043E\u0439
-    1.2"
+    1.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11879,7 +11879,7 @@ GameObject:
   - component: {fileID: 1008370522}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0415\u0434\u0438\u043D\u043E\u0440\u043E\u0433\u043E\u0432\u043E\u0439
-    1.6"
+    1.6_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12639,7 +12639,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1060437968}
   m_Layer: 0
-  m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0413\u043E\u0440\u043D\u043E\u0439 1.2"
+  m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0413\u043E\u0440\u043D\u043E\u0439 1.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12669,7 +12669,7 @@ GameObject:
   - component: {fileID: 1062847320}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0421\u0435\u0434\u0430\u043D\u043E\u0432\u043E\u0439
-    1.4"
+    1.4_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12699,7 +12699,7 @@ GameObject:
   - component: {fileID: 1065659471}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u043E\u043C\u0430\u0442\u043D\u043E\u0439
-    1.8"
+    1.8_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12729,7 +12729,7 @@ GameObject:
   - component: {fileID: 1069366339}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u041C\u043E\u0432\u0441\u043A\u043E\u0439
-    2.2"
+    2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12759,7 +12759,7 @@ GameObject:
   - component: {fileID: 1070788281}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0421\u0435\u0434\u0430\u043D\u043E\u0432\u043E\u0439
-    3.3"
+    3.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12984,7 +12984,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1083939250}
   m_Layer: 0
-  m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041E\u0440\u043D\u043E\u0439 2.2"
+  m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041E\u0440\u043D\u043E\u0439 2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13112,7 +13112,7 @@ GameObject:
   - component: {fileID: 1086797787}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u042F\u0431\u043B\u043E\u0447\u043D\u043E\u0439
-    1.4"
+    1.4_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13338,7 +13338,7 @@ GameObject:
   - component: {fileID: 1090516086}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0411\u0430\u043A\u043B\u0430\u0436\u0430\u043D\u043E\u0432\u043E\u0439
-    1.1"
+    1.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13436,7 +13436,7 @@ GameObject:
   - component: {fileID: 1097561143}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u042F\u0431\u043B\u043E\u0447\u043D\u043E\u0439
-    1.8"
+    1.8_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13564,7 +13564,7 @@ GameObject:
   - component: {fileID: 1103084661}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0415\u0434\u0438\u043D\u043E\u0440\u043E\u0433\u043E\u0432\u043E\u0439
-    2.1"
+    2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13594,7 +13594,7 @@ GameObject:
   - component: {fileID: 1104576287}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0421\u0435\u0434\u0430\u043D\u043E\u0432\u043E\u0439
-    1.2"
+    1.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14016,7 +14016,7 @@ GameObject:
   - component: {fileID: 1134224419}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u0430\u043D\u0434\u043E\u0432\u043E\u0439
-    2.2"
+    2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14143,7 +14143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1136889143}
   m_Layer: 0
-  m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0413\u043E\u0440\u043D\u043E\u0439 2.1"
+  m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0413\u043E\u0440\u043D\u043E\u0439 2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14692,7 +14692,7 @@ GameObject:
   - component: {fileID: 1155817523}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    2.1"
+    2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14851,7 +14851,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1996717101189954, guid: 0ad54a6526de9f342b8adc34c5224e08, type: 2}
       propertyPath: m_Name
-      value: "\u0411\u044D\u0442\u0423\u043B\u0438\u0446\u0430_2_\u043C_\u043A_50_100/\u0411\u044D\u0442\u0423\u043B\u0438\u0446\u0430_3_\u043C_\u043A_50_100\u0423\u0433\u043E\u043B\u044C\u043D\u0430\u044F_1_\u043D_\u043A_50_100/\u0423\u0433\u043E\u043B\u044C\u043D\u0430\u044F_2_\u043D_\u043D_50_100"
+      value: "\u0411\u044D\u0442\u0423\u043B\u0438\u0446\u0430_2_\u043C_\u043A_50_100/\u0411\u044D\u0442\u0423\u043B\u0438\u0446\u0430_3_\u043C_\u043D_50_100/\u0423\u0433\u043E\u043B\u044C\u043D\u0430\u044F_1_\u043D_\u043A_50_100/\u0423\u0433\u043E\u043B\u044C\u043D\u0430\u044F_2_\u043D_\u043D_50_100"
       objectReference: {fileID: 0}
     - target: {fileID: 114019352133996020, guid: 0ad54a6526de9f342b8adc34c5224e08,
         type: 2}
@@ -14877,7 +14877,7 @@ GameObject:
   - component: {fileID: 1168297236}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u042F\u0431\u043B\u043E\u0447\u043D\u043E\u0439
-    1.5"
+    1.5_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14907,7 +14907,7 @@ GameObject:
   - component: {fileID: 1177866688}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    3.7"
+    3.7_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14937,7 +14937,7 @@ GameObject:
   - component: {fileID: 1178364026}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0438\u043D\u043E\u0433\u0440\u0430\u0434\u043D\u043E\u0439
-    2.1"
+    2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14967,7 +14967,7 @@ GameObject:
   - component: {fileID: 1184067545}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0430\u043A\u0430\u043D\u0434\u043E\u0432\u043E\u0439
-    2.5"
+    2.5_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15193,7 +15193,7 @@ GameObject:
   - component: {fileID: 1191456351}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0430\u043A\u0430\u043D\u0434\u043E\u0432\u043E\u0439
-    2.2"
+    2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15321,7 +15321,7 @@ GameObject:
   - component: {fileID: 1200630034}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0411\u044D\u0442\u0423\u043B\u0438\u0446\u0435
-    2.1"
+    2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15351,7 +15351,7 @@ GameObject:
   - component: {fileID: 1202391020}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0411\u0430\u043A\u043B\u0430\u0436\u0430\u043D\u043E\u0432\u043E\u0439
-    3.2"
+    3.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15830,7 +15830,7 @@ GameObject:
   - component: {fileID: 1227715811}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u043E\u0439
-    1.2"
+    1.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16211,7 +16211,7 @@ GameObject:
   - component: {fileID: 1253112358}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u042F\u0431\u043B\u043E\u0447\u043D\u043E\u0439
-    1.9"
+    1.9_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16396,7 +16396,7 @@ GameObject:
   - component: {fileID: 1277010740}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0438\u043D\u043E\u0433\u0440\u0430\u0434\u043D\u043E\u0439
-    1.7"
+    1.7_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16553,7 +16553,7 @@ GameObject:
   - component: {fileID: 1279234947}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u041C\u043E\u0432\u0441\u043A\u043E\u0439
-    4.1"
+    4.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16975,7 +16975,7 @@ GameObject:
   - component: {fileID: 1307951890}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0411\u044D\u0442\u0423\u043B\u0438\u0446\u0435
-    1.2"
+    1.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17005,7 +17005,7 @@ GameObject:
   - component: {fileID: 1308014932}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u0430\u043D\u0434\u043E\u0432\u043E\u0439
-    3.2"
+    3.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17035,7 +17035,7 @@ GameObject:
   - component: {fileID: 1309261205}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u043E\u043B\u044C\u043D\u043E\u0439
-    2.1"
+    2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17261,7 +17261,7 @@ GameObject:
   - component: {fileID: 1322214263}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u041C\u043E\u0432\u0441\u043A\u043E\u0439
-    4.3"
+    4.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17291,7 +17291,7 @@ GameObject:
   - component: {fileID: 1336841107}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    4.1"
+    4.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17419,7 +17419,7 @@ GameObject:
   - component: {fileID: 1341830895}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u043E\u0439
-    2.2"
+    2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17841,7 +17841,7 @@ GameObject:
   - component: {fileID: 1366932266}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u043E\u043B\u044C\u043D\u043E\u0439
-    1.5"
+    1.5_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17871,7 +17871,7 @@ GameObject:
   - component: {fileID: 1376974937}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u0430\u043D\u0434\u043E\u0432\u043E\u0439
-    1.2"
+    1.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17901,7 +17901,7 @@ GameObject:
   - component: {fileID: 1378745146}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    2.2"
+    2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17988,7 +17988,7 @@ GameObject:
   - component: {fileID: 1399200410}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0421\u0435\u0434\u0430\u043D\u043E\u0432\u043E\u0439
-    1.6"
+    1.6_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18116,7 +18116,7 @@ GameObject:
   - component: {fileID: 1403439322}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u043E\u043B\u044C\u043D\u043E\u0439
-    1.2"
+    1.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18146,7 +18146,7 @@ GameObject:
   - component: {fileID: 1404667881}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u041C\u043E\u0432\u0441\u043A\u043E\u0439
-    3.2"
+    3.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18176,7 +18176,7 @@ GameObject:
   - component: {fileID: 1425165212}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u043E\u0439
-    1.1"
+    1.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18304,7 +18304,7 @@ GameObject:
   - component: {fileID: 1430868385}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u043E\u043C\u0430\u0442\u043D\u043E\u0439
-    1.5"
+    1.5_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18334,7 +18334,7 @@ GameObject:
   - component: {fileID: 1436830805}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    2.7"
+    2.7_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18617,7 +18617,7 @@ GameObject:
   - component: {fileID: 1470180772}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    2.4"
+    2.4_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18941,7 +18941,7 @@ GameObject:
   - component: {fileID: 1481888002}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    3.3"
+    3.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19069,7 +19069,7 @@ GameObject:
   - component: {fileID: 1495786445}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0438\u043D\u043E\u0433\u0440\u0430\u0434\u043D\u043E\u0439
-    3.1"
+    3.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19197,7 +19197,7 @@ GameObject:
   - component: {fileID: 1505910017}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    3.6"
+    3.6_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19452,7 +19452,7 @@ GameObject:
   - component: {fileID: 1524884261}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u043E\u0439
-    1.1"
+    1.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19772,7 +19772,7 @@ GameObject:
   - component: {fileID: 1551426146}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    3.4"
+    3.4_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19801,7 +19801,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1553989735}
   m_Layer: 0
-  m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041E\u0440\u043D\u043E\u0439 2.1"
+  m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041E\u0440\u043D\u043E\u0439 2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19831,7 +19831,7 @@ GameObject:
   - component: {fileID: 1569273101}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u042F\u0431\u043B\u043E\u0447\u043D\u043E\u0439
-    2.2"
+    2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19988,7 +19988,7 @@ GameObject:
   - component: {fileID: 1579358353}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0411\u0430\u043A\u043B\u0430\u0436\u0430\u043D\u043E\u0432\u043E\u0439
-    2.1"
+    2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20116,7 +20116,7 @@ GameObject:
   - component: {fileID: 1589566464}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0430\u043A\u0430\u043D\u0434\u043E\u0432\u043E\u0439
-    2.3"
+    2.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20244,7 +20244,7 @@ GameObject:
   - component: {fileID: 1594668573}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    1.1"
+    1.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20274,7 +20274,7 @@ GameObject:
   - component: {fileID: 1600063034}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0421\u0435\u0434\u0430\u043D\u043E\u0432\u043E\u0439
-    1.1"
+    1.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20459,7 +20459,7 @@ GameObject:
   - component: {fileID: 1607727566}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u042F\u0431\u043B\u043E\u0447\u043D\u043E\u0439
-    1.1"
+    1.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20587,7 +20587,7 @@ GameObject:
   - component: {fileID: 1622889945}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u042F\u0431\u043B\u043E\u0447\u043D\u043E\u0439
-    2.1"
+    2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20617,7 +20617,7 @@ GameObject:
   - component: {fileID: 1625990337}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0415\u0434\u0438\u043D\u043E\u0440\u043E\u0433\u043E\u0432\u043E\u0439
-    3.1"
+    3.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20647,7 +20647,7 @@ GameObject:
   - component: {fileID: 1628078695}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u043E\u043C\u0430\u0442\u043D\u043E\u0439
-    3.1"
+    3.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20775,7 +20775,7 @@ GameObject:
   - component: {fileID: 1629294854}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0430\u043A\u0430\u043D\u0434\u043E\u0432\u043E\u0439
-    2.6"
+    2.6_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20805,7 +20805,7 @@ GameObject:
   - component: {fileID: 1631809861}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0411\u0430\u043A\u043B\u0430\u0436\u0430\u043D\u043E\u0432\u043E\u0439
-    3.1"
+    3.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20835,7 +20835,7 @@ GameObject:
   - component: {fileID: 1641729529}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0430\u043A\u0430\u043D\u0434\u043E\u0432\u043E\u0439
-    2.1"
+    2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21118,7 +21118,7 @@ GameObject:
   - component: {fileID: 1662073692}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0411\u044D\u0442\u0423\u043B\u0438\u0446\u0435
-    3.2"
+    3.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21246,7 +21246,7 @@ GameObject:
   - component: {fileID: 1681101538}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0430\u043A\u0430\u043D\u0434\u043E\u0432\u043E\u0439
-    2.4"
+    2.4_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21276,7 +21276,7 @@ GameObject:
   - component: {fileID: 1696577527}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u043E\u043B\u044C\u043D\u043E\u0439
-    1.7"
+    1.7_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21404,7 +21404,7 @@ GameObject:
   - component: {fileID: 1706840983}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u043E\u0439
-    2.5"
+    2.5_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21687,7 +21687,7 @@ GameObject:
   - component: {fileID: 1751660825}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u042F\u0431\u043B\u043E\u0447\u043D\u043E\u0439
-    1.6"
+    1.6_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21717,7 +21717,7 @@ GameObject:
   - component: {fileID: 1756042753}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u043E\u0439
-    2.4"
+    2.4_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21845,7 +21845,7 @@ GameObject:
   - component: {fileID: 1766327829}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    2.7"
+    2.7_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21875,7 +21875,7 @@ GameObject:
   - component: {fileID: 1771757979}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    3.5"
+    3.5_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21905,7 +21905,7 @@ GameObject:
   - component: {fileID: 1771782554}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    2.1"
+    2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22033,7 +22033,7 @@ GameObject:
   - component: {fileID: 1782196977}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u043E\u043C\u0430\u0442\u043D\u043E\u0439
-    3.2"
+    3.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22063,7 +22063,7 @@ GameObject:
   - component: {fileID: 1785258078}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    4.2"
+    4.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22289,7 +22289,7 @@ GameObject:
   - component: {fileID: 1799459175}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    2.3"
+    2.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22855,7 +22855,7 @@ GameObject:
   - component: {fileID: 1857901045}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0438\u043D\u043E\u0433\u0440\u0430\u0434\u043D\u043E\u0439
-    1.1"
+    1.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22916,7 +22916,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1996717101189954, guid: 0ad54a6526de9f342b8adc34c5224e08, type: 2}
       propertyPath: m_Name
-      value: "\u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u0430\u044F_1_\u043D_\u043A_50_100/\u041C\u043E\u0440\u0441\u043A\u0430\u044F_4_\u043D_\u043A_50_100/\u0421\u0440\u0435\u0442\u0435\u043D\u043A\u0430_1_\u043C_\u043D_50_100"
+      value: "\u041A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u0430\u044F_1_\u043D_\u043A_50_100/\u041C\u043E\u0440\u0441\u043A\u0430\u044F_4_\u043D_\u043D_50_100/\u0421\u0440\u0435\u0442\u0435\u043D\u043A\u0430_1_\u043C_\u043D_0_0"
       objectReference: {fileID: 0}
     - target: {fileID: 114019352133996020, guid: 0ad54a6526de9f342b8adc34c5224e08,
         type: 2}
@@ -22942,7 +22942,7 @@ GameObject:
   - component: {fileID: 1874871703}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u043E\u043B\u044C\u043D\u043E\u0439
-    1.6"
+    1.6_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23168,7 +23168,7 @@ GameObject:
   - component: {fileID: 1882267372}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    3.2"
+    3.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23198,7 +23198,7 @@ GameObject:
   - component: {fileID: 1892734723}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0411\u044D\u0442\u0423\u043B\u0438\u0446\u0435
-    3.1"
+    3.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23285,7 +23285,7 @@ GameObject:
   - component: {fileID: 1896055566}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u0430\u043D\u0434\u0430\u0440\u0438\u043D\u043E\u0432\u043E\u0439
-    3.6"
+    3.6_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23315,7 +23315,7 @@ GameObject:
   - component: {fileID: 1902818429}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u043E\u043C\u0430\u0442\u043D\u043E\u0439
-    2.3"
+    2.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23541,7 +23541,7 @@ GameObject:
   - component: {fileID: 1911094513}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u043E\u043B\u044C\u043D\u043E\u0439
-    1.3"
+    1.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23685,7 +23685,7 @@ GameObject:
   - component: {fileID: 1924412184}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u043E\u0439
-    1.3"
+    1.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23899,7 +23899,7 @@ GameObject:
   - component: {fileID: 1933150694}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0415\u0434\u0438\u043D\u043E\u0440\u043E\u0433\u043E\u0432\u043E\u0439
-    1.2"
+    1.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24026,7 +24026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1961403235}
   m_Layer: 0
-  m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041E\u0440\u043D\u043E\u0439 1.2"
+  m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041E\u0440\u043D\u043E\u0439 1.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24055,7 +24055,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1966914178}
   m_Layer: 0
-  m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0413\u043E\u0440\u043D\u043E\u0439 2.2"
+  m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0413\u043E\u0440\u043D\u043E\u0439 2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24183,7 +24183,7 @@ GameObject:
   - component: {fileID: 1969434992}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u043E\u043C\u0430\u0442\u043D\u043E\u0439
-    1.1"
+    1.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24636,7 +24636,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1996717101189954, guid: 0ad54a6526de9f342b8adc34c5224e08, type: 2}
       propertyPath: m_Name
-      value: "\u0421\u0440\u0435\u0442\u0435\u043D\u043A\u0430_2_\u043C_\u043A_50_100/\u0422\u041C\u043E\u0432\u0441\u043A\u0430\u044F_4_\u043D_\u043D_50_100/\u0422\u041C\u043E\u0432\u0441\u043A\u0430\u044F_3_\u043D_\u043A_50_100"
+      value: "\u0421\u0440\u0435\u0442\u0435\u043D\u043A\u0430_2_\u043C_\u043A_0_0/\u0422\u041C\u043E\u0432\u0441\u043A\u0430\u044F_4_\u043D_\u043D_50_100/\u0422\u041C\u043E\u0432\u0441\u043A\u0430\u044F_3_\u043D_\u043A_50_100"
       objectReference: {fileID: 0}
     - target: {fileID: 114019352133996020, guid: 0ad54a6526de9f342b8adc34c5224e08,
         type: 2}
@@ -25054,7 +25054,7 @@ GameObject:
   - component: {fileID: 2041448885}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u042F\u0431\u043B\u043E\u0447\u043D\u043E\u0439
-    3.2"
+    3.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25181,7 +25181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2044811872}
   m_Layer: 0
-  m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0413\u043E\u0440\u043D\u043E\u0439 1.1"
+  m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0413\u043E\u0440\u043D\u043E\u0439 1.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25603,7 +25603,7 @@ GameObject:
   - component: {fileID: 2074830268}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u041C\u043E\u0432\u0441\u043A\u043E\u0439
-    2.1"
+    2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25731,7 +25731,7 @@ GameObject:
   - component: {fileID: 2092702365}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0411\u0430\u043A\u043B\u0430\u0436\u0430\u043D\u043E\u0432\u043E\u0439
-    2.2"
+    2.2_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25888,7 +25888,7 @@ GameObject:
   - component: {fileID: 2105219301}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u042F\u0431\u043B\u043E\u0447\u043D\u043E\u0439
-    1.3"
+    1.3_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25918,7 +25918,7 @@ GameObject:
   - component: {fileID: 2106851704}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0412\u0438\u043D\u043E\u0433\u0440\u0430\u0434\u043D\u043E\u0439
-    1.8"
+    1.8_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26028,7 +26028,7 @@ GameObject:
   - component: {fileID: 2118254241}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0422\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u043D\u043E\u0439
-    2.1"
+    2.1_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26058,7 +26058,7 @@ GameObject:
   - component: {fileID: 2118452753}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u0423\u0433\u043E\u043B\u044C\u043D\u043E\u0439
-    1.8"
+    1.8_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26088,7 +26088,7 @@ GameObject:
   - component: {fileID: 2124390497}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    2.6"
+    2.6_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26314,7 +26314,7 @@ GameObject:
   - component: {fileID: 2142339240}
   m_Layer: 0
   m_Name: "\u0414\u043E\u043C \u043D\u0430 \u041C\u043E\u0440\u0441\u043A\u043E\u0439
-    2.5"
+    2.5_100_100_100_100"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
