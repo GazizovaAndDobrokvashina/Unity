@@ -22,10 +22,10 @@ public class Cameras : MonoBehaviour
         mode = 1;
         cameras[1] = camera;
 
-        Vector3 size = gameObject.GetComponent<BoxCollider>().size;
+        Vector3 size = gameObject.GetComponent<BoxCollider>().size * 100;
         
         //cameras[0].GetComponentInParent<CameraMove>().setRestrictions(15, -8.5f, 8.5f, 8.6f, -8.6f);
-        cameras[0].GetComponentInParent<CameraMove>().setRestrictions(cameras[0].transform.parent.position.y, -size.x, size.x, size.z, -size.z);
+        cameras[0].GetComponentInParent<CameraMove>().setRestrictions(cameras[0].transform.parent.position.y, -size.x/2f, size.x/2f, size.y/2f, -size.y/2f);
 
 
     }

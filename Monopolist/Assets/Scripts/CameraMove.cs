@@ -3,7 +3,7 @@
 public class CameraMove : MonoBehaviour
 {
     //скорость камеры
-    private float speed = 30f;
+    private float speed = 50f;
 
     //минимальная высота
     private float minHeigth = 10f;
@@ -37,10 +37,10 @@ public class CameraMove : MonoBehaviour
         
         b = maxHeigth + 10;
 
-        k1 = maxHeigth / rightRestriction;
-        k2 = maxHeigth / upRestriction;
-        k3 = maxHeigth / leftRestriction;
-        k4 = maxHeigth / downRestriction;
+        k3 =(3*minHeigth - maxHeigth) / rightRestriction;
+        k4 = (3*minHeigth - maxHeigth) / upRestriction;
+        k1 = (3*minHeigth - maxHeigth) / leftRestriction;
+        k2 = (3*minHeigth - maxHeigth) / downRestriction;
 
     }
 
