@@ -15,7 +15,7 @@ public static class Trade
         if (things == null)
         {
             //захардкоджено, исправить; размерность количество игроков на половину (?) количества игроков
-            things = new List<ThingForTrade>[6, 6];
+            things = new List<ThingForTrade>[10, 10];
         }
 
         //инициализация списка предложений между конкретными игроками
@@ -110,10 +110,8 @@ public static class Trade
                     thingForTrade.ForWhichPlayer.Money += thingForTrade.Price;
                     thingForTrade.FromWhichPlayer.Money -= thingForTrade.Price;
                 }
-
-            TradeClear(playerFrom, playerFor);
         }
-        else
+        else if (playerFrom.IdPlayer > playerFor.IdPlayer)
         {
             foreach (ThingForTrade thingForTrade in things[playerFor.IdPlayer, playerFrom.IdPlayer])
                 if (thingForTrade.PathforTrade != null)
@@ -125,9 +123,21 @@ public static class Trade
                     thingForTrade.ForWhichPlayer.Money += thingForTrade.Price;
                     thingForTrade.FromWhichPlayer.Money -= thingForTrade.Price;
                 }
-
-            TradeClear(playerFor, playerFrom);
         }
+        //если игрок закладывает
+        else
+        {
+            //для каждой улице в списке
+            foreach (ThingForTrade thingForTrade in things[playerFor.IdPlayer, playerFrom.IdPlayer])
+            {
+                if (thingForTrade.PathforTrade != null)
+                {
+                    BlockStreetPath(thingForTrade.PathforTrade, playerFor);
+                }
+            }
+        }
+
+        TradeClear(playerFor, playerFrom);
     }
 
     //очистка списка предложений между конкретными игроками
@@ -140,6 +150,33 @@ public static class Trade
         else
         {
             things[playerFor.IdPlayer, playerFrom.IdPlayer] = new List<ThingForTrade>();
+        }
+    }
+
+    //блокировка улицы и возмещение её полной стоимости вместе с построенными зданиями игроку
+    private static void BlockStreetPath(PathForBuy pathForBuy, Player ownerPlayer)
+    {
+        if (!pathForBuy.IsBlocked)
+        {
+            pathForBuy.IsBlocked = true;
+            int sum = 0;
+            sum += pathForBuy.PriceStreetPath;
+            ownerPlayer.Money += sum;
+        }
+
+        else
+        {
+            UnBlockStreetPath(pathForBuy, ownerPlayer);
+        }
+    }
+
+    //разблокировка улицы при выплате полной стоимости
+    private static void UnBlockStreetPath(PathForBuy pathForBuy, Player ownerPlayer)
+    {
+        if (pathForBuy.IsBlocked && ownerPlayer.Money >= pathForBuy.PriceStreetPath)
+        {
+            pathForBuy.IsBlocked = false;
+            ownerPlayer.Money -= pathForBuy.PriceStreetPath;
         }
     }
 }

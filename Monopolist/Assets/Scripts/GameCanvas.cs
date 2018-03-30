@@ -202,8 +202,8 @@ public class GameCanvas : MonoBehaviour
         //вывод информации, где находится игрок
         destinationText.text = "Улица: " + destination;
 
-        //если открыто меню торговли, то синхронизируем данные о деньгах игроков на слайдерах и инпутфилдах
-        if (TradeMenu.active)
+        //если открыто меню торговли и слайдеры игроков, то синхронизируем данные о деньгах игроков на слайдерах и инпутфилдах
+        if (TradeMenu.active &&sliderMoneyFirst.gameObject.activeInHierarchy)
         {
             if (moneyFirstPlayer != (int) sliderMoneyFirst.value)
             {
@@ -220,7 +220,7 @@ public class GameCanvas : MonoBehaviour
     }
 
 
-    //изменнение значения поля ввода суммы денег первого игрока
+    //изменение значения поля ввода суммы денег первого игрока
     public void OnValueChangedFirstInputFielid(string price)
     {
         if (!int.TryParse(price, out moneyFirstPlayer))
@@ -232,6 +232,7 @@ public class GameCanvas : MonoBehaviour
         else
         {
             moneyFirstPlayer = int.Parse(price);
+            if(sliderMoneyFirst.gameObject.activeInHierarchy)
             sliderMoneyFirst.value = (float) moneyFirstPlayer;
             InputFieldMoneyFirst.text = moneyFirstPlayer.ToString();
         }
@@ -249,6 +250,7 @@ public class GameCanvas : MonoBehaviour
         else
         {
             moneySecondPlayer = int.Parse(price);
+            if(sliderMoneySecond.gameObject.activeInHierarchy)
             sliderMoneySecond.value = (float) moneySecondPlayer;
             InputFieldMoneySecond.text = moneySecondPlayer.ToString();
         }
@@ -651,11 +653,6 @@ public class GameCanvas : MonoBehaviour
             prefButtons.GetChild(1).GetComponent<Button>().onClick
                 .AddListener(() => onButtonClickTrade(player.IdPlayer));
 
-            if (player == getCurrentPlayer())
-            {
-                prefButtons.GetChild(1).gameObject.SetActive(false);
-            }
-
             prefButtons.GetChild(2).GetComponent<Button>().GetComponentInChildren<Text>().text = "Info";
             prefButtons.GetChild(2).GetComponent<Button>().onClick
                 .AddListener(() => onButtonInfoClick(player.IdPlayer, 2));
@@ -753,7 +750,7 @@ public class GameCanvas : MonoBehaviour
     {
         if (activeTogle)
         {
-            List<int> paths = getDbWork().GetMyPathes(1);
+            List<int> paths = getDbWork().GetMyPathes(getCurrentPlayer().IdPlayer);
 
             foreach (RectTransform rectTransform in streetsPathsRectTransforms)
             {
@@ -903,47 +900,110 @@ public class GameCanvas : MonoBehaviour
     //открыть окно торговли с этим игроком
     private void onButtonClickTrade(int idPlayerSecond)
     {
+        //открываем меню торговли
         ChangeMenu(4);
+        //обновляем ссылку на дбворк
         _dBwork = getDbWork();
-
+        //создаем список товаров на продажу
         Trade.CreateListThings(getCurrentPlayer(), _dBwork.GetPlayerbyId(idPlayerSecond));
-
+        //вешаем скрипт на кнопку подтверждения предложения
         ApplyTrade.onClick.AddListener(() =>
             Trade.TradeApply(getCurrentPlayer(), _dBwork.GetPlayerbyId(idPlayerSecond), this, moneyFirstPlayer,
                 moneySecondPlayer));
-
+        //назначаем имя первого игрока
         firstPlayer.GetComponentInChildren<Text>().text = getCurrentPlayer().NickName;
-        secondPlayer.GetComponentInChildren<Text>().text = _dBwork.GetPlayerbyId(idPlayerSecond).NickName;
-
+        //узнаем улицы первого игрока
         List<int> pathsFirstPlayer = _dBwork.GetMyPathes(getCurrentPlayer().IdPlayer);
 
-        foreach (var path in pathsFirstPlayer)
+        //если торгуем с другим игроком
+        if (idPlayerSecond != getCurrentPlayer().IdPlayer)
         {
-            GameObject prefButton = Instantiate(prefButStreetForTrade);
-            prefButton.GetComponentInChildren<Text>().text = _dBwork.GetPathById(path).namePath;
-            prefButton.GetComponent<RectTransform>().SetParent(scrollFirstPlayerStreets.content, false);
-            prefButton.GetComponent<Button>().onClick
-                .AddListener(() =>
-                    onButtonAddOrDeleteOfferStreet(prefButton, getCurrentPlayer(),
-                        _dBwork.GetPlayerbyId(idPlayerSecond), path));
+            //назначаем имя второго игрока
+            secondPlayer.GetComponentInChildren<Text>().text = _dBwork.GetPlayerbyId(idPlayerSecond).NickName;
+
+            //собираем список улиц первого игрока в первом скроле
+            foreach (var path in pathsFirstPlayer)
+            {
+                //если улица заложена, то она не отображается доступной к продаже
+                if (_dBwork.GetPathForBuy(path).IsBlocked)
+                    continue;
+
+                GameObject prefButton = Instantiate(prefButStreetForTrade);
+                prefButton.GetComponentInChildren<Text>().text = _dBwork.GetPathById(path).namePath;
+                prefButton.GetComponent<RectTransform>().SetParent(scrollFirstPlayerStreets.content, false);
+                prefButton.GetComponent<Button>().onClick
+                    .AddListener(() =>
+                        onButtonAddOrDeleteOfferStreet(prefButton, getCurrentPlayer(),
+                            _dBwork.GetPlayerbyId(idPlayerSecond), path));
+            }
+
+            //создаем список улиц второго игрока
+            List<int> pathsSecondPlayer = _dBwork.GetMyPathes(idPlayerSecond);
+
+            //собираем список улиц второго игрока во втором скроле
+            foreach (var path in pathsSecondPlayer)
+            {
+                //если улица заложена, то она не отображается доступной к продаже
+                if (_dBwork.GetPathForBuy(path).IsBlocked)
+                    continue;
+
+                GameObject prefButton = Instantiate(prefButStreetForTrade);
+                prefButton.GetComponentInChildren<Text>().text = _dBwork.GetPathById(path).namePath;
+                prefButton.GetComponent<RectTransform>().SetParent(scrollSecondPlayerStreets.content, false);
+                prefButton.GetComponent<Button>().onClick
+                    .AddListener(() =>
+                        onButtonAddOrDeleteOfferStreet(prefButton, getCurrentPlayer(),
+                            _dBwork.GetPlayerbyId(idPlayerSecond), path));
+            }
+
+            //отражаем максимальное количество денег первого игрока 
+            sliderMoneyFirst.maxValue = getCurrentPlayer().Money;
+            //включаем слайдер первого игрока
+            sliderMoneyFirst.gameObject.SetActive(true);
+            //отражаем максимальное количество денег второго игрока 
+            sliderMoneySecond.maxValue = _dBwork.GetPlayerbyId(idPlayerSecond).Money;
+            //включаем слайдер второго игрока
+            sliderMoneySecond.gameObject.SetActive(true);
+            
+            //разрешаем заполнение игроком полей денег
+            InputFieldMoneyFirst.gameObject.GetComponent<CanvasGroup>().interactable = true;
+            InputFieldMoneySecond.gameObject.GetComponent<CanvasGroup>().interactable = true;
         }
-
-        List<int> pathsSecondPlayer = _dBwork.GetMyPathes(idPlayerSecond);
-
-        foreach (var path in pathsSecondPlayer)
+        //если открыли меню закладывания улиц
+        else
         {
-            GameObject prefButton = Instantiate(prefButStreetForTrade);
-            prefButton.GetComponentInChildren<Text>().text = _dBwork.GetPathById(path).namePath;
-            prefButton.GetComponent<RectTransform>().SetParent(scrollSecondPlayerStreets.content, false);
-            prefButton.GetComponent<Button>().onClick
-                .AddListener(() =>
-                    onButtonAddOrDeleteOfferStreet(prefButton, getCurrentPlayer(),
-                        _dBwork.GetPlayerbyId(idPlayerSecond), path));
-        }
+            //назначаем город вторым участником обмена
+            secondPlayer.GetComponentInChildren<Text>().text = "Город";
+            //Выключаем слайдеры
+            sliderMoneyFirst.gameObject.SetActive(false);
+            sliderMoneySecond.gameObject.SetActive(false);
+            //запрещаем заполнение игроком полей денег
+            InputFieldMoneyFirst.gameObject.GetComponent<CanvasGroup>().interactable = false;
+            InputFieldMoneySecond.gameObject.GetComponent<CanvasGroup>().interactable = false;
 
-        sliderMoneyFirst.maxValue = getCurrentPlayer().Money;
-        sliderMoneySecond.maxValue = _dBwork.GetPlayerbyId(idPlayerSecond).Money;
+            //раскидываем улицы по скролам в зависимости от того заложены они или нет
+            foreach (var path in pathsFirstPlayer)
+            {
+                GameObject prefButton = Instantiate(prefButStreetForTrade);
+                prefButton.GetComponentInChildren<Text>().text = _dBwork.GetPathById(path).namePath;            
+                
+                if (_dBwork.GetPathForBuy(path).IsBlocked)
+                {
+                    prefButton.GetComponent<RectTransform>().SetParent(scrollSecondPlayerStreets.content, false);
+                }
+                else
+                {
+                    prefButton.GetComponent<RectTransform>().SetParent(scrollFirstPlayerStreets.content, false);
+                }
+
+                prefButton.GetComponent<Button>().onClick
+                    .AddListener(() =>
+                        onButtonAddOrDeleteOfferStreet(prefButton, getCurrentPlayer(),
+                            getCurrentPlayer(), path));
+            }
+        }
     }
+
 
 
     //очистить канву торговли
@@ -980,7 +1040,12 @@ public class GameCanvas : MonoBehaviour
                 Destroy(scrollSecondPlayerStreets.content.GetChild(i).gameObject);
             }
         }
-
+        
+        //сбрасываем параметры слайдер и полей для ввода
+        moneyFirstPlayer = 0;
+        moneySecondPlayer = 0;
+        InputFieldMoneyFirst.text = "0";
+        InputFieldMoneySecond.text = "0";
         ChangeMenu(1);
     }
 
@@ -994,18 +1059,39 @@ public class GameCanvas : MonoBehaviour
             case "FirstPlayerItem":
                 button.GetComponent<RectTransform>().SetParent(scrollFirstPlayerOffer.content, false);
                 Trade.AddItemToList(playerOne, playerTwo, getDbWork().GetPathForBuy(idPath));
+                //если слайдеры не активны, то происходит закладывание улиц
+                if (!sliderMoneyFirst.gameObject.activeInHierarchy)
+                {
+                    moneySecondPlayer += _dBwork.GetPathForBuy(idPath).PriceStreetPath;
+                    OnValueChangedSecondInputFielid(moneySecondPlayer.ToString());
+                }
                 break;
             case "FirstPlayerOffer":
                 button.GetComponent<RectTransform>().SetParent(scrollFirstPlayerStreets.content, false);
                 Trade.RemoveItemFromList(playerOne, playerTwo, getDbWork().GetPathForBuy(idPath));
+                if (!sliderMoneyFirst.gameObject.activeInHierarchy)
+                {
+                    moneySecondPlayer -= _dBwork.GetPathForBuy(idPath).PriceStreetPath;
+                    OnValueChangedSecondInputFielid(moneySecondPlayer.ToString());
+                }
                 break;
             case "SecondPlayerItem":
                 button.GetComponent<RectTransform>().SetParent(scrollSecondPlayerOffer.content, false);
                 Trade.AddItemToList(playerTwo, playerOne, getDbWork().GetPathForBuy(idPath));
+                if (!sliderMoneyFirst.gameObject.activeInHierarchy)
+                {
+                    moneyFirstPlayer += _dBwork.GetPathForBuy(idPath).PriceStreetPath;
+                    OnValueChangedFirstInputFielid(moneyFirstPlayer.ToString());
+                }
                 break;
             case "SecondPlayerOffer":
                 button.GetComponent<RectTransform>().SetParent(scrollSecondPlayerStreets.content, false);
                 Trade.RemoveItemFromList(playerTwo, playerOne, getDbWork().GetPathForBuy(idPath));
+                if (!sliderMoneyFirst.gameObject.activeInHierarchy)
+                {
+                    moneyFirstPlayer -= _dBwork.GetPathForBuy(idPath).PriceStreetPath;
+                    OnValueChangedFirstInputFielid(moneyFirstPlayer.ToString());
+                }
                 break;
         }
     }

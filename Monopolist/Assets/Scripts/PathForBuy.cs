@@ -14,6 +14,12 @@ public class PathForBuy : StreetPath
     //заложена ли улица
     private bool isBlocked;
 
+    public bool IsBlocked
+    {
+        get { return isBlocked; }
+        set { isBlocked = value; }
+    }
+
     //покупка улицы игроком
     public void Buy(Player player)
     {
