@@ -67,7 +67,7 @@ public class MainMenu : MonoBehaviour
     private int countOfPlayers;
 
     //максимальное количество игроков
-    private int maxcountOfPlayers = 4;
+    private int maxcountOfPlayers = 6;
 
     //минимальное количество игроков
     private int mincountOfPlayers = 1;

@@ -316,6 +316,8 @@ public class DBwork : MonoBehaviour
                     MapBuilder.GetCenter(paths[1].start, paths[1].end));
             players[i] = player;
             dataService.AddPlayer(player);
+            
+            
         }
 
 

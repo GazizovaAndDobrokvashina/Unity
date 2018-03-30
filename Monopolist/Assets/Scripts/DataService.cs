@@ -1,4 +1,5 @@
-﻿using SQLite4Unity3d;
+﻿using System;
+using SQLite4Unity3d;
 using UnityEngine;
 #if !UNITY_EDITOR
 using System.Collections;
@@ -116,6 +117,11 @@ public class DataService
         _connection.InsertAll(streetPathses);
         _connection.InsertAll(pathsForBuys);
         _connection.InsertAll(buildses);
+    }
+
+    public void FullEvents(Events[] eventses)
+    {
+        _connection.InsertAll(eventses);
     }
 
     public void AddPlayer(Player player)

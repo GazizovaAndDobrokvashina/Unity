@@ -145,6 +145,102 @@ public class CoordinateBuilder : EditorWindow {
 			
 			service.FullTables(streetses,path, forBuy, builds);
 		}
+
+		if (GUILayout.Button("InsertEvents"))
+		{
+			
+			DataService service = new DataService(NameOfDB, @"Assets/Resources/");
+			
+			Events[] eventses = new[]
+                {
+                    new Events
+                    {
+                        IdGovermentPath = 8,
+                        Info = "Поздравляем! Вы выиграли в лотерею!",
+                        NameEvent = "Лотерея",
+                        Price = 100
+                    }, //парк
+                    new Events
+                    {
+                        IdGovermentPath = 8,
+                        Info = "О нет! Вас обокрали!",
+                        NameEvent = "Воришки!",
+                        Price = -50
+                    }, //парк
+                    new Events
+                    {
+                        IdGovermentPath = 8,
+                        Info = "Нужно закупить оборудование!",
+                        NameEvent = "Субботник",
+                        Price = -50
+                    }, //парк
+                    new Events
+                    {
+                        IdGovermentPath = 17,
+                        Info = "Поздравляем! Вы выиграли в конкурсе!",
+                        NameEvent = "Праздник в городе!",
+                        Price = 70
+                    }, //парк
+                    new Events
+                    {
+                        IdGovermentPath = 17,
+                        Info = "Вы посетили благотворительную ярмарку!",
+                        NameEvent = "Благотворительная ярмарка!",
+                        Price = -20
+                    }, //парк
+                    new Events
+                    {
+                        IdGovermentPath = 17,
+                        Info = "Нужно закупить оборудование!",
+                        NameEvent = "Субботник",
+                        Price = -20
+                    }, //парк
+                    new Events
+                    {
+                        IdGovermentPath = 18,
+                        Info = "Вы заключены под стражу!",
+                        NameEvent = "Арест!",
+                        Price = -100
+                    }, //суд
+                    new Events
+                    {
+                        IdGovermentPath = 18,
+                        Info = "Ошибка в налоговой привела к увеличению вашего капитала",
+                        NameEvent = "Ошибка в налоговой!",
+                        Price = 50
+                    }, //суд
+                    new Events
+                    {
+                        IdGovermentPath = 18,
+                        Info = "Ошибка в налоговой привела к уменьшению вашего капитала",
+                        NameEvent = "Ошибка в налоговой!",
+                        Price = -50
+                    }, //суд
+                    new Events
+                    {
+                        IdGovermentPath = 41,
+                        Info = "Фортуна на вашей стороне! Вы выиграли крупную сумму денег!",
+                        NameEvent = "Крупный Выигрыш!",
+                        Price = 200
+                    }, //казино
+                    new Events
+                    {
+                        IdGovermentPath = 41,
+                        Info = "Фортуна на вашей стороне! Вы выиграли небольшую сумму денег!",
+                        NameEvent = "Выигрыш!",
+                        Price = 50
+                    }, //казино
+                    new Events
+                    {
+                        IdGovermentPath = 41,
+                        Info = "О нет! Вам не повезло и Вы проиграли большую сумму денег!",
+                        NameEvent = "Проигрыш",
+                        Price = -125
+                    } //казино
+                };
+			
+			service.FullEvents(eventses);
+		}
 	}
 
 	private int IfExist(List<StreetPaths> paths, string name)
@@ -175,4 +271,6 @@ public class CoordinateBuilder : EditorWindow {
 
 		return -1;
 	}
+	
+	
 }

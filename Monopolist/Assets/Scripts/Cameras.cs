@@ -21,7 +21,13 @@ public class Cameras : MonoBehaviour
     {
         mode = 1;
         cameras[1] = camera;
-        cameras[0].GetComponentInParent<CameraMove>().setRestrictions(15, -8.5f, 8.5f, 8.6f, -8.6f);
+
+        Vector3 size = gameObject.GetComponent<BoxCollider>().size;
+        
+        //cameras[0].GetComponentInParent<CameraMove>().setRestrictions(15, -8.5f, 8.5f, 8.6f, -8.6f);
+        cameras[0].GetComponentInParent<CameraMove>().setRestrictions(cameras[0].transform.parent.position.y, -size.x, size.x, size.z, -size.z);
+
+
     }
 
     //Включить верхнюю камеру

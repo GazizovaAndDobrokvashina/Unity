@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     protected Vector3 destination;
 
     //скорость передвижения
-    public float speed = 2f;
+    public float speed = 20f;
 
     //ссылка на ДБворк
     protected DBwork _dbWork;
@@ -238,6 +238,7 @@ public class Player : MonoBehaviour
         }
 
         corutine = false;
+        _gameCanvas.OnOffSavedButtons();
         if (tried && isGonnaBeCathced)
         {
             _gameCanvas.GetComponent<GameController>().nextStep();
@@ -260,8 +261,9 @@ public class Player : MonoBehaviour
                     _gameCanvas.OpenWarningWindow(this);
                     isCheating = true;
                 }
-
+                _gameCanvas.OnOffSavedButtons();
                 StartCoroutine(Go());
+                
             }
         }
         else

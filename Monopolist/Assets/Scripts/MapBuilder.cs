@@ -70,7 +70,7 @@ public class MapBuilder : MonoBehaviour
                 GameObject newPlayer = Instantiate(emptyPlayer) as GameObject;
                 newPlayer.GetComponent<Player>().GetData(players[1]);
                 newPlayer.transform.position = players[1].Destination;
-                data.updatePlayer(newPlayer.GetComponent<Player>());transform.Find("/firstTown3Painted2").GetComponent<Cameras>()
+                data.updatePlayer(newPlayer.GetComponent<Player>());transform.Find("/Town").GetComponent<Cameras>()
                     .SetCamera(newPlayer.GetComponentInChildren<Camera>());
             }
             else

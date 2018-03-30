@@ -10,6 +10,10 @@ using UnityEngine.UI;
 
 public class GameCanvas : MonoBehaviour
 {
+    public CanvasGroup saveButton;
+
+    public CanvasGroup saveAsNewButton;
+
     //объект с енопками меню торговли
     public GameObject TradeMenu;
 
@@ -150,7 +154,7 @@ public class GameCanvas : MonoBehaviour
 
     //сумма денег второго игрока (используется в торговле)
     private int moneySecondPlayer;
-    
+
     //идентификатор улицы, информацию о которой нужно показать
     private int idStreetWhichOPened;
 
@@ -158,7 +162,7 @@ public class GameCanvas : MonoBehaviour
     {
         OpenBuildsList(idStreetWhichOPened);
     }
-    
+
     //переключение между видом от первого и от третьего лица
     public void ChangeCamera()
     {
@@ -308,12 +312,12 @@ public class GameCanvas : MonoBehaviour
 
     public void CloseScroll(int idScroll)
     {
-        
         if (idScroll == 1)
         {
             ChooseScrollView(ScrollRectFirst, 1, -1);
             resetOpenParametr(1);
-        } else if (idScroll == 2)
+        }
+        else if (idScroll == 2)
         {
             ChooseScrollView(ScrollRectSecond, 1, -1);
             resetOpenParametr(2);
@@ -330,7 +334,8 @@ public class GameCanvas : MonoBehaviour
         if (openedStreets == number)
         {
             openedStreets = 0;
-        } else if (openedPlayers == number)
+        }
+        else if (openedPlayers == number)
         {
             openedPlayers = 0;
         }
@@ -339,6 +344,7 @@ public class GameCanvas : MonoBehaviour
             openedBuilds = 0;
         }
     }
+
     //открыть список игроков
     public void OpenPlayersList()
     {
@@ -392,34 +398,61 @@ public class GameCanvas : MonoBehaviour
             {
                 ChooseScrollView(ScrollRectFirst, 3, idPath);
                 openedBuilds = 1;
+                currentPathB = idPath;
             }
             else if (!ScrollRectSecond.IsActive())
             {
                 ChooseScrollView(ScrollRectSecond, 3, idPath);
                 openedBuilds = 2;
+                currentPathB = idPath;
             }
             else if (!ScrollRectThird.IsActive())
             {
                 ChooseScrollView(ScrollRectThird, 3, idPath);
                 openedBuilds = 3;
+                currentPathB = idPath;
             }
         }
         else
         {
             if (openedBuilds == 1)
             {
-                ChooseScrollView(ScrollRectFirst, 3, idPath);
-                openedBuilds = 0;
+                if (currentPathB == idPath)
+                {
+                    ChooseScrollView(ScrollRectFirst, 3, idPath);
+                    openedBuilds = 0;
+                }
+                else
+                {
+                    ChooseScrollView(ScrollRectFirst, 3, idPath);
+                    currentPathB = idPath;
+                }
             }
             else if (openedBuilds == 2)
             {
-                ChooseScrollView(ScrollRectSecond, 3, idPath);
-                openedBuilds = 0;
+                if (currentPathB == idPath)
+                {
+                    ChooseScrollView(ScrollRectSecond, 3, idPath);
+                    openedBuilds = 0;
+                }
+                else
+                {
+                    ChooseScrollView(ScrollRectSecond, 3, idPath);
+                    currentPathB = idPath;
+                }
             }
             else if (openedBuilds == 3)
             {
-                ChooseScrollView(ScrollRectThird, 3, idPath);
-                openedBuilds = 0;
+                if (currentPathB == idPath)
+                {
+                    ChooseScrollView(ScrollRectThird, 3, idPath);
+                    openedBuilds = 0;
+                }
+                else
+                {
+                    ChooseScrollView(ScrollRectThird, 3, idPath);
+                    currentPathB = idPath;
+                }
             }
         }
     }
@@ -689,6 +722,7 @@ public class GameCanvas : MonoBehaviour
             buildsButton.SetActive(true);
             idStreetWhichOPened = idPath;
             ImportantInfoAboutStreetText.transform.parent.gameObject.SetActive(true);
+            ImportantInfoAboutStreetText.gameObject.SetActive(true);
 
             PathForBuy pathForBuy = getDbWork().GetPathForBuy(idPath);
 
@@ -983,6 +1017,9 @@ public class GameCanvas : MonoBehaviour
         ChangeMenu(1);
     }
 
+    //улица, для которой открыты здания
+    private int currentPathB;
+
     //выбор ещё не активной вьюхи для отображения информации
     private void ChooseScrollView(ScrollRect scroll, int type, int idPath)
     {
@@ -1026,14 +1063,29 @@ public class GameCanvas : MonoBehaviour
         }
         else
         {
-            scroll.gameObject.SetActive(false);
-            for (int i = scroll.content.childCount - 1; i >= 0; i--)
-                Destroy(scroll.content.GetChild(i).gameObject);
-            //пока что корявнько так
-            if (type == 1)
+            if (type == 3 && currentPathB != idPath)
             {
-                ImportantInfoAboutStreetText.gameObject.SetActive(false);
-                buildsButton.gameObject.SetActive(false);
+                for (int i = scroll.content.childCount - 1; i >= 0; i--)
+                    Destroy(scroll.content.GetChild(i).gameObject);
+
+                CreateBuildsButtons(idPath);
+                foreach (RectTransform rectTransform in buildsRectTransforms)
+                {
+                    rectTransform.SetParent(scroll.content, false);
+                }
+            }
+            else
+            {
+                scroll.gameObject.SetActive(false);
+                for (int i = scroll.content.childCount - 1; i >= 0; i--)
+                    Destroy(scroll.content.GetChild(i).gameObject);
+                //пока что корявнько так
+                if (type == 1)
+                {
+                    ImportantInfoAboutStreetText.gameObject.SetActive(false);
+                    ImportantInfoAboutStreetText.transform.parent.gameObject.SetActive(false);
+                    buildsButton.gameObject.SetActive(false);
+                }
             }
 
 
@@ -1121,5 +1173,11 @@ public class GameCanvas : MonoBehaviour
     public void ChangeMusicLevel(float input)
     {
         GameMixer.SetFloat("Music", input);
+    }
+
+    public void OnOffSavedButtons()
+    {
+        saveAsNewButton.interactable = !saveAsNewButton.interactable;
+        saveButton.interactable = !saveButton.interactable;
     }
 }
