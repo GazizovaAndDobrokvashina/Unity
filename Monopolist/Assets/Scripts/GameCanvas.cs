@@ -592,6 +592,7 @@ public class GameCanvas : MonoBehaviour
             }
 
             var prefButtons = Instantiate(prefabButtonsinScrolls);
+            
             streetsPathsRectTransforms[path.GetIdStreetPath()] = prefButtons;
 
             prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text =
@@ -751,6 +752,8 @@ public class GameCanvas : MonoBehaviour
         if (activeTogle)
         {
             List<int> paths = getDbWork().GetMyPathes(getCurrentPlayer().IdPlayer);
+            
+            List<RectTransform> offThem = new List<RectTransform>();
 
             foreach (RectTransform rectTransform in streetsPathsRectTransforms)
             {
@@ -758,16 +761,18 @@ public class GameCanvas : MonoBehaviour
                 {
                     continue;
                 }
-
-                if (paths.Contains(rectTransform.GetSiblingIndex()))
+                //Debug.Log(rectTransform.GetSiblingIndex() + "     " + _dBwork.GetPathById(rectTransform.GetSiblingIndex()).NamePath);
+                if (paths.Contains(rectTransform.GetSiblingIndex()+1))
                 {
-                    paths.Remove(rectTransform.GetSiblingIndex());
+                    //Debug.Log("MINE");
+                    paths.Remove(rectTransform.GetSiblingIndex()+1);
                 }
                 else
                 {
                     rectTransform.gameObject.SetActive(false);
                 }
             }
+
         }
         else
         {
@@ -1123,6 +1128,8 @@ public class GameCanvas : MonoBehaviour
                     {
                         RectTransform rectTransform = streetsPathsRectTransforms[index];
                         rectTransform.SetParent(scroll.content, false);
+                        
+                        Debug.Log(rectTransform.GetSiblingIndex() + "     " + _dBwork.GetPathById(rectTransform.GetSiblingIndex()).NamePath);
                     }
 
                     //тип 2 - игроки

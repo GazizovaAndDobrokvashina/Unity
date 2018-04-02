@@ -22,6 +22,7 @@
           <e p="CoordinateBuilder.cs" t="Include" />
           <e p="DataService.cs" t="Include" />
           <e p="DBwork.cs" t="Include" />
+          <e p="Dice.cs" t="Include" />
           <e p="Event.cs" t="Include" />
           <e p="GameCanvas.cs" t="Include" />
           <e p="GameController.cs" t="Include" />
@@ -36,6 +37,7 @@
           <e p="SQLite.cs" t="Include" />
           <e p="Street.cs" t="Include" />
           <e p="StreetPath.cs" t="Include" />
+          <e p="SurfaceScript.cs" t="Include" />
           <e p="Tables" t="Include">
             <e p="Builds.cs" t="Include" />
             <e p="Events.cs" t="Include" />

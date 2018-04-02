@@ -36,8 +36,8 @@ public class PathForBuy : StreetPath
     //конструктор класса
     public PathForBuy(int idPath, string namePath, int idStreetParent, int renta, Vector3 start, Vector3 end,
         int idPlayer, int[] builds,
-        int priceStreetPath, bool isBridge, bool isBlocked) : base(idPath, namePath, idStreetParent, renta, start, end,
-        isBridge)
+        int priceStreetPath, bool isBridge, string nameOfPrefab, bool isBlocked) : base(idPath, namePath, idStreetParent, renta, start, end,
+        isBridge, nameOfPrefab)
     {
         this.idPlayer = idPlayer;
         this.builds = builds;

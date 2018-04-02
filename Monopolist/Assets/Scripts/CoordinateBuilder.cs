@@ -81,7 +81,8 @@ public class CoordinateBuilder : EditorWindow {
 									IdStreetParent = streets.IndexOf(m.Groups["name"].Value)+1,
 									StartX = child.position.x,
 									StartY = child.position.z,
-									IsBridge = m.Groups["IsBridge"].Value.Equals("м")
+									IsBridge = m.Groups["IsBridge"].Value.Equals("м"),
+									NameOfPrefab = "Building"
 								});
 							}
 							else
@@ -93,7 +94,8 @@ public class CoordinateBuilder : EditorWindow {
 									IdStreetParent = streets.IndexOf(m.Groups["name"].Value)+1,
 									EndX = child.position.x,
 									EndY = child.position.z,
-									IsBridge = m.Groups["IsBridge"].Value.Equals("м")
+									IsBridge = m.Groups["IsBridge"].Value.Equals("м"),
+									NameOfPrefab = "Building"
 								});
 							}
 							itWas = paths.Count;

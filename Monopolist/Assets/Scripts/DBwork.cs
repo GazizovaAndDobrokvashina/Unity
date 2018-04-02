@@ -42,6 +42,8 @@ public class DBwork : MonoBehaviour
     //название игры
     private string nameOfGane;
 
+    private GovermentPath court;
+
 
     void Start()
     {
@@ -106,6 +108,11 @@ public class DBwork : MonoBehaviour
         return true;
     }
 
+    public GovermentPath getCourt()
+    {
+        return court;
+    }
+
     //заполнение массивов игроков, улиц, частей улиц и зданий, исходя из данных в базе данных
     public void GetEverithing()
     {
@@ -147,6 +154,7 @@ public class DBwork : MonoBehaviour
                     List<Events> eventses = dataService.getEventsOnTheStreet(streetPathse.IdStreetPath);
                     Event[] events = new Event[eventses.Count];
 
+                    
                     int j = 0;
                     if (!streetse.AboutStreet.Contains("суд"))
                     {
@@ -161,6 +169,8 @@ public class DBwork : MonoBehaviour
                     }
 
                     paths[streetPathse.IdStreetPath] = streetPathse.GetGovermentPath(events);
+                    if (streetPathse.NameOfPrefab.Equals("Court"))
+                        court = streetPathse.GetGovermentPath(events);
                     govermentPaths.Add(streetPathse.GetGovermentPath(events));
                 }
 
@@ -178,7 +188,7 @@ public class DBwork : MonoBehaviour
 
         players[0] = new Player(0, "никто", 0, true, true, Vector3.zero);
         streets[0] = new Street(0, "", "", new int[1]);
-        paths[0] = new StreetPath(0, "", 0, 0, Vector3.zero, Vector3.zero, false);
+        paths[0] = new StreetPath(0, "", 0, 0, Vector3.zero, Vector3.zero, false, "");
         builds[0] = new Build(0, "", "", 0, 0, false, 0, 0);
     }
 

@@ -31,6 +31,8 @@ public class StreetPath : MonoBehaviour
     //можно ли приобрести
     public bool canBuy;
 
+    protected string nameOfPrefab;
+
     //возврат названия улицы
     public string NamePath
     {
@@ -60,8 +62,14 @@ public class StreetPath : MonoBehaviour
         this.isBridge = streetPath.isBridge;
         this.namePath = streetPath.namePath;
         this.CanBuy = streetPath.canBuy;
+        this.nameOfPrefab = streetPath.nameOfPrefab;
     }
 
+    public string GetNameOfPrefab()
+    {
+        return nameOfPrefab;
+    }
+    
     //нахождение соседних частей улиц с этой
     public void GetNeighbors()
     {
@@ -102,7 +110,7 @@ public class StreetPath : MonoBehaviour
 
     //конструктор 
     public StreetPath(int idStreetPath, string namePath, int idStreetParent, int renta, Vector3 start, Vector3 end,
-        bool isBridge)
+        bool isBridge, string nameOfPrefab)
     {
         this.idStreetPath = idStreetPath;
         this.idStreetParent = idStreetParent;
@@ -111,6 +119,7 @@ public class StreetPath : MonoBehaviour
         this.end = end;
         this.isBridge = isBridge;
         this.namePath = namePath;
+        this.nameOfPrefab = nameOfPrefab;
     }
 
     //возврат айдишников соседей
@@ -122,6 +131,6 @@ public class StreetPath : MonoBehaviour
     //вернуть значение улицы
     public StreetPaths getEntity()
     {
-        return new StreetPaths(idStreetPath, idStreetParent, namePath, renta, start.x, end.x, start.z, end.z, isBridge);
+        return new StreetPaths(idStreetPath, idStreetParent, namePath, renta, start.x, end.x, start.z, end.z, isBridge, nameOfPrefab);
     }
 }

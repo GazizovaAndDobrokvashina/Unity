@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GovermentPath : StreetPath, GovermantBuild
 {
@@ -17,13 +19,14 @@ public class GovermentPath : StreetPath, GovermantBuild
     //выбираем случайное событие 
     public Event GetRandomEvent()
     {
+        
         return events[Random.Range(1, events.Length)];
     }
 
     //конструктор класса
     public GovermentPath(int idStreetPath, string namePath, int idStreetParent, int renta, Vector3 start, Vector3 end,
-        bool isBridge,
-        Event[] events) : base(idStreetPath, namePath, idStreetParent, renta, start, end, isBridge)
+        bool isBridge, String nameOfPrefab,
+        Event[] events) : base(idStreetPath, namePath, idStreetParent, renta, start, end, isBridge, nameOfPrefab)
     {
         this.events = events;
         base.canBuy = false;
@@ -40,7 +43,7 @@ public class GovermentPath : StreetPath, GovermantBuild
     public void StepOnMe(int idPlayer)
     {
         DBwork dBwork = Camera.main.GetComponent<DBwork>();
-        if (idPlayer == 1 && dBwork.GetPlayerbyId(idPlayer).isInJail())
+        if (idPlayer == 1 && dBwork.GetPlayerbyId(idPlayer).isInJail() )
             return;
 
         Event newEvent = GetRandomEvent();
@@ -54,13 +57,5 @@ public class GovermentPath : StreetPath, GovermantBuild
         }
     }
 
-    //отправка игрока в тюрьму
-    public void GoToJail(int idPlayer, GameCanvas canv)
-    {
-        DBwork dBwork = Camera.main.GetComponent<DBwork>();
-        Event newEvent = events[0];
-        canv.ShowInfoAboutEvent(newEvent.Name + "\n" + newEvent.Info);
-        dBwork.GetPlayerbyId(idPlayer).InJail(3);
-        dBwork.GetPlayerbyId(idPlayer).Money += newEvent.Price;
-    }
+    
 }

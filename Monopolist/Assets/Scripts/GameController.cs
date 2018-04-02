@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters;
 using System.Security.Principal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,6 +28,34 @@ public class GameController : MonoBehaviour
 
     //история действий
     public static string aboutPlayer;
+
+    //скрипт первого кубика
+    public Dice firstDice;
+
+    //скрипт второго кубика
+    public Dice secondDice;
+    
+    //количество ходов, выпавших на кубиках
+    private int stepsForPlayer;
+    
+    //корутина броска кубиков
+    private IEnumerator Dices()
+    {
+        //сбрасываем индекс первого кубика
+        firstDice.resetIndex();
+        //сбрасываем индекс второго кубика
+        secondDice.resetIndex();
+        //дожидаемся ответа от первого кубика
+        yield return StartCoroutine(firstDice.WaitForAllSurfaces());
+        //дожидаемся ответа от второго кубика
+        yield return StartCoroutine(secondDice.WaitForAllSurfaces());
+
+        if (firstDice.GetIndexOfSurface() > -1)
+            stepsForPlayer += firstDice.GetIndexOfSurface();
+
+        if (secondDice.GetIndexOfSurface() > -1)
+            stepsForPlayer += secondDice.GetIndexOfSurface();
+    }
 
     //сброс истории, обновление ссылки на дбворк, бросок кубиков первого игрока
     void Start()
@@ -106,7 +135,7 @@ public class GameController : MonoBehaviour
         //перевести плеера в суд, так как он пойман
         CurrentPlayer = _dBwork.GetPlayerbyId(1);
         CurrentPlayer.move(_dBwork.GetPathById(14));
-        _dBwork.GetGovermentPath(14).GoToJail(CurrentPlayer.IdPlayer, gameObject.GetComponent<GameCanvas>());
+        GoToJail(CurrentPlayer.IdPlayer, gameObject.GetComponent<GameCanvas>());
     }
 
     //если игрок закончил ход на чужой улице, то с него снимается плата в пользу игрока, владеющего этой улицей
@@ -128,9 +157,39 @@ public class GameController : MonoBehaviour
             path.StepOnMe(idPlayer);
         }
 
+        //проеверка баланса игрока, если он меньше нуля, то проверить, может ли игрок что-то заложить, иначе он банкрот
         if (ourPlayer.Money < 0)
         {
-            ourPlayer.IsBankrupt = true;
+            bool haveNotBlockedStreets = false;
+            List<int> paths = _dBwork.GetMyPathes(ourPlayer.IdPlayer);
+
+            foreach (int path in paths)
+            {
+                if (!_dBwork.GetPathForBuy(path).IsBlocked)
+                {
+                    haveNotBlockedStreets = true;
+                    break;
+                }
+            }
+
+            if (haveNotBlockedStreets)
+            {
+                //запуск корутины ожидания ответа от игрока: он хочет сдаться или заложить имеющуюся недвижимость
+            }
+            else
+            {
+                ourPlayer.IsBankrupt = true;
+            }
         }
+    }
+
+    //отправка игрока в тюрьму
+    public void GoToJail(int idPlayer, GameCanvas canv)
+    {
+        DBwork dBwork = Camera.main.GetComponent<DBwork>();
+        Event newEvent = dBwork.getCourt().events[0];
+        canv.ShowInfoAboutEvent(newEvent.Name + "\n" + newEvent.Info);
+        dBwork.GetPlayerbyId(idPlayer).InJail(3);
+        dBwork.GetPlayerbyId(idPlayer).Money += newEvent.Price;
     }
 }
