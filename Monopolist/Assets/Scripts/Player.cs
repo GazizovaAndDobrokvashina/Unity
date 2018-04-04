@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Networking.NetworkSystem;
 
@@ -47,7 +48,7 @@ public class Player : MonoBehaviour
     //пытается ли считерить игрок
     protected bool isCheating;
 
-    //будет ли игрок пойман прb попытке считерить
+    //будет ли игрок пойман при попытке считерить
     protected bool isGonnaBeCathced;
 
     //игровая канва
@@ -109,7 +110,7 @@ public class Player : MonoBehaviour
     //создаем ссылку на канву игры, объявляет ход игрока 
     void Start()
     {
-        _gameCanvas = transform.Find("/Canvas").GetComponent<GameCanvas>();
+        _gameCanvas = _dbWork.GetGameCanvas();
         if (idPlayer == 1)
         CurrentStep = true;
     }
@@ -143,12 +144,14 @@ public class Player : MonoBehaviour
         isCheating = false;
     }
 
+  
+
     //Корутина движения
     private IEnumerator Go()
     {
         if (alreadyCheat)
         {
-            _gameCanvas.ShowInfoAboutEvent("вы уже мухлевали на этом ходе :(");
+            _gameCanvas.ShowInfoAboutEvent("Вы уже мухлевали на этом ходе :(");
             corutine = false;
             yield break;
         }
@@ -246,7 +249,7 @@ public class Player : MonoBehaviour
     }
 
     //запуск корутины движения
-    public void move(StreetPath path)
+    public virtual void move(StreetPath path)
     {
         if (StepsInJail == 0)
         {
@@ -373,21 +376,22 @@ public class Player : MonoBehaviour
     public virtual void NextStep()
     {
         alreadyCheat = false;
+        isGonnaBeCathced = false;
+        
         if (StepsInJail > 0)
         {
             StepsInJail--;
             maxSteps = 0;
         }
 
-        if (StepsInJail == 0)
-        {
-            maxSteps = Random.Range(2, 8);
-        }
-
-        GameController.aboutPlayer += "Игроку " + NickName + " выпало ходов: " + maxSteps + "\n";
         currentSteps = 0;
     }
 
+    public void SetMaxStep(int maxStep)
+    {
+        this.maxSteps = maxStep;
+    }
+    
     //находится ли игрок под арестом
     public bool isInJail()
     {

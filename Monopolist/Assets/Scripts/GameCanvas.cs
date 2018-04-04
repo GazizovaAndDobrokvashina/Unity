@@ -10,6 +10,9 @@ using UnityEngine.UI;
 
 public class GameCanvas : MonoBehaviour
 {
+    //кнопка броска кубиков
+    public GameObject buttonThrowDice;
+    
     public CanvasGroup saveButton;
 
     public CanvasGroup saveAsNewButton;
@@ -157,6 +160,21 @@ public class GameCanvas : MonoBehaviour
 
     //идентификатор улицы, информацию о которой нужно показать
     private int idStreetWhichOPened;
+
+    private GameController _gameController;
+
+    public void ThrowDice()
+    {
+        if (_gameController == null)
+            _gameController = gameObject.GetComponent<GameController>();
+        StartCoroutine(_gameController.Dices());
+        buttonThrowDice.SetActive(false);
+    }
+
+    public void OpenThrowDiceButton()
+    {
+        buttonThrowDice.SetActive(true);
+    }
 
     public void OpenBuilds()
     {
@@ -1009,6 +1027,11 @@ public class GameCanvas : MonoBehaviour
         }
     }
 
+
+    private void Start()
+    {
+        getDbWork().SetGameCanvas(this);
+    }
 
 
     //очистить канву торговли

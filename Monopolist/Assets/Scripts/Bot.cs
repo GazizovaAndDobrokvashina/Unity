@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Bot : Player
 {
@@ -22,31 +24,54 @@ public class Bot : Player
         }
     }
 
+    public override void move(StreetPath path)
+    {
+        if (StepsInJail == 0)
+        {
+            if (!isMoving && !corutine)
+            {
+                corutine = true;
+                way = _dbWork.GetWay(currentStreetPath.GetIdStreetPath(),
+                    path.GetIdStreetPath());
+                    isCheating = true;
+                _gameCanvas.OnOffSavedButtons();
+                StartCoroutine(GoBot());
+                
+            }
+        }
+    }
+
     //корутина движенния бота
     private IEnumerator GoBot()
     {
-        way = _dbWork.GetWay(currentStreetPath.GetIdStreetPath(), ThinkOfWay());
-        bool tried = (Random.value * 100 > 95);
-
-        if (tried)
+        if (!isCheating)
         {
-            if (Random.Range(0, 2) != 1)
+            
+            _gameCanvas.OnOffSavedButtons();
+            way = _dbWork.GetWay(currentStreetPath.GetIdStreetPath(), ThinkOfWay());
+            bool tried = (Random.value * 100 > 95);
+
+            if (tried)
             {
-                GetCheat();
-                GameController.aboutPlayer += "Игрок " + NickName + " не попался \n";
-                alreadyCheat = true;
+                GameController.aboutPlayer += "Игрок " + NickName + " пытался смухлевать \n";
+                if (Random.Range(0, 2) != 1)
+                {
+                    GetCheat();
+                    GameController.aboutPlayer += "Игрок " + NickName + " не попался \n";
+                    alreadyCheat = true;
+                }
+                else
+                {
+                    GameController.aboutPlayer += "Игрок " + NickName + " попался \n";
+                    corutine = false;
+                    _gameCanvas.gameObject.GetComponent<GameController>().cathedPlayer();
+                    yield break;
+                }
             }
-            else
-            {
-                GameController.aboutPlayer += "Игрок " + NickName + " попался \n";
-                corutine = false;
-                _gameCanvas.gameObject.GetComponent<GameController>().cathedPlayer();
-                yield break;
-            }
+
         }
 
-
-        while (currentSteps < maxSteps)
+        while (currentSteps < maxSteps || isCheating && way.Count > 0)
         {
             bool endFirstStep = false;
             int num = way.Count;
@@ -117,6 +142,8 @@ public class Bot : Player
 
         corutine = false;
         ready = true;
+        
+        _gameCanvas.OnOffSavedButtons();
     }
 
     //выбор компьютерным игроком пути

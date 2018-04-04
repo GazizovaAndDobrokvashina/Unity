@@ -23,9 +23,15 @@ public class Dice : MonoBehaviour
         surfaces[index] = surfOnColl;
     }
 
+    public void SetPosition(Vector3 positVector3)
+    {
+        transform.position = positVector3;
+    }
+    
     //метод, опрашивающий все грани и выясняющий, какая из них находится в коллизии
     private int WhichSurfaceOnCollision()
     {
+        
         //счетчик граней в колизии
         int count = 0;
         //номер грани, находящийся в колизии
@@ -62,29 +68,33 @@ public class Dice : MonoBehaviour
     public void resetIndex()
     {
         indexOfSurface = 0;
+        surfaces = new bool[7];
     }
     
     //корутина, проверяющая, что  в течение трех секунд грань, находящаяся в колизии не изменилась
     public IEnumerator WaitForAllSurfaces()
     {
+       
+        yield return new WaitUntil(()=> WhichSurfaceOnCollision()!=-1);
+        
         //запоминаем первый результат
         int firstResult = WhichSurfaceOnCollision();
         //ждем три секунды
-        yield return new WaitForSeconds(3);
+        //yield return new WaitForSeconds(3);
         //запоминаем второй результат
-        int secondResult = WhichSurfaceOnCollision();
+        //int secondResult = WhichSurfaceOnCollision();
         
         //если первый и второй результат совпадают
-        if (firstResult == secondResult)
-        {
+//        if (firstResult == secondResult)
+//        {
             //то записываем, какая грань находится в коллизии
             indexOfSurface = firstResult;
-        }
-        else
-        {    
-            //иначе записываем -1
-            indexOfSurface = -1;
-        }
+//        }
+//        else
+//        {    
+//            //иначе записываем -1
+//            indexOfSurface = -1;
+//        }
             
     }
 }

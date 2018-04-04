@@ -24,7 +24,7 @@ public class MapBuilder : MonoBehaviour
             GameObject newStreetPath = Instantiate(emptyStreet) as GameObject;
             newStreetPath.name = "StreetPath" + i;
             BoxCollider coll = newStreetPath.GetComponent<BoxCollider>();
-            coll.size = new Vector3(GetVectorLength(pathForBuys[i].end - pathForBuys[i].start), 2, 1);
+            coll.size = new Vector3(GetVectorLength(pathForBuys[i].end - pathForBuys[i].start), 3, 8);
 
             if (pathForBuys[i].canBuy)
             {
@@ -37,6 +37,8 @@ public class MapBuilder : MonoBehaviour
             {
                 newStreetPath.AddComponent<GovermentPath>();
                 newStreetPath.GetComponent<GovermentPath>().TakeData(data.GetGovermentPath(i));
+                if (newStreetPath.GetComponent<GovermentPath>().GetNameOfPrefab().Equals("Court"))
+                    data.SetCourt(newStreetPath.GetComponent<GovermentPath>());
                 newStreetPath.GetComponent<GovermentPath>().GetNeighbors();
                 data.updatePath(newStreetPath.GetComponent<GovermentPath>());
             }

@@ -58,5 +58,6 @@ public class SurfaceScript : MonoBehaviour
 
         //завершаем корутину
         yield break;
+        
     }
 }

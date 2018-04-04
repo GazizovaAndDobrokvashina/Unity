@@ -10,12 +10,6 @@ public class GovermentPath : StreetPath, GovermantBuild
     //ссылка на игровую канву
     private GameCanvas _gameCanvas;
 
-    //создаемм ссылку на текущую канву
-    private void Start()
-    {
-        _gameCanvas = transform.Find("/Canvas").GetComponent<GameCanvas>();
-    }
-
     //выбираем случайное событие 
     public Event GetRandomEvent()
     {
@@ -51,7 +45,11 @@ public class GovermentPath : StreetPath, GovermantBuild
 
         if (idPlayer == 1)
         {
-            _gameCanvas = transform.Find("/Canvas").GetComponent<GameCanvas>();
+            if (_gameCanvas == null)
+            {
+                _gameCanvas = dBwork.GetGameCanvas();
+            }
+
             _gameCanvas.ShowInfoAboutEvent(newEvent.Name + "\n" + newEvent.Info + "\n" + "Стоимость: " +
                                            newEvent.Price);
         }

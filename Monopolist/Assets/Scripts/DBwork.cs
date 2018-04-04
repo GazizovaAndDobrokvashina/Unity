@@ -44,6 +44,8 @@ public class DBwork : MonoBehaviour
 
     private GovermentPath court;
 
+    private GameCanvas _gameCanvas;
+
 
     void Start()
     {
@@ -76,6 +78,16 @@ public class DBwork : MonoBehaviour
         names.Add("Гундермурд Сигурдфлордбрадсен");
     }
 
+    public void SetGameCanvas(GameCanvas gameCanvas)
+    {
+        _gameCanvas = gameCanvas;
+    }
+
+    public GameCanvas GetGameCanvas()
+    {
+        return _gameCanvas;
+    }
+    
     public void SetGameDB(string dbName)
     {
         dataService = new DataService(dbName);
@@ -111,6 +123,11 @@ public class DBwork : MonoBehaviour
     public GovermentPath getCourt()
     {
         return court;
+    }
+
+    public void SetCourt(GovermentPath court)
+    {
+        this.court = court;
     }
 
     //заполнение массивов игроков, улиц, частей улиц и зданий, исходя из данных в базе данных
@@ -156,7 +173,7 @@ public class DBwork : MonoBehaviour
 
                     
                     int j = 0;
-                    if (!streetse.AboutStreet.Contains("суд"))
+                    if (!streetPathse.NameOfPrefab.Equals("Court"))
                     {
                         events = new Event[eventses.Count + 1];
                         j++;
@@ -170,7 +187,10 @@ public class DBwork : MonoBehaviour
 
                     paths[streetPathse.IdStreetPath] = streetPathse.GetGovermentPath(events);
                     if (streetPathse.NameOfPrefab.Equals("Court"))
+                    {
                         court = streetPathse.GetGovermentPath(events);
+                    }
+
                     govermentPaths.Add(streetPathse.GetGovermentPath(events));
                 }
 
