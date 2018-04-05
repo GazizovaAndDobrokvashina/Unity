@@ -23,11 +23,10 @@ public class Cameras : MonoBehaviour
         cameras[1] = camera;
 
         Vector3 size = gameObject.GetComponent<BoxCollider>().size * 100;
-        
+
         //cameras[0].GetComponentInParent<CameraMove>().setRestrictions(15, -8.5f, 8.5f, 8.6f, -8.6f);
-        cameras[0].GetComponentInParent<CameraMove>().setRestrictions(cameras[0].transform.parent.position.y, -size.x/2f, size.x/2f, size.y/2f, -size.y/2f);
-
-
+        cameras[0].GetComponentInParent<CameraMove>().setRestrictions(cameras[0].transform.parent.position.y,
+            -size.x / 2f, size.x / 2f, size.y / 2f, -size.y / 2f);
     }
 
     //Включить верхнюю камеру
@@ -73,5 +72,17 @@ public class Cameras : MonoBehaviour
     public void moveOrtoCamera(Vector3 pos)
     {
         cameras[0].transform.parent.transform.position = pos;
+    }
+
+    public IEnumerator moveTopCamera(Vector3 pos)
+    {
+        Vector3 currentPos = cameras[0].transform.parent.transform.position;
+        
+        while (!cameras[0].transform.parent.transform.position.Equals(pos))
+        {
+            Debug.Log(cameras[0].transform.parent.transform.position);
+            cameras[0].transform.parent.transform.position = Vector3.MoveTowards(currentPos, pos, 10 * Time.deltaTime);
+        }
+       yield break;
     }
 }

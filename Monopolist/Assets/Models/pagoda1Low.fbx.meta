@@ -1,0 +1,234 @@
+fileFormatVersion: 2
+guid: afc20cf2d42202b449b590bcb325f7e7
+timeCreated: 1522924656
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: balki
+    100002: balki1
+    100004: balki2
+    100006: balki3
+    100008: balki4
+    100010: balki5
+    100012: balki6
+    100014: balki7
+    100016: cat
+    100018: decor
+    100020: dveri
+    100022: fonari
+    100024: koloni
+    100026: krug
+    100028: krug1
+    100030: krug3
+    100032: lopasti
+    100034: //RootNode
+    100036: paneli
+    100038: paneli1
+    100040: pol
+    100042: roof
+    100044: roofs
+    100046: stolbi
+    100048: turbina
+    100050: verevki
+    100052: walls
+    100054: zabor
+    100056: zabor1
+    100058: zerkalo
+    400000: balki
+    400002: balki1
+    400004: balki2
+    400006: balki3
+    400008: balki4
+    400010: balki5
+    400012: balki6
+    400014: balki7
+    400016: cat
+    400018: decor
+    400020: dveri
+    400022: fonari
+    400024: koloni
+    400026: krug
+    400028: krug1
+    400030: krug3
+    400032: lopasti
+    400034: //RootNode
+    400036: paneli
+    400038: paneli1
+    400040: pol
+    400042: roof
+    400044: roofs
+    400046: stolbi
+    400048: turbina
+    400050: verevki
+    400052: walls
+    400054: zabor
+    400056: zabor1
+    400058: zerkalo
+    2300000: balki
+    2300002: balki1
+    2300004: balki2
+    2300006: balki3
+    2300008: balki4
+    2300010: balki5
+    2300012: balki6
+    2300014: balki7
+    2300016: cat
+    2300018: decor
+    2300020: dveri
+    2300022: fonari
+    2300024: koloni
+    2300026: krug
+    2300028: krug1
+    2300030: krug3
+    2300032: lopasti
+    2300034: paneli
+    2300036: paneli1
+    2300038: pol
+    2300040: roof
+    2300042: roofs
+    2300044: stolbi
+    2300046: turbina
+    2300048: verevki
+    2300050: walls
+    2300052: zabor
+    2300054: zabor1
+    3300000: balki
+    3300002: balki1
+    3300004: balki2
+    3300006: balki3
+    3300008: balki4
+    3300010: balki5
+    3300012: balki6
+    3300014: balki7
+    3300016: cat
+    3300018: decor
+    3300020: dveri
+    3300022: fonari
+    3300024: koloni
+    3300026: krug
+    3300028: krug1
+    3300030: krug3
+    3300032: lopasti
+    3300034: paneli
+    3300036: paneli1
+    3300038: pol
+    3300040: roof
+    3300042: roofs
+    3300044: stolbi
+    3300046: turbina
+    3300048: verevki
+    3300050: walls
+    3300052: zabor
+    3300054: zabor1
+    4300000: cat
+    4300002: decor
+    4300004: krug3
+    4300006: verevki
+    4300008: fonari
+    4300010: balki
+    4300012: dveri
+    4300014: paneli
+    4300016: stolbi
+    4300018: turbina
+    4300020: lopasti
+    4300022: krug1
+    4300024: krug
+    4300026: pol
+    4300028: koloni
+    4300030: walls
+    4300032: roofs
+    4300034: zabor
+    4300036: zabor1
+    4300038: paneli1
+    4300040: balki1
+    4300042: balki2
+    4300044: balki3
+    4300046: balki4
+    4300048: balki5
+    4300050: balki6
+    4300052: balki7
+    4300054: roof
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: deeb17138bc737d4389e5e2fe7b68ac1, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

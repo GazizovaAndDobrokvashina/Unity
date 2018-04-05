@@ -917,7 +917,11 @@ public class GameCanvas : MonoBehaviour
         camerasScript.moveOrtoCamera(getDbWork()
             .GetPathById(getDbWork().GetPlayerbyId(idPlayer).GetCurrentStreetPath().GetIdStreetPath()).transform
             .position);
-        camerasScript.SetActiveFirstCamera();
+
+//        StartCoroutine(camerasScript.moveTopCamera(getDbWork()
+//            .GetPathById(getDbWork().GetPlayerbyId(idPlayer).GetCurrentStreetPath().GetIdStreetPath()).transform
+//            .position));
+//        camerasScript.SetActiveFirstCamera();
     }
 
     //открыть окно торговли с этим игроком
