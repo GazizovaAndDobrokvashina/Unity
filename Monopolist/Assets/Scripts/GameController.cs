@@ -1,10 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Serialization.Formatters;
-using System.Security.Principal;
-using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -43,6 +39,8 @@ public class GameController : MonoBehaviour
 
     private Vector3 posSecondDice;
 
+    private GameCanvas _gameCanvas;
+
     //корутина броска кубиков
     public IEnumerator Dices()
     {
@@ -78,6 +76,7 @@ public class GameController : MonoBehaviour
         aboutPlayer = "";
         _dBwork = Camera.main.GetComponent<DBwork>();
 
+        _gameCanvas = gameObject.GetComponent<GameCanvas>();
         _dBwork.GetPlayerbyId(1).NextStep();
         CurrentPlayer = _dBwork.GetPlayerbyId(1);
 
@@ -108,10 +107,9 @@ public class GameController : MonoBehaviour
     private IEnumerator Cheating()
     {
         GameController.aboutPlayer += "Игрок " + CurrentPlayer.NickName + " пытается смухлевать" + "\n";
-        GameCanvas gameCanvas = gameObject.GetComponent<GameCanvas>();
-        gameCanvas.OpenWarningWindow(CurrentPlayer);
-        yield return new WaitWhile(() => gameCanvas.warningWindow.activeInHierarchy);
-        if (gameCanvas.response)
+        _gameCanvas.OpenWarningWindow(CurrentPlayer);
+        yield return new WaitWhile(() => _gameCanvas.warningWindow.activeInHierarchy);
+        if (_gameCanvas.response)
         {
             if (Random.Range(0, 2) != 1)
             {
@@ -151,6 +149,8 @@ public class GameController : MonoBehaviour
         {
             players[index].ready = false;
             CurrentPlayer = players[index];
+                if(CurrentPlayer.IsBankrupt) 
+                    continue;
             if (CountStepsInAllGame % 10 == 0)
                 players[index].Money += salary;
             if (!CurrentPlayer.isInJail())
@@ -211,6 +211,11 @@ public class GameController : MonoBehaviour
             GovermentPath path = _dBwork.GetGovermentPath(ourPlayer.GetCurrentStreetPath().GetIdStreetPath());
             path.StepOnMe(idPlayer);
         }
+
+        if (ourPlayer.Money <= 0)
+        {
+            CheckForBankrupt(ourPlayer);
+        }
         
     }
 
@@ -230,12 +235,13 @@ public class GameController : MonoBehaviour
 
         if (haveNotBlockedStreets)
         {
-            //запуск корутины ожидания ответа от игрока: он хочет сдаться или заложить имеющуюся недвижимость
+            StartCoroutine(Bankrupting());
+
         }
-        else
-        {
-            player.IsBankrupt = true;
-        }
+//        else
+//        {
+//            player.IsBankrupt = true;
+//        }
     }
 
     //отправка игрока в тюрьму
@@ -250,5 +256,29 @@ public class GameController : MonoBehaviour
 
         dBwork.GetPlayerbyId(idPlayer).InJail(3);
         dBwork.GetPlayerbyId(idPlayer).Money += newEvent.Price;
+    }
+    
+    private IEnumerator Bankrupting()
+    {
+        aboutPlayer += "Игрок " + CurrentPlayer.NickName + " на грани банкротсва" + "\n";
+        if (!CurrentPlayer.IsBot())
+        {
+            _gameCanvas.OpenWarningWindow(CurrentPlayer);
+            yield return new WaitWhile(() => _gameCanvas.warningWindow.activeInHierarchy);
+            if (_gameCanvas.response)
+            {
+                _gameCanvas.onButtonClickTrade(CurrentPlayer.IdPlayer);
+
+            }
+            else
+            {
+                aboutPlayer+= "Игрок " + CurrentPlayer.NickName + " признал себя банкротом! \n Палочки вверх! \n ";
+                CurrentPlayer.IsBankrupt = true;
+            }
+        }
+        else
+        {
+            //логика ботов при банкротстве
+        }
     }
 }

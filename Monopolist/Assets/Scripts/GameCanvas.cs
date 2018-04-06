@@ -924,7 +924,7 @@ public class GameCanvas : MonoBehaviour
     }
 
     //открыть окно торговли с этим игроком
-    private void onButtonClickTrade(int idPlayerSecond)
+    public void onButtonClickTrade(int idPlayerSecond)
     {
         //открываем меню торговли
         ChangeMenu(4);
