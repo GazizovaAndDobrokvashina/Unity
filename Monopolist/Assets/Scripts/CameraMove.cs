@@ -26,6 +26,8 @@ public class CameraMove : MonoBehaviour
     //ограничение снизу
     float downRestriction;
 
+    private Cameras _cameras;
+
     //установить ограничения движения камеры
     public void setRestrictions(float maxHeigth, float left, float right, float up, float down)
     {
@@ -34,18 +36,35 @@ public class CameraMove : MonoBehaviour
         upRestriction = up;
         downRestriction = down;
         this.maxHeigth = maxHeigth;
-        
+
         b = maxHeigth + 10;
 
-        k3 =(3*minHeigth - maxHeigth) / rightRestriction;
-        k4 = (3*minHeigth - maxHeigth) / upRestriction;
-        k1 = (3*minHeigth - maxHeigth) / leftRestriction;
-        k2 = (3*minHeigth - maxHeigth) / downRestriction;
-
+        k3 = (3 * minHeigth - maxHeigth) / rightRestriction;
+        k4 = (3 * minHeigth - maxHeigth) / upRestriction;
+        k1 = (3 * minHeigth - maxHeigth) / leftRestriction;
+        k2 = (3 * minHeigth - maxHeigth) / downRestriction;
     }
 
+    private void Start()
+    {
+        _cameras = GameObject.Find("/Town").GetComponent<Cameras>();
+    }
+
+    public float GetMinHeight()
+    {
+        return minHeigth;
+    }
     void Update()
     {
+        if ((int) Input.mousePosition.x < 2 || (int) Input.mousePosition.x > Screen.width - 2 ||
+            Input.mousePosition.y > Screen.height - 2 || Input.mousePosition.y < 2)
+        {
+            if (_cameras == null)
+                _cameras = GameObject.Find("/Town").GetComponent<Cameras>();
+
+            _cameras.StopMoveTopCamera();
+        }
+
         if (Cameras.mode == 1)
             return;
 

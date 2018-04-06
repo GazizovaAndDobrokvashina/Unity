@@ -741,11 +741,12 @@ public class GameCanvas : MonoBehaviour
             ImportantInfoAboutStreetText.gameObject.SetActive(true);
 
             PathForBuy pathForBuy = getDbWork().GetPathForBuy(idPath);
-
-            if (camerasScript.isActiveOrtoCamera())
-            {
+            
+            camerasScript.SetActiveFirstCamera();
+          //  if (camerasScript.isActiveOrtoCamera())
+          //  {
                 camerasScript.moveOrtoCamera(getDbWork().GetPathById(idPath).transform.position);
-            }
+           // }
 
 
             if (pathForBuy != null)
@@ -914,14 +915,12 @@ public class GameCanvas : MonoBehaviour
     //перемещает к этому игроку на карте
     private void onButtonClickPlayer(int idPlayer)
     {
+        camerasScript.SetActiveFirstCamera();
         camerasScript.moveOrtoCamera(getDbWork()
             .GetPathById(getDbWork().GetPlayerbyId(idPlayer).GetCurrentStreetPath().GetIdStreetPath()).transform
             .position);
 
-//        StartCoroutine(camerasScript.moveTopCamera(getDbWork()
-//            .GetPathById(getDbWork().GetPlayerbyId(idPlayer).GetCurrentStreetPath().GetIdStreetPath()).transform
-//            .position));
-//        camerasScript.SetActiveFirstCamera();
+       
     }
 
     //открыть окно торговли с этим игроком

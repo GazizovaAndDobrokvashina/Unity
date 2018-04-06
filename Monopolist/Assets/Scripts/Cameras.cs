@@ -10,10 +10,20 @@ public class Cameras : MonoBehaviour
     //0 - просмотр карты, 1- от первого лица, 2 - от третьего карты
     public static int mode { get; set; }
 
+    private Vector3 targetPos;
+
+    private bool mustMove;
+
+    private float speed = 30f;
+
+    private CameraMove _cameraMove;
+
     //устанавливаем камеру от первого лица как стартовую
     private void Start()
     {
         mode = 1;
+        targetPos = new Vector3(0, 10, 0);
+        _cameraMove = GameObject.Find("/GameObject").GetComponent<CameraMove>();
     }
 
     //назначаем ограничители, в пределах которых может двигаться верхняя камера, назначаем камеру от первого лица в массив
@@ -71,18 +81,30 @@ public class Cameras : MonoBehaviour
     //перемещение верхней камеры
     public void moveOrtoCamera(Vector3 pos)
     {
-        cameras[0].transform.parent.transform.position = pos;
+        if (_cameraMove == null)
+            _cameraMove = GameObject.Find("/GameObject").GetComponent<CameraMove>();
+
+        targetPos = new Vector3(pos.x, _cameraMove.GetMinHeight(), pos.z);
+        StartCoroutine(moveTopCamera());
     }
 
-    public IEnumerator moveTopCamera(Vector3 pos)
+    private void Update()
     {
-        Vector3 currentPos = cameras[0].transform.parent.transform.position;
-        
-        while (!cameras[0].transform.parent.transform.position.Equals(pos))
-        {
-            Debug.Log(cameras[0].transform.parent.transform.position);
-            cameras[0].transform.parent.transform.position = Vector3.MoveTowards(currentPos, pos, 10 * Time.deltaTime);
-        }
-       yield break;
+        if (cameras[0].transform.parent.transform.position != targetPos && mustMove)
+            cameras[0].transform.parent.transform.position =
+                Vector3.MoveTowards(cameras[0].transform.parent.transform.position, targetPos, speed * Time.deltaTime);
+    }
+
+    public void StopMoveTopCamera()
+    {
+        StopCoroutine(moveTopCamera());
+        mustMove = false;
+    }
+
+    private IEnumerator moveTopCamera()
+    {
+        mustMove = true;
+        yield return new WaitUntil(() => cameras[0].transform.parent.transform.position == targetPos);
+        mustMove = false;
     }
 }

@@ -35,18 +35,17 @@ public class GameController : MonoBehaviour
 
     //скрипт второго кубика
     public Dice secondDice;
-    
+
     //количество ходов, выпавших на кубиках
     private int stepsForPlayer;
 
     private Vector3 posFirstDice;
 
     private Vector3 posSecondDice;
-    
+
     //корутина броска кубиков
     public IEnumerator Dices()
     {
-        
         aboutPlayer += "Игрок " + CurrentPlayer.NickName + " бросает кубики \n";
         firstDice.SetPosition(posFirstDice);
         secondDice.SetPosition(posSecondDice);
@@ -65,15 +64,14 @@ public class GameController : MonoBehaviour
         if (firstDice.GetIndexOfSurface() > -1)
             stepsForPlayer += firstDice.GetIndexOfSurface();
 
-        if (secondDice.GetIndexOfSurface() > -1 )
+        if (secondDice.GetIndexOfSurface() > -1)
             stepsForPlayer += secondDice.GetIndexOfSurface();
         CurrentPlayer.SetMaxStep(stepsForPlayer);
-        
+
         aboutPlayer += "Игроку " + CurrentPlayer.NickName + " выпало ходов: " + stepsForPlayer + "\n";
-        
     }
 
-      
+
     //сброс истории, обновление ссылки на дбворк, бросок кубиков первого игрока
     void Start()
     {
@@ -97,7 +95,7 @@ public class GameController : MonoBehaviour
     public void nextStep()
     {
         if (GameCanvas.currentSteps < GameCanvas.maxSteps && !CurrentPlayer.isInJail())
-        { 
+        {
             StartCoroutine(Cheating());
         }
         else
@@ -124,6 +122,7 @@ public class GameController : MonoBehaviour
                 GameController.aboutPlayer += "Игрок " + CurrentPlayer.NickName + " попался \n";
                 cathedPlayer();
             }
+
             StartCoroutine(GoNextStep());
         }
         else
@@ -162,6 +161,7 @@ public class GameController : MonoBehaviour
             {
                 aboutPlayer += "Прямое включение из тюрьмы: Ход игрока " + CurrentPlayer.NickName + "\n";
             }
+
             players[index].NextStep();
             yield return new WaitUntil(() => players[index].ready);
             checkPlayer(index);
@@ -178,6 +178,7 @@ public class GameController : MonoBehaviour
         {
             aboutPlayer += "Прямое включение из тюрьмы: Ход игрока " + CurrentPlayer.NickName + "\n";
         }
+
         _dBwork.GetPlayerbyId(1).NextStep();
         nextStepButton.GetComponent<CanvasGroup>().interactable = true;
         _dBwork.GetPlayerbyId(1).SetCurrentStep(true);
@@ -210,30 +211,30 @@ public class GameController : MonoBehaviour
             GovermentPath path = _dBwork.GetGovermentPath(ourPlayer.GetCurrentStreetPath().GetIdStreetPath());
             path.StepOnMe(idPlayer);
         }
+        
+    }
 
-        //проверка баланса игрока, если он меньше нуля, то проверить, может ли игрок что-то заложить, иначе он банкрот
-        if (ourPlayer.Money < 0)
+    public void CheckForBankrupt(Player player)
+    {
+        bool haveNotBlockedStreets = false;
+        List<int> paths = _dBwork.GetMyPathes(player.IdPlayer);
+
+        foreach (int path in paths)
         {
-            bool haveNotBlockedStreets = false;
-            List<int> paths = _dBwork.GetMyPathes(ourPlayer.IdPlayer);
+            if (!_dBwork.GetPathForBuy(path).IsBlocked)
+            {
+                haveNotBlockedStreets = true;
+                break;
+            }
+        }
 
-            foreach (int path in paths)
-            {
-                if (!_dBwork.GetPathForBuy(path).IsBlocked)
-                {
-                    haveNotBlockedStreets = true;
-                    break;
-                }
-            }
-
-            if (haveNotBlockedStreets)
-            {
-                //запуск корутины ожидания ответа от игрока: он хочет сдаться или заложить имеющуюся недвижимость
-            }
-            else
-            {
-                ourPlayer.IsBankrupt = true;
-            }
+        if (haveNotBlockedStreets)
+        {
+            //запуск корутины ожидания ответа от игрока: он хочет сдаться или заложить имеющуюся недвижимость
+        }
+        else
+        {
+            player.IsBankrupt = true;
         }
     }
 
@@ -246,6 +247,7 @@ public class GameController : MonoBehaviour
         {
             canv.ShowInfoAboutEvent(newEvent.Name + "\n" + newEvent.Info);
         }
+
         dBwork.GetPlayerbyId(idPlayer).InJail(3);
         dBwork.GetPlayerbyId(idPlayer).Money += newEvent.Price;
     }
