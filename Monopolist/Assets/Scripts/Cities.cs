@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Security.Authentication;
-using UnityEngine;
-using UnityEngine.XR.WSA.Persistence;
+﻿using System.Collections.Generic;
 
 public enum City
 {

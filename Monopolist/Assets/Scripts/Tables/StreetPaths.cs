@@ -26,6 +26,14 @@ public class StreetPaths
         Vector3 end = new Vector3((float) EndX, 0, (float) EndY);
         return new GovermentPath(IdStreetPath, NamePath, IdStreetParent, Renta, start, end, IsBridge, NameOfPrefab, events);
     }
+    
+    public NetworkGovermentPath GetNetworkGovermentPath(Event[] events)
+    {
+        Vector3 start = new Vector3((float) StartX, 0, (float) StartY);
+        Vector3 end = new Vector3((float) EndX, 0, (float) EndY);
+        return new NetworkGovermentPath(IdStreetPath, NamePath, IdStreetParent, Renta, start, end, IsBridge, NameOfPrefab, events);
+    }
+
 
     public StreetPaths(int idStreetPath, int idStreetParent, string namePath, int renta, double startX, double endX, double startY, double endY, bool isBridge, string nameOfPrefab)
     {

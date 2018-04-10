@@ -606,9 +606,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 936e5868-42f2-44ab-88bb-8adc76cb3b6f
+  cloudProjectId: 933f67e9-99e2-4693-91ed-4fe61ed8019c
   projectName: Monopolist
-  organizationId: saosha
+  organizationId: mapleshade
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

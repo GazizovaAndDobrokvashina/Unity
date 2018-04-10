@@ -19,6 +19,11 @@ public class Players
         return new Player(IdPlayer,NickName, Money, IsBankrupt, IsBot, position);
     }
 
+    public NetworkPlayer GetNetworkPlayer()
+    {
+        return new NetworkPlayer();
+    }
+
     public Players(int idPlayer, string nickName, int money, double coordinateX, double coordinateY, bool isBankrupt, bool isBot)
     {
         IdPlayer = idPlayer;

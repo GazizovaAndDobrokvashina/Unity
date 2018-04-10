@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\aleks\.Rider2017.3\system\resharper-host\local\Transient\ReSharperHost\v11\SolutionCaches\_Monopolist.-1414651897.00" t="ExcludeRecursive" />
-    <e p="C:\Users\aleks\Desktop\University\Unity\Unity\Monopolist" t="IncludeRecursive">
+    <e p="C:\Users\Elina\.Rider2017.3\system\resharper-host\local\Transient\ReSharperHost\v11\SolutionCaches\_Monopolist.874285291.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Elina\Documents\Unity\Monopolist" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Plugins" t="Include">
@@ -19,10 +20,12 @@
           <e p="CameraMove.cs" t="Include" />
           <e p="Cameras.cs" t="Include" />
           <e p="Cities.cs" t="Include" />
-          <e p="CoordinateBuilder.cs" t="Include" />
           <e p="DataService.cs" t="Include" />
           <e p="DBwork.cs" t="Include" />
           <e p="Dice.cs" t="Include" />
+          <e p="Editor" t="Include">
+            <e p="CoordinateBuilder.cs" t="Include" />
+          </e>
           <e p="Event.cs" t="Include" />
           <e p="GameCanvas.cs" t="Include" />
           <e p="GameController.cs" t="Include" />
@@ -31,6 +34,20 @@
           <e p="MainMenu.cs" t="Include" />
           <e p="MapBuilder.cs" t="Include" />
           <e p="MouseController.cs" t="Include" />
+          <e p="Multiplayer" t="Include">
+            <e p="NetworkBuild.cs" t="Include" />
+            <e p="NetworkDBwork.cs" t="Include" />
+            <e p="NetworkGameCanvas.cs" t="Include" />
+            <e p="NetworkGameController.cs" t="Include" />
+            <e p="NetworkGovermentPath.cs" t="Include" />
+            <e p="NetworkPathForBuy.cs" t="Include" />
+            <e p="NetworkPlayer.cs" t="Include" />
+            <e p="NetworkStreet.cs" t="Include" />
+            <e p="NetworkStreetPath.cs" t="Include" />
+            <e p="NetworkThingForTrade.cs" t="Include" />
+            <e p="NetworkTrade.cs" t="Include" />
+            <e p="PlayerHabr.cs" t="Include" />
+          </e>
           <e p="PathForBuy.cs" t="Include" />
           <e p="Player.cs" t="Include" />
           <e p="SaveLoad.cs" t="Include" />

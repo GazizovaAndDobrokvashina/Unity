@@ -13,6 +13,11 @@ public class Streets
     {
         return new Street(IdStreet, NameStreet, AboutStreet, paths);
     }
+    
+    public NetworkStreet GetNetworkStreet(int[] paths)
+    {
+        return new NetworkStreet(IdStreet, NameStreet, AboutStreet, paths);
+    }
 
     public Streets(int idStreet, string nameStreet, string aboutStreet)
     {

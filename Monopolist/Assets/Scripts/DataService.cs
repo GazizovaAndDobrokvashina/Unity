@@ -129,6 +129,11 @@ public class DataService
         _connection.Insert(player.getEntity());
     }
 
+    public void AddPlayer(NetworkPlayer player)
+    {
+        _connection.Insert(player.getEntity());
+    }
+    
     public List<Builds> getBuilds()
     {
         List<Builds> buildses = new List<Builds>();

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
-using NUnit.Framework;
-using UnityEditor.VersionControl;
-using UnityEngine;
 using FileMode = System.IO.FileMode;
+using UnityEngine;
 
 public class Ways
 {
@@ -25,6 +22,18 @@ public class Ways
             SaveWays(nameOfTown);
         }
     }
+    
+    public Ways(String nameOfTown, NetworkStreetPath[] streetPaths)
+    {
+        
+
+        if (!GetWays(nameOfTown))
+        {
+            createWays(streetPaths);
+
+            SaveWays(nameOfTown);
+        }
+    }    
 
     //подсчёт путей в заданном массиве частей улиц
     public void createWays(StreetPath[] streetPaths)
@@ -74,6 +83,55 @@ public class Ways
             }
         }
     }
+    
+    public void createWays(NetworkStreetPath[] streetPaths)
+    {
+        _queues = new Queue<int>[streetPaths.Length, streetPaths.Length];
+
+        foreach (NetworkStreetPath path in streetPaths)
+        {
+            _queues[path.GetIdStreetPath(), path.GetIdStreetPath()] = new Queue<int>();
+            if (path.GetIdStreetPath() == 0)
+                continue;
+
+            foreach (int i in path.NeighborsId)
+            {
+                if ((path.isBridge && path.start.Equals(streetPaths[i].start)) ||
+                    path.end.Equals(streetPaths[i].start) ||
+                    (streetPaths[i].isBridge && path.end.Equals(streetPaths[i].end)))
+                {
+                    _queues[path.GetIdStreetPath(), i] = new Queue<int>();
+                    _queues[path.GetIdStreetPath(), i].Enqueue(i);
+                }
+            }
+        }
+
+        for (int i = 1; i < streetPaths.Length; i++)
+        {
+            for (int j = 1; j < streetPaths.Length; j++)
+            {
+                for (int k = 1; k < streetPaths.Length; k++)
+                {
+                    if ((_queues[j, k] == null && _queues[j, i] != null && _queues[i, k] != null) ||
+                        (_queues[j, k] != null && _queues[j, i] != null && _queues[i, k] != null &&
+                         _queues[j, k].Count > _queues[j, i].Count + _queues[i, k].Count))
+                    {
+                        _queues[j, k] = new Queue<int>();
+                        foreach (int i1 in _queues[j, i].ToArray())
+                        {
+                            _queues[j, k].Enqueue(i1);
+                        }
+
+                        foreach (int i1 in _queues[i, k].ToArray())
+                        {
+                            _queues[j, k].Enqueue(i1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     //загрузка очередей улиц
     private bool GetWays(string nameOfTown)

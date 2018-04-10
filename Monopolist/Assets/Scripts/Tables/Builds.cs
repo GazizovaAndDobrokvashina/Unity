@@ -21,6 +21,11 @@ public class Builds
     {
         return new Build(IdBuild, NameBuild, AboutBuild, IdStreetPath, PriceBuild, Enabled, posX, posY);
     }
+    
+    public NetworkBuild getNetworkBuild()
+    {
+        return new NetworkBuild(IdBuild, NameBuild, AboutBuild, IdStreetPath, PriceBuild, Enabled, posX, posY);
+    }
 
     public Builds(int idBuild, string nameBuild, string aboutBuild, int idStreetPath, int priceBuild, bool enabled, double posX, double posY)
     {
