@@ -61,15 +61,52 @@ public class DataService
         _connection = new SQLiteConnection(dbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
         Debug.Log("Final PATH: " + dbPath);
     }
-
-    public void CreateDB(string nameOfTown)
+    
+    public DataService()
     {
-        //CreateTables();
+#if UNITY_EDITOR
+        var dbPath = string.Format(@"Assets\Resources\GamesData");
+        //var dbPath = string.Format(Application.persistentDataPath+@"\SavedGames\{0}", DatabaseName);
+#else
+// check if file exists in Application.persistentDataPath
+        	var filepath = string.Format("{0}/Resources/GamesData", Application.persistentDataPath);
+ 
+        	if (!File.Exists(filepath))
+		{
+			Debug.Log("Database not in Persistent path");
+			// if it doesn't ->
+			// open StreamingAssets directory and load the db ->
+#if UNITY_ANDROID 
+			var loadDb =
+ new WWW("jar:file://" + Application.dataPath + "!/assets/" + DatabaseName);  // this is the path to your StreamingAssets in android
+			while (!loadDb.isDone) { }  // CAREFUL here, for safety reasons you shouldn't let this while loop unattended, place a timer and error check
+			// then save to Application.persistentDataPath
+			File.WriteAllBytes(filepath, loadDb.bytes);
+#elif UNITY_IOS
+			var loadDb = Application.dataPath + "/Raw/" + DatabaseName;  // this is the path to your StreamingAssets in iOS
+			// then save to Application.persistentDataPath
+			File.Copy(loadDb, filepath);
+#elif UNITY_WP8
+			var loadDb =
+ Application.dataPath + "/StreamingAssets/" + DatabaseName;  // this is the path to your StreamingAssets in iOS
+			// then save to Application.persistentDataPath
+			File.Copy(loadDb, filepath);
+#elif UNITY_WINRT
+			var loadDb =
+ Application.dataPath + "/StreamingAssets/" + DatabaseName;  // this is the path to your StreamingAssets in iOS
+			// then save to Application.persistentDataPath
+			File.Copy(loadDb, filepath);
+#endif
+			Debug.Log("Database written");
+		}
+		var dbPath = filepath;
+#endif
+        _connection = new SQLiteConnection(dbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
+        Debug.Log("Final PATH: " + dbPath);
 
-        
-        
-        //FullTables();
+        _connection.CreateTable<GameData>();
     }
+
 
     public bool IsExist()
     {
@@ -86,6 +123,8 @@ public class DataService
         _connection.CreateTable<Streets>();
         _connection.CreateTable<StreetPaths>();
     }
+    
+    
 
 
     private void FullTables()
@@ -132,6 +171,27 @@ public class DataService
     public void AddPlayer(NetworkPlayer player)
     {
         _connection.Insert(player.getEntity());
+    }
+
+    public int AddGame(GameData gameData)
+    {
+         return _connection.Insert(gameData);
+    }
+
+    public List<GameData> GetAllGames()
+    {
+        List<GameData> games = new List<GameData>();
+        foreach (GameData game in _connection.Table<GameData>())
+        {
+            games.Add(game);
+        }
+
+        return games;
+    }
+
+    public void DeleteGame(GameData gameData)
+    {
+        _connection.Delete(gameData);
     }
     
     public List<Builds> getBuilds()

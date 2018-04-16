@@ -31,6 +31,8 @@ public class DBwork : MonoBehaviour
     //ссылка на DataService
     private DataService dataService;
 
+    private DataService savedGamesDS;
+
     //список всех путей между улицами
     private Ways ways;
 
@@ -49,6 +51,7 @@ public class DBwork : MonoBehaviour
 
     void Start()
     {
+        savedGamesDS = new DataService();
         names = new List<string>();
         names.Add("Равшан");
         names.Add("Джамшут");
@@ -299,6 +302,8 @@ public class DBwork : MonoBehaviour
     public void CreateNewGame(int countOfPlayers, int startMoney, string NameOfGame, bool online, string nameOfTown,
         string nickName)
     {
+        
+        
         
 #if UNITY_EDITOR
         File.Copy(@"Assets\Resources\" + nameOfTown, @"Assets\SavedGames\" + nameOfTown + "_" + NameOfGame + "_0.db");

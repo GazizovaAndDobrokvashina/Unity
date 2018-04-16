@@ -71,6 +71,10 @@ public class NetworkPlayer : NetworkBehaviour {
     //является ли текущий ход ходом игрока
     protected bool CurrentStep;
 
+    
+    float periodSvrRpc = 0.02f; //как часто сервер шлёт обновление картинки клиентам.
+    float timeSvrRpcLast = 0; //когда последний раз сервер слал обновление картинки
+    
     //пустой консруктор для бота
     public NetworkPlayer()
     {
@@ -117,16 +121,26 @@ public class NetworkPlayer : NetworkBehaviour {
     //перемещение игрока и отправка его данных в игровую канву
     void Update()
     {
-        if (!transform.position.Equals(destination))
+        if (this.isServer)
         {
-            transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
-            isMoving = true;
-        }
-        else
-        {
-            isMoving = false;
-        }
+            if (!transform.position.Equals(destination))
+            {
+                transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
+            }
 
+            if (timeSvrRpcLast + periodSvrRpc < Time.time)
+                //Если пора, то выслать координаты всем моим аватарам
+            {
+                RpcUpdateUnitPosition(this.transform.position);
+                RpcUpdateUnitOrientation(this.transform.rotation);
+                timeSvrRpcLast = Time.time;
+            }
+        }
 
         if (isLocalPlayer)
         {
@@ -144,7 +158,31 @@ public class NetworkPlayer : NetworkBehaviour {
         isCheating = false;
     }
 
-  
+    [ClientRpc(channel = 0)]
+    void RpcUpdateUnitPosition(Vector3 posNew)
+    {
+        if (this.isClient)
+            //Мои аватары копируют состояние моего духа.
+        {
+            this.transform.position = posNew;
+        }
+    }
+
+    [ClientRpc(channel = 0)]
+    void RpcUpdateUnitOrientation(Quaternion oriNew)
+    {
+        if (this.isClient)
+            //Мои аватары копируют состояние моего духа.
+        {
+            this.transform.rotation = oriNew;
+        }
+    }
+    
+    [Command(channel = 0)]
+    void CmdDrive(float veloSvrNew)
+    {
+        
+    }
 
     //Корутина движения
     private IEnumerator Go()
@@ -251,27 +289,31 @@ public class NetworkPlayer : NetworkBehaviour {
     //запуск корутины движения
     public virtual void move(NetworkStreetPath path)
     {
-        if (StepsInJail == 0)
+        if (this.isLocalPlayer)
         {
-            if (!isMoving && !corutine)
+            if (StepsInJail == 0)
             {
-                corutine = true;
-                way = _dbWork.GetWay(currentStreetPath.GetIdStreetPath(),
-                    path.GetIdStreetPath());               
-                if (currentSteps + way.Count > maxSteps && !isGonnaBeCathced && !alreadyCheat)
+                if (!isMoving && !corutine)
                 {
-                    NetworkGameController.aboutPlayer += "Игрок " + NickName + " пытается смухлевать" + "\n";
-                    _gameCanvas.OpenWarningWindow(this);
-                    isCheating = true;
+                    corutine = true;
+                    way = _dbWork.GetWay(currentStreetPath.GetIdStreetPath(),
+                        path.GetIdStreetPath());
+                    if (currentSteps + way.Count > maxSteps && !isGonnaBeCathced && !alreadyCheat)
+                    {
+                        NetworkGameController.aboutPlayer += "Игрок " + NickName + " пытается смухлевать" + "\n";
+                        _gameCanvas.OpenWarningWindow(this);
+                        isCheating = true;
+                    }
+
+                    _gameCanvas.OnOffSavedButtons();
+                    StartCoroutine(Go());
+
                 }
-                _gameCanvas.OnOffSavedButtons();
-                StartCoroutine(Go());
-                
             }
-        }
-        else
-        {
-            _gameCanvas.ShowInfoAboutEvent("Вы заключены под стражу" + "\n" + "Осталось ходов: " + StepsInJail);
+            else
+            {
+                _gameCanvas.ShowInfoAboutEvent("Вы заключены под стражу" + "\n" + "Осталось ходов: " + StepsInJail);
+            }
         }
     }
 
@@ -375,16 +417,16 @@ public class NetworkPlayer : NetworkBehaviour {
     //следующий ход, генерация ходов, выпадающих на кубике
     public virtual void NextStep()
     {
-        alreadyCheat = false;
-        isGonnaBeCathced = false;
-        
-        if (StepsInJail > 0)
-        {
-            StepsInJail--;
-            maxSteps = 0;
-        }
+            alreadyCheat = false;
+            isGonnaBeCathced = false;
 
-        currentSteps = 0;
+            if (StepsInJail > 0)
+            {
+                StepsInJail--;
+                maxSteps = 0;
+            }
+
+            currentSteps = 0;
     }
 
     public void SetMaxStep(int maxStep)
