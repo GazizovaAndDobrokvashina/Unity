@@ -2,7 +2,7 @@
 using UnityEngine.Networking;
 using UnityEngine;
 
-    public class NetworkStreetPath : NetworkBehaviour
+    public class NetworkStreetPath : Photon.MonoBehaviour
     {
         
         //айди части улицы

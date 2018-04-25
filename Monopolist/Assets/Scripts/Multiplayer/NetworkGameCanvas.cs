@@ -11,7 +11,7 @@ using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class NetworkGameCanvas : NetworkBehaviour
+public class NetworkGameCanvas : Photon.MonoBehaviour
 {
      //кнопка броска кубиков
     public GameObject buttonThrowDice;

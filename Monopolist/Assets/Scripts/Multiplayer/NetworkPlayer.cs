@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class NetworkPlayer : NetworkBehaviour {
+public class NetworkPlayer : Photon.MonoBehaviour{
 
 	//ID игрока
     protected int idPlayer;
@@ -113,6 +113,7 @@ public class NetworkPlayer : NetworkBehaviour {
     //создаем ссылку на канву игры, объявляет ход игрока 
     void Start()
     {
+        
         _gameCanvas = _dbWork.GetNetworkGameCanvas();
         if (idPlayer == 1)
         CurrentStep = true;
@@ -121,8 +122,7 @@ public class NetworkPlayer : NetworkBehaviour {
     //перемещение игрока и отправка его данных в игровую канву
     void Update()
     {
-        if (this.isServer)
-        {
+       
             if (!transform.position.Equals(destination))
             {
                 transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
@@ -133,22 +133,12 @@ public class NetworkPlayer : NetworkBehaviour {
                 isMoving = false;
             }
 
-            if (timeSvrRpcLast + periodSvrRpc < Time.time)
-                //Если пора, то выслать координаты всем моим аватарам
-            {
-                RpcUpdateUnitPosition(this.transform.position);
-                RpcUpdateUnitOrientation(this.transform.rotation);
-                timeSvrRpcLast = Time.time;
-            }
-        }
-
-        if (isLocalPlayer)
-        {
-            NetworkGameCanvas.currentSteps = currentSteps;
+           
+         NetworkGameCanvas.currentSteps = currentSteps;
             NetworkGameCanvas.maxSteps = maxSteps;
             NetworkGameCanvas.money = money;
             NetworkGameCanvas.destination = currentStreetPath.NamePath;
-        }
+        
     }
 
     //получить ответ с канвы
@@ -158,31 +148,7 @@ public class NetworkPlayer : NetworkBehaviour {
         isCheating = false;
     }
 
-    [ClientRpc(channel = 0)]
-    void RpcUpdateUnitPosition(Vector3 posNew)
-    {
-        if (this.isClient)
-            //Мои аватары копируют состояние моего духа.
-        {
-            this.transform.position = posNew;
-        }
-    }
-
-    [ClientRpc(channel = 0)]
-    void RpcUpdateUnitOrientation(Quaternion oriNew)
-    {
-        if (this.isClient)
-            //Мои аватары копируют состояние моего духа.
-        {
-            this.transform.rotation = oriNew;
-        }
-    }
     
-    [Command(channel = 0)]
-    void CmdDrive(float veloSvrNew)
-    {
-        
-    }
 
     //Корутина движения
     private IEnumerator Go()
@@ -289,8 +255,7 @@ public class NetworkPlayer : NetworkBehaviour {
     //запуск корутины движения
     public virtual void move(NetworkStreetPath path)
     {
-        if (this.isLocalPlayer)
-        {
+       
             if (StepsInJail == 0)
             {
                 if (!isMoving && !corutine)
@@ -313,8 +278,9 @@ public class NetworkPlayer : NetworkBehaviour {
             else
             {
                 _gameCanvas.ShowInfoAboutEvent("Вы заключены под стражу" + "\n" + "Осталось ходов: " + StepsInJail);
+                
             }
-        }
+        
     }
 
 

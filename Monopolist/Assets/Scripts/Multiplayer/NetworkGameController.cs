@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 
 
-public class NetworkGameController : NetworkBehaviour
+public class NetworkGameController : Photon.MonoBehaviour
 {
     //текущий активный игрок
     public NetworkPlayer CurrentPlayer;

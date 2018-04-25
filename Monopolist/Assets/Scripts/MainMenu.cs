@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using System.Linq;
+using ExitGames.Client.Photon;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using Button = UnityEngine.UI.Button;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Slider = UnityEngine.UI.Slider;
 using Toggle = UnityEngine.UI.Toggle;
 
 
 public class MainMenu : MonoBehaviour
 {
+
+    public GameObject NetworkSettings;
+    
+    public GameObject NetworkStartNewGame;
+    
     //объект с кнопками самого главного меню
     public GameObject MainMenuObj;
 
@@ -90,6 +97,31 @@ public class MainMenu : MonoBehaviour
     //имя игрока
     private string namePlayer = "Jonny";
 
+    public int CountOfPlayers
+    {
+        get { return countOfPlayers; }
+    }
+
+    public string NewNameGame
+    {
+        get { return newNameGame; }
+    }
+
+    public int StartMoney
+    {
+        get { return startMoney; }
+    }
+
+    public string NameTownForNewGame
+    {
+        get { return nameTownForNewGame; }
+    }
+
+    public string NamePlayer
+    {
+        get { return namePlayer; }
+    }
+
     //инициализация главного меню
     private void Start()
     {
@@ -113,6 +145,16 @@ public class MainMenu : MonoBehaviour
         if (!sliderCountOfPlayers.IsActive()) return;
         countOfPlayers = (int) sliderCountOfPlayers.value;
         countOfPlayersText.text = "Количество игроков: " + (int) sliderCountOfPlayers.value;
+    }
+
+    public void openNetworkSettings()
+    {
+        ChangeMenuObject(5);
+    }
+    
+    public void openNetworkStartNewGame()
+    {
+        ChangeMenuObject(6);
     }
     
     //изменение названия игры
@@ -214,7 +256,7 @@ public class MainMenu : MonoBehaviour
     public void StartNewGame()
     {
         Camera.main.GetComponent<DBwork>()
-            .CreateNewGame(countOfPlayers, startMoney, newNameGame, online, nameTownForNewGame, namePlayer);
+            .CreateNewGame(countOfPlayers, startMoney, newNameGame, false, nameTownForNewGame, namePlayer);
         if (Trade.things == null)
         {
             Trade.things = new List<ThingForTrade>[countOfPlayers, countOfPlayers];
@@ -223,6 +265,8 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 
+    
+    
     //изменить название игры
     public void ChangeNameOfGame()
     {
@@ -246,6 +290,8 @@ public class MainMenu : MonoBehaviour
                 BackButton.SetActive(true);
                 CreateNewGameObj.SetActive(true);
                 SettingsMenu.SetActive(false);
+                NetworkSettings.SetActive(false);
+                NetworkStartNewGame.SetActive(false);
                 break;
             //открыть меню загрузки игры
             case 2:
@@ -254,6 +300,8 @@ public class MainMenu : MonoBehaviour
                 BackButton.SetActive(true);
                 CreateNewGameObj.SetActive(false);
                 SettingsMenu.SetActive(false);
+                NetworkSettings.SetActive(false);
+                NetworkStartNewGame.SetActive(false);
                 break;
             //открыть настройки        
             case 3:
@@ -262,6 +310,8 @@ public class MainMenu : MonoBehaviour
                 BackButton.SetActive(true);
                 CreateNewGameObj.SetActive(false);
                 SettingsMenu.SetActive(true);
+                NetworkSettings.SetActive(false);
+                NetworkStartNewGame.SetActive(false);
                 break;
             //Вернуться в глввное меню
             case 4:
@@ -270,6 +320,28 @@ public class MainMenu : MonoBehaviour
                 BackButton.SetActive(false);
                 CreateNewGameObj.SetActive(false);
                 SettingsMenu.SetActive(false);
+                NetworkSettings.SetActive(false);
+                NetworkStartNewGame.SetActive(false);
+                break;
+            //открыть первое меню нетворка
+            case 5: 
+                MainMenuObj.SetActive(false);
+                ContinueObj.SetActive(false);
+                BackButton.SetActive(true);
+                CreateNewGameObj.SetActive(false);
+                SettingsMenu.SetActive(false);
+                NetworkSettings.SetActive(true);
+                NetworkStartNewGame.SetActive(false);
+                break;
+            
+            case 6: 
+                MainMenuObj.SetActive(false);
+                ContinueObj.SetActive(false);
+                BackButton.SetActive(true);
+                CreateNewGameObj.SetActive(false);
+                SettingsMenu.SetActive(false);
+                NetworkSettings.SetActive(false);
+                NetworkStartNewGame.SetActive(true);
                 break;
             default:
             {
@@ -278,6 +350,8 @@ public class MainMenu : MonoBehaviour
                 BackButton.SetActive(false);
                 CreateNewGameObj.SetActive(false);
                 SettingsMenu.SetActive(false);
+                NetworkSettings.SetActive(false);
+                NetworkStartNewGame.SetActive(false);
                 break;
             }
         }

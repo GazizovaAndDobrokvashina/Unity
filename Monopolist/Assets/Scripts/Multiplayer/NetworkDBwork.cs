@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class NetworkDBwork : NetworkBehaviour
+public class NetworkDBwork : Photon.MonoBehaviour
 {
     //массив игроков
     private NetworkPlayer[] players;
@@ -297,56 +297,38 @@ public class NetworkDBwork : NetworkBehaviour
     {
         
 #if UNITY_EDITOR
-        File.Copy(@"Assets\Resources\" + nameOfTown, @"Assets\SavedGames\" + nameOfTown + "_" + NameOfGame + "_0.db");
+        File.Copy(@"Assets\Resources\" + nameOfTown, @"Assets\SavedGames\" + nameOfTown + "_" + NameOfGame + ".db");
 #else
-        File.Copy(Application.persistentDataPath + @"\Resources\" + nameOfTown, Application.persistentDataPath +@"/SavedGames/" + nameOfTown + "_" + NameOfGame + "_0.db");
+        File.Copy(Application.persistentDataPath + @"\Resources\" + nameOfTown, Application.persistentDataPath +@"/SavedGames/" + nameOfTown + "_" + NameOfGame + ".db");
 #endif
         
-//        if (string.IsNullOrEmpty(nameOfTown))
-//        {
-//            nameOfTown = "Monopolist.db";
-//        }
-//
-//        if (NameOfGame.Length != 0 && !NameOfGame.EndsWith(".db"))
-//        {
-//            dataService = new DataService(nameOfTown + "_" + NameOfGame + ".db");
-//            nameOfGane = NameOfGame + ".db";
-//        }
-//        else if (NameOfGame.Length != 0 && NameOfGame.EndsWith(".db"))
-//        {
-//            dataService = new DataService(nameOfTown + "_" + NameOfGame);
-//            nameOfGane = NameOfGame;
-//        }
-//        else
-//        {
-//            dataService = new DataService(nameOfTown + "_Firstgame.db");
-//            nameOfGane = "Firstgame.db";
-//        }
-//
-//        if (!dataService.IsExist())
-//            dataService.CreateDB(nameOfTown);
-        
-        dataService = new DataService(nameOfTown + "_" + NameOfGame + "_0.db");
-        nameOfGane = NameOfGame + "_0.db";
+        dataService = new DataService(nameOfTown + "_" + NameOfGame + ".db");
+        nameOfGane = NameOfGame + ".db";
 
         GetEverithing();
         players = new NetworkPlayer[countOfPlayers + 1];
-        for (int i = 1; i < countOfPlayers + 1; i++)
-        {
-            NetworkPlayer player;
-            if (i == 1)
-                player = new NetworkPlayer(i, nickName, startMoney, false, false,
-                    MapBuilder.GetCenter(paths[1].start, paths[1].end));
-            else
-                player = new NetworkPlayer(i, names[Random.Range(0, names.Count)], startMoney, false, true,
-                    MapBuilder.GetCenter(paths[1].start, paths[1].end));
-            players[i] = player;
-            dataService.AddPlayer(player);
-            
-            
-        }
+        
+//        for (int i = 1; i < countOfPlayers + 1; i++)
+//        {
+//            NetworkPlayer player;
+//            if (i == 1)
+//                player = new NetworkPlayer(i, nickName, startMoney, false, false,
+//                    MapBuilder.GetCenter(paths[1].start, paths[1].end));
+//            else
+//                player = new NetworkPlayer(i, names[Random.Range(0, names.Count)], startMoney, false, true,
+//                    MapBuilder.GetCenter(paths[1].start, paths[1].end));
+//            players[i] = player;
+//            dataService.AddPlayer(player);
+//            
+//            
+//        }
 
-
+        NetworkPlayer playerOwn = new NetworkPlayer(1, nickName, startMoney, false, false, MapBuilder.GetCenter(paths[1].start, paths[1].end));
+        players[1] = playerOwn;
+        dataService.AddPlayer(playerOwn);
+        
+        
+        
         GetEverithing();
 
         this.nameOfTown = nameOfTown;

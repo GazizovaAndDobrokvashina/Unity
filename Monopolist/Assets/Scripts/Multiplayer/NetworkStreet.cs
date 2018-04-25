@@ -1,7 +1,7 @@
 ﻿using UnityEngine.Networking;
 using UnityEngine;
 
-public class NetworkStreet : NetworkBehaviour
+public class NetworkStreet :Photon.MonoBehaviour
 {
     //идентификатор монополии
     private int idStreet;
