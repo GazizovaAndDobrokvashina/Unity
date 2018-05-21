@@ -93,7 +93,7 @@ public class DBwork : MonoBehaviour
     
     public void SetGameDB(string dbName)
     {
-        dataService = new DataService(dbName);
+        dataService = new DataService(dbName, false);
         GetEverithing();
         nameOfTown = dbName.Substring(0, dbName.IndexOf("_"));
         nameOfGane = dbName.Substring(dbName.IndexOf("_") + 1);
@@ -219,6 +219,8 @@ public class DBwork : MonoBehaviour
     //помещение камеры в поле DontDestroyOnLoad для перенесения информации из главного меню в саму игру
     private void Awake()
     {
+        
+        
 #if UNITY_EDITOR
         Directory.CreateDirectory(@"Assets\SavedGames");
         Directory.CreateDirectory(@"Assets\StreamingAssets");
@@ -306,9 +308,9 @@ public class DBwork : MonoBehaviour
         
         
 #if UNITY_EDITOR
-        File.Copy(@"Assets\Resources\" + nameOfTown, @"Assets\SavedGames\" + nameOfTown + "_" + NameOfGame + "_0.db");
+        File.Copy(@"Assets\StreamingAssets\" + nameOfTown, @"Assets\SavedGames\" + nameOfTown + "_" + NameOfGame + "_0.db");
 #else
-        File.Copy(Application.persistentDataPath + @"\Resources\" + nameOfTown, Application.persistentDataPath +@"/SavedGames/" + nameOfTown + "_" + NameOfGame + "_0.db");
+        File.Copy(Application.persistentDataPath + @"\StreamingAssets\" + nameOfTown, Application.persistentDataPath +@"/SavedGames/" + nameOfTown + "_" + NameOfGame + "_0.db");
 #endif
         
 //        if (string.IsNullOrEmpty(nameOfTown))
@@ -335,7 +337,7 @@ public class DBwork : MonoBehaviour
 //        if (!dataService.IsExist())
 //            dataService.CreateDB(nameOfTown);
         
-        dataService = new DataService(nameOfTown + "_" + NameOfGame + "_0.db");
+        dataService = new DataService(nameOfTown + "_" + NameOfGame + "_0.db", false);
         nameOfGane = NameOfGame + "_0.db";
 
         GetEverithing();

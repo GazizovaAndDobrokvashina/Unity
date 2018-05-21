@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="TRON_Демка_0.db">
+  <database-model serializer="dbm" rdbms="SQLITE" format-version="4.7">
+    <root id="1"/>
+    <schema id="2" parent="1" name="main">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <collation id="3" parent="1" name="BINARY"/>
+    <collation id="4" parent="1" name="NOCASE"/>
+    <collation id="5" parent="1" name="RTRIM"/>
+    <table id="6" parent="2" name="Builds"/>
+    <table id="7" parent="2" name="Events"/>
+    <table id="8" parent="2" name="PathsForBuy"/>
+    <table id="9" parent="2" name="Players"/>
+    <table id="10" parent="2" name="StreetPaths"/>
+    <table id="11" parent="2" name="Streets"/>
+    <table id="12" parent="2" name="sqlite_master">
+      <System>1</System>
+    </table>
+    <table id="13" parent="2" name="sqlite_sequence">
+      <System>1</System>
+    </table>
+    <column id="14" parent="6" name="IdBuild">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="15" parent="6" name="NameBuild">
+      <Position>2</Position>
+      <DataType>varchar|0</DataType>
+    </column>
+    <column id="16" parent="6" name="AboutBuild">
+      <Position>3</Position>
+      <DataType>varchar|0</DataType>
+    </column>
+    <column id="17" parent="6" name="IdStreetPath">
+      <Position>4</Position>
+      <DataType>integer|0</DataType>
+    </column>
+    <column id="18" parent="6" name="PriceBuild">
+      <Position>5</Position>
+      <DataType>integer|0</DataType>
+    </column>
+    <column id="19" parent="6" name="Enabled">
+      <Position>6</Position>
+      <DataType>integer|0</DataType>
+    </column>
+    <column id="20" parent="6" name="posX">
+      <Position>7</Position>
+      <DataType>float|0</DataType>
+    </column>
+    <column id="21" parent="6" name="posY">
+      <Position>8</Position>
+      <DataType>float|0</DataType>
+    </column>
+    <key id="22" parent="6">
+      <ColNames>IdBuild</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="23" parent="7" name="IdEvent">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="24" parent="7" name="NameEvent">
+      <Position>2</Position>
+      <DataType>varchar|0</DataType>
+    </column>
+    <column id="25" parent="7" name="Info">
+      <Position>3</Position>
+      <DataType>varchar|0</DataType>
+    </column>
+    <column id="26" parent="7" name="Price">
+      <Position>4</Position>
+      <DataType>integer|0</DataType>
+    </column>
+    <column id="27" parent="7" name="IdGovermentPath">
+      <Position>5</Position>
+      <DataType>integer|0</DataType>
+    </column>
+    <key id="28" parent="7">
+      <ColNames>IdEvent</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="29" parent="8" name="IdPathForBuy">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="30" parent="8" name="IdPlayer">
+      <Position>2</Position>
+      <DataType>integer|0</DataType>
+    </column>
+    <column id="31" parent="8" name="PriceStreetPath">
+      <Position>3</Position>
+      <DataType>integer|0</DataType>
+    </column>
+    <column id="32" parent="8" name="isBlocked">
+      <Position>4</Position>
+      <DataType>integer|0</DataType>
+    </column>
+    <key id="33" parent="8">
+      <ColNames>IdPathForBuy</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="34" parent="9" name="IdPlayer">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="35" parent="9" name="NickName">
+      <Position>2</Position>
+      <DataType>varchar|0</DataType>
+    </column>
+    <column id="36" parent="9" name="Money">
+      <Position>3</Position>
+      <DataType>integer|0</DataType>
+    </column>
+    <column id="37" parent="9" name="CoordinateX">
+      <Position>4</Position>
+      <DataType>float|0</DataType>
+    </column>
+    <column id="38" parent="9" name="CoordinateY">
+      <Position>5</Position>
+      <DataType>float|0</DataType>
+    </column>
+    <column id="39" parent="9" name="IsBankrupt">
+      <Position>6</Position>
+      <DataType>integer|0</DataType>
+    </column>
+    <column id="40" parent="9" name="IsBot">
+      <Position>7</Position>
+      <DataType>integer|0</DataType>
+    </column>
+    <key id="41" parent="9">
+      <ColNames>IdPlayer</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="42" parent="10" name="IdStreetPath">
+      <Position>1</Position>
+      <DataType>INTEGER|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="43" parent="10" name="IdStreetParent">
+      <Position>2</Position>
+      <DataType>INTEGER|0</DataType>
+    </column>
+    <column id="44" parent="10" name="NamePath">
+      <Position>3</Position>
+      <DataType>VARCHAR|0</DataType>
+    </column>
+    <column id="45" parent="10" name="Renta">
+      <Position>4</Position>
+      <DataType>INTEGER|0</DataType>
+    </column>
+    <column id="46" parent="10" name="StartX">
+      <Position>5</Position>
+      <DataType>FLOAT|0</DataType>
+    </column>
+    <column id="47" parent="10" name="EndX">
+      <Position>6</Position>
+      <DataType>FLOAT|0</DataType>
+    </column>
+    <column id="48" parent="10" name="StartY">
+      <Position>7</Position>
+      <DataType>FLOAT|0</DataType>
+    </column>
+    <column id="49" parent="10" name="EndY">
+      <Position>8</Position>
+      <DataType>FLOAT|0</DataType>
+    </column>
+    <column id="50" parent="10" name="IsBridge">
+      <Position>9</Position>
+      <DataType>INTEGER|0</DataType>
+    </column>
+    <column id="51" parent="10" name="NameOfPrefab">
+      <Position>10</Position>
+      <DataType>VARCHAR|0</DataType>
+      <DefaultExpression>Building</DefaultExpression>
+    </column>
+    <key id="52" parent="10">
+      <ColNames>IdStreetPath</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="53" parent="11" name="IdStreet">
+      <Position>1</Position>
+      <DataType>integer|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="54" parent="11" name="NameStreet">
+      <Position>2</Position>
+      <DataType>varchar|0</DataType>
+    </column>
+    <column id="55" parent="11" name="AboutStreet">
+      <Position>3</Position>
+      <DataType>varchar|0</DataType>
+    </column>
+    <key id="56" parent="11">
+      <ColNames>IdStreet</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="57" parent="12" name="type">
+      <Position>1</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="58" parent="12" name="name">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="59" parent="12" name="tbl_name">
+      <Position>3</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="60" parent="12" name="rootpage">
+      <Position>4</Position>
+      <DataType>integer|0</DataType>
+    </column>
+    <column id="61" parent="12" name="sql">
+      <Position>5</Position>
+      <DataType>text|0</DataType>
+    </column>
+    <column id="62" parent="13" name="name">
+      <Position>1</Position>
+    </column>
+    <column id="63" parent="13" name="seq">
+      <Position>2</Position>
+    </column>
+  </database-model>
+</dataSource>

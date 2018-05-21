@@ -12,6 +12,13 @@ public class MapBuilder : MonoBehaviour
     public GameObject emptyBot;
     //префаб дома
     public GameObject emptyBuild;
+    
+    //
+    public GameObject police;
+
+    public GameObject casino;
+
+    public GameObject pagoda;
 
     //создание и заполнение карты, основываясь на данных из базы данных
     void Start()
@@ -21,6 +28,7 @@ public class MapBuilder : MonoBehaviour
         StreetPath[] pathForBuys = data.GetAllPaths();
         for (int i = 1; i < pathForBuys.Length; i++)
         {
+            
             GameObject newStreetPath = Instantiate(emptyStreet) as GameObject;
             newStreetPath.name = "StreetPath" + i;
             BoxCollider coll = newStreetPath.GetComponent<BoxCollider>();
@@ -34,11 +42,17 @@ public class MapBuilder : MonoBehaviour
                 data.updatePath(newStreetPath.GetComponent<PathForBuy>());
             }
             else
-            {
+            {   
                 newStreetPath.AddComponent<GovermentPath>();
                 newStreetPath.GetComponent<GovermentPath>().TakeData(data.GetGovermentPath(i));
                 if (newStreetPath.GetComponent<GovermentPath>().GetNameOfPrefab().Equals("Court"))
+                {
                     data.SetCourt(newStreetPath.GetComponent<GovermentPath>());
+//                    GameObject newBuild = Instantiate(police) as GameObject;
+//                    newBuild.transform.position = GetCenter(pathForBuys[i].start, pathForBuys[i].end);
+
+                }
+
                 newStreetPath.GetComponent<GovermentPath>().GetNeighbors();
                 data.updatePath(newStreetPath.GetComponent<GovermentPath>());
             }

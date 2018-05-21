@@ -2,36 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test : MonoBehaviour {
+public class Test : Photon.MonoBehaviour {
 
 	
-	//скрипт первого кубика
-	public Dice firstDice;
-
-	//скрипт второго кубика
-	public Dice secondDice;
 	
 	// Use this for initialization
 	void Start ()
 	{
-		StartCoroutine(Dices());
+		
+		int id1 = PhotonNetwork.AllocateViewID();
+		gameObject.AddComponent<PhotonView>().viewID = id1;
+		PhotonView photonView =gameObject.GetComponent<PhotonView>();
+		photonView.RPC("SendDBwork", PhotonTargets.Others);
+		
+		
 	}
 	
-	private IEnumerator Dices()
+	[PunRPC]
+	void SendDBwork()
 	{
-		//сбрасываем индекс первого кубика
-		firstDice.resetIndex();
-		//сбрасываем индекс второго кубика
-		secondDice.resetIndex();
-		//дожидаемся ответа от первого кубика
-		yield return StartCoroutine(firstDice.WaitForAllSurfaces());
-		//дожидаемся ответа от второго кубика
-		yield return StartCoroutine(secondDice.WaitForAllSurfaces());
+		Debug.Log("HEY ");
+		PhotonView photonView = gameObject.GetComponent<PhotonView>();
+		photonView.RPC("GetDBwork", PhotonTargets.All, 3);
+	}
 
-		if (firstDice.GetIndexOfSurface() > -1)
-			Debug.Log("First Dice: " + firstDice.GetIndexOfSurface());
-
-		if (secondDice.GetIndexOfSurface() > -1)
-			Debug.Log("Second Dice: " + secondDice.GetIndexOfSurface());
+	[PunRPC]
+	void GetDBwork(int n)
+	{
+		Debug.Log("Got " + n);
+//        this.players = db.players;
+//        this.streets = db.streets;
+//        this.paths = db.paths;
 	}
 }

@@ -19,11 +19,11 @@ public class Cameras : MonoBehaviour
     private CameraMove _cameraMove;
 
     //устанавливаем камеру от первого лица как стартовую
-    private void Start()
+    private void Awake()
     {
         mode = 1;
         targetPos = new Vector3(0, 10, 0);
-        _cameraMove = GameObject.Find("/GameObject").GetComponent<CameraMove>();
+        _cameraMove = GameObject.Find("/UpCamera").GetComponent<CameraMove>();
     }
 
     //назначаем ограничители, в пределах которых может двигаться верхняя камера, назначаем камеру от первого лица в массив

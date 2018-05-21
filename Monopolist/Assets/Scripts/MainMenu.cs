@@ -191,7 +191,7 @@ public class MainMenu : MonoBehaviour
     //создание кнопок городов
     private void CreateButtonTowns()
     {
-        List<string> townsList = SaveLoad.loadGamesList("Resources");
+        List<string> townsList = SaveLoad.loadGamesList("StreamingAssets");
         foreach (string nameTown in townsList)
         {
             Transform but = Instantiate(buttonTown) as Transform;
@@ -224,6 +224,7 @@ public class MainMenu : MonoBehaviour
     private void onButtonClickLoadGame(string dbName)
     {
         SaveLoad.loadGame(dbName);
+        
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 
@@ -259,7 +260,7 @@ public class MainMenu : MonoBehaviour
             .CreateNewGame(countOfPlayers, startMoney, newNameGame, false, nameTownForNewGame, namePlayer);
         if (Trade.things == null)
         {
-            Trade.things = new List<ThingForTrade>[countOfPlayers, countOfPlayers];
+            Trade.things = new List<ThingForTrade>[countOfPlayers+1, countOfPlayers+1];
         }
 
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
@@ -393,9 +394,11 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    
     //действия при изменении значения стартового капитала
     private void ChangeStartMoney(Toggle active)
     {
+        
         switch (active.name)
         {
             case "FirstMoney":

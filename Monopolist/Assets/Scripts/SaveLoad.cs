@@ -33,7 +33,11 @@ public class SaveLoad
     //загрузка игры
     public static void loadGame(string dbName)
     {
-        Camera.main.GetComponent<DBwork>().SetGameDB(dbName);
+        DBwork dBwork = Camera.main.GetComponent<DBwork>();
+        dBwork.SetGameDB(dbName);
+        int count = dBwork.GetAllPlayers().Length;
+        Trade.things = new List<ThingForTrade>[count,count];
+        
     }
 
     //удаление игры

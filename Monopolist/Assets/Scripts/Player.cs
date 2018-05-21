@@ -110,6 +110,8 @@ public class Player : MonoBehaviour
     //создаем ссылку на канву игры, объявляет ход игрока 
     void Start()
     {
+       
+        _dbWork = Camera.main.GetComponent<DBwork>();
         _gameCanvas = _dbWork.GetGameCanvas();
         if (idPlayer == 1)
         CurrentStep = true;

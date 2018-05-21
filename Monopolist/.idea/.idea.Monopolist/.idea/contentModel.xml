@@ -189,11 +189,14 @@
           <e p="MouseController.cs" t="Include" />
           <e p="Multiplayer" t="Include">
             <e p="Lobby.cs" t="Include" />
+            <e p="NetworkBot.cs" t="Include" />
             <e p="NetworkBuild.cs" t="Include" />
+            <e p="NetworkController.cs" t="Include" />
             <e p="NetworkDBwork.cs" t="Include" />
             <e p="NetworkGameCanvas.cs" t="Include" />
             <e p="NetworkGameController.cs" t="Include" />
             <e p="NetworkGovermentPath.cs" t="Include" />
+            <e p="NetworkMapBuilder.cs" t="Include" />
             <e p="NetworkPathForBuy.cs" t="Include" />
             <e p="NetworkPlayer.cs" t="Include" />
             <e p="NetworkStreet.cs" t="Include" />

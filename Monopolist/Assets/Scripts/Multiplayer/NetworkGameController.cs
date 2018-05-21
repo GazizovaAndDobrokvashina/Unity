@@ -281,4 +281,5 @@ public class NetworkGameController : Photon.MonoBehaviour
             //логика ботов при банкротстве
         }
     }
+    
 }

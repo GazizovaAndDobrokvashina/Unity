@@ -48,6 +48,7 @@ public class CameraMove : MonoBehaviour
     private void Start()
     {
         _cameras = GameObject.Find("/Town").GetComponent<Cameras>();
+        
     }
 
     public float GetMinHeight()

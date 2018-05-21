@@ -2,6 +2,7 @@
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class NetworkDBwork : Photon.MonoBehaviour
 {
@@ -71,7 +72,14 @@ public class NetworkDBwork : Photon.MonoBehaviour
         names.Add("Бабаназар");
         names.Add("Орозалы Бабаназарович");
         names.Add("Гундермурд Сигурдфлордбрадсен");
+        
+        
+       
+        
+        
     }
+    
+    
 
     public void SetGameCanvas(NetworkGameCanvas gameCanvas)
     {
@@ -86,7 +94,7 @@ public class NetworkDBwork : Photon.MonoBehaviour
     
     public void SetGameDB(string dbName)
     {
-        dataService = new DataService(dbName);
+        dataService = new DataService(dbName, true);
         GetEverithing();
         nameOfTown = dbName.Substring(0, dbName.IndexOf("_"));
         nameOfGane = dbName.Substring(dbName.IndexOf("_") + 1);
@@ -213,16 +221,18 @@ public class NetworkDBwork : Photon.MonoBehaviour
     private void Awake()
     {
 #if UNITY_EDITOR
-        Directory.CreateDirectory(@"Assets\SavedGames");
+        Directory.CreateDirectory(@"Assets\SavedGames\Network");
         Directory.CreateDirectory(@"Assets\StreamingAssets");
 #else
-        Directory.CreateDirectory(Application.persistentDataPath + @"\SavedGames");
+        Directory.CreateDirectory(Application.persistentDataPath + @"\SavedGames\Network");
         Directory.CreateDirectory(Application.persistentDataPath + @"\StreamingAssets");
 #endif
 
         DontDestroyOnLoad(gameObject);
         transform.position = new Vector3(5.63f, 0.43f, -5.63f);
         transform.localEulerAngles = new Vector3(0, -90, 0);
+        
+        
     }
 
     //возврат массива частей улиц
@@ -273,12 +283,12 @@ public class NetworkDBwork : Photon.MonoBehaviour
         string currentGame;
         string newGame;
 #if UNITY_EDITOR
-        currentGame = @"Assets\SavedGames\" + nameOfTown + "_" + nameOfGane;
-        newGame = @"Assets\SavedGames\" + nameOfTown + "_" + newName + ".db";
+        currentGame = @"Assets\SavedGames\Network\" + nameOfTown + "_" + nameOfGane;
+        newGame = @"Assets\SavedGames\Network\" + nameOfTown + "_" + newName + ".db";
         //DirectoryInfo dir = new DirectoryInfo(@"Assets\SavedGames\" +  );
 #else
-        currentGame = Application.persistentDataPath +@"/SavedGames/"+ nameOfTown + "_" + nameOfGane ;
-        newGame = Application.persistentDataPath +@"/SavedGames/"+ nameOfTown + "_" + newName + ".db";
+        currentGame = Application.persistentDataPath +@"/SavedGames/Network/"+ nameOfTown + "_" + nameOfGane ;
+        newGame = Application.persistentDataPath +@"/SavedGames/Network/"+ nameOfTown + "_" + newName + ".db";
         //DirectoryInfo dir = new DirectoryInfo(Application.persistentDataPath +"/SavedGames/"+ nameFolder);
 #endif
 
@@ -297,41 +307,88 @@ public class NetworkDBwork : Photon.MonoBehaviour
     {
         
 #if UNITY_EDITOR
-        File.Copy(@"Assets\Resources\" + nameOfTown, @"Assets\SavedGames\" + nameOfTown + "_" + NameOfGame + ".db");
+        File.Copy(@"Assets\StreamingAssets\" + nameOfTown, @"Assets\SavedGames\Network\" + nameOfTown + "_" + NameOfGame + ".db");
 #else
-        File.Copy(Application.persistentDataPath + @"\Resources\" + nameOfTown, Application.persistentDataPath +@"/SavedGames/" + nameOfTown + "_" + NameOfGame + ".db");
+        File.Copy(Application.persistentDataPath + @"\StreamingAssets\" + nameOfTown, Application.persistentDataPath +@"/SavedGames/Network/" + nameOfTown + "_" + NameOfGame + ".db");
 #endif
         
-        dataService = new DataService(nameOfTown + "_" + NameOfGame + ".db");
+        dataService = new DataService(nameOfTown + "_" + NameOfGame + ".db", true);
         nameOfGane = NameOfGame + ".db";
 
         GetEverithing();
         players = new NetworkPlayer[countOfPlayers + 1];
         
-//        for (int i = 1; i < countOfPlayers + 1; i++)
-//        {
-//            NetworkPlayer player;
-//            if (i == 1)
-//                player = new NetworkPlayer(i, nickName, startMoney, false, false,
-//                    MapBuilder.GetCenter(paths[1].start, paths[1].end));
-//            else
-//                player = new NetworkPlayer(i, names[Random.Range(0, names.Count)], startMoney, false, true,
-//                    MapBuilder.GetCenter(paths[1].start, paths[1].end));
-//            players[i] = player;
-//            dataService.AddPlayer(player);
-//            
-//            
-//        }
+        for (int i = 1; i < countOfPlayers + 1; i++)
+        {
+            NetworkPlayer player;
+            if (i == 1)
+                player = new NetworkPlayer(i, nickName, startMoney, false, false,
+                    MapBuilder.GetCenter(paths[1].start, paths[1].end));
+            else
+                player = new NetworkPlayer(i, names[Random.Range(0, names.Count)], startMoney, false, true,
+                    MapBuilder.GetCenter(paths[1].start, paths[1].end));
+            players[i] = player;
+            dataService.AddPlayer(player);
+            
+            
+        }
 
-        NetworkPlayer playerOwn = new NetworkPlayer(1, nickName, startMoney, false, false, MapBuilder.GetCenter(paths[1].start, paths[1].end));
-        players[1] = playerOwn;
-        dataService.AddPlayer(playerOwn);
+//        NetworkPlayer playerOwn = new NetworkPlayer(1, nickName, startMoney, false, false, MapBuilder.GetCenter(paths[1].start, paths[1].end));
+//        players[1] = playerOwn;
+//        dataService.AddPlayer(playerOwn);
         
         
         
         GetEverithing();
 
         this.nameOfTown = nameOfTown;
+    }
+
+    public void OnSceneLoad()
+    {
+        if (SceneManager.GetActiveScene().name.Equals("GameNetwork"))
+        {
+            
+            int id1 = PhotonNetwork.AllocateViewID();
+            if (PhotonNetwork.isMasterClient)
+            {
+                gameObject.AddComponent<PhotonView>().viewID = id1;
+                
+            }
+            else
+            {
+                gameObject.AddComponent<PhotonView>().viewID = 1001;
+            }
+            if (!PhotonNetwork.isMasterClient)
+            {
+                PhotonView photonView =gameObject.GetComponent<PhotonView>();
+                photonView.RPC("SendDBwork", PhotonTargets.MasterClient);
+            }
+        }
+        else
+        {
+            if (gameObject.GetComponent<PhotonView>() != null)
+            {
+                Destroy(gameObject.GetComponent<PhotonView>());
+            }
+        }
+    }
+    
+    [PunRPC]
+    void SendDBwork()
+    {
+        Debug.Log("HEY ");
+        PhotonView photonView = gameObject.GetComponent<PhotonView>();
+        photonView.RPC("GetDBwork", PhotonTargets.Others);
+    }
+
+    [PunRPC]
+    void GetDBwork()
+    {
+        Debug.Log("Got ");
+//        this.players = db.players;
+//        this.streets = db.streets;
+//        this.paths = db.paths;
     }
 
     //возврат массива игроков

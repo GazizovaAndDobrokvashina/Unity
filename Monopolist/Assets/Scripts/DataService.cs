@@ -18,15 +18,22 @@ public class DataService
         var dbPath = string.Format(DataPath + CityName);
         _connection = new SQLiteConnection(dbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
     }
+    
 
-    public DataService(string DatabaseName)
+    public DataService(string DatabaseName, bool isNet)
     {
 #if UNITY_EDITOR
         var dbPath = string.Format(@"Assets\SavedGames\{0}", DatabaseName);
+        if(isNet)
+            dbPath =  string.Format(@"Assets\SavedGames\Network\{0}", DatabaseName);
         //var dbPath = string.Format(Application.persistentDataPath+@"\SavedGames\{0}", DatabaseName);
 #else
 // check if file exists in Application.persistentDataPath
         	var filepath = string.Format("{0}/SavedGames/{1}", Application.persistentDataPath, DatabaseName);
+    
+    
+        if(isNet)
+            filepath =  string.Format(@"{0}/SavedGames/Network/{1}", Application.persistentDataPath, DatabaseName);
  
         	if (!File.Exists(filepath))
 		{
@@ -65,11 +72,11 @@ public class DataService
     public DataService()
     {
 #if UNITY_EDITOR
-        var dbPath = string.Format(@"Assets\Resources\GamesData");
+        var dbPath = string.Format(@"Assets\StreamingAssets\GamesData");
         //var dbPath = string.Format(Application.persistentDataPath+@"\SavedGames\{0}", DatabaseName);
 #else
 // check if file exists in Application.persistentDataPath
-        	var filepath = string.Format("{0}/Resources/GamesData", Application.persistentDataPath);
+        	var filepath = string.Format("{0}/StreamingAssets/GamesData", Application.persistentDataPath);
  
         	if (!File.Exists(filepath))
 		{

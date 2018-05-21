@@ -66,7 +66,7 @@ public class NetworkPlayer : Photon.MonoBehaviour{
     protected bool alreadyCheat;
 
     //под управлением компьютера ли игрок?
-    protected bool isBot;
+    public bool isBot;
 
     //является ли текущий ход ходом игрока
     protected bool CurrentStep;
@@ -113,7 +113,6 @@ public class NetworkPlayer : Photon.MonoBehaviour{
     //создаем ссылку на канву игры, объявляет ход игрока 
     void Start()
     {
-        
         _gameCanvas = _dbWork.GetNetworkGameCanvas();
         if (idPlayer == 1)
         CurrentStep = true;
