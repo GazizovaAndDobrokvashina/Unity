@@ -235,8 +235,10 @@ public class Bot : Player
     //предложение о торговле от компьютерного игрока
     private void TryToTrade()
     {
+        //монополии (не обязательно полные) бота
         List<int> monopolies = GetMyMonopolies(_dbWork.GetMyPathes(idPlayer));
-
+        
+        //поиск pathforbuy которого не хватает до полной монополии
         int count = 0;
         PathForBuy trade = null;
         foreach (int monopoly in monopolies)
@@ -258,14 +260,17 @@ public class Bot : Player
             if (trade != null)
                 break;
         }
-
+        
+        //если нет таких, то выходим
         if (trade == null)
             return;
-
+        
+        //поиск, какому игроку принадлежит улица
         Player player = _dbWork.GetPlayerbyId(trade.IdPlayer);
         Trade.CreateListThings(player, this);
         Trade.AddItemToList(player, this, trade);
 
+        //проверяем, есть ли у этого игрока ещё улицы из этой монополии
         foreach (StreetPath streetPath in _dbWork.GetPathsOfStreet(trade.GetIdStreetParent()))
         {
             PathForBuy path = _dbWork.GetPathForBuy(streetPath.GetIdStreetPath());
@@ -277,8 +282,19 @@ public class Bot : Player
             }
         }
 
-        Trade.AddMoneyToList(player, this, count * price);
+        //если достаточно денег, то записываем деньги в сделку и открываем игроку канву с предложением о сделке
+        if (count * price >= money)
+        {
+            Trade.AddMoneyToList(player, this, count * price);
+           
+        }
+        else
+        {
+            //прописать отмену сделки
+        }
 
+        
+        
         // ПРЕДЛОЖИТЬ СДЕЛКУ!!!
     }
 }
