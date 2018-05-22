@@ -16,17 +16,16 @@ public class MainMenu : MonoBehaviour
 
 
 {
-
     public ScrollRect scrollActiveNetworkGames;
-    
+
     public ScrollRect scrollSavedNetworkGames;
-    
+
     public Text textTypeOfNewGame;
 
     public GameObject NetworkSettings;
-    
+
     public GameObject SavedNetworkGames;
-    
+
     public GameObject ActiveNetworkGames;
 
     //объект с кнопками самого главного меню
@@ -162,29 +161,28 @@ public class MainMenu : MonoBehaviour
     {
         ChangeMenuObject(7);
     }
-    
+
     public void openActiveNetworkGames()
     {
         CreateButtonsNetworkActive();
         ChangeMenuObject(6);
     }
-    
+
     public void openNetworkSettings()
     {
-        
         ChangeMenuObject(5);
     }
 
     private void ClearScroll(ScrollRect scroll)
     {
         int countOfChild = scroll.content.childCount;
-        if(countOfChild != 0)
-        for (int i = countOfChild - 1; i >= 0; i--)
-        {
-           Destroy(scroll.content.GetChild(i)); 
-        }
+        if (countOfChild != 0)
+            for (int i = countOfChild - 1; i >= 0; i--)
+            {
+                Destroy(scroll.content.GetChild(i));
+            }
     }
-    
+
     public void openNetworkStartNewGame()
     {
         textTypeOfNewGame.text = "Новая сетевая игра";
@@ -221,7 +219,7 @@ public class MainMenu : MonoBehaviour
             b.onClick.AddListener(() => DeleteGame(dbName, prefButtons.gameObject));
         }
     }
-    
+
     //создание кнопок сохранений сетевых игр
     private void CreateButtonsNetworkSaves()
     {
@@ -233,43 +231,41 @@ public class MainMenu : MonoBehaviour
             prefButtons.SetParent(scrollSavedNetworkGames.content, false);
             prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text = dbName;
             Button b = prefButtons.GetChild(0).GetComponent<Button>();
-           // b.onClick.AddListener(() => onButtonClickLoadGame(dbName));
+            // b.onClick.AddListener(() => onButtonClickLoadGame(dbName));
 
             prefButtons.GetChild(1).GetComponent<Button>().GetComponentInChildren<Text>().text = "X";
             b = prefButtons.GetChild(1).GetComponent<Button>();
             b.onClick.AddListener(() => DeleteGame(dbName, prefButtons.gameObject));
         }
     }
-    
+
     //создание кнопок активных сетевых игр
     private void CreateButtonsNetworkActive()
     {
-        RoomInfo[] rooms = PhotonNetwork.GetRoomList();
-        
-        List<string> namesActiveGames = new List<string>();
+        Lobby lobby = GetComponent<Lobby>();
+        RoomInfo[] rooms = lobby.getRooms();
+        //List<string> namesActiveGames = new List<string>();
         object nameOfGame = "";
         object nameOfTown = "";
+
         foreach (RoomInfo room in rooms)
         {
             room.CustomProperties.TryGetValue("ngame", out nameOfGame);
             room.CustomProperties.TryGetValue("ntown", out nameOfTown);
 
             string town = nameOfTown.ToString();
-            namesActiveGames.Add((string)nameOfGame + " " + town);
-        }
-       
 
-        foreach (string dbName in namesActiveGames)
-        {
             var prefButtons = Instantiate(buttonsSaves);
             prefButtons.SetParent(scrollActiveNetworkGames.content, false);
-            prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text = dbName;
+            prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text =
+                (string) nameOfGame + " " + town;
             Button b = prefButtons.GetChild(0).GetComponent<Button>();
-            // b.onClick.AddListener(() => onButtonClickLoadGame(dbName));
+            b.onClick.AddListener(() => lobby.ConnectToRoom(room.Name));
 
-           Destroy(prefButtons.GetChild(1));
+            prefButtons.GetChild(1).gameObject.SetActive(false);
         }
     }
+
 
     //создание кнопок городов
     private void CreateButtonTowns()
@@ -329,7 +325,7 @@ public class MainMenu : MonoBehaviour
     //возврат в самое главное меню
     public void BackToMainMenu()
     {
-        if(ActiveNetworkGames.activeInHierarchy)
+        if (ActiveNetworkGames.activeInHierarchy)
             ClearScroll(scrollActiveNetworkGames);
         ChangeMenuObject(4);
     }
@@ -363,9 +359,8 @@ public class MainMenu : MonoBehaviour
 
     public void OpenListOfNetworksGames()
     {
-        
     }
-    
+
     //изменить название игры
     public void ChangeNameOfGame()
     {

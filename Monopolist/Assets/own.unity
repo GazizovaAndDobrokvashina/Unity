@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -308,6 +308,52 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: e7888594ef1d71749a2a6d88fe3ca920, type: 3}
   m_PrefabInternal: {fileID: 25328669}
+--- !u!1001 &26980039
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 90.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -164.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927791744334830, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_Name
+      value: SkameikaIFonar (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: da285726a502c2240b428499ec528ba3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &29370062
 Prefab:
   m_ObjectHideFlags: 0
@@ -700,6 +746,52 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: e7888594ef1d71749a2a6d88fe3ca920, type: 3}
   m_PrefabInternal: {fileID: 54297992}
+--- !u!1001 &56088960
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -94.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -164.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927791744334830, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_Name
+      value: SkameikaIFonar (6)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: da285726a502c2240b428499ec528ba3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &66970164
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,7 +806,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &66970165
 Transform:
   m_ObjectHideFlags: 0
@@ -1562,6 +1654,52 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: e7888594ef1d71749a2a6d88fe3ca920, type: 3}
   m_PrefabInternal: {fileID: 119333746}
+--- !u!1001 &121703922
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -16.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -164.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_RootOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927791744334830, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_Name
+      value: SkameikaIFonar (11)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: da285726a502c2240b428499ec528ba3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &124941720
 GameObject:
   m_ObjectHideFlags: 0
@@ -3073,12 +3211,6 @@ Transform:
   m_Father: {fileID: 326767360}
   m_RootOrder: 75
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &261110716 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114914843945469652, guid: ba273351e64c6a64a83d433953f46bb4,
-    type: 2}
-  m_PrefabInternal: {fileID: 1394874241}
-  m_Script: {fileID: 11500000, guid: 3b6b00c37dcf90c4eb3c2fb2dff145e0, type: 3}
 --- !u!1 &261566819
 GameObject:
   m_ObjectHideFlags: 0
@@ -3745,7 +3877,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &326767359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5873,7 +6005,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &549207735
 Transform:
   m_ObjectHideFlags: 0
@@ -7938,6 +8070,52 @@ Transform:
   m_Father: {fileID: 326767360}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1001 &656215637
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -67.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -164.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927791744334830, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_Name
+      value: SkameikaIFonar (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: da285726a502c2240b428499ec528ba3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &672248598
 GameObject:
   m_ObjectHideFlags: 0
@@ -7952,7 +8130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &672248599
 Transform:
   m_ObjectHideFlags: 0
@@ -8185,6 +8363,52 @@ Transform:
   m_Father: {fileID: 326767360}
   m_RootOrder: 166
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1001 &696680295
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 116.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -164.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927791744334830, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_Name
+      value: SkameikaIFonar (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: da285726a502c2240b428499ec528ba3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &699061569
 Prefab:
   m_ObjectHideFlags: 0
@@ -8596,12 +8820,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: e7888594ef1d71749a2a6d88fe3ca920, type: 3}
   m_PrefabInternal: {fileID: 731810929}
---- !u!114 &742076802 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114914843945469652, guid: ba273351e64c6a64a83d433953f46bb4,
-    type: 2}
-  m_PrefabInternal: {fileID: 1665446688}
-  m_Script: {fileID: 11500000, guid: 3b6b00c37dcf90c4eb3c2fb2dff145e0, type: 3}
 --- !u!1 &744363530
 GameObject:
   m_ObjectHideFlags: 0
@@ -9068,7 +9286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &771353547
 Transform:
   m_ObjectHideFlags: 0
@@ -9323,7 +9541,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &807369539
 Transform:
   m_ObjectHideFlags: 0
@@ -10302,6 +10520,52 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: e7888594ef1d71749a2a6d88fe3ca920, type: 3}
   m_PrefabInternal: {fileID: 885223078}
+--- !u!1001 &886127904
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -41.079994
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -164.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927791744334830, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_Name
+      value: SkameikaIFonar (9)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: da285726a502c2240b428499ec528ba3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &887249548
 Prefab:
   m_ObjectHideFlags: 0
@@ -10396,8 +10660,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 520214c3bbf068b478ac25f13cecf6f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstDice: {fileID: 261110716}
-  secondDice: {fileID: 742076802}
 --- !u!1 &888686101
 GameObject:
   m_ObjectHideFlags: 0
@@ -12142,6 +12404,52 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: e7888594ef1d71749a2a6d88fe3ca920, type: 3}
   m_PrefabInternal: {fileID: 1016057723}
+--- !u!1001 &1019083529
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 64.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -164.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927791744334830, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_Name
+      value: SkameikaIFonar (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: da285726a502c2240b428499ec528ba3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1019462837
 Prefab:
   m_ObjectHideFlags: 0
@@ -12450,7 +12758,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1036439481
 Transform:
   m_ObjectHideFlags: 0
@@ -12465,6 +12773,52 @@ Transform:
   m_Father: {fileID: 1093098099}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1001 &1045617911
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -147.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -164.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927791744334830, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_Name
+      value: SkameikaIFonar (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: da285726a502c2240b428499ec528ba3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1047814295
 Prefab:
   m_ObjectHideFlags: 0
@@ -14755,7 +15109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1153840076
 Transform:
   m_ObjectHideFlags: 0
@@ -15045,6 +15399,52 @@ Transform:
   m_Father: {fileID: 326767360}
   m_RootOrder: 129
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1001 &1183032564
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 10.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -164.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927791744334830, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_Name
+      value: SkameikaIFonar (10)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: da285726a502c2240b428499ec528ba3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1184067544
 GameObject:
   m_ObjectHideFlags: 0
@@ -16616,7 +17016,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1279160617
 Transform:
   m_ObjectHideFlags: 0
@@ -18753,6 +19153,52 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: e7888594ef1d71749a2a6d88fe3ca920, type: 3}
   m_PrefabInternal: {fileID: 1464905153}
+--- !u!1001 &1468652523
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 37.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -164.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927791744334830, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_Name
+      value: SkameikaIFonar (8)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: da285726a502c2240b428499ec528ba3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1470180771
 GameObject:
   m_ObjectHideFlags: 0
@@ -18979,6 +19425,52 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: e7888594ef1d71749a2a6d88fe3ca920, type: 3}
   m_PrefabInternal: {fileID: 1474617781}
+--- !u!1001 &1479041653
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -120.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -164.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927791744334830, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_Name
+      value: SkameikaIFonar (7)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: da285726a502c2240b428499ec528ba3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1479849200
 Prefab:
   m_ObjectHideFlags: 0
@@ -19475,7 +19967,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1520123418
 Transform:
   m_ObjectHideFlags: 0
@@ -19893,7 +20385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1541559813
 Transform:
   m_ObjectHideFlags: 0
@@ -20011,7 +20503,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1576399844
 Transform:
   m_ObjectHideFlags: 0
@@ -21730,6 +22222,48 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: e7888594ef1d71749a2a6d88fe3ca920, type: 3}
   m_PrefabInternal: {fileID: 1712087470}
+--- !u!1001 &1713808292
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 142.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.511
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -164.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449894444591888, guid: da285726a502c2240b428499ec528ba3, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: da285726a502c2240b428499ec528ba3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1745903572
 Prefab:
   m_ObjectHideFlags: 0
@@ -22629,7 +23163,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1809061216
 Transform:
   m_ObjectHideFlags: 0
@@ -23009,7 +23543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1849399109
 Transform:
   m_ObjectHideFlags: 0
@@ -23038,7 +23572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1852523530
 Transform:
   m_ObjectHideFlags: 0
@@ -24082,7 +24616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1930305593
 Transform:
   m_ObjectHideFlags: 0
@@ -25973,7 +26507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2099106592
 Transform:
   m_ObjectHideFlags: 0

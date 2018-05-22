@@ -17,10 +17,21 @@ public class Lobby : Photon.PunBehaviour
 
     public void ConnectToServer()
     {
+        PhotonNetwork.autoJoinLobby = true;
         PhotonNetwork.ConnectUsingSettings("0.0");
         StartCoroutine(WaitForConnection());
     }
 
+    public RoomInfo[] getRooms()
+    {
+        return PhotonNetwork.GetRoomList();
+    }
+
+    public void ConnectToRoom(string roomName)
+    {
+        PhotonNetwork.JoinRoom(roomName);
+    }
+    
 //начать новую игру
     public void StartNewNetworkGame(int countOfPlayers,int startMoney,string newNameGame, bool online,string nameTownForNewGame,string namePlayer)
     {
@@ -50,27 +61,6 @@ public class Lobby : Photon.PunBehaviour
         StartCoroutine(OpenScene());
 
 
-//		Camera.main.GetComponent<NetworkDBwork>()
-//			.CreateNewGame(menuScript.CountOfPlayers, menuScript.StartMoney, menuScript.NewNameGame, true, menuScript.NameTownForNewGame, menuScript.NamePlayer);
-//		if (Trade.things == null)
-//		{
-//			Trade.things = new List<ThingForTrade>[menuScript.CountOfPlayers, menuScript.CountOfPlayers];
-//		}
-//		RoomOptions options = new RoomOptions();
-//		options.IsOpen = true;
-//		options.IsVisible = true;
-//		options.MaxPlayers = (byte)menuScript.CountOfPlayers;
-//		ExitGames.Client.Photon.Hashtable ht = new ExitGames.Client.Photon.Hashtable
-//		{
-//			{"ngame", menuScript.NewNameGame},
-//			{"ntown", menuScript.NameTownForNewGame}
-//		};
-//		options.CustomRoomProperties = ht;
-//		options.CustomRoomPropertiesForLobby = new string[] {"ngame", "ntown"};
-//        
-//		PhotonNetwork.CreateRoom(menuScript.NewNameGame, options, TypedLobby.Default);
-//
-//		SceneManager.LoadScene("GameNetwork", LoadSceneMode.Single);
     }
 
     IEnumerator OpenScene()

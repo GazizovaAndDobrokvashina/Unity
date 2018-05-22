@@ -49,6 +49,16 @@ public class GameController : MonoBehaviour
         secondDice.SetPosition(posSecondDice);
         firstDice.gameObject.SetActive(true);
         secondDice.gameObject.SetActive(true);
+        
+        Vector3 vector1 = new Vector3(Random.Range(10,100),Random.Range(10,100),Random.Range(10,100));
+        Vector3 vector2 = new Vector3(Random.Range(10,100),Random.Range(10,100),Random.Range(10,100));
+        
+        firstDice.gameObject.GetComponent<Rigidbody>().AddTorque(vector1);
+        firstDice.gameObject.GetComponent<Rigidbody>().AddForce(vector1);
+        
+        secondDice.gameObject.GetComponent<Rigidbody>().AddTorque(vector2);
+        secondDice.gameObject.GetComponent<Rigidbody>().AddForce(vector2);
+        
         stepsForPlayer = 0;
         //сбрасываем индекс первого кубика
         firstDice.resetIndex();

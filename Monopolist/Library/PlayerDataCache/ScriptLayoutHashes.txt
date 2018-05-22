@@ -16,7 +16,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 6af7378a45ad6da4992a71ef50ddc2eb UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 af723155c251fcfa0e66530a75f3ea4c UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 b027659a510ae8d01d6d5f31baf9827a Assembly-CSharp.dll:.PhotonStatsGui
-cb51597b62645691a4b02483b6b7f05b Assembly-CSharp.dll:.MainMenu
+1bfc5bd2b573f7d997511c1d85b7d8f1 Assembly-CSharp.dll:.MainMenu
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.NetworkController
 2b4ee1fc14f90ef2465230265b6864ae Assembly-CSharp.dll:.NetworkSpaceshipBullet
 6fce0feadba7642a361e87ebfcfe753e Assembly-CSharp.dll:.PhotonAnimatorView
@@ -62,7 +62,7 @@ f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 72372a6732732299b6dd9f3032fde16b Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyInfoPanel
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlayerHabr
 9ee352c8e172702d238c396bd428f5a3 Assembly-CSharp.dll:.InputToEvent
-f7bde437654739189382e56b966b6a03 Assembly-CSharp.dll:.MapBuilder
+9b9a339325992cf47a22c45635cde729 Assembly-CSharp.dll:.MapBuilder
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
