@@ -13,12 +13,22 @@ using Toggle = UnityEngine.UI.Toggle;
 
 
 public class MainMenu : MonoBehaviour
+
+
 {
+
+    public ScrollRect scrollActiveNetworkGames;
+    
+    public ScrollRect scrollSavedNetworkGames;
+    
+    public Text textTypeOfNewGame;
 
     public GameObject NetworkSettings;
     
-    public GameObject NetworkStartNewGame;
+    public GameObject SavedNetworkGames;
     
+    public GameObject ActiveNetworkGames;
+
     //объект с кнопками самого главного меню
     public GameObject MainMenuObj;
 
@@ -39,7 +49,7 @@ public class MainMenu : MonoBehaviour
 
     //поле для ввода нового названия игры
     public InputField InputFieldNameOfGame;
-    
+
     //поле для ввода имени игрока
     public InputField InputFieldPlayerName;
 
@@ -60,7 +70,7 @@ public class MainMenu : MonoBehaviour
 
     //вывод названия выбранного города
     public Text NameOfTown;
-    
+
     //поле для вывода имени игрока
     public Text NamePlayerText;
 
@@ -93,7 +103,7 @@ public class MainMenu : MonoBehaviour
 
     //онлайн или оффлайн игра
     private bool online = false;
-    
+
     //имя игрока
     private string namePlayer = "Jonny";
 
@@ -137,6 +147,7 @@ public class MainMenu : MonoBehaviour
         //создаем кнопки сохранений и городов
         CreateButtonTowns();
         CreateButtonsSaves();
+        CreateButtonsNetworkSaves();
     }
 
     //выводим значения слайдеров на экран, если они активны
@@ -147,16 +158,40 @@ public class MainMenu : MonoBehaviour
         countOfPlayersText.text = "Количество игроков: " + (int) sliderCountOfPlayers.value;
     }
 
+    public void openSavedNetworkGames()
+    {
+        ChangeMenuObject(7);
+    }
+    
+    public void openActiveNetworkGames()
+    {
+        CreateButtonsNetworkActive();
+        ChangeMenuObject(6);
+    }
+    
     public void openNetworkSettings()
     {
+        
         ChangeMenuObject(5);
+    }
+
+    private void ClearScroll(ScrollRect scroll)
+    {
+        int countOfChild = scroll.content.childCount;
+        if(countOfChild != 0)
+        for (int i = countOfChild - 1; i >= 0; i--)
+        {
+           Destroy(scroll.content.GetChild(i)); 
+        }
     }
     
     public void openNetworkStartNewGame()
     {
-        ChangeMenuObject(6);
+        textTypeOfNewGame.text = "Новая сетевая игра";
+        online = true;
+        ChangeMenuObject(1);
     }
-    
+
     //изменение названия игры
     public void ChangeNameOfGPlyer()
     {
@@ -185,7 +220,55 @@ public class MainMenu : MonoBehaviour
             b = prefButtons.GetChild(1).GetComponent<Button>();
             b.onClick.AddListener(() => DeleteGame(dbName, prefButtons.gameObject));
         }
+    }
+    
+    //создание кнопок сохранений сетевых игр
+    private void CreateButtonsNetworkSaves()
+    {
+        List<string> namesSavedGames = SaveLoad.loadGamesList("SavedGames/Network");
 
+        foreach (string dbName in namesSavedGames)
+        {
+            var prefButtons = Instantiate(buttonsSaves);
+            prefButtons.SetParent(scrollSavedNetworkGames.content, false);
+            prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text = dbName;
+            Button b = prefButtons.GetChild(0).GetComponent<Button>();
+           // b.onClick.AddListener(() => onButtonClickLoadGame(dbName));
+
+            prefButtons.GetChild(1).GetComponent<Button>().GetComponentInChildren<Text>().text = "X";
+            b = prefButtons.GetChild(1).GetComponent<Button>();
+            b.onClick.AddListener(() => DeleteGame(dbName, prefButtons.gameObject));
+        }
+    }
+    
+    //создание кнопок активных сетевых игр
+    private void CreateButtonsNetworkActive()
+    {
+        RoomInfo[] rooms = PhotonNetwork.GetRoomList();
+        
+        List<string> namesActiveGames = new List<string>();
+        object nameOfGame = "";
+        object nameOfTown = "";
+        foreach (RoomInfo room in rooms)
+        {
+            room.CustomProperties.TryGetValue("ngame", out nameOfGame);
+            room.CustomProperties.TryGetValue("ntown", out nameOfTown);
+
+            string town = nameOfTown.ToString();
+            namesActiveGames.Add((string)nameOfGame + " " + town);
+        }
+       
+
+        foreach (string dbName in namesActiveGames)
+        {
+            var prefButtons = Instantiate(buttonsSaves);
+            prefButtons.SetParent(scrollActiveNetworkGames.content, false);
+            prefButtons.GetChild(0).GetComponent<Button>().GetComponentInChildren<Text>().text = dbName;
+            Button b = prefButtons.GetChild(0).GetComponent<Button>();
+            // b.onClick.AddListener(() => onButtonClickLoadGame(dbName));
+
+           Destroy(prefButtons.GetChild(1));
+        }
     }
 
     //создание кнопок городов
@@ -205,6 +288,8 @@ public class MainMenu : MonoBehaviour
     //открыть меню создания новой игры
     public void OpenMenuNewGame()
     {
+        textTypeOfNewGame.text = "Новая одиночная игра";
+        online = false;
         ChangeMenuObject(1);
     }
 
@@ -224,7 +309,7 @@ public class MainMenu : MonoBehaviour
     private void onButtonClickLoadGame(string dbName)
     {
         SaveLoad.loadGame(dbName);
-        
+
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 
@@ -244,6 +329,8 @@ public class MainMenu : MonoBehaviour
     //возврат в самое главное меню
     public void BackToMainMenu()
     {
+        if(ActiveNetworkGames.activeInHierarchy)
+            ClearScroll(scrollActiveNetworkGames);
         ChangeMenuObject(4);
     }
 
@@ -256,17 +343,28 @@ public class MainMenu : MonoBehaviour
     //начать новую игру
     public void StartNewGame()
     {
-        Camera.main.GetComponent<DBwork>()
-            .CreateNewGame(countOfPlayers, startMoney, newNameGame, false, nameTownForNewGame, namePlayer);
-        if (Trade.things == null)
+        if (!online)
         {
-            Trade.things = new List<ThingForTrade>[countOfPlayers+1, countOfPlayers+1];
-        }
+            Camera.main.GetComponent<DBwork>()
+                .CreateNewGame(countOfPlayers, startMoney, newNameGame, online, nameTownForNewGame, namePlayer);
+            if (Trade.things == null)
+            {
+                Trade.things = new List<ThingForTrade>[countOfPlayers + 1, countOfPlayers + 1];
+            }
 
-        SceneManager.LoadScene("Game", LoadSceneMode.Single);
+            SceneManager.LoadScene("Game", LoadSceneMode.Single);
+        }
+        else
+        {
+            Lobby lobby = GetComponent<Lobby>();
+            lobby.StartNewNetworkGame(countOfPlayers, startMoney, newNameGame, online, nameTownForNewGame, namePlayer);
+        }
     }
 
-    
+    public void OpenListOfNetworksGames()
+    {
+        
+    }
     
     //изменить название игры
     public void ChangeNameOfGame()
@@ -292,7 +390,8 @@ public class MainMenu : MonoBehaviour
                 CreateNewGameObj.SetActive(true);
                 SettingsMenu.SetActive(false);
                 NetworkSettings.SetActive(false);
-                NetworkStartNewGame.SetActive(false);
+                SavedNetworkGames.SetActive(false);
+                ActiveNetworkGames.SetActive(false);
                 break;
             //открыть меню загрузки игры
             case 2:
@@ -302,7 +401,8 @@ public class MainMenu : MonoBehaviour
                 CreateNewGameObj.SetActive(false);
                 SettingsMenu.SetActive(false);
                 NetworkSettings.SetActive(false);
-                NetworkStartNewGame.SetActive(false);
+                SavedNetworkGames.SetActive(false);
+                ActiveNetworkGames.SetActive(false);
                 break;
             //открыть настройки        
             case 3:
@@ -312,7 +412,8 @@ public class MainMenu : MonoBehaviour
                 CreateNewGameObj.SetActive(false);
                 SettingsMenu.SetActive(true);
                 NetworkSettings.SetActive(false);
-                NetworkStartNewGame.SetActive(false);
+                SavedNetworkGames.SetActive(false);
+                ActiveNetworkGames.SetActive(false);
                 break;
             //Вернуться в глввное меню
             case 4:
@@ -322,27 +423,41 @@ public class MainMenu : MonoBehaviour
                 CreateNewGameObj.SetActive(false);
                 SettingsMenu.SetActive(false);
                 NetworkSettings.SetActive(false);
-                NetworkStartNewGame.SetActive(false);
+                SavedNetworkGames.SetActive(false);
+                ActiveNetworkGames.SetActive(false);
                 break;
-            //открыть первое меню нетворка
-            case 5: 
+            //открыть первое меню нетворка 
+            case 5:
                 MainMenuObj.SetActive(false);
                 ContinueObj.SetActive(false);
                 BackButton.SetActive(true);
                 CreateNewGameObj.SetActive(false);
                 SettingsMenu.SetActive(false);
                 NetworkSettings.SetActive(true);
-                NetworkStartNewGame.SetActive(false);
+                SavedNetworkGames.SetActive(false);
+                ActiveNetworkGames.SetActive(false);
                 break;
-            
-            case 6: 
+            //открыть список доступных игровых лобби
+            case 6:
                 MainMenuObj.SetActive(false);
                 ContinueObj.SetActive(false);
                 BackButton.SetActive(true);
                 CreateNewGameObj.SetActive(false);
                 SettingsMenu.SetActive(false);
                 NetworkSettings.SetActive(false);
-                NetworkStartNewGame.SetActive(true);
+                SavedNetworkGames.SetActive(false);
+                ActiveNetworkGames.SetActive(true);
+                break;
+            //открыть список сохраненных сетевых игр
+            case 7:
+                MainMenuObj.SetActive(false);
+                ContinueObj.SetActive(false);
+                BackButton.SetActive(true);
+                CreateNewGameObj.SetActive(false);
+                SettingsMenu.SetActive(false);
+                NetworkSettings.SetActive(false);
+                SavedNetworkGames.SetActive(true);
+                ActiveNetworkGames.SetActive(false);
                 break;
             default:
             {
@@ -352,7 +467,8 @@ public class MainMenu : MonoBehaviour
                 CreateNewGameObj.SetActive(false);
                 SettingsMenu.SetActive(false);
                 NetworkSettings.SetActive(false);
-                NetworkStartNewGame.SetActive(false);
+                SavedNetworkGames.SetActive(false);
+                ActiveNetworkGames.SetActive(false);
                 break;
             }
         }
@@ -394,11 +510,10 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    
+
     //действия при изменении значения стартового капитала
     private void ChangeStartMoney(Toggle active)
     {
-        
         switch (active.name)
         {
             case "FirstMoney":
