@@ -8,6 +8,8 @@ public class NetworkPlayer : Photon.MonoBehaviour{
 	//ID игрока
     protected int idPlayer;
 
+    protected int viewID;
+
     //имя игрока
     protected string nickName;
 
@@ -80,6 +82,12 @@ public class NetworkPlayer : Photon.MonoBehaviour{
     {
     }
 
+    public int ViewId
+    {
+        get { return viewID; }
+        set { viewID = value; }
+    }
+
     //вернуть значение является ли ботом
     public bool IsBot()
     {
@@ -113,15 +121,16 @@ public class NetworkPlayer : Photon.MonoBehaviour{
     //создаем ссылку на канву игры, объявляет ход игрока 
     void Start()
     {
+        if(_dbWork.GetNetworkGameCanvas() != null)
         _gameCanvas = _dbWork.GetNetworkGameCanvas();
-        if (idPlayer == 1)
+        if ((_gameCanvas==null && idPlayer == 1 )|| (_gameCanvas!=null && _gameCanvas.GetComponent<NetworkGameController>().CurrentPlayer!= null && _gameCanvas.GetComponent<NetworkGameController>().CurrentPlayer.IdPlayer == idPlayer))
         CurrentStep = true;
     }
 
     //перемещение игрока и отправка его данных в игровую канву
     void Update()
     {
-       
+       if(GetComponentInChildren<Camera>() != null)
             if (!transform.position.Equals(destination))
             {
                 transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
@@ -134,9 +143,9 @@ public class NetworkPlayer : Photon.MonoBehaviour{
 
            
          NetworkGameCanvas.currentSteps = currentSteps;
-            NetworkGameCanvas.maxSteps = maxSteps;
-            NetworkGameCanvas.money = money;
-            NetworkGameCanvas.destination = currentStreetPath.NamePath;
+         NetworkGameCanvas.maxSteps = maxSteps;
+         NetworkGameCanvas.money = money;
+         NetworkGameCanvas.destination = currentStreetPath.NamePath;
         
     }
 
@@ -346,6 +355,25 @@ public class NetworkPlayer : Photon.MonoBehaviour{
         this.destination = player.Destination;
         this.idPlayer = player.IdPlayer;
         this.nickName = player.NickName;
+        this.isBankrupt = player.IsBankrupt;
+        this.maxSteps = player.MaxSteps;
+        this.money = player.Money;
+        this.speed = player.Speed;
+        this.isBot = player.isBot;
+
+        _dbWork = Camera.main.GetComponent<NetworkDBwork>();
+
+
+        this.currentStreetPath = findMyPath(destination);
+    }
+    
+    //замена бота на игрока, базируясь на данных бота
+    public void GetData(NetworkPlayer player, string nickName)
+    {
+        this.currentSteps = player.CurrentSteps;
+        this.destination = player.Destination;
+        this.idPlayer = player.IdPlayer;
+        this.nickName = nickName;
         this.isBankrupt = player.IsBankrupt;
         this.maxSteps = player.MaxSteps;
         this.money = player.Money;

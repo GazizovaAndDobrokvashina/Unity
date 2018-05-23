@@ -139,6 +139,7 @@ public class MainMenu : MonoBehaviour
             Destroy(GameObject.FindGameObjectWithTag("MainCamera"));
         }
 
+        Camera.main.GetComponent<NetworkDBwork>().OnSceneLoad();
         //задаем значения для слайдера количества игроков
         sliderCountOfPlayers.minValue = mincountOfPlayers;
         sliderCountOfPlayers.maxValue = maxcountOfPlayers;

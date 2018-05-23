@@ -42,6 +42,11 @@ public class NetworkDBwork : Photon.MonoBehaviour
 
     private NetworkGameCanvas _gameCanvas;
 
+    //игрок, на чьей стороне скрипт находится
+    private NetworkPlayer player;
+
+    public bool ready;
+
 
     void Start()
     {
@@ -73,12 +78,34 @@ public class NetworkDBwork : Photon.MonoBehaviour
         names.Add("Орозалы Бабаназарович");
         names.Add("Гундермурд Сигурдфлордбрадсен");
         
-        
-       
-        
-        
+    }
+
+    public void SetAll(NetworkStreetPath[] paths, List<NetworkPathForBuy> pathForBuys,
+        List<NetworkGovermentPath> govermentPaths, NetworkStreet[] streets, NetworkBuild[] builds,
+        NetworkPlayer[] players, string NameOfGane, string NameOfTown)
+    {
+        this.paths = paths;
+        this.pathForBuys = pathForBuys;
+        this.govermentPaths = govermentPaths;
+        this.streets = streets;
+        this.builds = builds;
+        this.players = players;
+        this.nameOfGane = NameOfGane;
+        this.nameOfTown = NameOfTown;
     }
     
+    public NetworkPlayer GetPlayer()
+    {
+        if (player == null && players != null)
+        {
+            foreach (NetworkPlayer networkPlayer in players)
+            {
+                if (networkPlayer.IdPlayer!=0 && !networkPlayer.isBot && networkPlayer.transform!=null && networkPlayer.transform.GetComponentInChildren<Camera>()!=null)
+                    player = networkPlayer;
+            }
+        }
+        return player;
+    }
     
 
     public void SetGameCanvas(NetworkGameCanvas gameCanvas)
@@ -247,6 +274,21 @@ public class NetworkDBwork : Photon.MonoBehaviour
         return builds;
     }
 
+    public List<NetworkPathForBuy> GetAllPathForBuys()
+    {
+        return pathForBuys;
+    }
+
+    public List<NetworkGovermentPath> GetAllGovermentPaths()
+    {
+        return govermentPaths;
+    }
+
+    public NetworkStreet[] GetAllStreets()
+    {
+        return streets;
+    }
+
     //сохранение игры
     public void SaveGame()
     {
@@ -325,7 +367,7 @@ public class NetworkDBwork : Photon.MonoBehaviour
                 player = new NetworkPlayer(i, nickName, startMoney, false, false,
                     MapBuilder.GetCenter(paths[1].start, paths[1].end));
             else
-                player = new NetworkPlayer(i, names[Random.Range(0, names.Count)], startMoney, false, true,
+                player = new NetworkPlayer(i, names[Random.Range(0, names.Count)], startMoney,false, true,
                     MapBuilder.GetCenter(paths[1].start, paths[1].end));
             players[i] = player;
             dataService.AddPlayer(player);
@@ -333,12 +375,6 @@ public class NetworkDBwork : Photon.MonoBehaviour
             
         }
 
-//        NetworkPlayer playerOwn = new NetworkPlayer(1, nickName, startMoney, false, false, MapBuilder.GetCenter(paths[1].start, paths[1].end));
-//        players[1] = playerOwn;
-//        dataService.AddPlayer(playerOwn);
-        
-        
-        
         GetEverithing();
 
         this.nameOfTown = nameOfTown;
@@ -349,20 +385,27 @@ public class NetworkDBwork : Photon.MonoBehaviour
         if (SceneManager.GetActiveScene().name.Equals("GameNetwork"))
         {
             
-            int id1 = PhotonNetwork.AllocateViewID();
             if (PhotonNetwork.isMasterClient)
             {
-                gameObject.AddComponent<PhotonView>().viewID = id1;
+                int id1 = PhotonNetwork.AllocateViewID();
                 
+                gameObject.AddComponent<PhotonView>().viewID = id1;
+                //gameObject.GetComponent<PhotonView>().ObservedComponents = new List<Component> {this};
+                
+                //gameObject.GetComponent<PhotonView>().synchronization = ViewSynchronization.UnreliableOnChange;
             }
             else
             {
+                ready = false;
                 gameObject.AddComponent<PhotonView>().viewID = 1001;
+                //gameObject.GetComponent<PhotonView>().ObservedComponents = new List<Component> {this};
+
+                //gameObject.GetComponent<PhotonView>().synchronization = ViewSynchronization.UnreliableOnChange;
             }
             if (!PhotonNetwork.isMasterClient)
             {
-                PhotonView photonView =gameObject.GetComponent<PhotonView>();
-                photonView.RPC("SendDBwork", PhotonTargets.MasterClient);
+                PhotonView photonView = gameObject.GetComponent<PhotonView>();
+                //photonView.RPC("SendDBwork", PhotonTargets.MasterClient);
             }
         }
         else
@@ -374,22 +417,22 @@ public class NetworkDBwork : Photon.MonoBehaviour
         }
     }
     
-    [PunRPC]
-    void SendDBwork()
-    {
-        Debug.Log("HEY ");
-        PhotonView photonView = gameObject.GetComponent<PhotonView>();
-        photonView.RPC("GetDBwork", PhotonTargets.Others);
-    }
-
-    [PunRPC]
-    void GetDBwork()
-    {
-        Debug.Log("Got ");
-//        this.players = db.players;
-//        this.streets = db.streets;
-//        this.paths = db.paths;
-    }
+//    [PunRPC]
+//    void SendDBwork()
+//    {
+//        Debug.Log("HEY ");
+//        PhotonView photonView = gameObject.GetComponent<PhotonView>();
+//        photonView.RPC("GetDBwork", PhotonTargets.Others);
+//    }
+//
+//    [PunRPC]
+//    void GetDBwork()
+//    {
+//        Debug.Log("Got ");
+////        this.players = db.players;
+////        this.streets = db.streets;
+////        this.paths = db.paths;
+//    }
 
     //возврат массива игроков
     public NetworkPlayer[] GetAllPlayers()
@@ -534,4 +577,225 @@ public class NetworkDBwork : Photon.MonoBehaviour
 
         return paths;
     }
+    
+//    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+//{
+//    Debug.Log("DBWORK UPDATES!");
+//   if (stream.isWriting)
+//   {
+//       
+//       stream.SendNext(paths.Length);
+//       
+//       foreach (NetworkStreetPath networkStreetPath in paths)
+//       {
+//           stream.SendNext(networkStreetPath.GetIdStreetPath());
+//           stream.SendNext(networkStreetPath.GetIdStreetParent());
+//           stream.SendNext(networkStreetPath.GetRenta());
+//           stream.SendNext(networkStreetPath.start);
+//           stream.SendNext(networkStreetPath.end);
+//           stream.SendNext(networkStreetPath.isBridge);
+//           stream.SendNext(networkStreetPath.NeighborsId);
+//           stream.SendNext(networkStreetPath.NamePath);
+//           stream.SendNext(networkStreetPath.CanBuy);
+//           stream.SendNext(networkStreetPath.GetNameOfPrefab());
+//
+//       }
+//        stream.SendNext(pathForBuys.Count);
+//       foreach (NetworkPathForBuy pathForBuy in pathForBuys)
+//       {
+//           stream.SendNext(pathForBuy.GetIdStreetPath());
+//           stream.SendNext(pathForBuy.IdPlayer);
+//           stream.SendNext(pathForBuy.Builds);
+//           stream.SendNext(pathForBuy.PriceStreetPath);
+//           stream.SendNext(pathForBuy.IsBlocked);
+//       }
+//       
+//       stream.SendNext(govermentPaths.Count);
+//
+//       foreach (NetworkGovermentPath govermentPath in govermentPaths)
+//       {
+//           stream.SendNext(govermentPath.GetIdStreetPath());
+//           Event[] events = govermentPath.events;
+//           stream.SendNext(events.Length);
+//           foreach (Event eve in events)
+//           {
+//               if (eve != null)
+//               {
+//                   stream.SendNext(eve.Id);
+//                   stream.SendNext(eve.Info);
+//                   stream.SendNext(eve.Name);
+//                   stream.SendNext(eve.Price);
+//               }
+//               else
+//               {
+//                   stream.SendNext(0);
+//               }
+//               
+//           }
+//       }
+//       
+//       stream.SendNext(streets.Length);
+//
+//       foreach (NetworkStreet street in streets)
+//       {
+//           stream.SendNext(street.IdStreet);
+//           stream.SendNext(street.NameStreet);
+//           stream.SendNext(street.AboutStreet);
+//           stream.SendNext(street.Paths);
+//       }
+//       
+//       stream.SendNext(builds.Length);
+//       foreach (NetworkBuild build in builds)
+//       {
+//           stream.SendNext(build.IdBuild);
+//           stream.SendNext(build.NameBuild);
+//           stream.SendNext(build.AboutBuild);
+//           stream.SendNext(build.IdStreetPath);
+//           stream.SendNext(build.PriceBuild);
+//           stream.SendNext(build.Enable);
+//           stream.SendNext(build.Place);
+//       }
+//       
+//       stream.SendNext(players.Length);
+//       foreach (NetworkPlayer networkPlayer in players)
+//       {
+//           stream.SendNext(networkPlayer.IdPlayer);
+//           stream.SendNext(networkPlayer.ViewId);
+//           stream.SendNext(networkPlayer.NickName);
+//           stream.SendNext(networkPlayer.Money);
+//           stream.SendNext(networkPlayer.MaxSteps);
+//           stream.SendNext(networkPlayer.CurrentSteps);
+//           stream.SendNext(networkPlayer.IsBankrupt);
+//           stream.SendNext(networkPlayer.Destination);
+//           stream.SendNext(networkPlayer.CurrentStreetPath.GetIdStreetPath());
+//           stream.SendNext(networkPlayer.isBot);
+//
+//       }
+//   }
+//   else
+//   {
+//       Debug.Log("DBWORK UPDATES!");
+//       paths = new NetworkStreetPath[(int)stream.ReceiveNext()];
+//       for (int i = 0; i < paths.Length; i++)
+//       {
+//       Debug.Log("DBWORK UPDATES!");
+//           int pathId = (int)stream.ReceiveNext();
+//           int parentId = (int) stream.ReceiveNext();
+//           int renta = (int) stream.ReceiveNext();
+//           Vector3 start = (Vector3) stream.ReceiveNext();
+//           Vector3 end = (Vector3) stream.ReceiveNext();
+//           bool isBridge = (bool) stream.ReceiveNext();
+//           int[] neighbours = (int[]) stream.ReceiveNext();
+//           string namePath = (string) stream.ReceiveNext();
+//           bool canBuy = (bool) stream.ReceiveNext();
+//           string nameOfPref = (string) stream.ReceiveNext();
+//           
+//           paths[i] = new NetworkStreetPath(pathId,namePath, parentId, renta, start, end, isBridge, nameOfPref);
+//           paths[i].neighborsId = neighbours;
+//           paths[i].CanBuy = canBuy;
+//       }
+//       
+//       pathForBuys = new List<NetworkPathForBuy>();
+//       int count = (int)stream.ReceiveNext();
+//
+//       Debug.Log("DBWORK UPDATES!");
+//       for (int i=0; i < count; i++)
+//       {
+//           Debug.Log("DBWORK UPDATES!");
+//           int id = (int) stream.ReceiveNext();
+//           NetworkStreetPath path = paths[id];
+//           int owmerId = (int) stream.ReceiveNext();
+//           int[] buildes = (int[]) stream.ReceiveNext();
+//           int price = (int) stream.ReceiveNext();
+//           bool isBlocked = (bool) stream.ReceiveNext();
+//           
+//           pathForBuys.Add(new NetworkPathForBuy(id,path.NamePath,path.GetIdStreetParent(), path.GetRenta(), path.start, path.end, owmerId, buildes, price, path.isBridge,path.GetNameOfPrefab(),isBlocked));
+//       }
+//       
+//       
+//
+//       count = (int) stream.ReceiveNext();
+//
+//       for (int i=0; i < count; i++)
+//       {
+//           int id = (int) stream.ReceiveNext();
+//           NetworkStreetPath path = paths[id];
+//
+//           int countEvent = (int) stream.ReceiveNext();
+//           Event[] eves = new Event[countEvent];
+//           for (int j = 0; j < countEvent; j++)
+//           {
+//               int eId = (int) stream.ReceiveNext();
+//               if (eId == 0)
+//               {
+//                   eves[i] = null;
+//               }
+//               else
+//               {
+//                   string eInfo = (string) stream.ReceiveNext();
+//                   string eName = (string) stream.ReceiveNext();
+//                   int ePrice = (int) stream.ReceiveNext();
+//                   eves[i] = new Event(eId, eInfo, eName, ePrice, id);
+//               }
+//           }
+//           
+//           
+//           govermentPaths.Add(new NetworkGovermentPath(id,path.NamePath,path.GetIdStreetParent(), path.GetRenta(), path.start, path.end, path.isBridge,path.GetNameOfPrefab(),eves));
+//       }
+//       
+//       streets = new NetworkStreet[(int)stream.ReceiveNext()];
+//       for (int i = 0; i < streets.Length; i++)
+//       {
+//           int stId = (int)stream.ReceiveNext();
+//           string stName = (string)stream.ReceiveNext();
+//           string stAbout = (string)stream.ReceiveNext();
+//           int[] stPaths = (int[])stream.ReceiveNext();
+//           
+//           streets[i] = new NetworkStreet(stId,stName,stAbout,stPaths);
+//       }
+//       
+//       builds = new NetworkBuild[(int)stream.ReceiveNext()];
+//       
+//       for (int i = 0; i < builds.Length; i++)
+//       {
+//           int bId = (int)stream.ReceiveNext();
+//           string bName = (string)stream.ReceiveNext();
+//           string bAbout = (string)stream.ReceiveNext();
+//           int bstID = (int)stream.ReceiveNext();
+//           int bPrice = (int)stream.ReceiveNext();
+//           bool ben = (bool)stream.ReceiveNext();
+//           Vector3 bplace = (Vector3) stream.ReceiveNext();
+//           
+//           builds[i] = new NetworkBuild(bId,bName,bAbout,bstID,bPrice,ben,bplace.x, bplace.z);
+//       }
+//       
+//       players = new NetworkPlayer[(int)stream.ReceiveNext()];
+//       for (int i = 0; i < players.Length; i++)
+//       {
+//           int plId = (int)stream.ReceiveNext(); 
+//           int plVId = (int)stream.ReceiveNext();
+//           string plName = (string) stream.ReceiveNext();
+//           int plMoney = (int) stream.ReceiveNext();
+//           bool plBank = (bool)stream.ReceiveNext();
+//           Vector3 plDest = (Vector3)stream.ReceiveNext();
+//           NetworkStreetPath
+//               plPath = pathForBuys[(int) stream.ReceiveNext()];
+//           bool plIsBot = (bool) stream.ReceiveNext();
+//           
+//           players[i] = new NetworkPlayer(plId,plName,plMoney,plBank,plIsBot,plDest);
+//           players[i].ViewId = plVId;
+//           
+//       }
+//
+//       object name;
+//       PhotonNetwork.room.CustomProperties.TryGetValue("ngame", out name);
+//       nameOfGane = (string) name;
+//       PhotonNetwork.room.CustomProperties.TryGetValue("ntown", out name);
+//       nameOfTown = (string) name;
+//
+//       ready = true;
+//       
+//       Debug.Log("DBWORK UPDATES!");
+//   }
+//}
 }

@@ -21,7 +21,8 @@ public class Players
 
     public NetworkPlayer GetNetworkPlayer()
     {
-        return new NetworkPlayer();
+        Vector3 position = new Vector3((float) CoordinateX, 0, (float) CoordinateY);
+        return new NetworkPlayer(IdPlayer,NickName, Money, IsBankrupt, IsBot, position);
     }
 
     public Players(int idPlayer, string nickName, int money, double coordinateX, double coordinateY, bool isBankrupt, bool isBot)

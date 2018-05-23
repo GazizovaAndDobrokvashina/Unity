@@ -164,12 +164,32 @@ public class NetworkGameCanvas : Photon.MonoBehaviour
     //идентификатор улицы, информацию о которой нужно показать
     private int idStreetWhichOPened;
 
-    private GameController _gameController;
+    private NetworkGameController _gameController;
+
+    private void Start()
+    {
+        if (getCurrentPlayer() == null)
+        {
+            playMenu.SetActive(false);
+            StartCoroutine(WaitForDBwork());
+            ButtonWithInfo.GetComponentInChildren<Text>().text = "Подождите, подгружается база данных \n\n" + "(нажмите, чтобы закрыть)";
+            ButtonWithInfo.SetActive(true);
+            
+        }
+    }
+
+    IEnumerator WaitForDBwork()
+    {
+        yield return new WaitUntil(() => getCurrentPlayer()!=null && getDbWork().ready);
+        if(ButtonWithInfo.activeInHierarchy)
+            ButtonWithInfo.SetActive(false);
+        playMenu.SetActive(true);
+    }
 
     public void ThrowDice()
     {
         if (_gameController == null)
-            _gameController = gameObject.GetComponent<GameController>();
+            _gameController = gameObject.GetComponent<NetworkGameController>();
         StartCoroutine(_gameController.Dices());
         buttonThrowDice.SetActive(false);
     }
@@ -823,7 +843,7 @@ public class NetworkGameCanvas : Photon.MonoBehaviour
     private NetworkPlayer getCurrentPlayer()
     {
         if (currentPlayer == null)
-            currentPlayer = getDbWork().GetPlayerbyId(1);
+            currentPlayer = getDbWork().GetPlayer();
         return currentPlayer;
     }
 
@@ -1034,7 +1054,7 @@ public class NetworkGameCanvas : Photon.MonoBehaviour
     }
 
 
-    private void Start()
+    private void Awake()
     {
         getDbWork().SetGameCanvas(this);
     }

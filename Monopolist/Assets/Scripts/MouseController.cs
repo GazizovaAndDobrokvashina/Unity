@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 
 public class MouseController : MonoBehaviour
 {
     //ссылка на текущий ДБворк
     private DBwork _dBwork;
+
+    private NetworkDBwork _networkDBwork;
 
     //выбранное здание
     private Build selectedBuild;
@@ -29,13 +32,16 @@ public class MouseController : MonoBehaviour
     //инициализация ДБворка
     void Start()
     {
-        _dBwork = Camera.main.GetComponent<DBwork>();
+        if (!SceneManager.GetActiveScene().name.Equals("GameNetwork"))
+            _dBwork = Camera.main.GetComponent<DBwork>();
+        else
+            _networkDBwork = Camera.main.GetComponent<NetworkDBwork>();
     }
 
     //движение камеры в сторону, к краю которой был приведен курсор
     void Update()
     {
-        if (EventSystem.current.IsPointerOverGameObject() || Time.timeScale == 0)
+        if (EventSystem.current.IsPointerOverGameObject() || Time.timeScale == 0 || !transform.parent.GetComponent<PhotonView>().isMine)
         {
             return;
         }
@@ -48,15 +54,15 @@ public class MouseController : MonoBehaviour
         {
             GameObject ourHitObject = hitInfo.collider.transform.gameObject;
 
-            if (ourHitObject.GetComponent<StreetPath>() != null)
+            if (ourHitObject.GetComponent<StreetPath>() != null && ourHitObject.GetComponent<NetworkStreetPath>())
             {
                 MouseOver_Street(ourHitObject);
             }
-            else if (ourHitObject.GetComponentInParent<Player>() != null)
+            else if (ourHitObject.GetComponentInParent<Player>() != null) //&& ourHitObject.GetComponentInParent<NetworkPlayer>() != null)
             {
                 MouseOver_Player(ourHitObject);
             }
-            else if (ourHitObject.GetComponentInParent<Build>() != null)
+            else if (ourHitObject.GetComponentInParent<Build>() != null) //&& ourHitObject.GetComponentInParent<NetworkBuild>() != null)
             {
                 MouseOver_Build(ourHitObject);
             }
@@ -79,29 +85,61 @@ public class MouseController : MonoBehaviour
     //при клике на какую-нибудь улицу
     void MouseOver_Street(GameObject ourHitObject)
     {
-        if (Input.GetMouseButton(0) && canMove && _dBwork.GetPlayerbyId(1).GetCurrentStep() && Cameras.mode != 1)
+        if (ourHitObject.GetComponent<StreetPath>() != null)
         {
-            canMove = false;
-            _dBwork.GetPlayerbyId(1).move(ourHitObject.GetComponent<StreetPath>());
-        }
-        else if (Input.GetMouseButton(0) && canMove && _dBwork.GetPlayerbyId(1).GetCurrentStep() && Cameras.mode == 1)
-        {
-            if (_dBwork.GetWay(_dBwork.GetPlayerbyId(1).CurrentStreetPath.GetIdStreetPath(),
-                    ourHitObject.GetComponent<StreetPath>().GetIdStreetPath()).Count == 1)
+            if (Input.GetMouseButton(0) && canMove && _dBwork.GetPlayerbyId(1).GetCurrentStep() && Cameras.mode != 1)
             {
                 canMove = false;
                 _dBwork.GetPlayerbyId(1).move(ourHitObject.GetComponent<StreetPath>());
             }
+            else if (Input.GetMouseButton(0) && canMove && _dBwork.GetPlayerbyId(1).GetCurrentStep() &&
+                     Cameras.mode == 1)
+            {
+                if (_dBwork.GetWay(_dBwork.GetPlayerbyId(1).CurrentStreetPath.GetIdStreetPath(),
+                        ourHitObject.GetComponent<StreetPath>().GetIdStreetPath()).Count == 1)
+                {
+                    canMove = false;
+                    _dBwork.GetPlayerbyId(1).move(ourHitObject.GetComponent<StreetPath>());
+                }
+            }
+            else if (Input.GetMouseButton(1) && Cameras.mode != 1)
+            {
+                // показать информацию о улице
+                selectedStreetPath = ourHitObject.GetComponent<StreetPath>();
+            }
+            else if (!Input.GetMouseButton(0))
+            {
+                canMove = true;
+            }
         }
-        else if (Input.GetMouseButton(1) && Cameras.mode != 1)
+        else
         {
-            // показать информацию о улице
-            selectedStreetPath = ourHitObject.GetComponent<StreetPath>();
+            if (Input.GetMouseButton(0) && canMove && _networkDBwork.GetPlayer().GetCurrentStep() && Cameras.mode != 1)
+            {
+                canMove = false;
+                _networkDBwork.GetPlayer().move(ourHitObject.GetComponent<NetworkStreetPath>());
+            }
+            else if (Input.GetMouseButton(0) && canMove && _networkDBwork.GetPlayer().GetCurrentStep() &&
+                     Cameras.mode == 1)
+            {
+                if (_networkDBwork.GetWay(_networkDBwork.GetPlayer().CurrentStreetPath.GetIdStreetPath(),
+                        ourHitObject.GetComponent<NetworkStreetPath>().GetIdStreetPath()).Count == 1)
+                {
+                    canMove = false;
+                    _networkDBwork.GetPlayer().move(ourHitObject.GetComponent<NetworkStreetPath>());
+                }
+            }
+            else if (Input.GetMouseButton(1) && Cameras.mode != 1)
+            {
+                // показать информацию о улице
+                //selectedStreetPath = ourHitObject.GetComponent<StreetPath>();
+            }
+            else if (!Input.GetMouseButton(0))
+            {
+                canMove = true;
+            }
         }
-        else if (!Input.GetMouseButton(0))
-        {
-            canMove = true;
-        }
+        
     }
 
     //при клике на здание
